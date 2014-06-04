@@ -103,7 +103,7 @@ ob_end_flush();
 				<!-- ENDS featured -->
                 <h2 class="heading">
 <?php
-	$auction_end_date = db1('db_main' "SELECT endDateString FROM activeAuctions LIMIT 1");
+	$auction_end_date = db1('db_main', "SELECT endDateString FROM activeAuctions LIMIT 1");
 	if($auction_end_date != FALSE){
 		print '
 					&nbsp; &nbsp; See our current auctions ending on '.$auction_end_date.'!
