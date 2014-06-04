@@ -103,7 +103,7 @@ ob_end_flush();
 				<!-- ENDS featured -->
                 <h2 class="heading">
 <?php
-	$auction_end_date = db1('db_main', "SELECT endDateString FROM activeAuctions LIMIT 1");
+	$auction_end_date = db1($db_main, "SELECT endDateString FROM activeAuctions LIMIT 1");
 	if($auction_end_date != FALSE){
 		print '
 					&nbsp; &nbsp; See our current auctions ending on '.$auction_end_date.'!
@@ -118,7 +118,7 @@ ob_end_flush();
 	
 	$R_auctions = $db_main->query("SELECT * FROM activeAuctions");
 	if($R_auctions !== FALSE){
-		$R_autions->data_seek(0);
+		$R_auctions->data_seek(0);
 		while($auction = $R_auctions->fetch_assoc()){
 			print'
 					<a href="http://www.ebay.com/itm/'.$auction['auctionID'].'" class="thumb" target="new">

@@ -175,7 +175,7 @@ ob_end_flush();
 			if( file_exists($frontpic) || file_exists($backpic) ){
 			
 				// print the front pic if exists
-				if(file_exists($frontpic){
+				if(file_exists($frontpic)){
 					print'
 						<a href="http://www.helmarbrewing.com/'.$frontpic.'" data-lightbox="'.$card['series'].'_'.$card['cardnum'].'" ><font size="5">F</font></a>
 					';
@@ -187,7 +187,7 @@ ob_end_flush();
 				}
 				
 				// print the back pic if exists
-				if(file_exists($backpic){
+				if(file_exists($backpic)){
 					print'
 						<a href="http://www.helmarbrewing.com/'.$backpic.'" data-lightbox="'.$card['series'].'_'.$card['cardnum'].'" ><font size="5">B</font></a>
 					';
@@ -204,7 +204,7 @@ ob_end_flush();
 					</td>
 				</tr>
 			';
-			$i++
+			$i++;
 			$updated = $card['updatedate'];
 		}
 		$R_cards->free();
