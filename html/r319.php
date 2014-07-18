@@ -226,7 +226,7 @@ ob_end_flush();
 		</p>
 	';
 
-	$db_main->close;   // We no longer need the connection to the database on this page so we have to close it.
+	$db_main->close();   // We no longer need the connection to the database on this page so we have to close it.
 	
 ?>  
 
