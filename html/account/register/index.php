@@ -5,6 +5,8 @@ ob_start();
 
 /* FORCE HTTPS FOR THIS PAGE */ if($use_https === TRUE){if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){header("Location: https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);exit;}}
 
+/* SET PROTOCOL FOR REDIRECT */ if($use_https === TRUE){$protocol='https';}else{$protocol='http';}
+
 /* WHICH DATABASES DO WE NEED */
 	$db2use = array(
 		'db_auth' 	=> TRUE,
@@ -44,7 +46,7 @@ if($user->login() === 1){
 	$user->regen();
 	$db_auth->close();
 	$db_main->close();
-	header("Location: http://$site/",TRUE,303);
+	header("Location: $protocol://$site/",TRUE,303);
 	exit;
 }else{
 	ob_end_flush();
@@ -133,7 +135,7 @@ if($user->login() === 1){
 			$stmt = $db_main->prepare("INSERT INTO users(userID, username, firstname, lastname, email) VALUES(?,?,?,?,?)");
 			$stmt->bind_param("sssss", $userID, $username, $firstname, $lastname, $email);
 			$stmt->execute();
-			$stmt->close;
+			$stmt->close();
 			$message = '<p>You have successfully registerd.</p>';
 		}catch(mysqli_sql_exception $e){
 			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>.</p>';
