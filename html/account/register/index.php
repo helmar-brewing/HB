@@ -191,6 +191,6 @@ if($user->login() === 1){
 
 
 
-
+$db_auth->close();
 $db_main->close();
 ?>
