@@ -14,8 +14,6 @@ ob_start();
 
 /* GET KEYS TO SITE */ require($path_to_keys);
 
-/* GET COOKIE */ if(isset($_COOKIE[$gv_login_cookie_name])){$cookie = $_COOKIE[$gv_login_cookie_name];}
-
 ob_end_flush();
 
 ?>
