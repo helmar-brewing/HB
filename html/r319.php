@@ -14,8 +14,6 @@ ob_start();
 
 /* GET KEYS TO SITE */ require($path_to_keys);
 
-/* GET COOKIE */ if(isset($_COOKIE[$gv_login_cookie_name])){$cookie = $_COOKIE[$gv_login_cookie_name];}
-
 ob_end_flush();
 
 ?>
@@ -226,7 +224,7 @@ ob_end_flush();
 		</p>
 	';
 
-	$db_main->close;   // We no longer need the connection to the database on this page so we have to close it.
+	$db_main->close();   // We no longer need the connection to the database on this page so we have to close it.
 	
 ?>  
 
