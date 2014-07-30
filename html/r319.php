@@ -120,7 +120,7 @@ ob_end_flush();
 		<th>Team</th>
 		<th class="smallCol">Last Sold</th>
         <th class="smallCol">Average Sold</th>
-        <th class="smallCol">Picture?</th>
+        <th class="picCol">Picture?</th>
 	</tr>
 <!--    </thead>-->
     <!-- Table Header -->
@@ -161,21 +161,26 @@ ob_end_flush();
 			
 			// for one row, check if picture exists
 			print'
-					<td align="center" class="smallCol">
+					<td align="center" class="picCol">
 			';
 			
 			
 			// define the pictures
 			$frontpic = 'images/cardPics/'.$card['series'].'_'.$card['cardnum'].'_Front.jpg';
+			$frontthumb = 'images/cardPics/thumb/'.$card['series'].'_'.$card['cardnum'].'_Front_small.jpg';
 			$backpic  = 'images/cardPics/'.$card['series'].'_'.$card['cardnum'].'_Back.jpg';
+			$backthumb  = 'images/cardPics/thumb/'.$card['series'].'_'.$card['cardnum'].'_Back_small.jpg';
 			
 			//check if either pic exists
 			if( file_exists($frontpic) || file_exists($backpic) ){
 			
 				// print the front pic if exists
 				if(file_exists($frontpic)){
-					print'
+				/*	print'
 						<a href="http://www.helmarbrewing.com/'.$frontpic.'" data-lightbox="'.$card['series'].'_'.$card['cardnum'].'" ><font size="5">F</font></a>
+					';*/
+					print'
+						<a href="http://www.helmarbrewing.com/'.$frontpic.'" data-lightbox="'.$card['series'].'_'.$card['cardnum'].'" ><img src="http://www.helmarbrewing.com/'.$frontthumb.'"></a>
 					';
 				}
 				
@@ -186,9 +191,13 @@ ob_end_flush();
 				
 				// print the back pic if exists
 				if(file_exists($backpic)){
-					print'
+					/*print'
 						<a href="http://www.helmarbrewing.com/'.$backpic.'" data-lightbox="'.$card['series'].'_'.$card['cardnum'].'" ><font size="5">B</font></a>
+					';*/
+					print'
+						<a href="http://www.helmarbrewing.com/'.$backpic.'" data-lightbox="'.$card['series'].'_'.$card['cardnum'].'" ><img src="http://www.helmarbrewing.com/'.$backthumb.'"></a>
 					';
+					
 				}
 				
 			// neither pic exists print message instead
