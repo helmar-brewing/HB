@@ -52,35 +52,7 @@ ob_end_flush();
 		<!-- WRAPPER -->
 		<div class="wrapper">
 		
-			<!-- HEADER -->
-			<header class="cf">
-				<div id="logo"><a href="index.php"><img src="img/helmartitle2.png" alt="Helmar Baseball Card Art Company" /></a></div>
-				
-				<!-- social-bar -->
-				<ul id="social-bar" class="cf">
-					<li class="facebook"><a href="https://www.facebook.com/pages/Helmar-Baseball-Art-Card-Company/666710940030121"  title="Facebook" target="new"></a></li>
-					<li class="ebay"><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/"  title="Ebay" target="new"></a></li>
-					
-
-				</ul>
-				<!-- ENDS social-bar -->
-				
-			</header>
-			<!-- ENDS HEADER -->
-			
-			<!-- NAV -->
-			<nav class="cf">
-				<ul id="nav" class="sf-menu">
-					<li><a href="index.php">Home</a></li>
-					<li class="current-menu-item"><a href="artwork.php">Helmar Artwork</a></li>
-					<li><a href="about.php">Helmar & Charles</a></li>
-					<li><a href="contact.php">Stay in Touch</a></li>
-                    <li class="important"><a href="http://helmarblog.wordpress.com" target="new">helmarblog</a></li>
-					<li class="important"><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="new">OUR STORE!</a></li>
-					
-				</ul>
-			</nav>
-			<!-- ENDS NAV -->
+			<?php include 'header.php';?>
 			
             <!-- MAIN -->
 			<div id="main" class="cf">
@@ -94,7 +66,7 @@ ob_end_flush();
                     <h2 class="heading">
 					Helmar Artwork >> R319-Helmar Series
 				</h2>
-                <p><font color="red"><u>Please note that the website is still under deveopment. Certain links/pages may not display properly. Thank you for this understanding. </u></font></p>
+                
 				
                 <p><center>
                 <img src="images/cardPics/R319-Helmar_10_Front.jpg" alt="R319-Helmar" width=300/>
@@ -102,7 +74,7 @@ ob_end_flush();
                 </center></p>
 		        		
 		        		<h3  class="heading">R319-Helmar</h2>
-		        		<p>description of the card series</p>
+		        		<p>The R-319 Helmar series has 180 subjects including many of your favorite players. All the original art was painted by our artists over a period of years, you won't find it elsewhere. Given the scope, the expense and the complexity for a small company or artist to put together a 385 card set of original and exceptional art, no one else may attempt something this ambitious for decades.  They are not available in full sets.</p>
                         
                         
                         
@@ -255,12 +227,7 @@ ob_end_flush();
 			
 			
 			
-			<!-- FOOTER -->
-			<div class="footer-divider"></div>
-			<footer class="cf">
-				Madison Theme by <a href="http://www.luiszuno.com" >luiszuno.com</a> 
-			</footer>
-			<!-- ENDS FOOTER -->
+			<?php include 'footer.php';?>
 		
 		</div>
 		<!-- ENDS WRAPPER -->
