@@ -24,6 +24,7 @@ ob_end_flush();
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" > <!--<![endif]-->
+
 	<head>
 		<meta charset="utf-8">
 		<title>Helmar Baseball Art Card Company</title>
@@ -73,6 +74,11 @@ ob_end_flush();
                 <img src="images/cardPics/R319-Helmar_10_Back.jpg" alt="R319-Helmar" width=300/>
                 </center></p>
 		        		
+
+<!-- edit series description here -->
+<!-- edit series description here -->
+<!-- edit series description here -->
+   
 		        		<h3  class="heading">R319-Helmar</h2>
 		        		<p>The R-319 Helmar series has 180 subjects including many of your favorite players. All the original art was painted by our artists over a period of years, you won't find it elsewhere. Given the scope, the expense and the complexity for a small company or artist to put together a 385 card set of original and exceptional art, no one else may attempt something this ambitious for decades.  They are not available in full sets.</p>
                         
