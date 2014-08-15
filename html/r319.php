@@ -48,6 +48,7 @@ ob_end_flush();
 
 	</head>
 	<body>
+<img src="img/baseball-background-2.jpg" class="bg"/>
 	
 		
 		<!-- WRAPPER -->

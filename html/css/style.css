@@ -33,6 +33,21 @@ body {
   color: #6b3b25;
   background: url(../img/grass.png);
 }
+img.bg {
+	min-height: 100%;
+	min-width: 1024px;
+	width: 100%;
+	height: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index:-1;
+}
+
+
+
+
+
 .wrapper {
   width: 1000px;
   margin: 30px auto 80px auto;
