@@ -1,3 +1,25 @@
+<?php
+ob_start();
+
+/* ROOT SETTINGS */ require($_SERVER['DOCUMENT_ROOT'].'/root_settings.php');
+
+/* FORCE HTTPS FOR THIS PAGE */ if($use_https === TRUE){if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){header("Location: https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);exit;}}
+
+/* WHICH DATABASES DO WE NEED */
+	$db2use = array(
+		'db_auth' 	=> FALSE,
+		'db_main'	=> FALSE
+	);
+//
+
+/* GET KEYS TO SITE */ require($path_to_keys);
+
+ob_end_flush();
+
+
+?>
+
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
