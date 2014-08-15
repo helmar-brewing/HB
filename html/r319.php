@@ -53,7 +53,7 @@ ob_end_flush();
 		<!-- WRAPPER -->
 		<div class="wrapper">
 		
-			<?php include 'header.php';?>
+			<?php include 'layout/header.php';?>
 			
             <!-- MAIN -->
 			<div id="main" class="cf">
@@ -233,7 +233,7 @@ ob_end_flush();
 			
 			
 			
-			<?php include 'footer.php';?>
+			<?php include 'layout/footer.php';?>
 		
 		</div>
 		<!-- ENDS WRAPPER -->

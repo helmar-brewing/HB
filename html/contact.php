@@ -23,7 +23,7 @@
 		<!-- WRAPPER -->
 		<div class="wrapper">
 		
-			<?php include 'header.php';?>
+			<?php include 'layout/header.php';?>
 			
 			
 			<!-- MAIN -->
@@ -87,7 +87,7 @@
 			
 			
 			
-			<?php include 'footer.php';?>
+			<?php include 'layout/footer.php';?>
 		
 		</div>
 		<!-- ENDS WRAPPER -->
