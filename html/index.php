@@ -78,7 +78,7 @@ ob_end_flush();
 ?>  	
 				</h2>
 				
-				<p style="line-height:305px;"> <!-- line height added as a quick hacky fix to put spacing between rows of cards -->
+				<p style="line-height:155px;"> <!-- line height added as a quick hacky fix to put spacing between rows of cards -->
                 
 <?php
 	
@@ -87,7 +87,7 @@ ob_end_flush();
 		$R_auctions->data_seek(0);
 		while($auction = $R_auctions->fetch_assoc()){
 			print'
-					<a href="http://www.ebay.com/itm/'.$auction['auctionID'].'" class="thumb" target="new"><img src="'.$auction['imgURL'].'" style="max-height:300px;" /></a>
+					<a href="http://www.ebay.com/itm/'.$auction['auctionID'].'" class="thumb" target="new"><img src="'.$auction['imgURL'].'" style="max-height:150px;" /></a>
 			';
 		}
 		$R_auctions->free();
