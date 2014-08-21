@@ -86,14 +86,6 @@ include 'layout/header.php';
 			<!-- ENDS MAIN -->
 			
 			
-			
-			
-			
-			<?php include 'layout/footer.php';?>
-		
-		</div>
-		<!-- ENDS WRAPPER -->
-		
 		<!-- JS -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/jquery.js"><\/script>')</script>
@@ -111,6 +103,7 @@ include 'layout/header.php';
 		<script src="js/tabs.js"></script>
 		
 	
-		<!-- ENDS JS -->
-	</body>
-</html>
+		<!-- ENDS JS -->			
+			
+			
+<?php include 'layout/footer.php';?>

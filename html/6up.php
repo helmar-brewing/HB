@@ -196,13 +196,6 @@ include 'layout/header.php';
 			
 			
 			
-			
-			
-			<?php include 'layout/footer.php';?>
-		
-		</div>
-		<!-- ENDS WRAPPER -->
-		
 		<!-- JS -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/jquery.js"><\/script>')</script>
@@ -221,5 +214,5 @@ include 'layout/header.php';
 		
 	
 		<!-- ENDS JS -->
-	</body>
-</html>
+			
+<?php include 'layout/footer.php';?>

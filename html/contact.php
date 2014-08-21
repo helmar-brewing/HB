@@ -68,7 +68,7 @@ include 'layout/header.php';
 							
 						</form>
 						<p id="sent-form-msg" class="success">Form data sent. Thanks for your comments.</p>
-						<!-- ENDS form -->
+						ENDS form -->
                         
 																
 					</div>
@@ -79,14 +79,6 @@ include 'layout/header.php';
 			</div>
 			<!-- ENDS MAIN -->
 			
-			
-			
-			
-			<?php include 'layout/footer.php';?>
-		
-		</div>
-		<!-- ENDS WRAPPER -->
-		
 		<!-- JS -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/jquery.js"><\/script>')</script>
@@ -125,6 +117,7 @@ include 'layout/header.php';
 		    });
 		  </script>
 	
-		<!-- ENDS JS -->
-	</body>
-</html>
+		<!-- ENDS JS -->			
+			
+			
+<?php include 'layout/footer.php';?>
