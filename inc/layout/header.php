@@ -15,20 +15,20 @@ print'
 		<!-- CSS -->
 		<link href="http://fonts.googleapis.com/css?family=Arvo:400" rel="stylesheet" type="text/css">
 		<link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/responsive.css">
-		 <link rel="stylesheet" href="css/helmar.css">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/responsive.css">
+		 <link rel="stylesheet" href="/css/helmar.css">
 		
-		<script src="js/modernizr.js"></script>
+		<script src="/js/modernizr.js"></script>
 		
 		<!-- light box, thank you http://lokeshdhakar.com/projects/lightbox2/ -->
-        <link href="css/lightbox.css" rel="stylesheet" />
-        <script src="js/jquery-1.10.2.min.js"></script>
-		<script src="js/lightbox-2.6.min.js"></script>
+        <link href="/css/lightbox.css" rel="stylesheet" />
+        <script src="/js/jquery-1.10.2.min.js"></script>
+		<script src="/js/lightbox-2.6.min.js"></script>
         
 	</head>
 	<body>
-	<img src="img/baseball-background-2.jpg" class="bg"/>
+	<img src="/img/baseball-background-2.jpg" class="bg"/>
 	
 		
 		<!-- WRAPPER -->
@@ -38,7 +38,7 @@ print'
 
 <!-- HEADER -->
 <header class="cf">
-<div id="logo"><a href="index.php"><img src="img/helmartitle2.png" alt="Helmar Baseball Card Art Company" /></a></div>
+<div id="logo"><a href="/"><img src="/img/helmartitle2.png" alt="Helmar Baseball Card Art Company" /></a></div>
 				
 <!-- social-bar -->
 <ul id="social-bar" class="cf">

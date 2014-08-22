@@ -33,6 +33,7 @@ $user->logout();
 
 /* <HEAD> */ $head=''; // </HEAD>
 /* PAGE TITLE */ $title='Helmar Account - Logout';
+include 'layout/header.php';
 
 print'
 		<div class="login">
@@ -60,6 +61,7 @@ print'
 		</div>
 	';
 
+include 'layout/footer.php';
 
 $db_auth->close();
 ?>

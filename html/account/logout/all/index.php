@@ -32,6 +32,7 @@ $user->checklogin(2);
 
 /* <HEAD> */ $head=''; // </HEAD>
 /* PAGE TITLE */ $title='Account - Logout';
+include 'layout/header.php';
 
 
 if($user->login() === 2){
@@ -79,7 +80,7 @@ print'
 	</div>
 ';
 
-
+include 'layout/footer.php';
 
 
 $db_auth->close();

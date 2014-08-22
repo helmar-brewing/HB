@@ -29,6 +29,7 @@ $user->checklogin(1);
 
 /* <HEAD> */ $head=''; // </HEAD>
 /* PAGE TITLE */ $title='Helmar Account - Verify';
+include 'layout/header.php';
 
 if($user->login() === 1 && isset($redir)){
 	$user->regen();
@@ -64,6 +65,8 @@ if($user->login() === 1 && isset($redir)){
 
 
 /* BLACKOUT FOR MODAL DIALOGS */ print'<div id="blackout" class="blackout"></div>';
+
+include 'layout/footer.php';
 
 $db_auth->close();
 $db_main->close();

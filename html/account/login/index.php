@@ -126,6 +126,7 @@ if($user->login() === 1 || $user->login() === 2){
 	if($show){
 		/* <HEAD> */ $head=''; // </HEAD>
 		/* PAGE TITLE */ $title='Helmar - Log in';
+		include 'layout/header.php';
 		/* FOCUS CURSOR */ print'<script type="text/javascript">$(document).ready(function(){$("#username").focus()});</script>';
 		ob_end_flush();
 		print'
@@ -148,8 +149,8 @@ if($user->login() === 1 || $user->login() === 2){
 					<div class="login-footer">Need an account? <a href="'.$protocol.'://'.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.'://'.$site.'/account/recover/">Account Recovery</a></div>
 				</form>
 			</div>
-			
 		';
+		include 'layout/footer.php';
 	}
 }
 ?>

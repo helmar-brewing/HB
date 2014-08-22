@@ -39,6 +39,7 @@ $user->checklogin(2);
 
 /* <HEAD> */ $head=''; // </HEAD>
 /* PAGE TITLE */ $title='Helmar - Register';
+include 'layout/header.php';
 
 
 
@@ -191,7 +192,7 @@ if($user->login() === 1){
 }
 
 
-
+include 'layout/footer.php';
 
 $db_auth->close();
 $db_main->close();

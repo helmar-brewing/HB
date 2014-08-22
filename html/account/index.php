@@ -34,6 +34,8 @@ $user->checklogin(2);
 /* <HEAD> */ $head=''; // </HEAD>
 /* PAGE TITLE */ $title='Account';
 
+include 'layout/header.php';
+
 
 if($user->login() === 0){
 	$db_auth->close();
@@ -107,4 +109,7 @@ if($user->login() === 0){
 
 $db_auth->close();
 $db_main->close();
+
+include 'layout/footer.php';
+
 ?>
