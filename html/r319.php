@@ -35,8 +35,8 @@ include 'layout/header.php';
                 
 				
                 <p><center>
-                <img src="images/cardPics/R319-Helmar_10_Front.jpg" alt="R319-Helmar" width=300/>
-                <img src="images/cardPics/R319-Helmar_10_Back.jpg" alt="R319-Helmar" width=300/>
+                <img src="images/cardPics/R319-Helmar_375_Front.jpg" alt="R319-Helmar" width=300/>
+                <img src="images/cardPics/R319-Helmar_375_Back.jpg" alt="R319-Helmar" width=300/>
                 </center></p>
 		        		
 

@@ -31,7 +31,7 @@ body {
   font-size: 16px;
   line-height: 1.5em;
   color: #6b3b25;
-//  background: url(../img/grass.png);
+
 }
 img.bg {
 	min-height: 100%;
@@ -195,8 +195,8 @@ header {
   min-height: 155px;
 }
 header #logo {
-  margin-top: 42px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   float: left;
 }
 header #logo:hover {
