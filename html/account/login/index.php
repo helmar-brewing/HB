@@ -130,24 +130,26 @@ if($user->login() === 1 || $user->login() === 2){
 		/* FOCUS CURSOR */ print'<script type="text/javascript">$(document).ready(function(){$("#username").focus()});</script>';
 		ob_end_flush();
 		print'
-			<div class="login">
-				<h2>Log in</h2>
-				<form method="post">
-					';if(isset($redir)){print'<input type="hidden" name="redir" value="'.$redir.'" />';}print'
-					<div class="register-left">
-						<div class="grey-seal">';if($error == ''){print'<div class="push"><p>You can use your facebook account to log in with a single click.</p></div><div class="facebook-button"><a href="https://'.$site.'/account/login/facebook/';if(isset($redir)){print'?redir='.$redir;}print'">Log in w/ Facebook</a></div>';}print''.$error.'</div>
-					</div>
-					<div class="register-right">
-						<div class="push">
-							<label class="nudge" for="username">USERNAME</label>
-							<input type="text" name="username" tabindex="1" id="username" />
-							<label for="password">Password</label>
-							<input type="password" name="pass" tabindex="2" id="password" />
+			<div class="page-content">
+				<div class="login">
+					<h2>Log in</h2>
+					<form method="post">
+						';if(isset($redir)){print'<input type="hidden" name="redir" value="'.$redir.'" />';}print'
+						<div class="register-left">
+							<div class="grey-seal">';if($error == ''){print'<div class="push"><p>You can use your facebook account to log in with a single click.</p></div><div class="facebook-button"><a href="https://'.$site.'/account/login/facebook/';if(isset($redir)){print'?redir='.$redir;}print'">Log in w/ Facebook</a></div>';}print''.$error.'</div>
 						</div>
-						<input type="submit" value="Login" tabindex="3" />
-					</div>
-					<div class="login-footer">Need an account? <a href="'.$protocol.'://'.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.'://'.$site.'/account/recover/">Account Recovery</a></div>
-				</form>
+						<div class="register-right">
+							<div class="push">
+								<label class="nudge" for="username">USERNAME</label>
+								<input type="text" name="username" tabindex="1" id="username" />
+								<label for="password">Password</label>
+								<input type="password" name="pass" tabindex="2" id="password" />
+							</div>
+							<input type="submit" value="Login" tabindex="3" />
+						</div>
+						<div class="login-footer">Need an account? <a href="'.$protocol.'://'.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.'://'.$site.'/account/recover/">Account Recovery</a></div>
+					</form>
+				</div>
 			</div>
 		';
 		include 'layout/footer.php';

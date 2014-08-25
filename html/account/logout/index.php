@@ -36,6 +36,7 @@ $user->logout();
 include 'layout/header.php';
 
 print'
+	<div class="page-content">
 		<div class="login">
 			<h2>Log out</h2>
 			<form action="'.$protocol.'://'.$site.'/account/logout/all/" method="post">
@@ -59,7 +60,8 @@ print'
 				<div class="colbreak"></div>
 			</form>
 		</div>
-	';
+	</div>
+';
 
 include 'layout/footer.php';
 

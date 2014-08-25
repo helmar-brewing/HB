@@ -62,21 +62,23 @@ if($logout){
 
 ob_end_flush();
 print'
-	<div class="login">
-		<h2>Log out</h2>
-		<form action="'.$protocol.'://'.$site.'/account/logout/all/" method="post">
-			<input type="hidden" name="username" value="' . $username . '" />
-			';if(isset($redir)){print'<input type="hidden" name="redir" value="'.$redir.'" />';}print'
-			<div class="register-left">
-				<div class="grey-seal"></div>
-			</div>
-			<div class="register-right">
-					<p>'.$message.'</p>
-					<p>&#187; <a href="'.$protocol.'://'.$site.'/">Go to homepage</a></p>
-					<p>&#187; <a href="'.$protocol.'://'.$site.'/account/login/">Log back in</a></p>
-			</div>
-			<div class="colbreak"></div>
-		</form>
+	<div class="page-content">
+		<div class="login">
+			<h2>Log out</h2>
+			<form action="'.$protocol.'://'.$site.'/account/logout/all/" method="post">
+				<input type="hidden" name="username" value="' . $username . '" />
+				';if(isset($redir)){print'<input type="hidden" name="redir" value="'.$redir.'" />';}print'
+				<div class="register-left">
+					<div class="grey-seal"></div>
+				</div>
+				<div class="register-right">
+						<p>'.$message.'</p>
+						<p>&#187; <a href="'.$protocol.'://'.$site.'/">Go to homepage</a></p>
+						<p>&#187; <a href="'.$protocol.'://'.$site.'/account/login/">Log back in</a></p>
+				</div>
+				<div class="colbreak"></div>
+			</form>
+		</div>
 	</div>
 ';
 

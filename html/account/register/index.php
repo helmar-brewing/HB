@@ -151,42 +151,44 @@ if($user->login() === 1){
 	}
 
 	print'
-		<div class="register">
-			<h2>Register</h2>
-			<div class="message">'.$message.'</div>
+		<div class="page-content">
+			<div class="register">
+				<h2>Register</h2>
+				<div class="message">'.$message.'</div>
 	';
 	if($show){
 		print'
-			<div class="reg-info">
-				<p>Fill out this form to register.</p>
-			</div>
-			<form method="post">
-				<input type="hidden" name="submitted" value="yes"/>
-				<div class="register-left no-border">
-					<label for="firstname">First Name</label>
-					<input type="text" name="firstname" id="firstname" tabindex="1" value="'.$firstname.'"/>
+				<div class="reg-info">
+					<p>Fill out this form to register.</p>
 				</div>
-				<div class="register-right no-border">
-					<label for="lastname">Last Name</label>
-					<input type="text" name="lastname" id="lastname" tabindex="2" value="'.$lastname.'"/>
-				</div>
-				<div class="register-left">
-					<label class="nudge" for="username">Username</label>
-					<input type="text" name="username" id="username" tabindex="3" value="'.$username.'"/>
-					<label for="email">Email Address</label>
-					<input type="text" name="email" id="email" tabindex="4" value="'.$email.'"/>
-				</div>
-				<div class="register-right">
-					<label class="nudge" for="password1">Password</label>
-					<input type="password" name="password1" id="password1" tabindex="5" />
-					<label for="password2">Confirm Password</label>
-					<input type="password" name="password2" id="password2" tabindex="6" />
-				</div>
-				<input type="submit" value="Register" tabindex="7" />
-			</form>
+				<form method="post">
+					<input type="hidden" name="submitted" value="yes"/>
+					<div class="register-left no-border">
+						<label for="firstname">First Name</label>
+						<input type="text" name="firstname" id="firstname" tabindex="1" value="'.$firstname.'"/>
+					</div>
+					<div class="register-right no-border">
+						<label for="lastname">Last Name</label>
+						<input type="text" name="lastname" id="lastname" tabindex="2" value="'.$lastname.'"/>
+					</div>
+					<div class="register-left">
+						<label class="nudge" for="username">Username</label>
+						<input type="text" name="username" id="username" tabindex="3" value="'.$username.'"/>
+						<label for="email">Email Address</label>
+						<input type="text" name="email" id="email" tabindex="4" value="'.$email.'"/>
+					</div>
+					<div class="register-right">
+						<label class="nudge" for="password1">Password</label>
+						<input type="password" name="password1" id="password1" tabindex="5" />
+						<label for="password2">Confirm Password</label>
+						<input type="password" name="password2" id="password2" tabindex="6" />
+					</div>
+					<input type="submit" value="Register" tabindex="7" />
+				</form>
 		';
 	}
 	print'
+			</div>
 		</div>
 	';
 }

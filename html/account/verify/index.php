@@ -36,23 +36,25 @@ if($user->login() === 1 && isset($redir)){
 	ob_end_flush();
 	/* FOCUS CURSOR */ print'<script type="text/javascript">$(document).ready(function(){$("#password").focus()});</script>';
 	print'
-		<div class="login">
-			<h2>Verify</h2>
-			<form action="'.$protocol.'://'.$site.'/' . $redir . '" method="post">
-				';if(isset($redir)){print'<input type="hidden" name="redir" value="'.$redir.'" />';}print'
-				<div class="register-left">
-					<div class="grey-seal"></div>
-				</div>
-				<div class="register-right">
-					<div class="push">
-						<p><span style="font-weight:bold">' . $user->username . '</span>, for security purposes, please verify your password.</p>
-						<label for="password">Password</label>
-						<input type="password" name="pass" tabindex="1" id="password" />
+		<div class="page-content">
+			<div class="login">
+				<h2>Verify</h2>
+				<form action="'.$protocol.'://'.$site.'/' . $redir . '" method="post">
+					';if(isset($redir)){print'<input type="hidden" name="redir" value="'.$redir.'" />';}print'
+					<div class="register-left">
+						<div class="grey-seal"></div>
 					</div>
-					<input type="submit" value="Verify" tabindex="2" />
-				</div>
-				<div class="colbreak"></div>
-			</form>
+					<div class="register-right">
+						<div class="push">
+							<p><span style="font-weight:bold">' . $user->username . '</span>, for security purposes, please verify your password.</p>
+							<label for="password">Password</label>
+							<input type="password" name="pass" tabindex="1" id="password" />
+						</div>
+						<input type="submit" value="Verify" tabindex="2" />
+					</div>
+					<div class="colbreak"></div>
+				</form>
+			</div>
 		</div>
 	';
 }else{

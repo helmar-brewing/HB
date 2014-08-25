@@ -55,47 +55,49 @@ if($user->login() === 0){
 	ob_end_flush();
 
 	print'
-	<div class="account">
-		<h1 class="pagetitle">Account</h1>
+	<div class="page-content">
+		<div class="account">
+			<h1 class="pagetitle">Account</h1>
 		
-		<div class="yourinfo">
-			<h2>Your Info</h2>
-			<dl>
-				<dt>Username</dt>
-				<dd>'.$user->username.'</dd>
-				<dt>First Name</dt>
-				<dd>'.$user->firstname.'</dd>
-				<dt>Last Name</dt>
-				<dd>'.$user->lastname.'</dd>
-				<input type="button" value="Update Info" />
-				<hr />
-				<dt>Email</dt>
-				<dd>'.$user->email.'</dd>
-				<input type="button" value="Change Email" />
-			</dl>
-		</div>
+			<div class="yourinfo">
+				<h2>Your Info</h2>
+				<dl>
+					<dt>Username</dt>
+					<dd>'.$user->username.'</dd>
+					<dt>First Name</dt>
+					<dd>'.$user->firstname.'</dd>
+					<dt>Last Name</dt>
+					<dd>'.$user->lastname.'</dd>
+					<input type="button" value="Update Info" />
+					<hr />
+					<dt>Email</dt>
+					<dd>'.$user->email.'</dd>
+					<input type="button" value="Change Email" />
+				</dl>
+			</div>
 		
-		<div class="active-logins">
-			<h2>Active Logins</h2>
-			<ul>
-	';
-	
-	foreach($user->get_active_logins() as $login){
-		print'
-				<li>
-					Last accessed on <span>'.date("M j Y",$login['logintime']).'</span> at <span>'.date("g:ia",$login['logintime']).'</span><br />from IP address <span>'.$login['IP'].'</span> with <span>'.$login['browser']['parent'].'</span> on <span>'.$login['browser']['platform'].'</span>
-					<input type="button" value="Log out device" />
-				</li>
+			<div class="active-logins">
+				<h2>Active Logins</h2>
+				<ul>
 		';
-	}
+	
+		foreach($user->get_active_logins() as $login){
+			print'
+					<li>
+						Last accessed on <span>'.date("M j Y",$login['logintime']).'</span> at <span>'.date("g:ia",$login['logintime']).'</span><br />from IP address <span>'.$login['IP'].'</span> with <span>'.$login['browser']['parent'].'</span> on <span>'.$login['browser']['platform'].'</span>
+						<input type="button" value="Log out device" />
+					</li>
+			';
+		}
 
-	print'
-			</ul>
-			<form action="logout/all/" method="post">
-				<input type="submit" value="Invalidate all logins" />
-			</form>
+		print'
+				</ul>
+				<form action="logout/all/" method="post">
+					<input type="submit" value="Invalidate all logins" />
+				</form>
+			</div>
 		</div>
-	</div>	
+	</div>
 	';
 	
 	
