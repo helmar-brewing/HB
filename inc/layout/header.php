@@ -17,7 +17,8 @@ print'
 		<link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="/css/style.css">
 		<link rel="stylesheet" href="/css/responsive.css">
-		 <link rel="stylesheet" href="/css/helmar.css">
+		<link rel="stylesheet" href="/css/helmar.css">
+		
 		
 		<script src="/js/modernizr.js"></script>
 		
@@ -25,6 +26,8 @@ print'
         <link href="/css/lightbox.css" rel="stylesheet" />
         <script src="/js/jquery-1.10.2.min.js"></script>
 		<script src="/js/lightbox-2.6.min.js"></script>
+		
+		'.$head.'
         
 	</head>
 	<body>
