@@ -19,6 +19,7 @@ ob_start();
 
 /* LOAD FUNC-CLASS-LIB */
 	require_once('classes/phnx-user.class.php');
+	require_once('libraries/stripe/Stripe.php');
 //
 
 /* PAGE VARIABLES */
@@ -131,23 +132,46 @@ if($user->login() === 1){
 		
 		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 		try{
+			Stripe::setApiKey($apikey['stripe']['secret']);
+			$cust = Stripe_Customer::create(array(
+				"description"	=> $username,
+				"email"			=> $email
+			));
 			$db_auth->query("INSERT INTO users(username, saltedHash, lastUsedVer) VALUES('$username', '$pepperedHash', '$currentVer')");
 			$userID = $db_auth->insert_id;
-			$stmt = $db_main->prepare("INSERT INTO users(userID, username, firstname, lastname, email) VALUES(?,?,?,?,?)");
-			$stmt->bind_param("sssss", $userID, $username, $firstname, $lastname, $email);
+			$stmt = $db_main->prepare("INSERT INTO users(userID, username, firstname, lastname, email, stripeID) VALUES(?,?,?,?,?,?)");
+			$stmt->bind_param("ssssss", $userID, $username, $firstname, $lastname, $email, $cust['id']);
 			$stmt->execute();
 			$stmt->close();
 			$message = '<p>You have successfully registerd.</p>';
+			$show = FALSE;
+		}catch(Stripe_AuthenticationError $e){
+			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 1)</p>';
+			//$message.= '<p>'.$e->getMessage().'</p>';
+		}catch (Stripe_InvalidRequestError $e){
+			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 2)</p>';
+			//$message.= '<p>'.$e->getMessage().'</p>';
+		}catch (Stripe_AuthenticationError $e){
+			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 3)</p>';
+			//$message.= '<p>'.$e->getMessage().'</p>';
+		}catch (Stripe_ApiConnectionError $e){
+			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 4)</p>';
+			//$message.= '<p>'.$e->getMessage().'</p>';
+		}catch (Stripe_Error $e){
+			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 5)</p>';
+			//$message.= '<p>'.$e->getMessage().'</p>';
 		}catch(mysqli_sql_exception $e){
-			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>.</p>';
+			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: database)</p>';
 			//$message.= '<p>'.$e->getMessage().'</p>';		
 			/* Clean up in case of failure */
-			$db_auth->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
-			$db_main->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
+			$cu = Stripe_Customer::retrieve($cust['id']);
+			$cu->delete();
+			if($userID !== null){
+				$db_auth->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
+				$db_main->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
+			}
 		}
 		mysqli_report(MYSQLI_REPORT_ERROR ^ MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
-		
-		$show = FALSE;
 	}
 
 	print'
