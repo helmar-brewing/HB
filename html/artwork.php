@@ -30,7 +30,7 @@ include 'layout/header.php';
             <h2 class="heading">
 					&nbsp; &nbsp; Here is some of our artwork!
 				</h2>
-                <p><font color="red"><u>Please note that the website is still under deveopment. Certain links/pages may not display properly. Thank you for this understanding. </u></font></p>
+                
 				
 				<!-- work list -->
 				<ul class="work-list cf" id="filter-container">
@@ -48,7 +48,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="e145.php" class="thumb" >
-							<img src="images/cardPics/E145-Helmar_4_Front.jpg" alt="E145-Helmar" />
+							<img src="images/cardPics/thumb/E145-Helmar_4_Front.jpg" alt="E145-Helmar" />
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="e145.php"  class="title" > <center>E145-Helmar</center></a>
@@ -57,7 +57,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="6up.php" class="thumb" >
-							<img src="images/cardPics/Helmar_6_Up_Die-Cut_71_Front.jpg" alt="Helmar 6 Up Die-Cut" />
+							<img src="images/cardPics/thumb/Helmar_6_Up_Die-Cut_71_Front.jpg" alt="Helmar 6 Up Die-Cut" />
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="6up.php"  class="title" > <center>Helmar 6 Up Die-Cut</center></a>
@@ -66,7 +66,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="trolley.php" class="thumb" >
-							<img src="images/cardPics/Helmar_Trolley_Card_13_Front.jpg" alt="Helmar Trolley Card"/>
+							<img src="images/cardPics/thumb/Helmar_Trolley_Card_13_Front.jpg" alt="Helmar Trolley Card"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="trolley.php"  class="title" > <center>Helmar Trolley Card</center></a>
@@ -77,7 +77,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="r318.php" class="thumb" >
-							<img src="images/cardPics/R318-Helmar_147_Front.jpg" alt="R318-Helmar" />
+							<img src="images/cardPics/thumb/R318-Helmar_147_Front.jpg" alt="R318-Helmar" />
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="r318.php"  class="title" > <center>R318-Helmar</center></a>
@@ -90,7 +90,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="helmarcabinet.php" class="thumb" >
-							<img src="images/cardPics/Helmar_Cabinet_14_Front.jpg" alt="Helmar Cabinet"/>
+							<img src="images/cardPics/thumb/Helmar_Cabinet_14_Front.jpg" alt="Helmar Cabinet"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="cabinet.php"  class="title" > <center>Helmar Cabinet</center></a>
@@ -99,7 +99,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="t206.php" class="thumb" >
-							<img src="images/cardPics/T206-Helmar_110_Front.jpg" alt="T206-Helmar"/>
+							<img src="images/cardPics/thumb/T206-Helmar_110_Front.jpg" alt="T206-Helmar"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="t206.php"  class="title" > <center>T206-Helmar</center></a>
@@ -110,7 +110,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="h813.php" class="thumb" >
-							<img src="images/cardPics/H813-4_Boston_Garter-Helmar_17_Front.jpg" alt="H813-4 Boston Garter-Helmar"/>
+							<img src="images/cardPics/thumb/H813-4_Boston_Garter-Helmar_17_Front.jpg" alt="H813-4 Boston Garter-Helmar"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="h813.php"  class="title" > <center>H813-4 Boston Garter-Helmar</center></a>
@@ -119,7 +119,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="r321.php" class="thumb" >
-							<img src="images/cardPics/R321-Helmar_1_Front.jpg" alt="R321-Helmar"/>
+							<img src="images/cardPics/thumb/R321-Helmar_1_Front.jpg" alt="R321-Helmar"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="r321.php"  class="title" > <center>R321-Helmar</center></a>
@@ -128,7 +128,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="imperial.php" class="thumb" >
-							<img src="images/cardPics/Helmar_Imperial_Cabinet_23_Front.jpg" alt="Helmar Imperial Cabinet"/>
+							<img src="images/cardPics/thumb/Helmar_Imperial_Cabinet_23_Front.jpg" alt="Helmar Imperial Cabinet"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="imperial.php"  class="title" > <center>Helmar Imperial Cabinet</center></a>
@@ -137,7 +137,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="l1.php" class="thumb" >
-							<img src="images/cardPics/L1-Helmar_43_Front.jpg" alt="L1-Helmar"/>
+							<img src="images/cardPics/thumb/L1-Helmar_43_Front.jpg" alt="L1-Helmar"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="l1.php"  class="title" > <center>L1-Helmar</center></a>
@@ -148,7 +148,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="t202.php" class="thumb" >
-							<img src="images/cardPics/T202-Helmar_2_Front.jpg" alt="T202-Helmar"/>
+							<img src="images/cardPics/thumb/T202-Helmar_2_Front.jpg" alt="T202-Helmar"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="t202.php"  class="title" > <center>T202-Helmar</center></a>
@@ -158,7 +158,7 @@ include 'layout/header.php';
                                     
                     <li>
 						<a href="ourguy.php" class="thumb" >
-							<img src="images/cardPics/Our_Guy_18_Front.jpg" alt="Our Guy"/>
+							<img src="images/cardPics/thumb/Our_Guy_18_Front.jpg" alt="Our Guy"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="ourguy.php"  class="title" > <center>Our Guy</center></a>
@@ -167,7 +167,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="t3.php" class="thumb" >
-							<img src="images/cardPics/T3-Helmar_1_Front.jpg" alt="T3-Helmar"/>
+							<img src="images/cardPics/thumb/T3-Helmar_1_Front.jpg" alt="T3-Helmar"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="t3.php"  class="title" > <center>T3-Helmar</center></a>
@@ -176,7 +176,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="pharoh.php" class="thumb" >
-							<img src="images/cardPics/Helmar_Pharohs_Choice_Cabinet_1_Front.jpg" alt="Helmar Pharoh's Choice Cabinet"/>
+							<img src="images/cardPics/thumb/Helmar_Pharohs_Choice_Cabinet_1_Front.jpg" alt="Helmar Pharoh's Choice Cabinet"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="pharoh.php"  class="title" > <center>Helmar Pharoh's Choice Cabinet</center></a>
@@ -187,7 +187,7 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="l3.php" class="thumb" >
-							<img src="images/cardPics/L3-Helmar_Cabinet_52_Front.jpg" alt="L3-Helmar Cabinet"/>
+							<img src="images/cardPics/thumb/L3-Helmar_Cabinet_52_Front.jpg" alt="L3-Helmar Cabinet"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="l3.php"  class="title" > <center>L3-Helmar Cabinet</center></a>
@@ -196,181 +196,13 @@ include 'layout/header.php';
                     
                     <li>
 						<a href="polo.php" class="thumb" >
-							<img src="images/cardPics/Polo_Grounds_Heroes_51_Front.jpg" alt="Polo Grounds Heroes"/>
+							<img src="images/cardPics/thumb/Polo_Grounds_Heroes_51_Front.jpg" alt="Polo Grounds Heroes"/>
 							<div class="img-overlay">View Series</div>
 						</a>
 						<a href="polo.php"  class="title" > <center>Polo Grounds Heroes</center></a>
 						
 					</li>
                     
-                   <!-- 
-					<li>
-						<a href="r319.php" class="thumb" >
-							<img src="images/cardPics/thumb/R319-Helmar_188_Front.jpg" alt="R319-Helmar" />
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="r319.php"  class="title" > <center>R319-Helmar</center></a>
-						
-					</li>
-
-					
-                    
-                    <li>
-						<a href="e145.php" class="thumb" >
-							<img src="images/cardPics/E145-Helmar_4_Front.jpg" alt="E145-Helmar" />
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="e145.php"  class="title" > <center>E145-Helmar</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="6up.php" class="thumb" >
-							<img src="images/cardPics/Helmar_6_Up_Die-Cut_71_Front.jpg" alt="Helmar 6 Up Die-Cut" />
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="6up.php"  class="title" > <center>Helmar 6 Up Die-Cut</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="trolley.php" class="thumb" >
-							<img src="images/cardPics/Helmar_Trolley_Card_13_Front.jpg" alt="Helmar Trolley Card"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="trolley.php"  class="title" > <center>Helmar Trolley Card</center></a>
-						
-					</li>
-                    
-                    
-                    
-                    <li>
-						<a href="r318.php" class="thumb" >
-							<img src="images/cardPics/R318-Helmar_147_Front.jpg" alt="R318-Helmar" />
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="r318.php"  class="title" > <center>R318-Helmar</center></a>
-						
-					</li>
-                    
-                    
-                    
-                    
-                    
-                    <li>
-						<a href="helmarcabinet.php" class="thumb" >
-							<img src="images/cardPics/Helmar_Cabinet_14_Front.jpg" alt="Helmar Cabinet"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="cabinet.php"  class="title" > <center>Helmar Cabinet</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="t206.php" class="thumb" >
-							<img src="images/cardPics/T206-Helmar_110_Front.jpg" alt="T206-Helmar"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="t206.php"  class="title" > <center>T206-Helmar</center></a>
-						
-					</li>
-                    
-                    
-                    
-                    <li>
-						<a href="h813.php" class="thumb" >
-							<img src="images/cardPics/H813-4_Boston_Garter-Helmar_17_Front.jpg" alt="H813-4 Boston Garter-Helmar"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="h813.php"  class="title" > <center>H813-4 Boston Garter-Helmar</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="r321.php" class="thumb" >
-							<img src="images/cardPics/R321-Helmar_1_Front.jpg" alt="R321-Helmar"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="r321.php"  class="title" > <center>R321-Helmar</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="imperial.php" class="thumb" >
-							<img src="images/cardPics/Helmar_Imperial_Cabinet_23_Front.jpg" alt="Helmar Imperial Cabinet"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="imperial.php"  class="title" > <center>Helmar Imperial Cabinet</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="l1.php" class="thumb" >
-							<img src="images/cardPics/L1-Helmar_43_Front.jpg" alt="L1-Helmar"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="l1.php"  class="title" > <center>L1-Helmar</center></a>
-						
-					</li>
-                    
-                    
-                    
-                    <li>
-						<a href="t202.php" class="thumb" >
-							<img src="images/cardPics/T202-Helmar_2_Front.jpg" alt="T202-Helmar"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="t202.php"  class="title" > <center>T202-Helmar</center></a>
-						
-					</li>
-                    
-                                    
-                    <li>
-						<a href="ourguy.php" class="thumb" >
-							<img src="images/cardPics/Our_Guy_18_Front.jpg" alt="Our Guy"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="ourguy.php"  class="title" > <center>Our Guy</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="t3.php" class="thumb" >
-							<img src="images/cardPics/T3-Helmar_1_Front.jpg" alt="T3-Helmar"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="t3.php"  class="title" > <center>T3-Helmar</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="pharoh.php" class="thumb" >
-							<img src="images/cardPics/Helmar_Pharohs_Choice_Cabinet_1_Front.jpg" alt="Helmar Pharoh's Choice Cabinet"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="pharoh.php"  class="title" > <center>Helmar Pharoh's Choice Cabinet</center></a>
-						
-					</li>
-                    
-                    
-                    
-                    <li>
-						<a href="l3.php" class="thumb" >
-							<img src="images/cardPics/L3-Helmar_Cabinet_52_Front.jpg" alt="L3-Helmar Cabinet"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="l3.php"  class="title" > <center>L3-Helmar Cabinet</center></a>
-						
-					</li>
-                    
-                    <li>
-						<a href="polo.php" class="thumb" >
-							<img src="images/cardPics/Polo_Grounds_Heroes_51_Front.jpg" alt="Polo Grounds Heroes"/>
-							<div class="img-overlay">View Series</div>
-						</a>
-						<a href="polo.php"  class="title" > <center>Polo Grounds Heroes</center></a>
-						
-					</li>-->
 
 				</ul>
 				<!-- ENDS work list -->		
