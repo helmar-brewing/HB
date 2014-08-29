@@ -49,7 +49,6 @@ $user->checklogin(2);
 			$form.append($(\'<input type="hidden" name="stripeToken" />\').val(token));
 			
 			// instead of inserting token here how about we do AJAX instead, then move this whole script and form into a modal
-			// need to create customerID in stripe when registering, needs to be next step
 			
 			// and re-submit
 			$form.get(0).submit();
