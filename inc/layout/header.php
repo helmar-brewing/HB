@@ -19,6 +19,7 @@ print'
 		<link rel="stylesheet" href="/css/responsive.css">
 		<link rel="stylesheet" href="/css/helmar.css">
 		
+		<link rel="stylesheet" href="/css/steve.css">
 		
 		<script src="/js/modernizr.js"></script>
 		

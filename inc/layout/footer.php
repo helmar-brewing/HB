@@ -10,6 +10,7 @@ print'
 		<!-- ENDS WRAPPER -->
 		</div>
 		
+		<div id="fullscreenload"><span></span><img src="/img/loading.gif"/></div>
 	</body>
 </html>
 ';
