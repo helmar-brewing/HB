@@ -57,10 +57,10 @@ print'
 <!-- NAV -->
 <nav class="cf">
 	<ul id="nav" class="sf-menu">
-		<li><a href="index.php">Home</a></li>
-		<li class="current-menu-item"><a href="artwork.php">Helmar Artwork</a></li>
-		<li><a href="about.php">Helmar & Charles</a></li>
-		<li><a href="contact.php">Stay in Touch</a></li>
+		<li><a href="/index.php">Home</a></li>
+		<li><a href="/artwork.php">Helmar Artwork</a></li>
+		<li><a href="/about.php">Helmar & Charles</a></li>
+		<li><a href="/contact.php">Stay in Touch</a></li>
 		<li class="important"><a href="http://helmarblog.wordpress.com" target="new">helmarblog</a></li>
 		<li class="important"><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="new">OUR STORE!</a></li>
 	</ul>
