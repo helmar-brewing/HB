@@ -29,17 +29,40 @@ $token = $_GET['t'];
 $user = new phnx_user;
 $user->checklogin(2);
 if($user->login() === 2){
+
 	
-	$json = array(
-		'error' => '0',
-		'msg' => 'Great.'
-	);
 	
+	$R_userdeets = $db_main->query("SELECT * FROM users WHERE userid = ".$user->id." LIMIT 1");
+	if($R_userdeets !== FALSE){
+		$userdeets = $R_userdeets->fetch_assoc();
+		$R_userdeets->free();
+		
+		Stripe::setApiKey($apikey['stripe']['secret']);
+		
+		$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
+		$cust->cards->create(array("card" => $token));
+		
+		// insert try catch for exceptions
+		
+		//how do I test here
+		
+		$json = array(
+			'error' => '0',
+			'msg' => $userdeets['stripeID']
+			
+		);
+		
+	}else{
+		$json = array(
+			'error' => '1',
+			'msg' => 'There was an error updating your card. (ref: user pull fail)'
+		);
+	}
 	
 	
 }else{
 	$json = array(
-		'error' => '1',
+		'error' => '2',
 		'msg' => 'You must be logged in to make changes to your card.  Please refresh the page and try again.'
 	);
 }

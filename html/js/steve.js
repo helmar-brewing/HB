@@ -14,7 +14,10 @@ var stripeResponseHandler = function(status, response) {
 			function( data ) {
 				if(data.error === '0'){
 					$form.find('.payment-errors').text(data.msg);
+					document.getElementById('fullscreenload').style.display = 'none';
 				}else if(data.error === '1'){
+					$form.find('.payment-errors').text(data.msg);
+					document.getElementById('fullscreenload').style.display = 'none';
 				}else if(data.error === '2'){
 				}else{
 				}
@@ -22,7 +25,7 @@ var stripeResponseHandler = function(status, response) {
 			"json"
 		)
 		.fail(function() {
-			alert(token);
+			alert('ajax failure');
 			document.getElementById('fullscreenload').style.display = 'none';
 		});
 	}

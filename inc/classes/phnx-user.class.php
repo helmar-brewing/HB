@@ -357,7 +357,7 @@
 				$R_info = $db_main->query("SELECT * FROM users WHERE username = '".$this->username."' LIMIT 1");
 				if($R_info != FALSE){
 					$info = $R_info->fetch_assoc();
-					$this->id = $info['userID'];
+					$this->id = $info['userid'];
 					$this->firstname = $info['firstname'];
 					$this->lastname = $info['lastname'];
 					$this->email = $info['email'];
