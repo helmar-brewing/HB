@@ -1,6 +1,6 @@
 <?php
 
-/* TEST FOR SUBMISSION */ if(empty($_POST)){print'<p style="font-family:arial;">Nothing to see here, move along.</p>';exit;}
+// /* TEST FOR SUBMISSION */  if(empty($_POST)){print'<p style="font-family:arial;">Nothing to see here, move along.</p>';exit;}
 
 ob_start();
 
@@ -23,7 +23,7 @@ ob_start();
 //
 
 /* PAGE VARIABLES */
-$token = $_GET['t'];
+$token = $_POST['t'];
 //
 
 $user = new phnx_user;
@@ -39,19 +39,73 @@ if($user->login() === 2){
 		
 		Stripe::setApiKey($apikey['stripe']['secret']);
 		
-		$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
-		$cust->cards->create(array("card" => $token));
+		try {
 		
-		// insert try catch for exceptions
-		
-		//how do I test here
-		
-		$json = array(
-			'error' => '0',
-			'msg' => $userdeets['stripeID']
+			$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
 			
-		);
-		
+			if($cust['cards']['total_count'] === 0){
+				$cust->cards->create(array("card" => $token));		
+				$json = array(
+					'error' => '0',
+					'msg' => 'yay.create'
+					
+					// $cust->cards->data->[0]->last4
+				);
+			}else{
+				$card_id_array = $cust->cards->data;
+				$card_id = $card_id_array[0]['id'];
+				$cust->cards->retrieve($card_id)->delete();
+				$cust->cards->create(array("card" => $token));
+				$json = array(
+					'error' => '0',
+					'msg' => 'yay.update'
+				);
+			}
+
+		} catch(Stripe_CardError $e) {
+			// Since it's a decline, Stripe_CardError will be caught
+			$body = $e->getJsonBody();
+			$err  = $body['error'];
+
+			print('Status is:' . $e->getHttpStatus() . "\n");
+			print('Type is:' . $err['type'] . "\n");
+			print('Code is:' . $err['code'] . "\n");
+			// param is '' in this case
+			print('Param is:' . $err['param'] . "\n");
+			print('Message is:' . $err['message'] . "\n");
+		} catch (Stripe_InvalidRequestError $e) {
+			// Invalid parameters were supplied to Stripe's API
+			$json = array(
+				'error' => '3',
+				'json' => $e->getJsonBody()
+			);
+		} catch (Stripe_AuthenticationError $e) {
+			// Authentication with Stripe's API failed
+			// (maybe you changed API keys recently)
+			$json = array(
+				'error' => '3',
+				'json' => $e->getJsonBody()
+			);
+		} catch (Stripe_ApiConnectionError $e) {
+			// Network communication with Stripe failed
+			$json = array(
+				'error' => '3',
+				'json' => $e->getJsonBody()
+			);
+		} catch (Stripe_Error $e) {
+			// Display a very generic error to the user, and maybe send yourself an email
+			$json = array(
+				'error' => '3',
+				'json' => $e->getJsonBody()
+			);
+		} catch (Exception $e) {
+			// Something else happened, completely unrelated to Stripe
+			$json = array(
+				'error' => '3',
+				'json' => $e->getJsonBody()
+			);
+		}
+
 	}else{
 		$json = array(
 			'error' => '1',

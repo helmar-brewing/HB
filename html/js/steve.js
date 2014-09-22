@@ -19,7 +19,13 @@ var stripeResponseHandler = function(status, response) {
 					$form.find('.payment-errors').text(data.msg);
 					document.getElementById('fullscreenload').style.display = 'none';
 				}else if(data.error === '2'){
+					$form.find('.payment-errors').text(data.msg);
+					document.getElementById('fullscreenload').style.display = 'none';
+				}else if(data.error === '3'){
+					$form.find('.payment-errors').text(data.json.error.type + '-' + data.json.error.message + '-' + data.json.error.param);
+					document.getElementById('fullscreenload').style.display = 'none';
 				}else{
+					alert('There was an error, but no error type was returned.');
 				}
 			},
 			"json"
