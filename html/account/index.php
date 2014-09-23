@@ -59,6 +59,58 @@ if($user->login() === 0){
 	exit;
 }elseif($user->login() === 2){
 	$user->regen();
+	
+	
+	
+	
+	$R_userdeets = $db_main->query("SELECT * FROM users WHERE userid = ".$user->id." LIMIT 1");
+	if($R_userdeets !== FALSE){
+		$userdeets = $R_userdeets->fetch_assoc();
+		$R_userdeets->free();
+		
+		try {
+		
+			Stripe::setApiKey($apikey['stripe']['secret']);
+		
+			$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
+			
+			if($cust['cards']['total_count'] !== 0){
+				$card_info = $cust->cards->data;
+				$card_num = '&#183;&#183;&#183;&#183; &#183;&#183;&#183;&#183; &#183;&#183;&#183;&#183; '.$card_info[0]['last4'];
+				$brand = $card_info[0]['brand'];
+				$exp_month = sprintf('%02d', $card_info[0]['exp_month']);
+				$exp_year = $card_info[0]['exp_year'];
+			}
+		} catch(Stripe_CardError $e) {
+			
+			// this still needs to show the form in case of expired cards that were already on the account
+		
+			$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: stripe exception card error)';
+		} catch (Stripe_InvalidRequestError $e) {
+			$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: stripe exception invalid request)';
+		} catch (Stripe_AuthenticationError $e) {
+			$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: stripe exception authentication)';
+		} catch (Stripe_ApiConnectionError $e) {
+			$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: stripe exception api connection)';
+		} catch (Stripe_Error $e) {
+			$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: stripe exception general)';
+		} catch (Exception $e) {
+			$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: stripe exception generic)';
+		}
+	}else{
+		$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: user details fail)';
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	ob_end_flush();
 
 	print'
@@ -107,15 +159,15 @@ if($user->login() === 0){
 			<div>
 				<h2>Subscription</h2>
 				<form action="" method="POST" id="payment-form">
-					<div class="payment-errors"></div>
+					<div class="payment-errors">'.$msg.'</div>
 					<label>Card Number</label>
-					<input type="text" size="20" data-stripe="number"/>
+					<input type="text" size="20" id="card_number" data-stripe="number" value="'.$card_num.'" />
 					<label>CVC</label>
-					<input type="text" size="4" data-stripe="cvc"/>
+					<input type="text" size="4" id="cvc" data-stripe="cvc"/>
 					<label>Expiration (MM/YYYY)</label>
-					<input type="text" size="2" data-stripe="exp-month"/>
+					<input type="text" size="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/>
 					<span> / </span>
-					<input type="text" size="4" data-stripe="exp-year"/>
+					<input type="text" size="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
 					<button type="submit">Submit Payment</button>
 				</form>
 			</div>

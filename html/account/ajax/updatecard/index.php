@@ -1,6 +1,6 @@
 <?php
 
-// /* TEST FOR SUBMISSION */  if(empty($_POST)){print'<p style="font-family:arial;">Nothing to see here, move along.</p>';exit;}
+/* TEST FOR SUBMISSION */  if(empty($_POST)){print'<p style="font-family:arial;">Nothing to see here, move along.</p>';exit;}
 
 ob_start();
 
@@ -44,35 +44,39 @@ if($user->login() === 2){
 			$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
 			
 			if($cust['cards']['total_count'] === 0){
-				$cust->cards->create(array("card" => $token));		
+				$cust->cards->create(array("card" => $token));
+				
+				$card_info = $cust->cards->data;
+				
 				$json = array(
 					'error' => '0',
-					'msg' => 'yay.create'
-					
-					// $cust->cards->data->[0]->last4
+					'msg' => 'Your card has been successfully added.',
+					'last4' => $card_info['last4'],
+					'brand' => $card_info['brand'],
+					'exp_month' => $card_info['exp_month'],
+					'exp_year' => $card_info['exp_year']
 				);
 			}else{
 				$card_id_array = $cust->cards->data;
 				$card_id = $card_id_array[0]['id'];
+				$card_info = $cust->cards->create(array("card" => $token));
 				$cust->cards->retrieve($card_id)->delete();
-				$cust->cards->create(array("card" => $token));
 				$json = array(
 					'error' => '0',
-					'msg' => 'yay.update'
+					'msg' => 'Your card has been successfully updated.',
+					'last4' => $card_info['last4'],
+					'brand' => $card_info['brand'],
+					'exp_month' => $card_info['exp_month'],
+					'exp_year' => $card_info['exp_year']
 				);
 			}
 
 		} catch(Stripe_CardError $e) {
 			// Since it's a decline, Stripe_CardError will be caught
-			$body = $e->getJsonBody();
-			$err  = $body['error'];
-
-			print('Status is:' . $e->getHttpStatus() . "\n");
-			print('Type is:' . $err['type'] . "\n");
-			print('Code is:' . $err['code'] . "\n");
-			// param is '' in this case
-			print('Param is:' . $err['param'] . "\n");
-			print('Message is:' . $err['message'] . "\n");
+			$json = array(
+				'error' => '1',
+				'msg' =>  'There was an error updating your card. (ref: stripe card error exception)'
+			);
 		} catch (Stripe_InvalidRequestError $e) {
 			// Invalid parameters were supplied to Stripe's API
 			$json = array(

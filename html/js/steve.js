@@ -14,6 +14,12 @@ var stripeResponseHandler = function(status, response) {
 			function( data ) {
 				if(data.error === '0'){
 					$form.find('.payment-errors').text(data.msg);
+					
+					document.getElementById('card_number').value = '\xB7\xB7\xB7\xB7 \xB7\xB7\xB7\xB7 \xB7\xB7\xB7\xB7 ' + data.last4;
+					document.getElementById('exp_month').value = data.exp_month;
+					document.getElementById('exp_year').value = data.exp_year;
+					document.getElementById('cvc').value = null;
+					
 					document.getElementById('fullscreenload').style.display = 'none';
 				}else if(data.error === '1'){
 					$form.find('.payment-errors').text(data.msg);
