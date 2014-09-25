@@ -18,7 +18,10 @@ var stripeResponseHandler = function(status, response) {
 					document.getElementById('card_number').value = '\xB7\xB7\xB7\xB7 \xB7\xB7\xB7\xB7 \xB7\xB7\xB7\xB7 ' + data.last4;
 					document.getElementById('exp_month').value = data.exp_month;
 					document.getElementById('exp_year').value = data.exp_year;
-					document.getElementById('cvc').value = null;
+					document.getElementById('cvc').value = '';
+					
+					document.getElementById('delete_card').disabled = false;
+					document.getElementById('add_update_card').innerHTML = 'Update Card';
 					
 					document.getElementById('fullscreenload').style.display = 'none';
 				}else if(data.error === '1'){
@@ -40,6 +43,8 @@ var stripeResponseHandler = function(status, response) {
 			alert('ajax failure');
 			document.getElementById('fullscreenload').style.display = 'none';
 		});
+		
+		$form.find('button').prop('disabled', false);
 	}
 };
 jQuery(function($) {
@@ -53,3 +58,40 @@ jQuery(function($) {
 		return false;
 	});
 });
+
+
+
+
+
+
+
+function deleteCard(){
+	document.getElementById('fullscreenload').style.display = 'block';
+	$.post(
+		"/account/ajax/deletecard/",
+		{ a:1 },
+		function( data ) {
+			if(data.error === '0'){
+				
+				document.getElementById('card_number').value = '';
+				document.getElementById('exp_month').value = '';
+				document.getElementById('exp_year').value = '';
+				document.getElementById('cvc').value = '';
+				document.getElementById('delete_card').disabled = true;
+				document.getElementById('add_update_card').innerHTML = 'Add Card';
+				
+				document.getElementById('payment-errors').innerHTML = data.msg;
+				
+				document.getElementById('fullscreenload').style.display = 'none';
+			}else{
+				document.getElementById('payment-errors').innerHTML = data.msg;
+				document.getElementById('fullscreenload').style.display = 'none';
+			}
+		},
+		"json"
+	)
+	.fail(function() {
+		alert('ajax failure');
+		document.getElementById('fullscreenload').style.display = 'none';
+	});
+}

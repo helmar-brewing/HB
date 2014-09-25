@@ -81,8 +81,10 @@ if($user->login() === 0){
 				$exp_month = sprintf('%02d', $card_info[0]['exp_month']);
 				$exp_year = $card_info[0]['exp_year'];
 				$card_button_text = 'Update Card';
+				$delete_disabled = false;
 			}else{
 				$card_button_text = 'Add Card';
+				$delete_disabled = true;
 			}
 		} catch(Stripe_CardError $e) {
 			
@@ -162,7 +164,7 @@ if($user->login() === 0){
 			<div>
 				<h2>Subscription</h2>
 				<form action="" method="POST" id="payment-form">
-					<div class="payment-errors">'.$msg.'</div>
+					<div class="payment-errors" id="payment-errors">'.$msg.'</div>
 					<label>Card Number</label>
 					<input type="text" size="20" id="card_number" data-stripe="number" value="'.$card_num.'" />
 					<label>CVC</label>
@@ -171,8 +173,9 @@ if($user->login() === 0){
 					<input type="text" size="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/>
 					<span> / </span>
 					<input type="text" size="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
-					<button type="submit">'.$card_button_text.'</button>
+					<button id="add_update_card" type="submit">'.$card_button_text.'</button>
 				</form>
+				<button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
 			</div>
 		</div>
 	</div>

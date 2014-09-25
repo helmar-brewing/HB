@@ -23,7 +23,6 @@ ob_start();
 //
 
 /* PAGE VARIABLES */
-$token = $_POST['t'];
 //
 
 $user = new phnx_user;
@@ -44,27 +43,18 @@ if($user->login() === 2){
 			$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
 			
 			if($cust['cards']['total_count'] === 0){
-				$card_info = $cust->cards->create(array("card" => $token));
+			
 				$json = array(
-					'error' => '0',
-					'msg' => 'Your card has been successfully added.',
-					'last4' => $card_info['last4'],
-					'brand' => $card_info['brand'],
-					'exp_month' => $card_info['exp_month'],
-					'exp_year' => $card_info['exp_year']
+					'error' => '1',
+					'msg' => 'Could not find a card on file. Please refresh page.',
 				);
 			}else{
 				$card_id_array = $cust->cards->data;
 				$card_id = $card_id_array[0]['id'];
-				$card_info = $cust->cards->create(array("card" => $token));
 				$cust->cards->retrieve($card_id)->delete();
 				$json = array(
 					'error' => '0',
-					'msg' => 'Your card has been successfully updated.',
-					'last4' => $card_info['last4'],
-					'brand' => $card_info['brand'],
-					'exp_month' => $card_info['exp_month'],
-					'exp_year' => $card_info['exp_year']
+					'msg' => 'Your card has been successfully deleted.',
 				);
 			}
 
@@ -72,7 +62,7 @@ if($user->login() === 2){
 			// Since it's a decline, Stripe_CardError will be caught
 			$json = array(
 				'error' => '1',
-				'msg' =>  'There was an error updating your card. (ref: stripe card error exception)'
+				'msg' =>  'There was an error deleting your card. (ref: stripe card error exception)'
 			);
 		} catch (Stripe_InvalidRequestError $e) {
 			// Invalid parameters were supplied to Stripe's API
@@ -110,7 +100,7 @@ if($user->login() === 2){
 	}else{
 		$json = array(
 			'error' => '1',
-			'msg' => 'There was an error updating your card. (ref: user pull fail)'
+			'msg' => 'There was an error deleting your card. (ref: user pull fail)'
 		);
 	}
 	
