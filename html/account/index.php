@@ -80,6 +80,9 @@ if($user->login() === 0){
 				$brand = $card_info[0]['brand'];
 				$exp_month = sprintf('%02d', $card_info[0]['exp_month']);
 				$exp_year = $card_info[0]['exp_year'];
+				$card_button_text = 'Update Card';
+			}else{
+				$card_button_text = 'Add Card';
 			}
 		} catch(Stripe_CardError $e) {
 			
@@ -168,7 +171,7 @@ if($user->login() === 0){
 					<input type="text" size="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/>
 					<span> / </span>
 					<input type="text" size="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
-					<button type="submit">Submit Payment</button>
+					<button type="submit">'.$card_button_text.'</button>
 				</form>
 			</div>
 		</div>
