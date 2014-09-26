@@ -102,6 +102,37 @@ if($user->login() === 0){
 		} catch (Exception $e) {
 			$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: stripe exception generic)';
 		}
+		
+		
+		
+		try {
+		
+
+		
+			$sub_response = Stripe_Customer::retrieve($userdeets['stripeID'])->subscriptions->all();
+			$subs = $sub_response->data;
+			$status = $subs[0]['status'];
+			
+			
+
+		} catch(Stripe_CardError $e) {
+			
+			// this still needs to show the form in case of expired cards that were already on the account
+		
+			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception card error)';
+		} catch (Stripe_InvalidRequestError $e) {
+			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception invalid request)';
+		} catch (Stripe_AuthenticationError $e) {
+			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception authentication)';
+		} catch (Stripe_ApiConnectionError $e) {
+			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception api connection)';
+		} catch (Stripe_Error $e) {
+			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception general)';
+		} catch (Exception $e) {
+			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception generic)';
+		}
+		
+		
 	}else{
 		$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: user details fail)';
 	}
@@ -162,7 +193,8 @@ if($user->login() === 0){
 			</div>
 			
 			<div>
-				<h2>Subscription</h2>
+				<h2>Helmar Gold</h2>
+				<h3>Credit Card</h3>
 				<form action="" method="POST" id="payment-form">
 					<div class="payment-errors" id="payment-errors">'.$msg.'</div>
 					<label>Card Number</label>
@@ -176,6 +208,9 @@ if($user->login() === 0){
 					<button id="add_update_card" type="submit">'.$card_button_text.'</button>
 				</form>
 				<button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
+				<h3>Subscription</h3>
+				<p>Helmar Gold costs $9.99 per month.</p>
+				<p>Status: '.$status.'</p>
 			</div>
 		</div>
 	</div>
