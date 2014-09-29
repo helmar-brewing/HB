@@ -111,7 +111,20 @@ if($user->login() === 0){
 		
 			$sub_response = Stripe_Customer::retrieve($userdeets['stripeID'])->subscriptions->all();
 			$subs = $sub_response->data;
-			$status = $subs[0]['status'];
+			
+			if(empty($subs)){
+				$status = 'You do not have an active subscription.';
+				$sub_button_text = 'Subscribe Now';
+			}else{
+				$status = $subs[0]['status'];
+				$sub_button_text = 'Cancel';
+				if($subs[0]['cancel_at_period_end'] === true){
+					$status .= ' - Your subscription is paid in full until '.date('M j Y', $subs[0]['current_period_end']).' at which point it will be canceled.';
+					$sub_button_text = 'Resume Subscription';
+				}
+			}
+			
+			
 			
 			
 
@@ -119,22 +132,22 @@ if($user->login() === 0){
 			
 			// this still needs to show the form in case of expired cards that were already on the account
 		
-			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception card error)';
+			$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception card error)';
 		} catch (Stripe_InvalidRequestError $e) {
-			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception invalid request)';
+			$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception invalid request)';
 		} catch (Stripe_AuthenticationError $e) {
-			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception authentication)';
+			$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception authentication)';
 		} catch (Stripe_ApiConnectionError $e) {
-			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception api connection)';
+			$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception api connection)';
 		} catch (Stripe_Error $e) {
-			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception general)';
+			$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception general)';
 		} catch (Exception $e) {
-			$msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception generic)';
+			$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception generic)';
 		}
 		
 		
 	}else{
-		$msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: user details fail)';
+		$sub_msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: user details fail)';
 	}
 	
 	
@@ -210,7 +223,10 @@ if($user->login() === 0){
 				<button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
 				<h3>Subscription</h3>
 				<p>Helmar Gold costs $9.99 per month.</p>
-				<p>Status: '.$status.'</p>
+				<p id="sub_error">'.$sub_msg.'</p>
+				<p>Status: <span id="sub_status">'.$status.'</p>
+				<!-- maybe insert toggle switch here instead after a transition to SASS/Bourbon/Neat -->
+				<button id="sub_button" onclick="toggleSub()">'.$sub_button_text.'</button>
 			</div>
 		</div>
 	</div>

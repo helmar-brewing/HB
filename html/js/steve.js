@@ -95,3 +95,27 @@ function deleteCard(){
 		document.getElementById('fullscreenload').style.display = 'none';
 	});
 }
+
+function toggleSub(){
+	document.getElementById('fullscreenload').style.display = 'block';
+	$.post(
+		"/account/ajax/togglesub/",
+		{ a:1 },
+		function( data ) {
+			if(data.error === '0'){
+				document.getElementById('sub_status').innerHTML = data.status;
+				document.getElementById('sub_button').innerHTML = data.button;
+				document.getElementById('sub_error').innerHTML = data.msg;				
+				document.getElementById('fullscreenload').style.display = 'none';
+			}else{
+				document.getElementById('sub_error').innerHTML = data.msg;
+				document.getElementById('fullscreenload').style.display = 'none';
+			}
+		},
+		"json"
+	)
+	.fail(function() {
+		alert('ajax failure');
+		document.getElementById('fullscreenload').style.display = 'none';
+	});
+}
