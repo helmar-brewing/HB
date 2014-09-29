@@ -60,9 +60,6 @@ if($user->login() === 0){
 }elseif($user->login() === 2){
 	$user->regen();
 	
-	
-	
-	
 	$R_userdeets = $db_main->query("SELECT * FROM users WHERE userid = ".$user->id." LIMIT 1");
 	if($R_userdeets !== FALSE){
 		$userdeets = $R_userdeets->fetch_assoc();
