@@ -43,7 +43,7 @@ print'
 
 <!-- HEADER -->
 <header class="cf">
-<div id="logo"><a href="/"><img src="/img/helmartitle2.png" alt="Helmar Baseball Card Art Company" /></a></div>
+<div id="logo"><a href="/"><img src="/img/Helmar_logo_lg_2.png" alt="Helmar Baseball Card Art Company" /></a></div>
 				
 <!-- social-bar -->
 <ul id="social-bar" class="cf">
