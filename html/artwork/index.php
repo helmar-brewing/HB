@@ -7,8 +7,8 @@ ob_start();
 
 /* WHICH DATABASES DO WE NEED */
 $db2use = array(
-	'db_auth' 	=> FALSE,
-	'db_main'	=> FALSE
+	'db_auth' 	=> TRUE,
+	'db_main'	=> TRUE
 );
 
 /* GET KEYS TO SITE */ require($path_to_keys);
@@ -107,4 +107,7 @@ print'
 
 
 /* FOOTER */ require('layout/footer1.php');
+
+$db_auth->close();
+$db_main->close();
 ?>
