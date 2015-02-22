@@ -1,4 +1,4 @@
-.contact {
+.about {
   ///////////////////////////////////////////////////////////////////////////////////
   //$base-line-height: 1.5em !default;
   //$base-accent-color: #477DCA !default;
@@ -25,7 +25,7 @@
   }
 
   .images-wrapper {
-    @include background(url('/img/microphone.jpg'));
+    @include background(url('/img/about-card.jpg'));
     background-size: cover;
     border-bottom: $side-image-border;
     display: block;

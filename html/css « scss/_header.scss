@@ -1,10 +1,28 @@
-    body{
+body{
         background:url('/img/sprinkles.png');
-    }
+}
 @include hidpi(1.5) {
     body{
         background:url('/img/sprinkles@2x.png');
         background-size:10px 5px;
+    }
+}
+
+
+.header2{
+    @include clearfix;
+    background: url('/img/baseball-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    padding: 2em 0;
+    .logo2{
+        display:block;
+        img{
+            display:block;
+            margin:0 auto;
+            height:6em;
+        }
     }
 }
 
@@ -14,7 +32,7 @@
 
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
-  $centered-navigation-background: desaturate(darken($base-accent-color, 20), 30);
+  $centered-navigation-background: desaturate($base-accent-color, 50);;
   $centered-navigation-color: transparentize(white, 0.3);
   $centered-navigation-color-hover: white;
   $centered-navigation-height: 60px;
