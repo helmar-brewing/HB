@@ -21,6 +21,7 @@ ob_end_flush();
 /* PAGE TITLE */ $title='Helmar Brewing Co';
 /* HEADER */ require('layout/header0.php');
 
+/* HEADER */ require('layout/header2.php');
 /* HEADER */ require('layout/header1.php');
 
 

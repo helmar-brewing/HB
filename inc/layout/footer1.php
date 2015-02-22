@@ -1,3 +1,5 @@
+<?php
+    print'
         <footer class="footer">
             <div class="footer-logo">
                 <img src="/img/helmar_logo_white.png" alt="Helmar Brewing Co Logo">
@@ -5,22 +7,23 @@
             <div class="footer-links">
                 <ul>
                     <li><h3>Content</h3></li>
-                    <li><a href="javascript:void(0)">Artwork</a></li>
-                    <li><a href="javascript:void(0)">Helmar &amp; Charles</a></li>
-                    <li><a href="javascript:void(0)">Articles</a></li>
-                    <li><a href="javascript:void(0)">Blog</a></li>
+                    <li><a href="'.$protocol.'://'.$site.'/artwork/">Artwork</a></li>
+                    <li><a href="'.$protocol.'://'.$site.'/about/">Helmar &amp; Charles</a></li>
+                    <li><a href="">Articles</a></li>
+                    <li><a href="http://helmarblog.com/">Blog</a></li>
                 </ul>
                 <ul>
                     <li><h3>Connect</h3></li>
-                    <li><a href="javascript:void(0)">Facebook</a></li>
-                    <li><a href="javascript:void(0)">Contact</a></li>
+                    <li><a href="">Facebook</a></li>
+                    <li><a target="_blank" href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/">Ebay</a></li>
+                    <li><a href="'.$protocol.'://'.$site.'/contact/">Contact</a></li>
                 </ul>
                 <ul>
                     <li><h3>Account</h3></li>
-                    <li><a href="javascript:void(0)">Login</a></li>
-                    <li><a href="javascript:void(0)">Subscription</a></li>
-                    <li><a href="javascript:void(0)">Terms and Conditions</a></li>
-                    <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                    <li><a href="'.$protocol.'://'.$site.'/account/login?redir='.$currentpage.'">Login</a></li>
+                    <li><a href="">Subscription</a></li>
+                    <li><a href="">Terms and Conditions</a></li>
+                    <li><a href="">Privacy Policy</a></li>
                 </ul>
             </div>
             <hr>
@@ -39,3 +42,5 @@
         <div id="fullscreenload" class="fullscreenload"><span></span><img src="/img/loading.gif"></div>
     </body>
     </html>
+    ';
+?>
