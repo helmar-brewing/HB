@@ -13,6 +13,9 @@ $db2use = array(
 
 /* GET KEYS TO SITE */ require($path_to_keys);
 
+/* LOAD FUNC-CLASS-LIB */
+require_once('classes/phnx-user.class.php');
+
 /* PAGE VARIABLES */
 $currentpage = 'contact/';
 

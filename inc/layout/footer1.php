@@ -9,7 +9,7 @@
                     <li><h3>Content</h3></li>
                     <li><a href="'.$protocol.'://'.$site.'/artwork/">Artwork</a></li>
                     <li><a href="'.$protocol.'://'.$site.'/about/">Helmar &amp; Charles</a></li>
-                    <li><a href="">Articles</a></li>
+                <!--    <li><a href="">Articles</a></li>                -->
                     <li><a href="http://helmarblog.com/">Blog</a></li>
                 </ul>
                 <ul>
@@ -22,8 +22,8 @@
                     <li><h3>Account</h3></li>
                     <li><a href="'.$protocol.'://'.$site.'/account/login?redir='.$currentpage.'">Login</a></li>
                     <li><a href="">Subscription</a></li>
-                    <li><a href="">Terms and Conditions</a></li>
-                    <li><a href="">Privacy Policy</a></li>
+                <!--    <li><a href="">Terms and Conditions</a></li>    -->
+                <!--    <li><a href="">Privacy Policy</a></li>          -->
                 </ul>
             </div>
             <hr>
