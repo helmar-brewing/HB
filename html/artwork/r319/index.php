@@ -33,8 +33,8 @@ print'
         <h4>Artwork</h4>
         <h1>R319-Helmar Series</h1>
         <div class="series_images">
-            <img src="'.$protocol.'://'.$site.'/images/cardPics/R319-Helmar_375_Front.jpg" />
-            <img src="'.$protocol.'://'.$site.'/images/cardPics/R319-Helmar_375_Back.jpg" />
+            <img src="'.$protocol.$site.'/images/cardPics/R319-Helmar_375_Front.jpg" />
+            <img src="'.$protocol.$site.'/images/cardPics/R319-Helmar_375_Back.jpg" />
         </div>
         <p class="single">The R-319 Helmar series has 180 subjects including many of your favorite players. All the original art was painted by our artists over a period of years, you won\'t find it elsewhere. Given the scope, the expense and the complexity for a small company or artist to put together a 385 card set of original and exceptional art, no one else may attempt something this ambitious for decades. They are not available in full sets.</p>
         <table class="tables">
