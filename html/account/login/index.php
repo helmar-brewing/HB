@@ -38,11 +38,11 @@ if($user->login() === 1){
 	$db_auth->close();
 	$db_main->close();
 	if(isset($redir)){
-		header("Location: $protocol://$site/$redir",TRUE,303);
+		header('Location: '.$protocol.$site.'/'.$redir,TRUE,303);
         ob_end_flush();
 		exit;
 	}else{
-		header("Location: $protocol://$site",TRUE,303);
+		header('Location: '.$protocol.$site,TRUE,303);
         ob_end_flush();
 		exit;
 	}
@@ -115,25 +115,35 @@ if($user->login() === 1){
     /* FOCUS CURSOR */ print'<script type="text/javascript">$(document).ready(function(){$("#username").focus()});</script>';
 
     print'
-        <h1>Log in</h1>
-        <form method="post">
+		<div class="sideimage login">
+			<div class="images-wrapper"></div>
+			<div class="side-image-content">
+				<h4>Account</h4>
+				<h1>Log in</h1>
+		        <form method="post">
     ';
     if(isset($redir)){
         print'
-            <input type="hidden" name="redir" value="'.$redir.'" />
+		            <input type="hidden" name="redir" value="'.$redir.'" />
         ';
     }
+	if($msg != ''){
+		print'
+					<p>'.$msg.'</p>
+		';
+	}
     print'
-            <p>'.$msg.'</p>
-            <label for="username">Username</label>
-            <input type="text" name="username" tabindex="1" id="username" />
-            <label for="password">Password</label>
-            <input type="password" name="pass" tabindex="2" id="password" />
-            <input type="submit" value="Login" tabindex="3" />
-            <div>
-                Need an account? <a href="'.$protocol.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.$site.'/account/recover/">Account Recovery</a>
-            </div>
-        </form>
+		            <label for="username">Username</label>
+		            <input type="text" name="username" tabindex="1" id="username" />
+		            <label for="password">Password</label>
+		            <input type="password" name="pass" tabindex="2" id="password" />
+		            <input type="submit" value="Login" tabindex="3" />
+		            <div class="login-footer">
+		                Need an account? <a href="'.$protocol.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.$site.'/account/recover/">Account Recovery</a>
+		            </div>
+		        </form>
+			</div>
+		</div>
     ';
 
     /* FOOTER */ require('layout/footer1.php');

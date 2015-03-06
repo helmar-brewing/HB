@@ -31,9 +31,9 @@ ob_end_flush();
 
 
 print'
-	<div class="contact">
+	<div class="contact sideimage">
 		<div class="images-wrapper"></div>
-			<div class="side-image-content">
+		<div class="side-image-content">
 			<h4>Stay In Touch</h4>
 			<h1>Send us a message</h1>
 			<p>Text here about what type of messages we\'d like to receive, and how quickly you can expect a response.</p>

@@ -30,9 +30,9 @@ ob_end_flush();
 
 
 print'
-	<div class="about">
-		<div class="images-wrapper"></div>
-			<div class="side-image-content">
+	<div class="about sideimage">
+		<div class="images-wrapper about-image"></div>
+		<div class="side-image-content">
 			<h4>About Helmar</h4>
 			<h1>The Story Behind Helmar and Charles</h1>
             <p>Perhaps you\'ve enjoyed some of my other projects including cult favorites Helmar Big League Brew (see the back of every card, including this current offering). By the way, this Helmar beer won a Gold Medal at the 2005 World Beer Festival and has been the subject of quite a few magazine articles. We\'ve also made Potato Chips featuring sports cards and the ongoing series of Helmar Famous Athletes trading cards that one often finds on eBay offered by other sellers. Check out other eBay sellers of Helmar Brewing products. I\'ve been fortunate enough to be at the forefront of some of the hobby\'s most interesting products and trends.</p>

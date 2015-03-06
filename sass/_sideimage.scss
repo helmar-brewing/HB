@@ -1,22 +1,13 @@
-.contact {
-  ///////////////////////////////////////////////////////////////////////////////////
-  //$base-line-height: 1.5em !default;
-  //$base-accent-color: #477DCA !default;
-  //$base-link-color: $base-accent-color !default;
-  //$dark-gray: #333 !default;
-  //$large-screen: em(860) !default;
-  //$base-font-color: $dark-gray !default;
+$side-image-background-bottom: #5DAC5D;
+$side-image-content-background: #F9F9F9;
+$side-image-border: 1px solid darken(transparentize($side-image-background-bottom, 0.8), 30%);
+
+.sideimage {
 
   p {
     color: $base-font-color;
     line-height: $base-line-height;
   }
-  //////////////////////////////////////////////////////////////////////////////////
-
-
-  $side-image-background-bottom: #5DAC5D;
-  $side-image-content-background: #F9F9F9;
-  $side-image-border: 1px solid darken(transparentize($side-image-background-bottom, 0.8), 30%);
 
   background: $side-image-content-background;
 
@@ -24,9 +15,10 @@
     @include row(table);
   }
 
+
   .images-wrapper {
-    @include background(url('/img/microphone.jpg'));
-    background-size: cover;
+//    @include background(url('/img/microphone.jpg'));
+//    background-size: cover;
     border-bottom: $side-image-border;
     display: block;
     min-height: 12em;
@@ -34,11 +26,13 @@
 
     @include media($large-screen) {
       @include span-columns(4);
-      background-position: bottom;
-      background-size: cover;
+//      background-position: bottom;
+//      background-size: cover;
       border-right: $side-image-border;
     }
   }
+
+
 
   .side-image-content {
     @include span-columns(12);

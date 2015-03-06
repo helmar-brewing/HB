@@ -2,8 +2,6 @@ $twitter_blue:	#00B0FD;
 $facebook_blue:	#3B5B99;
 $c_red: #9B3333;
 
-
-
 @import "bourbon/bourbon";
 @import "reset";
 @import "base/base";
@@ -12,10 +10,16 @@ $c_red: #9B3333;
 @import "font-awesome/font-awesome";
 
 @import "modal";
+@import "sideimage";
+
+
+
 @import "header";
+@import "footer";
+
+@import "account";
+
 @import "home";
 @import "contact";
 @import "about";
 @import "artwork";
-
-@import "footer";
