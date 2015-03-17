@@ -3,12 +3,12 @@
 	// The mappings of source directory and output directory
 	"mappings": [
 		 {
-		 	"src": "css « scss/",
-		 	"dest": "css/"
+		 	"src": "sass/",
+		 	"dest": "html/css/"
 		 },
 		{
-			"src": "js « scripts/",
-			"dest": "js/"
+			"src": "scripts/",
+			"dest": "html/js/"
 		}
 	],
 
