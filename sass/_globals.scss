@@ -1,0 +1,3 @@
+a.link-button{
+    @include button(flat, $base-accent-color);
+}

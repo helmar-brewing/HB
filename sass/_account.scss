@@ -3,12 +3,12 @@
         @include background(url('/img/login-card.jpg'));
         background-size: cover;
         background-position: bottom;
-        @include media($large-screen) {
-            background-position: bottom;
-            background-size: cover;
+        @include media(max-width $large-screen) {
+            display:none;
         }
     }
     .login-footer{
         margin: 1em 0 0 0;
     }
+
 }

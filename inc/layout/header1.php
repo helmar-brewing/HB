@@ -20,7 +20,25 @@ print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/contact/">Stay In Touch</a></li>
                 <li class="nav-link"><a href="http://helmarblog.com/">Blog</a></li>
                 <li class="nav-link"><a target="_blank" href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/">Store</a></li>
-                <li class="nav-link"><a href="'.$protocol.$site.'/account/login/?redir='.$currentpage.'">Log In</a></li>
+';
+if(isset($user)){
+    if( $user->login() == 1 || $user->login() == 2 ){
+        print'
+                <li class="nav-link"><a href="'.$protocol.$site.'/account/logout">Log out</a></li>
+        ';
+    }else{
+        print'
+                <li class="nav-link"><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Log in</a></li>
+                <li class="nav-link"><a href="'.$protocol.$site.'/account/register">Register</a></li>
+        ';
+    }
+}else{
+    print'
+                <li class="nav-link"><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Log in</a></li>
+                <li class="nav-link"><a href="'.$protocol.$site.'/account/register">Register</a></li>
+    ';
+}
+print'
             </ul>
         </div>
     </header>

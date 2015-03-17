@@ -31,7 +31,7 @@ switch($user->login()){
     case 0:
         $db_auth->close();
         $db_main->close();
-        header('Location: '.$protocol.$site.'/account/login/?redir='.$currentpage,TRUE,303);
+        header('Location: '.$protocol.$site.'/account/login/?redir='.$redir,TRUE,303);
         ob_end_flush();
         exit;
         break;
@@ -67,23 +67,29 @@ switch($user->login()){
     /* FOCUS CURSOR */ print'<script type="text/javascript">$(document).ready(function(){$("#password").focus()});</script>';
 
     print'
-        <h1>Verify</h1>
-        <form action="'.$protocol.$site.'/'.$redir.'" method="post">
+		<div class="sideimage login">
+			<div class="images-wrapper"></div>
+			<div class="side-image-content">
+				<h4>Account</h4>
+		        <h1>Verify</h1>
+		        <form action="'.$protocol.$site.'/'.$redir.'" method="post">
     ';
     if(isset($redir)){
         print'
-            <input type="hidden" name="redir" value="'.$redir.'" />
+	            	<input type="hidden" name="redir" value="'.$redir.'" />
         ';
     }
     print'
-            <p><strong>' . $user->username . '</strong>, for security purposes, please verify your password.</p>
-            <label for="password">Password</label>
-            <input type="password" name="pass" tabindex="1" id="password" />
-            <input type="submit" value="Verify" tabindex="2" />
-            <div>
-                Need an account? <a href="'.$protocol.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.$site.'/account/recover/">Account Recovery</a>
-            </div>
-        </form>
+		            <p><strong>' . $user->username . '</strong>, for security purposes, please verify your password.</p>
+		            <label for="password">Password</label>
+		            <input type="password" name="pass" tabindex="1" id="password" />
+		            <input type="submit" value="Verify" tabindex="2" />
+		            <div>
+		                Need an account? <a href="'.$protocol.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.$site.'/account/recover/">Account Recovery</a>
+		            </div>
+		        </form>
+			</div>
+		</div>
     ';
 
     /* FOOTER */ require('layout/footer1.php');
