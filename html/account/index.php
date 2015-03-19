@@ -174,8 +174,8 @@ print'
 				<input type="button" value="Update Info" />
 				<hr />
 				<dt>Email</dt>
-				<dd>'.$user->email.'</dd>
-				<input type="button" value="Change Email" />
+				<dd id="account-email">'.$user->email.'</dd>
+				<input type="button" value="Change Email" onclick="changeEmail(1)" />
 			</dl>
 		</div>
 
