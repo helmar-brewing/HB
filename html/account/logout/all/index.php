@@ -64,8 +64,8 @@ if($logout){
 				<h4>Account</h4>
 				<h1>Log out</h1>
 				<p>'.$message.'</p>
-				<p><a class="link-button" href="'.$protocol.'://'.$site.'/">Go to homepage</a></p>
-				<p><a class="link-button" href="'.$protocol.'://'.$site.'/account/login/">Log back in</a></p>
+				<p><a class="link-button" href="'.$protocol.$site.'/">Go to homepage</a></p>
+				<p><a class="link-button" href="'.$protocol.$site.'/account/login/">Log back in</a></p>
             </div>
 		</div>
     ';
