@@ -46,24 +46,16 @@ print'
 print'
 	    <div class="auctions">
 	        <h1>Current Auctions</h1>
-	        <p>Auctions end on Tueday October 28 2014.</p>
-	        <ul>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/E145-Helmar_8_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/E145-Helmar_12_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/E145-Helmar_18_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/E145-Helmar_34_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/Helmar_Imperial_Cabinet_14_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/L3-Helmar_Cabinet_9_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/L3-Helmar_Cabinet_145_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/R319-Helmar_30_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/R319-Helmar_259_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/T206-Helmar_225_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/Helmar_6_Up_Die-Cut_17_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/R321-Helmar_61_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/R318-Helmar_56_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
-	            <li><figure style="background:url(\'http://www.helmarbrewing.com/images/cardPics/medium/R318-Helmar_31_Front.jpg\'); background-size: cover;background-position: top center;"></figure></li>
+	        <p id="auction_end">Auctions end on Tueday October 28 2014.</p>
+	        <ul id="auction_list">
 	        </ul>
+			<button id="auction_button">show more</button>
 	    </div>
+		<script>
+		$( document ).ready(function() {
+			auctions(1);
+		});
+		</script>
 	';
 
 /* FOOTER */ require('layout/footer1.php');
