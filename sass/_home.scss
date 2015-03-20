@@ -1,7 +1,9 @@
 
 
 .auctions{
-    @include outer-container;
+    font-family:$serif;
+    padding-top:1em;
+    @include clearfix;
     h1{
         font-weight:bold;
         text-align:center;
@@ -9,22 +11,41 @@
     p{
         text-align:center;
     }
-    font-family:$serif;
-    padding-top:1em;
-    @include clearfix;
+    ul{
+        @include outer-container;
+        @include media(max-width $max-width) {
+            margin:0 10px;
+        }
+    }
     li{
-        @include span-columns(2);
+        @include span-columns(3);
+        @include omega(4n);
+        @include media(max-width $large-screen) {
+            @include span-columns(6);
+            @include omega(2n);
+        }
         margin-bottom:1em;
-        float:left;
-        @include omega(6n);
+        span{
+            display:block;
+            background:rgba(0,0,0,0.6);
+            border-radius:5px;
+        }
+        a{
+            display:block;
+            margin:0;
+            width:100%;
+            border-radius: 5px;
+        }
         figure{
             display:block;
             margin:0;
             width:100%;
-            padding:120% 0 0 0;
-            background-repeat: no-repeat;
-            border-radius: 5px;
+            padding:100% 0 0 0;
         }
+    }
+    button{
+        display:block;
+        margin:1em auto;
     }
 }
 
