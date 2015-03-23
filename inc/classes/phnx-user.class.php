@@ -1,27 +1,27 @@
 <?php
 	class phnx_user{
-	
+
 		private $login;
 		private $cookie;
-		
+
 		public $username;
 		public $id;
 		public $firstname;
 		public $lastname;
 		public $email;
-		
+		public $stripeID;
 		public $error_cookie;
 		public $error = array();
-		
-		
-		
+
+
+
 		/* RETURN CURRENT LOGIN STATE */
 		function login(){
 			return $this->login;
 		}
-		
-		
-		
+
+
+
 		/* IMPORT LOGIN COOKIE TO CLASS */
 		function get_cookie(){
 			global $gv_login_cookie_name;
@@ -29,9 +29,9 @@
 				$this->cookie = $_COOKIE[$gv_login_cookie_name];
 			}
 		}
-		
-		
-		
+
+
+
 		/* KILL SESSION */
 		function kill_session(){
 			$_SESSION = array();
@@ -41,9 +41,9 @@
 			}
 			session_destroy();
 		}
-		
-		
-		
+
+
+
 		/* RUN THE LOGIN CHECK */
 		function checklogin($l){
 			if($l === 1){
@@ -54,9 +54,9 @@
 				trigger_error("Invalid parameter specified for logincheck", E_USER_ERROR);
 			}
 		}
-		
-		
-		
+
+
+
 		/* MAKE A NEW LOGIN */
 		function newlogin(){
 			if(isset($this->username)){
@@ -73,9 +73,9 @@
 				trigger_error("UserMgmt tried to create a new login, and username is not set.", E_USER_ERROR);
 			}
 		}
-		
-		
-		
+
+
+
 		/* REGENERATE THE ACTIVE LOGIN */
 		function regen(){
 			global $db_auth;
@@ -84,10 +84,10 @@
 			$this->cookieMonster('delete','logout');
 			$this->newlogin();
 		}
-		
+
 		/* LOGOUT */
 		function logout($all = NULL){
-			
+
 			// can be simplifed if PHP is 5.4 or greater for sure
 			if ( version_compare(phpversion(), '5.4.0', '>=') ){
 				if(session_status() === PHP_SESSION_ACTIVE){
@@ -100,10 +100,10 @@
 					$s = TRUE;
 				}
 			}
-			
+
 			if(!$s){ session_start(); }
-		
-		
+
+
 			global $db_auth;
 			if($this->cookie == NULL){
 				$this->get_cookie();
@@ -112,11 +112,11 @@
 			$this->del_active_login($sprinkles);
 			$this->cookieMonster('delete','logout');
 			$this->kill_session();
-			
+
 			if($all === 'all'){
 				$db_auth->query("DELETE FROM activeLogins WHERE username='".$this->username."'");
 			}
-			
+
 			$this->username = NULL;
 			$this->id = NULL;
 			$this->login = 0;
@@ -124,9 +124,9 @@
 			$this->lastname = NULL;
 			$this->email = NULL;
 		}
-		
-		
-		
+
+
+
 		/* RETURN ARRAY OF ACTIVE LOGINS */
 		function get_active_logins(){
 			if($this->login === 2){
@@ -151,9 +151,9 @@
 				trigger_error("UserMgmt tried to get the list of active logins without level 2 access.", E_USER_ERROR);
 			}
 		}
-		
-		
-		
+
+
+
 		/* CHECK TO SEE IF A USERNAME EXISTS */
 		function exists($username){
 			global $db_auth;
@@ -164,9 +164,9 @@
 				return FALSE;
 			}
 		}
-		
-		
-		
+
+
+
 		/* CHECK FOR USER BASED ON FACEBOOK ID */
 		function check_fb_id($fbid){
 			if($fbid == '' || $fbid == NULL){
@@ -182,9 +182,9 @@
 				}
 			}
 		}
-		
-		
-		
+
+
+
 		/* CHECK PASSWORD */
 		function comparepass(){
 			if(isset($this->username)){
@@ -196,7 +196,7 @@
 					if(isset($_POST['pass'])){
 						$salt = substr($saltedHash,0,22);
 						$saltedHash = '$2y$11$'.$saltedHash;
-						$hash2test = crypt($_POST['pass'], '$2y$11$'.$salt.'$');						
+						$hash2test = crypt($_POST['pass'], '$2y$11$'.$salt.'$');
 						if($hash2test === $saltedHash){
 							return TRUE;
 						}else{
@@ -212,17 +212,17 @@
 				trigger_error("UserMgmt tried to verify password, and username is not set.", E_USER_ERROR);
 			}
 		}
-		
-		
-		
-		
+
+
+
+
 		/* COOKIE MONSTER */
 		function cookieMonster($action, $data, $exp = 864000, $name = NULL, $domain = NULL){
-			
+
 			$cookieError = 'Cookies are somtimes-food.';
 			$successCreate = 'COOKIE!';
 			$successDelete = 'nom nom nom';
-			
+
 			global $gv_login_cookie_name;
 			global $gv_login_cookie_domain;
 			if($name === NULL){
@@ -252,10 +252,10 @@
 				$this->error_cookie = $cookieError  . ' Error CKE.01';
 			}
 		}
-		
-		
-		
-		
+
+
+
+
 		/* DELETE A SPECIFIC ACTIVE LOGIN */
 		function del_active_login($loginID){
 			global $db_auth;
@@ -265,10 +265,10 @@
 				return FALSE;
 			}
 		}
-		
-		
-		
-		
+
+
+
+
 		/* RUN THE LOGIN CHECK UP TO LEVEL 1 */
 		private function checklogin1(){
 			if($this->cookie == NULL){
@@ -280,9 +280,9 @@
 				$this->login = 0;
 			}
 		}
-		
-		
-		
+
+
+
 		/* RUN THE LOGIN CHECK UP TO LEVEL 2 */
 		private function checklogin2(){
 			if($this->login === 1){
@@ -296,9 +296,9 @@
 				}
 			}
 		}
-		
-		
-		
+
+
+
 		/* GET SALTED HASH */
 		private function getSaltedHash(){
 			global $db_auth;
@@ -328,7 +328,7 @@
 		}
 
 
-		
+
 		/* THE LEVEL 1 CHECK */
 		private function level1(){
 			global $db_auth;
@@ -361,23 +361,24 @@
 					$this->firstname = $info['firstname'];
 					$this->lastname = $info['lastname'];
 					$this->email = $info['email'];
+					$this->stripeID = $info['stripeID'];
 					$R_info->free();
 					unset($R_info);
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 		/* THE LEVEL 2 CHECK */
 		private function level2(){
 			session_start();
 			if (!isset($_SESSION['level2session'])){
 				session_regenerate_id();
-			}	
+			}
 			if($_SESSION['level2session'] === TRUE && $_SESSION['sessionUsername'] === $this->username){
 				$diff = time()-$_SESSION['last_activity'];
 				if($diff < 1800 && $diff >= 0){
@@ -400,7 +401,7 @@
 					if(isset($_POST['pass'])){
 						$salt = substr($saltedHash,0,22);
 						$saltedHash = '$2y$11$'.$saltedHash;
-						$hash2test = crypt($_POST['pass'], '$2y$11$'.$salt.'$');						
+						$hash2test = crypt($_POST['pass'], '$2y$11$'.$salt.'$');
 						if($hash2test === $saltedHash){
 							// CREATE SESSION
 							$_SESSION['level2session'] = TRUE;
@@ -423,9 +424,26 @@
 				}
 			}
 		}
-		
-		
-		
-		
+
+
+		function checksub(){
+			$sub_response = Stripe_Customer::retrieve($this->stripeID)->subscriptions->all();
+			$subs = $sub_response->data;
+			if(empty($subs)){
+				return false;
+			}else{
+				if($subs[0]['status'] == 'active'){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}
+
+
+
+
+
+
 	}
 ?>

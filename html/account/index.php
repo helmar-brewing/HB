@@ -16,6 +16,7 @@ $db2use = array(
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
 require_once('libraries/stripe/Stripe.php');
+Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
 $currentpage = 'account/';
@@ -61,8 +62,6 @@ if($R_userdeets !== FALSE){
 	$R_userdeets->free();
 
 	try {
-
-		Stripe::setApiKey($apikey['stripe']['secret']);
 
 		$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
 
@@ -227,6 +226,7 @@ print'
 ';
 
 /* FOOTER */ require('layout/footer1.php');
+
 
 $db_auth->close();
 $db_main->close();
