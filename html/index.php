@@ -37,7 +37,7 @@ include 'layout/header.php';
 				Welcome to the homepage of Helmar Brewing Company! Helmar Brewing Co. produces fine, hand-made art cards, mainly of sports and history subjects. <a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/">Please visit our eBay store!</a>
 					
 				</p>
-                <p><font color="red"><u>Please note that the website is still under deveopment. Certain links/pages may not display properly. Thank you for this understanding. </u></font></p>
+                
 				<!-- ENDS featured -->
                 <h2 class="heading">
 <?php
