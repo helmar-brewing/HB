@@ -19,6 +19,12 @@ require_once('classes/phnx-user.class.php');
 /* PAGE VARIABLES */
 $currentpage = 'artwork/';
 
+// create user object
+$user = new phnx_user;
+
+// check user login status
+$user->checklogin(1);
+
 ob_end_flush();
 /* <HEAD> */ $head=''; // </HEAD>
 /* PAGE TITLE */ $title='Helmar Brewing Co';
