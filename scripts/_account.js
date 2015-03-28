@@ -11,15 +11,15 @@ function recover(a){
     });
     $('#ajax-modal').addClass('recover-modal');
     if(a === 'pword'){
-        var url = "/account/ajax/password/"
+        var u = "/account/ajax/password/"
         var e = document.getElementById('recover_pword_email').value;
     }
     if(a === 'uname'){
-        var url = "/account/ajax/username/"
+        var u = "/account/ajax/username/"
         var e = document.getElementById('recover_uname_email').value;
     }
     $.get(
-        url,
+        u,
         {email:e},
         function( data ) {
             document.getElementById('modal_h1').innerHTML = data.h1;
