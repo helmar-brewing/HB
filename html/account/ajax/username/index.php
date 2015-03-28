@@ -61,7 +61,7 @@ try{
     );
     $r = $drill->api('messages/send', $args);
     if($r['status']== 'error'){
-        throw new Exception('There was an error sending the username [ref: drill]')
+        throw new Exception('There was an error sending the username [ref: drill]');
     }else{
         $h1 = 'Username Recovery';
         $content = '<p>Your username was sent in an email to <strong>'.$email.'</strong></p>';
