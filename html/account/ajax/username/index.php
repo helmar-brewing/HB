@@ -66,8 +66,31 @@ try{
         $h1 = 'Username Recovery';
         $content = '<p>Your username was sent in an email to <strong>'.$email.'</strong></p>';
     }
-
-}catch(\Gajus\Drill\Exception\DrillException $e){
+} catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
+    $h1 = 'Error';
+    $content = 'There was an error sending the username (ref: drill)';
+} catch (\Gajus\Drill\Exception\RuntimeException\UserErrorException $e) {
+    $h1 = 'Error';
+    $content = 'There was an error sending the username (ref: drill)';
+} catch (\Gajus\Drill\Exception\RuntimeException\UnknownSubaccountException $e) {
+    $h1 = 'Error';
+    $content = 'There was an error sending the username (ref: drill)';
+} catch (\Gajus\Drill\Exception\RuntimeException\PaymentRequiredException $e) {
+    $h1 = 'Error';
+    $content = 'There was an error sending the username (ref: drill)';
+} catch (\Gajus\Drill\Exception\RuntimeException\GeneralErrorException $e) {
+    $h1 = 'Error';
+    $content = 'There was an error sending the username (ref: drill)';
+} catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
+    $h1 = 'Error';
+    $content = 'There was an error sending the username (ref: drill)';
+} catch (\Gajus\Drill\Exception\RuntimeException $e) {
+    $h1 = 'Error';
+    $content = 'There was an error sending the username (ref: drill)';
+} catch (\Gajus\Drill\Exception\InvalidArgumentException $e) {
+    $h1 = 'Error';
+    $content = 'There was an error sending the username (ref: drill)';
+} catch (\Gajus\Drill\Exception\DrillException $e) {
     $h1 = 'Error';
     $content = 'There was an error sending the username (ref: drill)';
 }catch(mysqli_sql_exception $e){
