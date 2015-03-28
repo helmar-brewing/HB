@@ -1,3 +1,4 @@
+<?php
 require_once('libraries/drill/Client.php');
 require_once('libraries/drill/Exception/DrillException.php');
 require_once('libraries/drill/Exception/InvalidArgumentException.php');
@@ -8,3 +9,4 @@ require_once('libraries/drill/Exception/RuntimeException/PaymentRequiredExceptio
 require_once('libraries/drill/Exception/RuntimeException/UnknownSubaccountException.php');
 require_once('libraries/drill/Exception/RuntimeException/UserErrorException.php');
 require_once('libraries/drill/Exception/RuntimeException/ValidationErrorException.php');
+?>
