@@ -49,10 +49,29 @@ if($user->login() === 1){
     /* HEADER */ require('layout/header1.php');
 
     print'
-		<section>
-			<h4>Account</h4>
-			<h1>Register</h1>
-			<div></div>
+		<section class="recover">
+			<div class="boxes">
+				<h4>Account</h4>
+				<h1>Account Recovery</h1>
+				<div class="recover-box">
+					<h2>Forgot Username</h2>
+					<p>If you have an account, but forgot your username, enter your email address and we will send it to you. Emails are usually sent immediately, but can take up to an hour or more.</p>
+				</div>
+				<div class="recover-box">
+					<label for="">Email Address</label>
+					<input type="text">
+					<button type="button">Send Username</button>
+				</div>
+				<div class="recover-box">
+					<h2>Forgot Password</h2>
+					<p>If you forgot your password, we will send you a link that will allow you to reset it. Emails are usually sent immediately, but can take up to an hour or more.</p>
+				</div>
+				<div class="recover-box">
+					<label for="">Email Address</label>
+					<input type="text">
+					<button type="button">Reset Password</button>
+				</div>
+			</div>
 		</section>
     ';
 

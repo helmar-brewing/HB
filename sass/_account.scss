@@ -10,5 +10,64 @@
     .login-footer{
         margin: 1em 0 0 0;
     }
+}
 
+
+
+.recover{
+    padding: $base-spacing*2 $gutter;
+    width: 100%;
+    background-color:$side-image-content-background;
+    h4{
+        background: #BBB;
+        color: white;
+        display: inline-block;
+        font-size: 0.75em;
+        font-weight: 800;
+        margin-bottom: 1.3em;
+        padding: 3px 8px;
+        text-transform: uppercase;
+    }
+    h1{
+        margin:0 0 .9em 0;
+    }
+    h2{
+        font-size:1.2em;
+    }
+    .boxes{
+        width:700px;
+        margin:0 auto;
+        @include clearfix;
+        @include media(max-width $large-screen) {
+            width:100%;
+            margin:0;
+        }
+    }
+    .recover-box{
+        float:left;
+        width:330px;
+        margin-right:40px;
+        margin-bottom:60px;
+        @include omega(2n);
+        @include clearfix;
+        button{
+            margin-top:1em;
+            float:right;
+        }
+        @include media(max-width $large-screen) {
+            width:45%;
+            margin-right:10%;
+        }
+        @include media(max-width $medium-screen) {
+            width:100%;
+            margin-right:0;
+            float:none;
+            margin-bottom:0;
+            &:nth-of-type(3){
+                margin-top:30px;
+                padding-top:30px;
+                border-top:1px solid #ddd;
+            }
+        }
+    }
 }
