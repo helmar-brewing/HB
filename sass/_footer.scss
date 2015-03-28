@@ -21,11 +21,13 @@
   }
 
   .footer-links {
+    max-width:$large-screen;
     @include clearfix;
-    margin-bottom: $base-spacing;
+    //margin-bottom: $base-spacing;
+    margin:0 auto $base-spacing auto;
 
     @include media($medium-screen) {
-      @include shift(3);
+//      @include shift(1);
     }
   }
 
@@ -33,9 +35,19 @@
     margin-bottom: $base-spacing*2;
 
     @include media($medium-screen) {
-      @include span-columns(3);
+      @include span-columns(4);
       @include omega(3n);
       @include clearfix;
+      &:nth-child(1){
+          li{
+              text-align: left;
+          }
+      }
+      &:nth-child(3){
+          li{
+              text-align: right;
+          }
+      }
     }
   }
 
@@ -43,7 +55,7 @@
     text-align: center;
 
     @include media($medium-screen) {
-      text-align: left;
+      // text-align: left;
     }
   }
 
