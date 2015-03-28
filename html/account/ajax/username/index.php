@@ -10,7 +10,7 @@ ob_start();
 
 /* WHICH DATABASES DO WE NEED */
 $db2use = array(
-	'db_auth' 	=> TRUE,
+	'db_auth' 	=> FALSE,
 	'db_main'	=> TRUE
 );
 
@@ -33,7 +33,7 @@ try{
     }
 
     // check to see if there is a user with that email
-    $username = db1($db_auth, "SELECT username FROM users WHERE email='$email' LIMIT 1");
+    $username = db1($db_main, "SELECT username FROM users WHERE email='$email' LIMIT 1");
     if($username == FALSE){
         throw new Exception('There is no account associated with that email address.');
     }
@@ -87,7 +87,7 @@ $json = array(
 
 
 $db_main->close();
-$db_auth->close();
+//$db_auth->close();
 header('Cache-Control: no-cache, must-revalidate');
 header('Content-type: application/json');
 print json_encode($json);
