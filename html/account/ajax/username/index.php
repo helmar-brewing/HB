@@ -69,43 +69,43 @@ try{
 } catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 1)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\UserErrorException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 2)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\UnknownSubaccountException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 3)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\PaymentRequiredException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 4)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\GeneralErrorException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 5)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 6)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 7)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\InvalidArgumentException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 8)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\DrillException $e) {
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: drill 9)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 }catch(mysqli_sql_exception $e){
     $h1 = 'Error';
     $content = '<p>There was an error sending the username (ref: data)</p>';
-    $content .= '<p>'.$e->getMessage().'</p>'
+    $content .= '<p>'.$e->getMessage().'</p>';
 }catch(Exception $e){
     $h1 = 'Error';
     $content = $e->getMessage();
