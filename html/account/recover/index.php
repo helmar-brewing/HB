@@ -58,18 +58,18 @@ if($user->login() === 1){
 					<p>If you have an account, but forgot your username, enter your email address and we will send it to you. Emails are usually sent immediately, but can take up to an hour or more.</p>
 				</div>
 				<div class="recover-box">
-					<label for="">Email Address</label>
-					<input type="text">
-					<button type="button">Send Username</button>
+					<label for="recover_uname_email">Email Address</label>
+					<input id="recover_uname_email" type="text">
+					<button type="button" onclick="recover(\'uname\')">Send Username</button>
 				</div>
 				<div class="recover-box">
 					<h2>Forgot Password</h2>
 					<p>If you forgot your password, we will send you a link that will allow you to reset it. Emails are usually sent immediately, but can take up to an hour or more.</p>
 				</div>
 				<div class="recover-box">
-					<label for="">Email Address</label>
-					<input type="text">
-					<button type="button">Reset Password</button>
+					<label for="recover_pword_email">Email Address</label>
+					<input id="recover_pword_email" type="text">
+					<button type="button" onclick="recover(\'pword\')">Reset Password</button>
 				</div>
 			</div>
 		</section>

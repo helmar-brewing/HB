@@ -1,3 +1,48 @@
+function recoverCleanup(){
+    $('#ajax-modal').removeClass('recover-modal');
+    $('#modal_close').unbind('click');
+    document.getElementById('modal_h1').innerHTML = '';
+    document.getElementById('modal_content').innerHTML = '';
+}
+function recover(a){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $('#modal_close').click(function() {
+        recoverCleanup();
+    });
+    $('#ajax-modal').addClass('recover-modal');
+    if(a === 'pword'){
+        var url = "/account/ajax/password/"
+        var e = document.getElementById('recover_pword_email').value;
+    }
+    if(a === 'uname'){
+        var url = "/account/ajax/username/"
+        var e = document.getElementById('recover_uname_email').value;
+    }
+    $.get(
+        url,
+        {email:e},
+        function( data ) {
+            document.getElementById('modal_h1').innerHTML = data.h1;
+            document.getElementById('modal_content').innerHTML = data.content;
+            document.getElementById('fullscreenload').style.display = 'none';
+            showModal('ajax-modal');
+        },
+        "json"
+    )
+    .fail(function() {
+        $('#ajax-modal').removeClass('change-email');
+        document.getElementById('modal_h1').innerHTML = 'Error';
+        document.getElementById('modal_content').innerHTML = '<p>There was an error updating your account. Please refresh the page and try again.</p><p>(ref. ajax fail)<p>';
+        document.getElementById('fullscreenload').style.display = 'none';
+        showModal('ajax-modal');
+    });
+}
+
+
+
+
+
+
 function changeEmailUnBindForms(){
     $('#change-email-field').unbind('keypress');
     $('#change-email-button').unbind('click');
@@ -6,6 +51,8 @@ function changeEmailCleanup(){
     $('#ajax-modal').removeClass('change-email');
     $('#modal_close').unbind('click');
     changeEmailUnBindForms();
+    document.getElementById('modal_h1').innerHTML = '';
+    document.getElementById('modal_content').innerHTML = '';
 }
 function changeEmail(s, d1){
     changeEmailUnBindForms();
@@ -83,6 +130,8 @@ function changeInfoCleanup(){
     $('#ajax-modal').removeClass('change-info');
     $('#modal_close').unbind('click');
     changeInfoUnBindForms();
+    document.getElementById('modal_h1').innerHTML = '';
+    document.getElementById('modal_content').innerHTML = '';
 }
 function changeInfo(s, d1){
     changeInfoUnBindForms();
