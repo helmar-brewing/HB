@@ -17,7 +17,7 @@ $db2use = array(
 /* GET KEYS TO SITE */ require($path_to_keys);
 
 /* LOAD FUNC-CLASS-LIB */
-require_once('libraries/drill/Client.php');
+require_once('libraries/drill/drill.php');
 $drill = new \Gajus\Drill\Client($api_key['madrill']);
 
 /* PAGE VARIABLES */
