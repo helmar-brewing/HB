@@ -60,6 +60,12 @@ if($user->login() === 1){
     switch($i){
         case 0:
 
+			// check if registration is on
+			if($gv_registraion_status === FALSE){
+				$msg = '<li>Registration for this website is currently disabled.</li>';
+				break;
+			}
+
             // check if submitted
             if(empty($_POST)){
                 break;
@@ -189,7 +195,7 @@ if($user->login() === 1){
 
         // What Happened?
         default:
-            $msg = '';
+            $msg = '<li>There was an error.</li>';
     }
 
 
