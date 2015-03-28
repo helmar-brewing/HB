@@ -72,7 +72,7 @@ try{
     $content = 'There was an error sending the username (ref: drill)';
 }catch(mysqli_sql_exception $e){
     $h1 = 'Error';
-    $content = 'There was an error sending the username (ref: data)';
+    $content = 'There was an error sending the username (ref: data)'.$e->getMessage();
 }catch(Exception $e){
     $h1 = 'Error';
     $content = $e->getMessage();
