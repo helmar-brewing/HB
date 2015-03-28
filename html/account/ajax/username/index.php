@@ -33,7 +33,7 @@ try{
     }
 
     // check to see if there is a user with that email
-    $username = db1($db_auth, "SELECT username FROM users WHERE email = '$email'");
+    $username = db1($db_auth, "SELECT username FROM users WHERE email=$email LIMIT 1");
     if($username == FALSE){
         throw new Exception('There is no account associated with that email address.');
     }
