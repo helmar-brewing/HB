@@ -67,7 +67,7 @@ try{
     if($r['status']== 'error'){
         throw new Exception('There was an error sending the password reset email [ref: drill]');
     }else{
-        $h1 = 'Username Recovery';
+        $h1 = 'Password Reset';
         $content = '<p>A password reset email was sent to <strong>'.$email.'</strong></p>';
     }
 } catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
