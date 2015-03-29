@@ -45,7 +45,6 @@ try{
     $html   .= '<p>Login at <a href="'.$protocol.$site.'/account/login/">'.$protocol.$site.'/account/login/</a></p>';
     $html   .= '</div>';
     $to =	array(array("email" => $email, "name" => $username));
-    $headers = array("Reply-To"=> "membership@hoaumich.org");
     $args = array(
         'message' => array(
             "html" => $html,

@@ -40,7 +40,7 @@ try{
 
     // insert email token into database
     $token = substr(md5(uniqid(rand(),true)), 0, 25);
-    $id = db1($db_main, "SELECT id FROM users WHERE username='$username' LIMIT 1");
+    $id = db1($db_main, "SELECT userid FROM users WHERE username='$username' LIMIT 1");
     $db_main->query("UPDATE users SET token='$token' WHERE username='$username' LIMIT 1");
 
     // send the message
@@ -50,13 +50,12 @@ try{
     $html   .= '<p>Please note, this is a single use link. Once you click on it it will become invalid.</p>';
     $html   .= '</div>';
     $to =	array(array("email" => $email, "name" => $username));
-    $headers = array("Reply-To"=> "membership@hoaumich.org");
     $args = array(
         'message' => array(
             "html" => $html,
             "from_email" => "no-reply@helmarbrewing.com",
             "from_name" => "helmarbrewing.com",
-            "subject" => "Your username for helmarbrewing.com",
+            "subject" => "Password Reset for helmarbrewing.com",
             "to" => $to,
             "headers" =>$headers,
             "track_opens" => true,
@@ -66,50 +65,50 @@ try{
     );
     $r = $drill->api('messages/send', $args);
     if($r['status']== 'error'){
-        throw new Exception('There was an error sending the username [ref: drill]');
+        throw new Exception('There was an error sending the password reset email [ref: drill]');
     }else{
         $h1 = 'Username Recovery';
-        $content = '<p>Your username was sent in an email to <strong>'.$email.'</strong></p>';
+        $content = '<p>A password reset email was sent to <strong>'.$email.'</strong></p>';
     }
 } catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 1)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 1)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\UserErrorException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 2)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 2)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\UnknownSubaccountException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 3)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 3)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\PaymentRequiredException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 4)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 4)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\GeneralErrorException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 5)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 5)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 6)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 6)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\RuntimeException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 7)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 7)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\InvalidArgumentException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 8)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 8)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 } catch (\Gajus\Drill\Exception\DrillException $e) {
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: drill 9)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: drill 9)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 }catch(mysqli_sql_exception $e){
     $h1 = 'Error';
-    $content = '<p>There was an error sending the username (ref: data)</p>';
+    $content = '<p>There was an error sending the password reset email (ref: data)</p>';
     $content .= '<p>'.$e->getMessage().'</p>';
 }catch(Exception $e){
     $h1 = 'Error';
