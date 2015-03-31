@@ -7,15 +7,15 @@
             <div class="footer-links">
                 <ul>
                     <li><h3>Content</h3></li>
-                    <li><a href="'.$protocol.$site.'/artwork/">Artwork</a></li>
+                    <li><a href="'.$protocol.$site.'/artwork/">Helmar Card Art</a></li>
                     <li><a href="'.$protocol.$site.'/about/">Helmar &amp; Charles</a></li>
                 <!--    <li><a href="">Articles</a></li>                -->
-                    <li><a href="http://helmarblog.com/">Blog</a></li>
+                    <li><a href="http://helmarblog.com/" target="_blank">Blog</a></li>
                 </ul>
                 <ul>
                     <li><h3>Connect</h3></li>
                     <li><a href="">Facebook</a></li>
-                    <li><a target="_blank" href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/">Ebay</a></li>
+                    <li><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">Ebay</a></li>
                     <li><a href="'.$protocol.$site.'/contact/">Contact</a></li>
                 </ul>
                 <ul>
