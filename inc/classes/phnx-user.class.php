@@ -219,7 +219,7 @@
 		/* COOKIE MONSTER */
 		function cookieMonster($action, $data, $exp = 864000, $name = NULL, $domain = NULL){
 
-			$cookieError = 'Cookies are somtimes-food.';
+			$cookieError = 'Cookies are sometimes-food.';
 			$successCreate = 'COOKIE!';
 			$successDelete = 'nom nom nom';
 

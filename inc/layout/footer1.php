@@ -46,7 +46,7 @@
                 </ul>
             </div>
             <hr>
-            <p>All content &copy; 2015 Helmar Brewing Co.</p>
+            <p>All content &copy; '.date("Y").' Helmar Brewing Co.</p>
         </footer>
         <div class="modal-holder" id="ajax-modal">
             <div class="modal-wrap">
