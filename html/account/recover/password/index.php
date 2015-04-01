@@ -99,16 +99,16 @@ do{
             break;
 
         // check username
-        case 6:
+        case 5:
             $token_from_db = db1($db_main,"SELECT token FROM users WHERE username='".$_SESSION['username']."' LIMIT 1");
             if($token_from_db === $_SESSION['token']){
                 if($_POST['username'] === $_SESSION['username']){
                     $new_token = substr(md5(uniqid(rand(),true)), 0, 25);
-                    $db_main->query("UPDATE users SET token='$new_token' WHERE username='$uname_via_ID'");
+                    $db_main->query("UPDATE users SET token='$new_token' WHERE username='".$_SESSION['username']."'");
                     $_SESSION['token'] = $new_token;
                     $form = 'password';
-                    $_SESSION['step'] = 7;
-                    $step = 7;
+                    $_SESSION['step'] = 6;
+                    $step = 0;
                 }else{
                     $step = 0;
                     $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
@@ -122,61 +122,63 @@ do{
             break;
 
         // check password
-        case 7:
-        $token_from_db = db1($db_main,"SELECT token FROM users WHERE username='".$_SESSION['uname']."' LIMIT 1");
-        if($token_from_db === $_SESSION['token']){
-            if($_SESSION['attemp'] < 4){
-                if($password1 == ''){
-                    $stop = TRUE;
-                    $msg .= '<li>You did not enter a password. (passwords, must be at least 8 characters long)</li>';
+        case 6:
+            $token_from_db = db1($db_main,"SELECT token FROM users WHERE username='".$_SESSION['username']."' LIMIT 1");
+            if($token_from_db === $_SESSION['token']){
+                if($_SESSION['attemp'] < 4){
+                    if($password1 == ''){
+                        $stop = TRUE;
+                        $msg .= '<li>You did not enter a password. (passwords, must be at least 8 characters long)</li>';
+                    }else{
+                        if(strlen($password1)<8){
+                            $stop = TRUE;
+                            $msg .= '<li>Your password must be at least 8 characters long.</li>';
+                        }
+                        if(preg_match('/[\'\"]+/',$password1)===1){
+                            $stop = TRUE;
+                            $msg .= '<li>Your password may not contain single or double quotes.</li>';
+                        }
+                        if($password1 != $password2){
+                            $stop = TRUE;
+                            $msg .= '<li>Your password did not match.</li>';
+                        }
+                    }
+                    if($stop){
+                        $new_token = substr(md5(uniqid(rand(),true)), 0, 25);
+                        $db_main->query("UPDATE users SET token='$new_token' WHERE username='".$_SESSION['username']."'");
+                        $_SESSION['token'] = $new_token;
+                        $form = 'password';
+                        $_SESSION['step'] = 6;
+                        $step = 0;
+                        $_SESSION['attemp']++;
+                    }else{
+                        $step = 7;
+                        $_SESSION['step'] = 7;
+                    }
                 }else{
-                    if(strlen($password1)<8){
-                        $stop = TRUE;
-                        $msg .= '<li>Your password must be at least 8 characters long.</li>';
-                    }
-                    if(preg_match('/[\'\"]+/',$password1)===1){
-                        $stop = TRUE;
-                        $msg .= '<li>Your password may not contain single or double quotes.</li>';
-                    }
-                    if($password1 != $password2){
-                        $stop = TRUE;
-                        $msg .= '<li>Your password did not match.</li>';
-                    }
-                }
-                if($stop){
-                    $new_token = substr(md5(uniqid(rand(),true)), 0, 25);
-                    $db_main->query("UPDATE users SET token='$new_token' WHERE username='$uname_via_ID'");
-                    $_SESSION['token'] = $new_token;
-                    $form = 'password';
-                    $_SESSION['step'] = 7;
                     $step = 0;
-                    $_SESSION['attemp']++;
-                }else{
-                    $step = 8;
-                    $_SESSION['step'] = 8;
+                    $msg .= '<li>Too many failed attempts.</li>';
+                    $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                    $user->kill_session();
                 }
             }else{
                 $step = 0;
-                $msg .= '<li>Too many failed attempts.</li>';
                 $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
                 $user->kill_session();
             }
-        }else{
-            $step = 0;
-            $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
-            $user->kill_session();
-        }
-        break;
+            break;
 
         //change the password
-        case 8:
+        case 7:
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
             try{
                 $hash = $user->new_hash($password1);
-                $db_main->query("UPDATE users SET token='', saltedHash='$hash' WHERE username='".$_SESSION['uname']."' LIMIT 1");
+                $db_main->query("UPDATE users SET token=NULL WHERE username='".$_SESSION['username']."' LIMIT 1");
+                $db_auth->query("UPDATE users SET saltedHash='$hash' WHERE username='".$_SESSION['username']."' LIMIT 1");
                 $msg = '<li>Your password has been successfully reset.</li>';
             }catch(mysqli_sql_exception $e){
                 $msg .= '<li>We are sorry, there was a problem updating your password. (ref: data)</li>';
+                $msg .= '<li>'.$e->getMessage().'</li>';
                 $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
             }catch(Exception $e){
                 $msg .= '<li>We are sorry, there was a problem updating your password. (ref: hash)</li>';
@@ -187,6 +189,11 @@ do{
             $user->kill_session();
             break;
 
+        // what happened?
+        default:
+            $msg = '<li>There was an error. (ref:big)</li>';
+            $step = 0;
+            break;
     }
 }while($step !== 0);
 
@@ -223,7 +230,7 @@ switch($form){
     case 'password':
         print'
             <form action="'.$protocol.$site.'/account/recover/password/" method="post">
-                <p>Please enter your username to continue.</p>
+                <p>Please enter a new password.</p>
                 <label for="password1">Password</label>
                 <input type="password" id="password1" name="password1">
                 <label for="password2">Confirm Password</label>
