@@ -211,7 +211,7 @@ print'
 switch($form){
     case 'username':
         print'
-            <form action="'.$protocol.$site.'/account/recover/password/">
+            <form action="'.$protocol.$site.'/account/recover/password/" method="post">
                 <p>Please enter your username to continue.</p>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
@@ -221,7 +221,7 @@ switch($form){
         break;
     case 'password':
         print'
-            <form action="'.$protocol.$site.'/account/recover/password/">
+            <form action="'.$protocol.$site.'/account/recover/password/" method="post">
                 <p>Please enter your username to continue.</p>
                 <label for="password1">Password</label>
                 <input type="password" id="password1" name="password1">
