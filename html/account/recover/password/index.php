@@ -67,7 +67,8 @@ do{
 
         // make sure the token is real
         case 3:
-            $uname_via_ID = db1($db_main,"SELECT username FROM users WHERE userid='".base_convert($token[0], 36, 10)."' LIMIT 1");
+            //$uname_via_ID = db1($db_main,"SELECT username FROM users WHERE userid='".base_convert($token[0], 36, 10)."' LIMIT 1");
+            $uname_via_ID = db1($db_main,"SELECT username FROM users WHERE userid='".$token[0]."' LIMIT 1");
             $uname_via_token = db1($db_main,"SELECT username FROM users WHERE token='".$token[1]."' LIMIT 1");
             if($uname_via_ID == FALSE || $uname_via_token == FALSE || $uname_via_ID != $uname_via_token){
                 $step = 0;
@@ -99,7 +100,7 @@ do{
 
         // check username
         case 6:
-            $token_from_db = db1($db_main,"SELECT token FROM users WHERE username='".$_SESSION['uname']."' LIMIT 1");
+            $token_from_db = db1($db_main,"SELECT token FROM users WHERE username='".$_SESSION['username']."' LIMIT 1");
             if($token_from_db === $_SESSION['token']){
                 if($_POST['username'] === $_SESSION['username']){
                     $new_token = substr(md5(uniqid(rand(),true)), 0, 25);
