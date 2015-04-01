@@ -67,7 +67,7 @@ do{
 
         // make sure the token is real
         case 3:
-            $uname_via_ID = db1($db_main,"SELECT username FROM users WHERE id='".base_convert($token[0], 36, 10)."' LIMIT 1");
+            $uname_via_ID = db1($db_main,"SELECT username FROM users WHERE userid='".base_convert($token[0], 36, 10)."' LIMIT 1");
             $uname_via_token = db1($db_main,"SELECT username FROM users WHERE token='".$token[1]."' LIMIT 1");
             if($uname_via_ID == FALSE || $uname_via_token == FALSE || $uname_via_ID != $uname_via_token){
                 $step = 0;
@@ -80,7 +80,7 @@ do{
                 $_SESSION['attemp'] = 0;
                 $form = 'username';
                 $_SESSION['step'] = 4;
-                $step = 4;
+                $step = 0;
             }
             break;
 
