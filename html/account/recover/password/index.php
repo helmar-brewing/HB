@@ -32,8 +32,9 @@ $user->checklogin(1);
 session_start();
 if(isset($_SESSION['step'])){
 	$step = $_SESSION['step'];
+}else{
+    $step = 1;
 }
-
 
 do{
     switch($step){
@@ -100,7 +101,7 @@ do{
         case 6:
             $token_from_db = db1($db_main,"SELECT token FROM users WHERE username='".$_SESSION['uname']."' LIMIT 1");
             if($token_from_db === $_SESSION['token']){
-                if($_POST['username'] === $_SESSION['username'){
+                if($_POST['username'] === $_SESSION['username']){
                     $new_token = substr(md5(uniqid(rand(),true)), 0, 25);
                     $db_main->query("UPDATE users SET token='$new_token' WHERE username='$uname_via_ID'");
                     $_SESSION['token'] = $new_token;
@@ -167,12 +168,12 @@ do{
         break;
 
         //change the password
-        case:8
+        case 8:
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
             try{
                 $hash = $user->new_hash($password1);
                 $db_main->query("UPDATE users SET token='', saltedHash='$hash' WHERE username='".$_SESSION['uname']."' LIMIT 1");
-                $msg = '<li>Your password has been successfully reset.</li>'
+                $msg = '<li>Your password has been successfully reset.</li>';
             }catch(mysqli_sql_exception $e){
                 $msg .= '<li>We are sorry, there was a problem updating your password. (ref: data)</li>';
                 $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
@@ -186,7 +187,7 @@ do{
             break;
 
     }
-}while($step != 0);
+}while($step !== 0);
 
 
 
@@ -210,7 +211,7 @@ print'
 switch($form){
     case 'username':
         print'
-            <form action="'$protocol.$site.'/account/recover/password/'.">
+            <form action="'.$protocol.$site.'/account/recover/password/">
                 <p>Please enter your username to continue.</p>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
@@ -220,7 +221,7 @@ switch($form){
         break;
     case 'password':
         print'
-            <form action="'$protocol.$site.'/account/recover/password/'.">
+            <form action="'.$protocol.$site.'/account/recover/password/">
                 <p>Please enter your username to continue.</p>
                 <label for="password1">Password</label>
                 <input type="password" id="password1" name="password1">
