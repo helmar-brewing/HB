@@ -7,6 +7,15 @@ $c_red: #9B3333;
 @import "base/base";
 @import "neat/neat";
 
+/* IE8 * clearfix */
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 @import "font-awesome/font-awesome";
 
 @import "modal";
