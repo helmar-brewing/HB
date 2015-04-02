@@ -38,7 +38,7 @@ print'
 	    			<h1>Welcome to the Helmar Brewing Company</h1>
 	    			<p>Helmar Brewing Co. produces fine, hand-made art cards, mainly of sports and history subjects.</p>
 	    		</div>
-	        <button><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/">Visit Our Store</a></button>
+	        <a class="button" href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/">Visit Our Store</a>
 	    	</div>
 	    </div>
 ';

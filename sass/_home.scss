@@ -81,13 +81,10 @@
     text-align: center;
     color: $hero-color;
 
-    button {
+    a.button {
       @include button(simple, $base-background-color);
       font-size: $base-font-size;
       outline: none;
-      a{
-          display:block;
-      }
     }
 
     .hero-copy {
