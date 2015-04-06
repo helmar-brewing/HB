@@ -51,7 +51,7 @@ print'
               <th>Stance / Position</th>
               <th>Team</th>
               <th>Last Sold Date</th>
-              <th>Max Sell price</th>
+              <th>Max Sell Price</th>
               <th>Pictures</th>
 			  <th>Personal Checklist</th>
             </tr>
@@ -78,7 +78,7 @@ if($R_cards !== FALSE){
         }else{
             print'
                 <td>'.$card->lastsold.'</td>
-                <td>'.$card->maxsold.'</td>
+                <td>'.$card->maxSold.'</td>
             ';
         }
 
@@ -89,10 +89,10 @@ if($R_cards !== FALSE){
 
 
         // define the pictures
-        $frontpic = 'images/cardPics/'.$card->series.'_'.$card->cardnum.'_Front.jpg';
-        $frontthumb = 'images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Front_small.jpg';
-        $backpic  = 'images/cardPics/'.$card->series.'_'.$card->cardnum.'_Back.jpg';
-        $backthumb  = 'images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Back_small.jpg';
+        $frontpic = 'http://www.helmarbrewing.com/images/cardPics/'.$card->series.'_'.$card->cardnum.'_Front.jpg';
+        $frontthumb = 'http://www.helmarbrewing.com/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Front_small.jpg';
+        $backpic  = 'http://www.helmarbrewing.com/images/cardPics/'.$card->series.'_'.$card->cardnum.'_Back.jpg';
+        $backthumb  = 'http://www.helmarbrewing.com/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Back_small.jpg';
 
         //check if either pic exists
         if( file_exists($frontpic) || file_exists($backpic) ){
@@ -126,7 +126,7 @@ if($R_cards !== FALSE){
 		/* end card pic */
         print'</td>';
 		
-		/* need to add ajax code */
+		/* need to add ajax code , how to add fontawesome icons? */
 		print '<td><i class="fa fa-user-plus"></i> Add</td>';
 		
 		
