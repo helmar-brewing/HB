@@ -67,11 +67,14 @@ if($result != FALSE){
 	}
 }
  
+ 
 // close the connection to file you are writign to
 fclose($fp);
  
 // close database connections
-$db->close();
+$result->free();
+$db_main->close();
+$db_auth->close();
  
 // send the HTTP headers
 header('Content-Description: File Transfer');
