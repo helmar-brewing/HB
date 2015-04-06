@@ -59,7 +59,7 @@ fputcsv($fp, $csvheaders);
 // for example, in this dataset perhaps 'vote' is a booleen in the database, but you want to display it as 'yes', or 'no' in the CSV.
 $result = $db_main->query("SELECT * FROM cardList WHERE series = 'R319-Helmar'");
 if($result != FALSE){
-	$result->dataseek(0);
+	$result->data_seek(0);
 	while($object = $result->fetch_object()){
 		// your csvline needs to be a simple array
 		$csvline = array($object->cardnum,$object->player,$object->description,$object->team);
