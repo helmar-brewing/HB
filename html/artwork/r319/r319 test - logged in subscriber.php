@@ -44,7 +44,7 @@ print'
         </div>
         <p class="single">The R-319 Helmar series has 180 subjects including many of your favorite players. All the original art was painted by our artists over a period of years, you won\'t find it elsewhere. Given the scope, the expense and the complexity for a small company or artist to put together a 385 card set of original and exceptional art, no one else may attempt something this ambitious for decades. They are not available in full sets.</p>
 		
-		<div id="album-artwork">
+	
         <table class="tables">
           <thead>
             <tr>
@@ -153,7 +153,7 @@ print'
             Card list last updated: '.$updated.'<br/>
             Number of Records: '.$i.'
         </p>
-		</div>
+		
     </div>
 
 
