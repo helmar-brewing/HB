@@ -44,10 +44,10 @@ print'
             <img src="'.$protocol.$site.'/images/cardPics/R319-Helmar_375_Back.jpg" />
         </div>
         <p class="single">The R-319 Helmar series has 180 subjects including many of your favorite players. All the original art was painted by our artists over a period of years, you won\'t find it elsewhere. Given the scope, the expense and the complexity for a small company or artist to put together a 385 card set of original and exceptional art, no one else may attempt something this ambitious for decades. They are not available in full sets.</p>';
- 
- 
+
+
  /* setup code if 1) user logged in with no subscription, 2) user logged in with subscription, 3) user not logged in */
- 
+
  if(isset($user)){
     if( $user->login() == 1 || $user->login() == 2 ){
 		/* do this code if user is logged in, but not paid subscription */
@@ -98,7 +98,7 @@ print'
             Card list last updated: '.$updated.'<br/>
             Number of Records: '.$i.'
         </p>
-    </div>
+
 ';
 
 
@@ -119,6 +119,10 @@ print'
 		/* do this if user is not logged in */
 		print '<a href="'.$protocol.$site.'/account/register/"><img src="'.$protocol.$site.'/img/checklist-sample.jpg"></a>';
 }
+
+print'
+	</div>
+';
 
 
 
