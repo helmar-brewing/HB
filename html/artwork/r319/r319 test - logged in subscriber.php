@@ -43,6 +43,8 @@ print'
             <img src="'.$protocol.$site.'/images/cardPics/R319-Helmar_375_Back.jpg" />
         </div>
         <p class="single">The R-319 Helmar series has 180 subjects including many of your favorite players. All the original art was painted by our artists over a period of years, you won\'t find it elsewhere. Given the scope, the expense and the complexity for a small company or artist to put together a 385 card set of original and exceptional art, no one else may attempt something this ambitious for decades. They are not available in full sets.</p>
+		
+		<div id="album-artwork">
         <table class="tables">
           <thead>
             <tr>
@@ -128,6 +130,7 @@ if($R_cards !== FALSE){
 		
 		/* need to add ajax code , how to add fontawesome icons? */
 		print '<td><i class="fa fa-user-plus"></i> Add</td>';
+		print '<img src="https://www-304.ibm.com/support/knowledgecenter/api/content/nl/en-us/SSS8GR_2.5.0/com.ibm.websphere.datapower.xc.doc/cloudcommon/add-icon.gif" alt="'.$card->series.','.$card->cardnum.'">';
 		
 		
 		
@@ -150,6 +153,7 @@ print'
             Card list last updated: '.$updated.'<br/>
             Number of Records: '.$i.'
         </p>
+		</div>
     </div>
 
 
@@ -160,3 +164,22 @@ print'
 $db_auth->close();
 $db_main->close();
 ?>
+
+<script>
+ $(document).ready(function() {
+        $("#album-artwork a").click(function(e) {
+            e.preventDefault();
+
+            var src = $(this).attr("href");
+            //var alt = $(this).next("img").attr("alt");
+            var alt = $(this).children().attr("alt");
+            //find function also do the same thing if you want to use.
+            /*var alt = $(this).find("img").attr("alt");*/
+
+            alert(src); // ok!
+            console.log(src); // ok!
+            alert(alt); //output: not undefined now its ok!
+            console.log(alt); //output: not undefined now its ok!
+        });
+    });
+</script>
