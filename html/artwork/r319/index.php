@@ -18,6 +18,7 @@ require_once('classes/phnx-user.class.php');
 
 /* PAGE VARIABLES */
 $currentpage = 'artwork/';
+$seriesName = 'R319-Helmar';
 
 // create user object
 $user = new phnx_user;
@@ -42,7 +43,16 @@ print'
             <img src="'.$protocol.$site.'/images/cardPics/R319-Helmar_375_Front.jpg" />
             <img src="'.$protocol.$site.'/images/cardPics/R319-Helmar_375_Back.jpg" />
         </div>
-        <p class="single">The R-319 Helmar series has 180 subjects including many of your favorite players. All the original art was painted by our artists over a period of years, you won\'t find it elsewhere. Given the scope, the expense and the complexity for a small company or artist to put together a 385 card set of original and exceptional art, no one else may attempt something this ambitious for decades. They are not available in full sets.</p>
+        <p class="single">The R-319 Helmar series has 180 subjects including many of your favorite players. All the original art was painted by our artists over a period of years, you won\'t find it elsewhere. Given the scope, the expense and the complexity for a small company or artist to put together a 385 card set of original and exceptional art, no one else may attempt something this ambitious for decades. They are not available in full sets.</p>';
+ 
+ 
+ /* setup code if 1) user logged in with no subscription, 2) user logged in with subscription, 3) user not logged in */
+ 
+ if(isset($user)){
+    if( $user->login() == 1 || $user->login() == 2 ){
+		/* do this code if user is logged in, but not paid subscription */
+
+print '
         <table class="tables">
           <thead>
             <tr>
@@ -50,15 +60,13 @@ print'
               <th>Player</th>
               <th>Stance / Position</th>
               <th>Team</th>
-              <th>Last Sold</th>
-              <th>Average Sold</th>
-              <th>Pictures</th>
             </tr>
           </thead>
           <tbody>
 ';
+
 $i = 0;
-$R_cards = $db_main->query("SELECT * FROM cardList WHERE series = 'R319-Helmar'");
+$R_cards = $db_main->query("SELECT * FROM cardList WHERE series = '".$seriesName."'");
 if($R_cards !== FALSE){
     $R_cards->data_seek(0);
     while($card = $R_cards->fetch_object()){
@@ -69,59 +77,6 @@ if($R_cards !== FALSE){
                 <td>'.$card->description.'</td>
                 <td>'.$card->team.'</td>
         ';
-        if($card->averagesold == 0){
-            print'
-                <td></td>
-                <td></td>
-            ';
-        }else{
-            print'
-                <td>'.$card->lastsold.'</td>
-                <td>'.$card->averagesold.'</td>
-            ';
-        }
-
-        // need to add ************ for one row, check if picture exists
-        print'
-                <td align="center" class="picCol">
-        ';
-
-
-        // define the pictures
-        $frontpic = 'images/cardPics/'.$card->series.'_'.$card->cardnum.'_Front.jpg';
-        $frontthumb = 'images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Front_small.jpg';
-        $backpic  = 'images/cardPics/'.$card->series.'_'.$card->cardnum.'_Back.jpg';
-        $backthumb  = 'images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Back_small.jpg';
-
-        //check if either pic exists
-        if( file_exists($frontpic) || file_exists($backpic) ){
-
-            // print the front pic if exists
-            if(file_exists($frontpic)){
-                print'
-                    <a href="http://www.helmarbrewing.com/'.$frontpic.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$frontthumb.'"></a>
-                ';
-            }
-
-            // insert space
-            if( file_exists($frontpic) && file_exists($backpic) ){
-                print'&nbsp;&nbsp;';
-            }
-
-            // print the back pic if exists
-            if(file_exists($backpic)){
-                print'
-                    <a href="http://www.helmarbrewing.com/'.$backpic.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$backthumb.'"></a>
-                ';
-
-            }
-
-        // neither pic exists print message instead
-        }else{
-            print'
-                    <i>no picture</i>
-            ';
-        }
 
         print'
                 </td>
@@ -133,7 +88,7 @@ if($R_cards !== FALSE){
     $R_cards->free();
 }else{
     print'
-        <tr><td colspan="7">could not get list of cards</td></tr>
+        <tr><td colspan="4">could not get list of cards</td></tr>
     ';
 }
 print'
@@ -144,9 +99,28 @@ print'
             Number of Records: '.$i.'
         </p>
     </div>
-
-
 ';
+
+
+
+
+
+
+
+
+
+
+
+		/* END code if user is logged in, but not paid subscription */
+    }else{
+		/* do this if user is not logged in */
+		print '<a href="'.$protocol.$site.'/account/register/"><img src="'.$protocol.$site.'/img/checklist-sample.jpg"></a>';    }
+}else{
+		/* do this if user is not logged in */
+		print '<a href="'.$protocol.$site.'/account/register/"><img src="'.$protocol.$site.'/img/checklist-sample.jpg"></a>';
+}
+
+
 
 /* FOOTER */ require('layout/footer1.php');
 
