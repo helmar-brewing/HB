@@ -130,7 +130,7 @@ if($R_cards !== FALSE){
 		
 		/* need to add ajax code , how to add fontawesome icons? */
 	/*	print '<td><i class="fa fa-user-plus"></i> Add</td>'; */
-		print '<td><img src="https://www-304.ibm.com/support/knowledgecenter/api/content/nl/en-us/SSS8GR_2.5.0/com.ibm.websphere.datapower.xc.doc/cloudcommon/add-icon.gif" alt="'.$card->series.','.$card->cardnum.'"></td>';
+		print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.','.$card->cardnum.'"></td>';
 		
 		
 		
@@ -165,21 +165,3 @@ $db_auth->close();
 $db_main->close();
 ?>
 
-<script>
- $(document).ready(function() {
-        $("#album-artwork a").click(function(e) {
-            e.preventDefault();
-
-            var src = $(this).attr("href");
-            //var alt = $(this).next("img").attr("alt");
-            var alt = $(this).children().attr("alt");
-            //find function also do the same thing if you want to use.
-            /*var alt = $(this).find("img").attr("alt");*/
-
-            alert(src); // ok!
-            console.log(src); // ok!
-            alert(alt); //output: not undefined now its ok!
-            console.log(alt); //output: not undefined now its ok!
-        });
-    });
-</script>
