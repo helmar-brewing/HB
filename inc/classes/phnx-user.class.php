@@ -10,6 +10,7 @@
 		public $lastname;
 		public $email;
 		public $stripeID;
+		public $subscription;
 		public $error_cookie;
 		public $error = array();
 
@@ -427,16 +428,64 @@
 
 
 		function checksub(){
-			$sub_response = Stripe_Customer::retrieve($this->stripeID)->subscriptions->all();
-			$subs = $sub_response->data;
-			if(empty($subs)){
-				return false;
-			}else{
-				if($subs[0]['status'] == 'active'){
-					return true;
+			try{
+				$sub_response = Stripe_Customer::retrieve($this->stripeID)->subscriptions->all();
+				if(empty($sub_response->data)){
+					$this->subscription = array(
+						'status' => 'none'
+					);
 				}else{
-					return false;
+					$this->subscription = array(
+						'status' => $sub_response->data[0]['status'],
+						'sub_id' => $sub_response->data[0]['id'],
+						'cancel_at_period_end' => $sub_response->data[0]['cancel_at_period_end'],
+						'current_period_end' => $sub_response->data[0]['current_period_end'],
+						'plan_type' => $sub_response->data[0]->plan['id'],
+					);
+					if($sub_response->data[0]->plan['id'] === 'sub-digital'){
+						$this->subscription['digital'] = TRUE;
+						$this->subscription['paper'] = FALSE;
+					}elseif($sub_response->data[0]->plan['id'] === 'sub-paper'){
+						$this->subscription['digital'] = FALSE;
+						$this->subscription['paper'] = TRUE;
+					}elseif($sub_response->data[0]->plan['id'] === 'sub-digital+paper'){
+						$this->subscription['digital'] = TRUE;
+						$this->subscription['paper'] = TRUE;
+					}else{
+						$this->subscription['digital'] = 'error';
+						$this->subscription['paper'] = 'error';
+					}
 				}
+			}catch(Stripe_CardError $e){
+				$this->subscription = array(
+					'status' => 'error',
+					'msg'	 => $e->getMessage()
+				);
+			}catch (Stripe_InvalidRequestError $e){
+				$this->subscription = array(
+					'status' => 'error',
+					'msg'	 => $e->getMessage()
+				);
+			}catch (Stripe_AuthenticationError $e){
+				$this->subscription = array(
+					'status' => 'error',
+					'msg'	 => $e->getMessage()
+				);
+			}catch (Stripe_ApiConnectionError $e){
+				$this->subscription = array(
+					'status' => 'error',
+					'msg'	 => $e->getMessage()
+				);
+			}catch (Stripe_Error $e){
+				$this->subscription = array(
+					'status' => 'error',
+					'msg'	 => $e->getMessage()
+				);
+			}catch (Exception $e){
+				$this->subscription = array(
+					'status' => 'error',
+					'msg'	 => $e->getMessage()
+				);
 			}
 		}
 
@@ -454,7 +503,6 @@
 			$pepperedHash = substr($saltedHash,7) . $pepper;
 			return $pepperedHash;
 		}
-
 
 
 	}

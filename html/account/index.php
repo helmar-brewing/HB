@@ -27,6 +27,7 @@ $user = new phnx_user;
 
 // check user login status
 $user->checklogin(2);
+$user->checksub();
 
 switch($user->login()){
     case 0:
@@ -56,14 +57,11 @@ switch($user->login()){
         break;
 }
 
-$R_userdeets = $db_main->query("SELECT * FROM users WHERE userid = ".$user->id." LIMIT 1");
-if($R_userdeets !== FALSE){
-	$userdeets = $R_userdeets->fetch_assoc();
-	$R_userdeets->free();
+
 
 	try {
 
-		$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
+		$cust = Stripe_Customer::retrieve($user->stripeID);
 
 		if($cust['cards']['total_count'] !== 0){
 			$card_info = $cust->cards->data;
@@ -95,51 +93,28 @@ if($R_userdeets !== FALSE){
 	}
 
 
-
-	try {
-
-
-
-		$sub_response = Stripe_Customer::retrieve($userdeets['stripeID'])->subscriptions->all();
-		$subs = $sub_response->data;
-
-		if(empty($subs)){
+	switch($user->subscription[status]){
+		case 'error':
+			$sub_msg = 'There was an error determining you subscription status.';
+			break;
+		case 'none':
 			$status = 'You do not have an active subscription.';
 			$sub_button_text = 'Subscribe Now';
-		}else{
-			$status = $subs[0]['status'];
+			break;
+		case 'active':
+			$status = 'active';
 			$sub_button_text = 'Cancel';
-			if($subs[0]['cancel_at_period_end'] === true){
-				$status .= ' - Your subscription is paid in full until '.date('M j Y', $subs[0]['current_period_end']).' at which point it will be canceled.';
+			if($user->subscription['cancel_at_period_end'] === true){
+				$status .= ' - Your subscription is paid in full until '.date('M j Y', $user->subscription['current_period_end']).' at which point it will be canceled.';
 				$sub_button_text = 'Resume Subscription';
 			}
-		}
-
-
-
-
-
-	} catch(Stripe_CardError $e) {
-
-		// this still needs to show the form in case of expired cards that were already on the account
-
-		$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception card error)';
-	} catch (Stripe_InvalidRequestError $e) {
-		$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception invalid request)';
-	} catch (Stripe_AuthenticationError $e) {
-		$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception authentication)';
-	} catch (Stripe_ApiConnectionError $e) {
-		$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception api connection)';
-	} catch (Stripe_Error $e) {
-		$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception general)';
-	} catch (Exception $e) {
-		$sub_msg = 'There was an error determining your subscription status. Please refresh the page and try again. (ref: stripe exception generic)';
+			break;
 	}
 
 
-}else{
-	$sub_msg = 'There was an error determining your card status. Please refresh the page and try again. (ref: user details fail)';
-}
+	//show renewal date for subscription
+
+
 
 
 ob_end_flush();
