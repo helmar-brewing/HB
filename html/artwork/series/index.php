@@ -23,7 +23,7 @@ $currentpage = 'artwork/';
 $seriesID = $_GET['series'];
 //$series_id = 'R319';
 
-$series_sql = $db_main->query("SELECT * FROM series_info WHERE series_id='".$series_id."' LIMIT 1");
+$series_sql = $db_main->query("SELECT * FROM series_info WHERE series_id='".$_GET['series']."' LIMIT 1");
 if($series_sql !== FALSE){
     $series_sql->data_seek(0);
     while($seriesinfo = $series_sql->fetch_object()){
