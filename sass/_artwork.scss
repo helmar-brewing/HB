@@ -89,6 +89,9 @@
         }
         margin-bottom:2em;
     }
+    .series_desc{
+        margin-bottom:1em;
+    }
     @include media($large-screen) {
         .series_images{
             @include clearfix;
