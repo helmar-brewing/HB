@@ -48,7 +48,6 @@ $user = new phnx_user;
 $user->checklogin(1);
 
 // check user subscription status
-$user->checklogin(1);
 $user->checksub();
 
 ob_end_flush();
