@@ -83,7 +83,7 @@ print'
     $R_cards = $db_main->query("SELECT * FROM cardList WHERE series = '".$series_tag."'");
 
       // if user does NOT have subscription:
-      if $user->subscription['status'] != 'active' {
+      if($user->subscription['status'] != 'active') {
                 print '
                         <table class="tables">
                           <thead>
