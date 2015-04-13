@@ -68,11 +68,8 @@ print'
     <div class="series_images">
         <img src="'.$front_img.'" />
         <img src="'.$back_img.'" />
-    </div>'
-
-    .$series_desc
-
-    ;
+    </div>
+	<div class="series_desc">'.$series_desc.'</div>';
 
 
  /* setup code if 1) user logged in with no subscription, 2) user logged in with subscription, 3) user not logged in */
