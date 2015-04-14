@@ -85,7 +85,7 @@ print'    </div>
     if( $user->login() == 1 || $user->login() == 2 ){
 		/* do this code if user is logged in */
 
-		print '<p><a href="/artwork/csv/'.$series_id.'"><i class="fa fa-download"></i> Download Card List</a></p>';
+		print '<div class="series_desc"><p><a href="/artwork/csv/'.$series_id.'"><i class="fa fa-download"></i> Download Card List</a></p></div>';
 
     $R_cards = $db_main->query("SELECT * FROM cardList WHERE series = '".$series_tag."'");
 
