@@ -29,15 +29,7 @@ $date2 = date('Y-m-d\Th:i:s\Z', $date2);
 $start_time = $date2;
 
 // set ebay headers
-$http_headers = array(
-    'Content-Type: text/xml',
-    'X-EBAY-API-COMPATIBILITY-LEVEL:903',
-    'X-EBAY-API-DEV-NAME:39b1e0dd-982e-461c-8791-d14dd5043ce6',
-    'X-EBAY-API-APP-NAME:RobertRu-b5e0-414c-b76e-82c06bd8e5c4',
-    'X-EBAY-API-CERT-NAME:9d2bf8d8-25dc-4491-a2e5-dfc69819dbed',
-    'X-EBAY-API-SITEID:0',
-    'X-EBAY-API-CALL-NAME:GetSellerList'
-);
+$http_headers = $apikey['ebay']['headers'];
 
 
 $xml_request = '
