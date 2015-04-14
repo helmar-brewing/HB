@@ -66,9 +66,16 @@ print'
     <h4>Artwork</h4>
     <h1>'.$series_name.'</h1>
     <div class="series_images">
-        <img src="'.$front_img.'" />
+        <img src="'.$front_img.'" />';
+
+		if($back_img!="" || $back_img!=NULL){
+					//do nothing if null or blank
+			}else{
         <img src="'.$back_img.'" />
-    </div>
+			}
+
+
+print'    </div>
 	<div class="series_desc">'.$series_desc.'</div>';
 
 
