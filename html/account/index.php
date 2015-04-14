@@ -192,7 +192,7 @@ print'
 			</form>
 			<button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
 			<h3>Subscription</h3>
-			<div>All subscriptions include full access to the website.</div>
+			<div>All subscriptions include full access to the website. Describe what that means.</div>
 			<ul class="sub-buttons">
 	';
 	if($user->subscription['status'] === 'none'){
