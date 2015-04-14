@@ -71,7 +71,7 @@ print'
 		if($back_img!="" || $back_img!=NULL){
 					//do nothing if null or blank
 			}else{
-        <img src="'.$back_img.'" />
+        print '<img src="'.$back_img.'" />';
 			}
 
 
@@ -84,6 +84,8 @@ print'    </div>
  if(isset($user)){
     if( $user->login() == 1 || $user->login() == 2 ){
 		/* do this code if user is logged in */
+
+		print '<a href="/artwork/csv/'.$series_id.'"><i class="fa fa-download"></i> Download Card List</a>';
 
     $R_cards = $db_main->query("SELECT * FROM cardList WHERE series = '".$series_tag."'");
 
