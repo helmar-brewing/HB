@@ -173,9 +173,10 @@ print'
 				<input type="submit" value="Invalidate all logins" />
 			</form>
 		</div>
+		<hr>
 
 		<div>
-			<h2>Helmar Gold</h2>
+			<h2>Helmar Brewing Subscription</h2>
 			<h3>Credit Card</h3>
 			<form action="" method="POST" id="payment-form">
 				<div class="payment-errors" id="payment-errors">'.$msg.'</div>
@@ -193,20 +194,71 @@ print'
 			<h3>Subscription</h3>
 			<div>All subscriptions include full access to the website.</div>
 			<ul class="sub-buttons">
-				<li>
+	';
+	if($user->subscription['status'] === 'none'){
+		print '<li class="selected">';
+	}else{
+		print '<li>';
+	}
+	print'
+					<h4>Website Access</h4>
+					<div class="price">FREE</div>
+					<p>Description</p>
+	';
+	if($user->subscription['status'] === 'none'){
+		print '<div class="sub-checkbox"><i class="fa fa-check-square-o"></i></div>';
+	}else{
+		print '<div class="sub-checkbox"><i class="fa fa-square-o"></i></div>';
+	}
+	print'</li>';
+	if($user->subscription['plan_type'] === 'sub-digital'){
+		print '<li class="selected">';
+	}else{
+		print '<li>';
+	}
+	print'
 					<h4>Digital Magazine</h2>
 					<div class="price">$20</div>
 					<p>Access to digital copies of the magazine via the website.</p>
-				</li>
-				<li>
+	';
+	if($user->subscription['plan_type'] === 'sub-digital'){
+		print '<div class="sub-checkbox"><i class="fa fa-check-square-o"></i></div>';
+	}else{
+		print '<div class="sub-checkbox"><i class="fa fa-square-o"></i></div>';
+	}
+	print'</li>';
+	if($user->subscription['plan_type'] === 'sub-paper'){
+		print'<li class="selected">';
+	}else{
+		print'<li>';
+	}
+	print'
 					<h4>Paper Magazine</h2>
 					<div class="price">$30</div>
 					<p>A paper copy of the magazine sent to you when they are released.</p>
-				</li>
-				<li>
+	';
+	if($user->subscription['plan_type'] === 'sub-paper'){
+		print '<div class="sub-checkbox"><i class="fa fa-check-square-o"></i></div>';
+	}else{
+		print '<div class="sub-checkbox"><i class="fa fa-square-o"></i></div>';
+	}
+	print'</li>';
+	if($user->subscription['plan_type'] === 'sub-digital+paper'){
+		print'<li class="selected">';
+	}else{
+		print'<li>';
+	}
+	print'
 					<h4>Digital + Paper Magazine</h2>
 					<div class="price">$36</div>
 					<p>A paper copy of the magazine sent to you when they are released as well as access to digital copies of the magazine via the website.</p>
+	';
+	if($user->subscription['plan_type'] === 'sub-digital+paper'){
+		print '<div class="sub-checkbox"><i class="fa fa-check-square-o"></i></div>';
+	}else{
+		print '<div class="sub-checkbox"><i class="fa fa-square-o"></i></div>';
+	}
+	print'
 				</li>
 			</ul>
 		</div>
