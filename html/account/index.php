@@ -191,11 +191,24 @@ print'
 			</form>
 			<button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
 			<h3>Subscription</h3>
-			<p>Helmar Gold costs $9.99 per month.</p>
-			<p id="sub_error">'.$sub_msg.'</p>
-			<p>Status: <span id="sub_status">'.$status.'</p>
-			<!-- maybe insert toggle switch here instead after a transition to SASS/Bourbon/Neat -->
-			<button id="sub_button" onclick="toggleSub()">'.$sub_button_text.'</button>
+			<div>All subscriptions include full access to the website.</div>
+			<ul class="sub-buttons">
+				<li>
+					<h4>Digital Magazine</h2>
+					<div class="price">$20</div>
+					<p>Access to digital copies of the magazine via the website.</p>
+				</li>
+				<li>
+					<h4>Paper Magazine</h2>
+					<div class="price">$30</div>
+					<p>A paper copy of the magazine sent to you when they are released.</p>
+				</li>
+				<li>
+					<h4>Digital + Paper Magazine</h2>
+					<div class="price">$36</div>
+					<p>A paper copy of the magazine sent to you when they are released as well as access to digital copies of the magazine via the website.</p>
+				</li>
+			</ul>
 		</div>
 	</div>
 ';
