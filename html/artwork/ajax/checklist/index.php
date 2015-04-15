@@ -43,7 +43,7 @@ if(isset($user)){
 
 
 									// run a query to see how many quantity user has
-									$checkCount = $db_main->query("SELECT * FROM userCardChecklist WHERE userid='".$user->id."' and series='".$_GET['series']."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
+									$checkCount = $db_main->query("SELECT * FROM userCardChecklist WHERE userid='".$user['id']."' and series='".$_GET['series']."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
 									if($checkCount !== FALSE){
 											$checkCount->data_seek(0);
 											while($checkC = $checkCount->fetch_object()){
