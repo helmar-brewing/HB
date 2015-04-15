@@ -87,7 +87,14 @@ print'    </div>
 
 		print '<div class="series_desc"><p><a href="/artwork/csv/'.$series_id.'"><i class="fa fa-download"></i> Download Card List</a></p></div>';
 
-    $R_cards = $db_main->query("SELECT * FROM cardList WHERE series = '".$series_tag."'");
+    $R_cards = $db_main->query("
+		SELECT cardList.*, userCardChecklist.quantity FROM cardList
+		LEFT JOIN userCardChecklist
+			ON cardList.series = userCardChecklist.series
+			AND cardList.cardnum = userCardChecklist.cardnum
+			AND userCardChecklist.userid = '".$user->id."'
+		WHERE cardList.series = '".$series_tag."'"
+	);
 
       // if user does NOT have subscription:
       if($user->subscription['status'] != 'active') {
@@ -226,26 +233,13 @@ print'    </div>
                     print'</td>';
 
 
-										// run a query to see how many quantity user has
-										$checkCount = $db_main->query("SELECT * FROM userCardChecklist WHERE userid='".$user->id."' and series='".$card->series."' and cardnum='".$card->cardnum."' LIMIT 1");
-										if($checkCount !== FALSE){
-												$checkCount->data_seek(0);
-												while($checkC = $checkCount->fetch_object()){
-														$quantity = $checkC->quantity;
-												}
-										} else {
-												$quantity = 0;
-										}
-										$checkCount->free();
-
-
-
             		/* add icon */
-								if($quantity===0){
-										print '<td><i class="fa fa-user-plus" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+								if($card->quantity > 0){
+									print '<td><i class="fa fa-trash-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
 								} else{
-										print '<td><i class="fa fa-trash-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+									print '<td><i class="fa fa-user-plus" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
 								}
+
 
 
 
@@ -296,9 +290,6 @@ print'    </div>
 print'
 	</div>
 ';
-
-$vars = get_object_vars ( $user );
-print_r ( $vars );
 
 
 /* FOOTER */ require('layout/footer1.php');
