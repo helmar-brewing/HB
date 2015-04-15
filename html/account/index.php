@@ -175,23 +175,8 @@ print'
 		</div>
 		<hr>
 
-		<div>
-			<h2>Helmar Brewing Subscription</h2>
-			<h3>Credit Card</h3>
-			<form action="" method="POST" id="payment-form">
-				<div class="payment-errors" id="payment-errors">'.$msg.'</div>
-				<label>Card Number</label>
-				<input type="text" size="20" id="card_number" data-stripe="number" value="'.$card_num.'" />
-				<label>CVC</label>
-				<input type="text" size="4" id="cvc" data-stripe="cvc"/>
-				<label>Expiration (MM/YYYY)</label>
-				<input type="text" size="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/>
-				<span> / </span>
-				<input type="text" size="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
-				<button id="add_update_card" type="submit">'.$card_button_text.'</button>
-			</form>
-			<button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
-			<h3>Subscription</h3>
+		<div class="subscription">
+			<h2>Baseball History Subscription</h2>
 			<div>All subscriptions include full access to the website. Describe what that means.</div>
 			<ul class="sub-buttons">
 	';
@@ -261,6 +246,24 @@ print'
 	print'
 				</li>
 			</ul>
+			<h3>Credit Card</h3>
+			<form action="" method="POST" id="payment-form">
+				<div class="payment-errors" id="payment-errors">'.$msg.'</div>
+				<label>Card Number</label>
+				<input type="text" size="20" id="card_number" data-stripe="number" value="'.$card_num.'" />
+				<fieldset class="cvc">
+					<label>CVC</label>
+					<input type="text" size="4" id="cvc" data-stripe="cvc"/>
+				</fieldset>
+				<fieldset class="exp">
+				<label>Expiration (MM/YYYY)</label>
+					<input type="text" size="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/>
+					<span> / </span>
+					<input type="text" size="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
+				</fieldset>
+				<button id="add_update_card" type="submit">'.$card_button_text.'</button>
+			</form>
+			<button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
 		</div>
 	</div>
 ';
