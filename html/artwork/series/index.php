@@ -82,7 +82,7 @@ print'    </div>
  /* setup code if 1) user logged in with no subscription, 2) user logged in with subscription, 3) user not logged in */
 
  if(isset($user)){
-    if( $user->login() == 1 || $user->login() == 2 ){
+    if( $user->login() === 1 || $user->login() === 2 ){
 		/* do this code if user is logged in */
 
 		print '<div class="series_desc"><p><a href="/artwork/csv/'.$series_id.'"><i class="fa fa-download"></i> Download Card List</a></p></div>';
@@ -225,9 +225,27 @@ print'    </div>
             		/* end card pic */
                     print'</td>';
 
-            		/* need to add ajax code , how to add fontawesome icons? */
-            		print '<td><i class="fa fa-user-plus"></i></td>';
-            //		print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.','.$card->cardnum.'"></td>';
+
+										// run a query to see how many quantity user has
+										$checkCount = $db_main->query("SELECT * FROM userCardChecklist WHERE userid='".$user->id."' and series='".$_GET['series']."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
+										if($checkCount !== FALSE){
+												$checkCount->data_seek(0);
+												while($checkC = $checkCount->fetch_object()){
+														$quantity = $checkC->quantity;
+												}
+										} else {
+												$quantity = 0;
+										}
+										$checkCount->free();
+
+
+
+            		/* add icon */
+								if($quantity===0){
+										print '<td><i class="fa fa-user-plus" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+								} else{
+										print '<td><i class="fa fa-trash-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+								}
 
 
 
@@ -286,3 +304,48 @@ print'
 $db_auth->close();
 $db_main->close();
 ?>
+
+<script type="text/javascript">
+
+
+
+function checklist(s, c){
+
+	$.get(
+					 "/artwork/ajax/checklist/",
+					{ series:s, cardnum:c },
+					function( data ) {
+
+						if( data.status == 'success' ) {
+
+							// if(data.qty === '1')
+							if(data.qty === 1){
+									$('#' + c).removeClass('fa fa-user-plus');
+									$('#' + c).addClass('fa fa-trash-o');
+							}else if(data.qty === 0){
+									$('#' + c).removeClass('fa fa-trash-o');
+									$('#' + c).addClass('fa fa-user-plus');
+							}else{
+								//something really bad happened
+							}
+
+							//alert(data.message);
+							//$('#' + c).removeClass('');
+							//$('#' + c).addClass('');
+
+
+							//$('#' + c).attr('src','delete-icon.png'); // update image picture
+
+						} else {
+							alert(data.message);
+						}
+
+					},
+					"json"
+	)
+	.fail(function() {
+		alert('There was an error. ref: ajax fail');
+	});
+}
+
+</script>
