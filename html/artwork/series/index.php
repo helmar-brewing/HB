@@ -308,7 +308,7 @@ $db_main->close();
 
 
 function checklist(s, c){
-	alert("checklist");
+
 
 	$.get(
 					 "/artwork/ajax/checklist/",
@@ -319,10 +319,13 @@ function checklist(s, c){
 
 							// if(data.qty === '1')
 							if(data.qty === 1){
+								alert("qty = 1");
 									document.getElementById(c).innnerHTML="Remove Card";
 							}else if(data.qty === 0){
+								alert("qty = 2");
 								document.getElementById(c).innnerHTML="Add Card";
 							}else{
+								alert("noooo!!!!");
 								//something really bad happened
 							}
 
@@ -337,11 +340,14 @@ function checklist(s, c){
 
 
 						} else {
+							alert("else part...");
 							alert(data.message);
 						}
 
 					},
 					"json"
+
+					alert("not success?");
 	)
 	.fail(function() {
 		alert('There was an error. ref: ajax fail');
