@@ -311,7 +311,7 @@ function checklist(s, c){
 
 
 	$.get(
-					 "/artwork/ajax/checklist/",
+					 "/artwork/ajax/checklist/index.php",
 					{ series:s, cardnum:c },
 					function( data ) {
 
@@ -352,6 +352,8 @@ function checklist(s, c){
 	.fail(function() {
 		alert('There was an error. ref: ajax fail');
 	});
+
+	alert(data.message);
 }
 
 </script>
