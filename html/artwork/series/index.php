@@ -235,10 +235,15 @@ print'    </div>
 
             		/* add icon */
 								if($card->quantity > 0){
-									print '<td><i class="fa fa-trash-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Add Card</button></td>';
 								} else{
-									print '<td><i class="fa fa-user-plus" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Remove Card</button></td>';
 								}
+
+//								print '<td><i class="fa fa-trash-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+//							} else{
+//								print '<td><i class="fa fa-user-plus" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+//							}
 
 
 
@@ -313,21 +318,22 @@ function checklist(s, c){
 
 							// if(data.qty === '1')
 							if(data.qty === 1){
-									$('#' + c).removeClass('fa fa-user-plus');
-									$('#' + c).addClass('fa fa-trash-o');
+									document.getElementById(c).innnerHTML="Remove Card";
 							}else if(data.qty === 0){
-									$('#' + c).removeClass('fa fa-trash-o');
-									$('#' + c).addClass('fa fa-user-plus');
+								document.getElementById(c).innnerHTML="Add Card";
 							}else{
 								//something really bad happened
 							}
 
-							//alert(data.message);
-							//$('#' + c).removeClass('');
-							//$('#' + c).addClass('');
+// old using fontawesome
+	//						if(data.qty === 1){
+//									$('#' + c).removeClass('fa fa-user-plus');
+//									$('#' + c).addClass('fa fa-trash-o');
+//							}else if(data.qty === 0){
+//									$('#' + c).removeClass('fa fa-trash-o');
+//									$('#' + c).addClass('fa fa-user-plus');
 
 
-							//$('#' + c).attr('src','delete-icon.png'); // update image picture
 
 						} else {
 							alert(data.message);
