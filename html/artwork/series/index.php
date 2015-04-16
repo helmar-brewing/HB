@@ -235,9 +235,9 @@ print'    </div>
 
             		/* add icon */
 								if($card->quantity > 0){
-									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Add Card</button></td>';
-								} else{
 									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Remove Card</button></td>';
+								} else{
+									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Add Card</button></td>';
 								}
 
 //								print '<td><i class="fa fa-trash-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
@@ -308,6 +308,7 @@ $db_main->close();
 
 
 function checklist(s, c){
+	alert("checklist");
 
 	$.get(
 					 "/artwork/ajax/checklist/",
