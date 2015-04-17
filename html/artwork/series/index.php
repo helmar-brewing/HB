@@ -342,18 +342,18 @@ function checklist(s, c){
 						} else {
 							alert("else part...");
 							alert(data.message);
-						}
-
-					},
+						}, // this ends the function STATUSdata
 					"json"
-
-					alert("not success?");
-	)
+					} // this ends the FUNCTION
+					
+	
 	.fail(function() {
 		alert('There was an error. ref: ajax fail');
-	});
+	}); // this ends the .GET and .fail function
 
 	alert(data.message);
 }
+
+
 
 </script>
