@@ -305,9 +305,36 @@ $db_main->close();
 
 <script type="text/javascript">
 
-
-
 function checklist(s, c){
+		$.ajax({
+              type: "GET",  
+              url: "/artwork/ajax/checklist/",     
+              data: { series:s, cardnum:c },
+              success: function( data ) {
+				var data = $.parseJSON(data);  // message in php file had JSON variable
+
+						if( data.status == 'success' ) {
+								if(data.qty === 1){
+									alert("qty = 1");
+										document.getElementById(c).innnerHTML="Remove Card";
+								}else if(data.qty === 0){
+									alert("qty = 0");
+									document.getElementById(c).innnerHTML="Add Card";
+								}else{
+									alert("noooo!!!!");
+									//something really bad happened
+								}
+						} else {
+							alert(data.message);
+						} // end IF data success
+			}   // end success function
+          }); // end AJAX
+
+    }; // end function checklist
+
+
+
+function OLDchecklist(s, c){
 
 
 	$.get(
