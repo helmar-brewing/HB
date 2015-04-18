@@ -28,90 +28,115 @@ $user->checklogin(1);
 // check user subscription status
 $user->checksub();
 
-ob_end_flush();
 
-?>
-
-
-<?php
-
-if(isset($user)){
+// clean up the series
+$series = str_replace("'", "", stripslashes($_GET['series']));
 
 
-			if($user->login() === 1 && $user->subscription['status'] == 'active'){
-				// run checklist code only if user is logged in AND active subscription
+try{
+
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
+
+	// check varibles
+	if(empty($_GET['series'])){
+		throw new Exception('No series number supplied');
+	}
+	if(empty($_GET['cardnum'])){
+		throw new Exception('No card number supplied');
+	}
+
+    // make sure we are logged in
+	if($user->login() !== 1){
+		throw new Exception('You need to be logged in to update your checklist');
+	}
+
+	// check subscription
+	if($user->subscription['status'] !== 'active'){
+		throw new Exception('You must have an active subscription to update your checklist');
+	}
+
+	// get current qty
+	$quantity = db1($db_main, "SELECT quantity FROM userCardChecklist WHERE userid='".$user->id."' AND series='$series' and cardnum='".$_GET['cardnum']."' LIMIT 1");
+
+	// if $quantity is false, it doesn't exist yet, but we can't pass FALSE to the switch
+	if($quantity === FALSE){
+		$quantity = 'none';
+	}
 
 
-									// run a query to see how many quantity user has
-									$checkCount = $db_main->query("SELECT * FROM userCardChecklist WHERE userid='".$user->id."' and series='".$_GET['series']."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
-									if($checkCount !== FALSE){
-											$checkCount->data_seek(0);
-											while($checkC = $checkCount->fetch_object()){
-													$quantity = $checkC->quantity;
-											}
-									} else {
-											$quantity = 0;
-									}
-									$checkCount->free();
+	// update the qty
+	switch ($quantity) {
 
+		// if the qty is 0 set it to 1
+		case 0:
 
+			$db_main->query("UPDATE userCardChecklist SET quantity=1 WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
+			$msg = 'You have added card '.$_GET['cardnum'].' to your list';
+			break;
 
-									if($quantity===0){
-																$query = "INSERT INTO userCardChecklist (userid, series, cardnum, quantity) VALUES ($user->id, '".$_GET['series']."', '".$_GET['cardnum']."','1')";
+		// if the qty is 1 set it to 0
+		case 1:
 
-																$stmt = $db_main->prepare($query);
+			$db_main->query("UPDATE userCardChecklist SET quantity=0 WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
+			$msg = 'You have removed card '.$_GET['cardnum'].' to your list';
+			break;
 
-																if ($stmt->execute()) {
-															    	$response['status'] = 'success';
-																		$response['message'] = 'You have added '.$_POST['series'].' card number '.$_POST['cardnum'].' to your checklist!';
-																		$response['qty']= 1;
-																} else {
-																	$response['status'] = 'fail';
-																	$response['message'] = 'Adding card has failed. Please try again or contact web admin';
-																}
+		// if the qty doesn't exist yet, add it and set it to 1
+		case 'none':
+			$db_main->query("INSERT INTO userCardChecklist (userid, series, cardnum, quantity) VALUES ('".$user->id."', '$series', '".$_GET['cardnum']."', 1)");
+			$msg = 'You have added card '.$_GET['cardnum'].' to your list';
+			break;
 
-										}elseif($quantity===1){
-															//remove card if quantity is already 1 because user wants to delete it
-
-																$query = "DELETE FROM userCardChecklist WHERE userid='".$user->id."' and series='".$_GET['series']."' and cardnum='".$_GET['cardnum']."'";
-
-																$stmt = $db_main->prepare($query);
-
-																if ($stmt->execute()) {
-																		$response['status'] = 'success';
-																		$response['message'] = 'You have REMOVED '.$_POST['series'].' card number '.$_POST['cardnum'].' from your checklist. We hope you enjoyed your time with our artwork!';
-																		$response['qty']= 0;
-																} else {
-																	$response['status'] = 'fail';
-																	$response['message'] = 'Removing card has failed. Please try again or contact web admin';
-																}
-
-										}	else {
-											// we shouldn't get quantity that is not 0 or 1 right now...
-										}
-
-
-
-
-
-				}else{
-					// run this else statement if user is not logged in or active subscription
-					print 'you are not logged in or a subscriber!';
-					$response['message'] = 'Adding card has failed. Please try again or contact web admin';
-				}
+		// there was an error, we should only have qty of 0 or 1
+		default:
+			throw new Exception('There was an error updating the card. [0x1]');
+	}
 
 
 
-}else{
-	print 'you are not logged in or a subscriber!';
-	$response['message'] = 'Adding card has failed. Please try again or contact web admin';
+	// get the new qty and set response
+	// we do this in a seperate step for when we have option of other quantities
+	$qty = db1($db_main, "SELECT quantity FROM userCardChecklist WHERE userid='".$user->id."' AND series='".$series."' AND cardnum='".$_GET['cardnum']."' LIMIT 1");
+
+	if($qty === FALSE){
+		throw new Exception('There was an error updating the card.[0x2]');
+	}
+
+	switch($qty){
+		case 0:
+			$error = 0;
+			break;
+		case 1:
+			$error = 0;
+			break;
+		default:
+			throw new Exception('There was an error updating the card.[0x3]');
+
+	}
+
+
+    mysqli_report(MYSQLI_REPORT_ERROR ^ MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
+
+}catch(Exception $e){
+    $error = 1;
+    $msg = $e->getMessage();
 }
 
 
+$json = array(
+    'error'     => $error,
+    'msg'       => $msg,
+	'qty'		=> $qty,
+	'userid'	=> $user->id,
+	'cardnum'	=> $_GET['cardnum'],
+	'series'	=> $series,
+	'quantity'	=> $quantity
+);
 
-echo json_encode($response);
-
-	$db_auth->close();
-	$db_main->close();
-
+$db_main->close();
+$db_auth->close();
+header('Cache-Control: no-cache, must-revalidate');
+header('Content-type: application/json');
+print json_encode($json);
+ob_end_flush();
 ?>

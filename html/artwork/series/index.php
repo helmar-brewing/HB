@@ -235,11 +235,11 @@ print'    </div>
 
             		/* add icon */
 								if($card->quantity > 0){
-									print '<td><img src="'.$protocol.$site.'/img/delete-icon.png" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" class="card-click"></td>';
-								} else{
-									print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" class="card-click"></td>';
-								}
-
+								// 	print '<td><img src="'.$protocol.$site.'/img/delete-icon.png" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" class="card-click"></td>';
+								// } else{
+								// 	print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" class="card-click"></td>';
+								// }
+								//
 
 
 //									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Remove Card</button></td>';
@@ -247,10 +247,10 @@ print'    </div>
 //									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Add Card</button></td>';
 //								}
 
-//								print '<td><i class="fa fa-trash-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
-//							} else{
-//								print '<td><i class="fa fa-user-plus" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
-//							}
+								print '<td><i class="fa fa-check-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+							} else{
+								print '<td><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+							}
 
 
 
@@ -309,7 +309,7 @@ print'
 $db_auth->close();
 $db_main->close();
 ?>
-
+<!--
 <script type="text/javascript">
 
 $(".card-click").click(function(){
@@ -374,54 +374,86 @@ function checklist(s, c){
 
     }; // end function checklist
 
+-->
+<script>
 
-
-function OLDchecklist(s, c){
-
-
-	$.get(
-					 "/artwork/ajax/checklist/index.php",
-					{ series:s, cardnum:c },
-					function( data ) {
-
-						if( data.status == 'success' ) {
-
-							// if(data.qty === '1')
-							if(data.qty === 1){
-								alert("qty = 1");
-									document.getElementById(c).innnerHTML="Remove Card";
-							}else if(data.qty === 0){
-								alert("qty = 2");
-								document.getElementById(c).innnerHTML="Add Card";
-							}else{
-								alert("noooo!!!!");
-								//something really bad happened
-							}
-
-// old using fontawesome
-	//						if(data.qty === 1){
-//									$('#' + c).removeClass('fa fa-user-plus');
-//									$('#' + c).addClass('fa fa-trash-o');
-//							}else if(data.qty === 0){
-//									$('#' + c).removeClass('fa fa-trash-o');
-//									$('#' + c).addClass('fa fa-user-plus');
-
-
-
-						} else {
-							alert("else part...");
-							alert(data.message);
-						}, // this ends the function STATUSdata
-					"json"
-					} // this ends the FUNCTION
-
-
-	.fail(function() {
-		alert('There was an error. ref: ajax fail');
-	}); // this ends the .GET and .fail function
-
-	alert(data.message);
+function checklist(s, c){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/artwork/ajax/checklist/",
+		{ series:s, cardnum:c },
+        function( data ) {
+			if(data.error === 0){
+				if(data.qty === '1'){
+						$('#' + c).removeClass('fa-square-o');
+						$('#' + c).addClass('fa-check-square-o');
+				}else if(data.qty === '0'){
+						$('#' + c).removeClass('fa-check-square-o');
+						$('#' + c).addClass('fa-square-o');
+				} else {
+					alert("else part...");
+				}
+			}else{
+				alert(data.msg);
+			}
+            document.getElementById('fullscreenload').style.display = 'none';
+        },
+        "json"
+    )
+    .fail(function() {
+        alert('There was an error, refresh the page.');
+    });
 }
+
+
+
+//
+//
+//
+// function checklist(s, c){
+//
+//
+// 	$.get(
+// 					 "/artwork/ajax/checklist/index.php",
+// 					{ series:s, cardnum:c },
+// 					function( data ) {
+//
+// 						// if( data.status == 'success' ) {
+// 						//
+// 						// 	// if(data.qty === '1')
+// 						// 	if(data.qty === 1){
+// 						// 		alert("qty = 1");
+// 						// 			document.getElementById(c).innnerHTML="Remove Card";
+// 						// 	}else if(data.qty === 0){
+// 						// 		alert("qty = 2");
+// 						// 		document.getElementById(c).innnerHTML="Add Card";
+// 						// 	}else{
+// 						// 		alert("noooo!!!!");
+// 						// 		//something really bad happened
+// 						// 	}
+//
+// // old using fontawesome
+// 						if(data.qty === 1){
+// 								$('#' + c).removeClass('fa-square-o');
+// 								$('#' + c).addClass('fa-check-square-o');
+// 						}else if(data.qty === 0){
+// 								$('#' + c).removeClass('fa-check-square-o');
+// 								$('#' + c).addClass('fa-square-o');
+// 						} else {
+// 							alert("else part...");
+// 							alert(data.message);
+// 						} // this ends the function STATUSdata
+// 					},
+// 					"json"
+// 				) // this ends the FUNCTION
+//
+//
+// 	.fail(function() {
+// 		alert('There was an error. ref: ajax fail');
+// 	}); // this ends the .GET and .fail function
+//
+// 	alert(data.message);
+// }
 
 
 
