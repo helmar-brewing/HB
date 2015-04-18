@@ -235,9 +235,9 @@ print'    </div>
 
             		/* add icon */
 								if($card->quantity > 0){
-									print '<td><img src="'.$protocol.$site.'/img/delete-icon.png" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'"></td>';
+									print '<td><img src="'.$protocol.$site.'/img/delete-icon.png" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" id="card-click"></td>';
 								} else{
-									print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'"></td>';
+									print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" id="card-click"></td>';
 								}
 
 
