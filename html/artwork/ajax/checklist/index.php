@@ -58,40 +58,27 @@ try{
 	// get current qty
 	$quantity = db1($db_main, "SELECT quantity FROM userCardChecklist WHERE userid='".$user->id."' AND series='$series' and cardnum='".$_GET['cardnum']."' LIMIT 1");
 
-	// if $quantity is false, it doesn't exist yet, but we can't pass FALSE to the switch
-	if($quantity === FALSE){
+	if($quantity === false){
 		$quantity = 'none';
 	}
 
 
 	// update the qty
-	switch ($quantity) {
 
+	if($quantity === '0'){
 		// if the qty is 0 set it to 1
-		case 0:
-
-			$db_main->query("UPDATE userCardChecklist SET quantity=1 WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
-			$msg = 'You have added card '.$_GET['cardnum'].' to your list';
-			break;
-
+		$db_main->query("UPDATE userCardChecklist SET quantity=1 WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
+		$msg = 'You have added card '.$_GET['cardnum'].' to your list';
+	}elseif($quantity === '1'){
 		// if the qty is 1 set it to 0
-		case 1:
-
-			$db_main->query("UPDATE userCardChecklist SET quantity=0 WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
-			$msg = 'You have removed card '.$_GET['cardnum'].' to your list';
-			break;
-
-		// if the qty doesn't exist yet, add it and set it to 1
-		case 'none':
-			$db_main->query("INSERT INTO userCardChecklist (userid, series, cardnum, quantity) VALUES ('".$user->id."', '$series', '".$_GET['cardnum']."', 1)");
-			$msg = 'You have added card '.$_GET['cardnum'].' to your list';
-			break;
-
-		// there was an error, we should only have qty of 0 or 1
-		default:
-			throw new Exception('There was an error updating the card. [0x1]');
+		$db_main->query("UPDATE userCardChecklist SET quantity=0 WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
+		$msg = 'You have removed card '.$_GET['cardnum'].' to your list';
+	}elseif($quantity === 'none'){
+		$db_main->query("INSERT INTO userCardChecklist (userid, series, cardnum, quantity) VALUES ('".$user->id."', '$series', '".$_GET['cardnum']."', 1)");
+		$msg = 'You have added card '.$_GET['cardnum'].' to your list';
+	}else{
+		throw new Exception('There was an error updating the card. [0x1]');
 	}
-
 
 
 	// get the new qty and set response
@@ -126,11 +113,7 @@ try{
 $json = array(
     'error'     => $error,
     'msg'       => $msg,
-	'qty'		=> $qty,
-	'userid'	=> $user->id,
-	'cardnum'	=> $_GET['cardnum'],
-	'series'	=> $series,
-	'quantity'	=> $quantity
+	'qty'		=> $qty
 );
 
 $db_main->close();
