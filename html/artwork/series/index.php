@@ -235,9 +235,9 @@ print'    </div>
 
             		/* add icon */
 								if($card->quantity > 0){
-									print '<td><img src="'.$protocol.$site.'/img/delete-icon.png" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" id="card-click"></td>';
+									print '<td><img src="'.$protocol.$site.'/img/delete-icon.png" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" class="card-click"></td>';
 								} else{
-									print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" id="card-click"></td>';
+									print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" class="card-click"></td>';
 								}
 
 
@@ -312,12 +312,12 @@ $db_main->close();
 
 <script type="text/javascript">
 
-$("#card-click").click(function(){
+$(".card-click").click(function(){
 		var cardNum = $(this).data("cardnum");
 		var series = $(this).data("series");
 	//	var cardid = this.id;
 
-	alert("you made it");
+//	alert("you made it");
 
 		$.ajax({
               type: "GET",                                 // If you want to send information to the PHP file your calling, do you want it to be POST or GET. Just get rid of this if your not sending data to the file
