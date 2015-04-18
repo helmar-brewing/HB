@@ -235,10 +235,17 @@ print'    </div>
 
             		/* add icon */
 								if($card->quantity > 0){
-									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Remove Card</button></td>';
+									print '<td><img src="'.$protocol.$site.'/img/delete-icon.png" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'"></td>';
 								} else{
-									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Add Card</button></td>';
+									print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'"></td>';
 								}
+
+
+
+//									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Remove Card</button></td>';
+//								} else{
+//									print '<td><button type="button" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'">Add Card</button></td>';
+//								}
 
 //								print '<td><i class="fa fa-trash-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
 //							} else{
@@ -305,10 +312,44 @@ $db_main->close();
 
 <script type="text/javascript">
 
+$(".card-click").click(function(){
+		var cardNum = $(this).data("cardnum");
+		var series = $(this).data("series");
+		var cardid = this.id;
+
+
+		$.ajax({
+              type: "GET",                                 // If you want to send information to the PHP file your calling, do you want it to be POST or GET. Just get rid of this if your not sending data to the file
+            	url: "/artwork/ajax/checklist/",
+						//  url: "testAdd.php",                             // The location of the PHP file your calling
+              data: "series=" + series + "&cardnum=" + cardNum,           // The information your passing in the variable1=value1&variable2=value2 pattern
+              success: function( data ) {
+
+			//	  console.log(data);  // message in php file had JSON variable
+				var data = $.parseJSON(data);  // message in php file had JSON variable
+
+				if( data.status == 'success' ) {
+					//alert(data.message);
+					if(data.qty === 1){
+						$('#' + cardid).attr('src','delete-icon.png'); // update image picture
+					}else{
+						$('#' + cardid).attr('src','delete-icon.png');
+					}
+			//		document.getElementById("" + cardid + "").className = "class-delete";
+			//		$('#' + cardid).addclass("card-delete");
+				} else {
+					alert(data.message);
+				}
+			}   // When you get the information, what to do with it. In this case, an alert
+            });
+
+      });
+
+
 function checklist(s, c){
 		$.ajax({
-              type: "GET",  
-              url: "/artwork/ajax/checklist/",     
+              type: "GET",
+              url: "/artwork/ajax/checklist/",
               data: { series:s, cardnum:c },
               success: function( data ) {
 				var data = $.parseJSON(data);  // message in php file had JSON variable
@@ -372,8 +413,8 @@ function OLDchecklist(s, c){
 						}, // this ends the function STATUSdata
 					"json"
 					} // this ends the FUNCTION
-					
-	
+
+
 	.fail(function() {
 		alert('There was an error. ref: ajax fail');
 	}); // this ends the .GET and .fail function
