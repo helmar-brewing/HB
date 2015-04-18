@@ -317,7 +317,7 @@ $(".card-click").click(function(){
 		var series = $(this).data("series");
 	//	var cardid = this.id;
 
-//	alert("you made it");
+	alert("you made it");
 
 		$.ajax({
               type: "GET",                                 // If you want to send information to the PHP file your calling, do you want it to be POST or GET. Just get rid of this if your not sending data to the file
