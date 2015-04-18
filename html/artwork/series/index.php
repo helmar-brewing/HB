@@ -312,15 +312,16 @@ $db_main->close();
 
 <script type="text/javascript">
 
-$(".card-click").click(function(){
+$("#card-click").click(function(){
 		var cardNum = $(this).data("cardnum");
 		var series = $(this).data("series");
-		var cardid = this.id;
+	//	var cardid = this.id;
 
+	alert("you made it");
 
 		$.ajax({
               type: "GET",                                 // If you want to send information to the PHP file your calling, do you want it to be POST or GET. Just get rid of this if your not sending data to the file
-            	url: "/artwork/ajax/checklist/",
+            	url: "/artwork/ajax/checklist/index.php",
 						//  url: "testAdd.php",                             // The location of the PHP file your calling
               data: "series=" + series + "&cardnum=" + cardNum,           // The information your passing in the variable1=value1&variable2=value2 pattern
               success: function( data ) {
