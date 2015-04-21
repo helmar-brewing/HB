@@ -1,7 +1,5 @@
 [![Deployment status from dploy.io](https://helmar.dploy.io/badge/23779029970145/26313.png)](http://helmar.dploy.io)
 
-[![Join the chat at https://gitter.im/iamstev/HB](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/iamstev/HB?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 ## Checking for subscription
 
 You have to add the check subscription line right below the check login line.
