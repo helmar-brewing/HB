@@ -1,5 +1,7 @@
 ## Checking for subscription
 
+[![Join the chat at https://gitter.im/iamstev/HB](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/iamstev/HB?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 You have to add the check subscription line right below the check login line.
 ```php
