@@ -47,40 +47,8 @@
     }
 
 
-    ul{
-        @include clearfix;
-    }
-    li{
-        @include span-columns(3);
-        margin-bottom:2em;
-        float:left;
-        @include omega(4n);
-        figure{
-            display:block;
-            margin:0;
-            width:100%;
-            padding:120% 0 0 0;
-            background-repeat: no-repeat;
-            border-radius: 5px;
-            box-shadow: 0 5px 5px -2px #888888;
-        }
-        p{
-            font-size:.8em;
-            text-align:center;
-            background-color:#DDD;
-            border-bottom:1px solid #BBB;
-            border-top:1px solid white;
-            margin:10px 0 0 0;
-            border-radius:3px;
-        }
-    }
-    @include media($large-screen) {
-        li{
-            p{
-                font-size:1.4em;
-            }
-        }
-    }
+
+    
     .series_images{
         @include clearfix;
         img{

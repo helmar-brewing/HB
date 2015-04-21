@@ -47,6 +47,16 @@
         display:block;
         margin:1em auto;
     }
+    p.nameplate{
+        font-size:.8em;
+        font-family:$helvetica;
+        text-align:center;
+        background-color:#DDD;
+        border-bottom:1px solid #BBB;
+        border-top:1px solid white;
+        margin:10px 0;
+        border-radius:3px;
+    }
 }
 
 
