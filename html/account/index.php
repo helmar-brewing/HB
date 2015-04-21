@@ -63,8 +63,8 @@ switch($user->login()){
 
 		$cust = Stripe_Customer::retrieve($user->stripeID);
 
-		if($cust['cards']['total_count'] !== 0){
-			$card_info = $cust->cards->data;
+		if($cust['sources']['total_count'] !== 0){
+			$card_info = $cust->sources->data;
 			$card_num = '&#183;&#183;&#183;&#183; &#183;&#183;&#183;&#183; &#183;&#183;&#183;&#183; '.$card_info[0]['last4'];
 			$brand = $card_info[0]['brand'];
 			$exp_month = sprintf('%02d', $card_info[0]['exp_month']);
@@ -250,24 +250,24 @@ print'
 				<form action="" method="POST" id="payment-form">
 					<div class="payment-errors" id="payment-errors">'.$msg.'</div>
 					<label>Card Number</label>
-					<input type="text" size="20" id="card_number" data-stripe="number" value="'.$card_num.'" />
+					<input type="text" maxlength="30" id="card_number" data-stripe="number" value="'.$card_num.'" />
+					<fieldset class="exp">
+						<label>Expiration</label>
+						<input type="text" placeholder="MM" maxlength="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/><span>/</span><input type="text" placeholder="YYYY" maxlength="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
+					</fieldset>
 					<fieldset class="cvc">
 						<label>CVC</label>
-						<input type="text" size="4" id="cvc" data-stripe="cvc"/>
-					</fieldset>
-					<fieldset class="exp">
-					<label>Expiration (MM/YYYY)</label>
-						<input type="text" size="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/>
-						<span> / </span>
-						<input type="text" size="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
+						<input type="text" maxlength="4" id="cvc" data-stripe="cvc"/>
 					</fieldset>
 					<button id="add_update_card" type="submit">'.$card_button_text.'</button>
 				</form>
-				<button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
 			</div>
 		</section>
 	</div>
 ';
+
+
+// <button id="delete_card" onclick="deleteCard()"';if($delete_disabled){print' disabled';}print'>Delete Card</button>
 
 /* FOOTER */ require('layout/footer1.php');
 
