@@ -19,7 +19,7 @@ require_once('libraries/stripe/Stripe.php');
 Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
-$currentpage = 'artwork/';
+$currentpage = 'artwork/'.$_GET['series'].'/';
 
 // Card Series Variables
 $series_id = $_GET['series'];
