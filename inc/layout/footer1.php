@@ -21,26 +21,26 @@
                 <ul>
                     <li><h3>Account</h3></li>
     ';
-    if(isset($user)){
-        if( $user->login() == 1 || $user->login() == 2 ){
-            print'
-                        <li><a href="'.$protocol.$site.'/account/logout">Log out</a></li>
-            ';
-        }else{
-            print'
-                        <li><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Login</a></li>
-                        <li><a href="'.$protocol.$site.'/account/register">Register</a></li>
-            ';
-        }
-    }else{
-        print'
-                        <li><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Login</a></li>
-                        <li><a href="'.$protocol.$site.'/account/register">Register</a></li>
-        ';
-    }
+    // if(isset($user)){
+    //     if( $user->login() == 1 || $user->login() == 2 ){
+    //         print'
+    //                     <li><a href="'.$protocol.$site.'/account/logout">Log out</a></li>
+    //         ';
+    //     }else{
+    //         print'
+    //                     <li><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Login</a></li>
+    //                     <li><a href="'.$protocol.$site.'/account/register">Register</a></li>
+    //         ';
+    //     }
+    // }else{
+    //     print'
+    //                     <li><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Login</a></li>
+    //                     <li><a href="'.$protocol.$site.'/account/register">Register</a></li>
+    //     ';
+    // }
     print'
-                    <li><a href="'.$protocol.$site.'/account/">Manage Account</a>
-                    <li><a href="">Subscription</a></li>
+            <!--        <li><a href="'.$protocol.$site.'/account/">Manage Account</a>
+                    <li><a href="">Subscription</a></li> -->
                 <!--    <li><a href="">Terms and Conditions</a></li>    -->
                 <!--    <li><a href="">Privacy Policy</a></li>          -->
                 </ul>

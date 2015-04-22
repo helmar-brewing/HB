@@ -270,10 +270,11 @@ print'    </div>
 		/* END code if user is logged in, but not paid subscription */
     }else{
 		/* do this if user is not logged in */
-		print '<a href="'.$protocol.$site.'/account/register/"><img class="centered" src="'.$protocol.$site.'/img/checklist-sample.jpg"></a>';    }
+	//	print '<a href="'.$protocol.$site.'/account/register/"><img class="centered" src="'.$protocol.$site.'/img/checklist-sample.jpg"></a>';
+	}
 }else{
 		/* do this if user is not logged in */
-		print '<a href="'.$protocol.$site.'/account/register/"><img class="centered" src="'.$protocol.$site.'/img/checklist-sample.jpg"></a>';
+	//	print '<a href="'.$protocol.$site.'/account/register/"><img class="centered" src="'.$protocol.$site.'/img/checklist-sample.jpg"></a>';
 }
 
 print'
