@@ -8,10 +8,15 @@ function auctions(p){
                 // add next row
                 $('#auction_list').append(data.content);
                 //change button
-                $('#auction_button').unbind();
-                $('#auction_button').click(function() {
-                    auctions(data.nextpage);
-                });
+                if(data.nextpage === false){
+                    $('#auction_button').unbind();
+                    document.getElementById('auction_button').innerHTML = 'All Actions Loaded';
+                }else{
+                    $('#auction_button').unbind();
+                    $('#auction_button').click(function() {
+                        auctions(data.nextpage);
+                    });
+                }
             }else{
                 alert('There was an error. ref: ebay error');
             }

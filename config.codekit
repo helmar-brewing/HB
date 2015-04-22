@@ -284,28 +284,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/html\/images\/cardPics\/R319-Helmar_375_Back.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 416635,
-		"inputAbbreviatedPath": "\/html\/images\/cardPics\/R319-Helmar_375_Back.jpg",
-		"outputAbbreviatedPath": "\/html\/images\/cardPics\/R319-Helmar_375_Back.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/images\/cardPics\/R319-Helmar_375_Front.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 398733,
-		"inputAbbreviatedPath": "\/html\/images\/cardPics\/R319-Helmar_375_Front.jpg",
-		"outputAbbreviatedPath": "\/html\/images\/cardPics\/R319-Helmar_375_Front.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/html\/img\/about-card.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -335,17 +313,6 @@
 		"initialSize": 79340,
 		"inputAbbreviatedPath": "\/html\/img\/checklist-sample.jpg",
 		"outputAbbreviatedPath": "\/html\/img\/checklist-sample.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/delete-icon.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 717,
-		"inputAbbreviatedPath": "\/html\/img\/delete-icon.png",
-		"outputAbbreviatedPath": "\/html\/img\/delete-icon.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -412,6 +379,17 @@
 		"initialSize": 94440,
 		"inputAbbreviatedPath": "\/html\/img\/login-card.jpg",
 		"outputAbbreviatedPath": "\/html\/img\/login-card.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/mandel.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 377948,
+		"inputAbbreviatedPath": "\/html\/img\/mandel.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/mandel.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -492,6 +470,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/inc\/keys-dev.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/inc\/keys-stev.co.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/inc\/keys-stev.co.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
