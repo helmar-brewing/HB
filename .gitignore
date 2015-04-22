@@ -2,4 +2,4 @@
 .DS_Store
 html/root_settings.php
 inc/keys.php
-inc/keys-dev.php
+inc/keys*.php
