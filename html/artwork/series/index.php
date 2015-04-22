@@ -19,11 +19,10 @@ require_once('libraries/stripe/Stripe.php');
 Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
-$currentpage = 'artwork/'.$_GET['series'].'/';
-
-// Card Series Variables
+$currentpage = 'artwork/series/'.$_GET['series'].'/';
 $series_id = $_GET['series'];
-//$series_id = 'R319';
+
+
 
 $series_sql = $db_main->query("SELECT * FROM series_info WHERE series_id='".$series_id."' LIMIT 1");
 if($series_sql !== FALSE){
@@ -39,7 +38,6 @@ if($series_sql !== FALSE){
 } else {
   // need error handling - don't load page at all!
 }
-
 $series_sql->free();
 
 
@@ -234,19 +232,11 @@ print'    </div>
 
 
             		/* add icon */
-								if($card->quantity > 0){
-								// 	print '<td><img src="'.$protocol.$site.'/img/delete-icon.png" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" class="card-click"></td>';
-								// } else{
-								// 	print '<td><img src="'.$protocol.$site.'/img/add_new_icon.gif" alt="'.$card->series.'-'.$card->cardnum.'" data-series="'.$card->series.'" data-cardnum="'.$card->cardnum.'" class="card-click"></td>';
-								// }
-								//
-
-								print '<td><i class="fa fa-check-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
-							} else{
-								print '<td><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
-							}
-
-
+					if($card->quantity > 0){
+						print '<td><i class="fa fa-check-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+					} else{
+						print '<td><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+					}
 
 
             		/* end row */
@@ -277,13 +267,6 @@ print'    </div>
       }
 
 
-
-
-
-
-
-
-
 		/* END code if user is logged in, but not paid subscription */
     }else{
 		/* do this if user is not logged in */
@@ -303,74 +286,8 @@ print'
 $db_auth->close();
 $db_main->close();
 ?>
-<!--
-<script type="text/javascript">
 
-$(".card-click").click(function(){
-		var cardNum = $(this).data("cardnum");
-		var series = $(this).data("series");
-	//	var cardid = this.id;
-
-	alert("you made it");
-
-		$.ajax({
-              type: "GET",                                 // If you want to send information to the PHP file your calling, do you want it to be POST or GET. Just get rid of this if your not sending data to the file
-            	url: "/artwork/ajax/checklist/index.php",
-						//  url: "testAdd.php",                             // The location of the PHP file your calling
-              data: "series=" + series + "&cardnum=" + cardNum,           // The information your passing in the variable1=value1&variable2=value2 pattern
-              success: function( data ) {
-
-			//	  console.log(data);  // message in php file had JSON variable
-				var data = $.parseJSON(data);  // message in php file had JSON variable
-
-				if( data.status == 'success' ) {
-					//alert(data.message);
-					if(data.qty === 1){
-						$('#' + cardid).attr('src','delete-icon.png'); // update image picture
-					}else{
-						$('#' + cardid).attr('src','delete-icon.png');
-					}
-			//		document.getElementById("" + cardid + "").className = "class-delete";
-			//		$('#' + cardid).addclass("card-delete");
-				} else {
-					alert(data.message);
-				}
-			}   // When you get the information, what to do with it. In this case, an alert
-            });
-
-      });
-
-
-function checklist(s, c){
-		$.ajax({
-              type: "GET",
-              url: "/artwork/ajax/checklist/",
-              data: { series:s, cardnum:c },
-              success: function( data ) {
-				var data = $.parseJSON(data);  // message in php file had JSON variable
-
-						if( data.status == 'success' ) {
-								if(data.qty === 1){
-									alert("qty = 1");
-										document.getElementById(c).innnerHTML="Remove Card";
-								}else if(data.qty === 0){
-									alert("qty = 0");
-									document.getElementById(c).innnerHTML="Add Card";
-								}else{
-									alert("noooo!!!!");
-									//something really bad happened
-								}
-						} else {
-							alert(data.message);
-						} // end IF data success
-			}   // end success function
-          }); // end AJAX
-
-    }; // end function checklist
-
--->
 <script>
-
 function checklist(s, c){
     document.getElementById('fullscreenload').style.display = 'block';
     $.get(
@@ -398,57 +315,4 @@ function checklist(s, c){
         alert('There was an error, refresh the page.');
     });
 }
-
-
-
-//
-//
-//
-// function checklist(s, c){
-//
-//
-// 	$.get(
-// 					 "/artwork/ajax/checklist/index.php",
-// 					{ series:s, cardnum:c },
-// 					function( data ) {
-//
-// 						// if( data.status == 'success' ) {
-// 						//
-// 						// 	// if(data.qty === '1')
-// 						// 	if(data.qty === 1){
-// 						// 		alert("qty = 1");
-// 						// 			document.getElementById(c).innnerHTML="Remove Card";
-// 						// 	}else if(data.qty === 0){
-// 						// 		alert("qty = 2");
-// 						// 		document.getElementById(c).innnerHTML="Add Card";
-// 						// 	}else{
-// 						// 		alert("noooo!!!!");
-// 						// 		//something really bad happened
-// 						// 	}
-//
-// // old using fontawesome
-// 						if(data.qty === 1){
-// 								$('#' + c).removeClass('fa-square-o');
-// 								$('#' + c).addClass('fa-check-square-o');
-// 						}else if(data.qty === 0){
-// 								$('#' + c).removeClass('fa-check-square-o');
-// 								$('#' + c).addClass('fa-square-o');
-// 						} else {
-// 							alert("else part...");
-// 							alert(data.message);
-// 						} // this ends the function STATUSdata
-// 					},
-// 					"json"
-// 				) // this ends the FUNCTION
-//
-//
-// 	.fail(function() {
-// 		alert('There was an error. ref: ajax fail');
-// 	}); // this ends the .GET and .fail function
-//
-// 	alert(data.message);
-// }
-
-
-
 </script>
