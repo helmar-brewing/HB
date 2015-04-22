@@ -61,7 +61,7 @@ print'
 
 				print'
 					<li>
-						<a style="background:url(\''.$cover_img.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$protocol.$site.'/artwork/series/?series='.$series_id.'/">
+						<a style="background:url(\''.$cover_img.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$protocol.$site.'/artwork/series/?series='.$series_id.'">
 							<span>
 								<figure style="background:url(\''.$cover_img.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
 							</span>
