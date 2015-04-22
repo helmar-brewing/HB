@@ -1,0 +1,11 @@
+.about{
+    .images-wrapper{
+        @include background(url('/img/about-card.jpg'));
+        background-size: cover;
+        background-position: top;
+        @include media(max-width $large-screen){
+            background-position: top;
+            background-size: cover;
+        }
+    }
+}

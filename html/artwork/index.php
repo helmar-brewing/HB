@@ -42,7 +42,7 @@ print'
 		<div class="artwork">
 			<h4>Artwork</h4>
 			<h1>Helmar Artwork</h1>
-		</div>';
+		';
 
 		if($series_sql !== FALSE){
 
@@ -53,24 +53,22 @@ print'
 		    $series_sql->data_seek(0);
 		    while($seriesinfo = $series_sql->fetch_object()){
 
-		      $series_id = $seriesinfo->series_id;
-		      $series_name = $seriesinfo->series_name;
-		      $cover_img = $seriesinfo->cover_img;
-
-					//	<figure style="background:url(\''.$protocol.$site.'/images/cardPics/thumb/R319-Helmar_188_Front.jpg\'); background-size: cover;background-position: top center;"></figure>
-					print '
-									<li>
-											<a href="'.$protocol.$site.'/artwork/series/'.$series_id.'/">
-													<img src="'.$cover_img.'">
-													<p>'.$series_name.'</p>
-											</a>
-									</li>
-						';
+				$series_id = $seriesinfo->series_id;
+				$series_name = $seriesinfo->series_name;
+				$cover_img = $seriesinfo->cover_img;
 
 
 
-
-
+				print'
+					<li>
+						<a style="background:url(\''.$cover_img.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$protocol.$site.'/artwork/series/'.$series_id.'/">
+							<span>
+								<figure style="background:url(\''.$cover_img.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
+							</span>
+						</a>
+						<p class="nameplate">'.$series_name.'</p>
+					</li>
+				';
 		    }
 
 				print '
@@ -80,6 +78,8 @@ print'
 		} else {
 		  // need error handling - don't load page at all!
 		}
+
+		print'</div>';
 
 
 

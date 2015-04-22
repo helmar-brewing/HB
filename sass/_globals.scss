@@ -1,0 +1,11 @@
+a.link-button{
+    @include button(flat, $base-accent-color);
+}
+
+
+.centered{
+    display:block;
+    clear:both;
+    margin:1em auto;
+    max-width:100%;
+}

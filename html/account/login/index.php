@@ -3,24 +3,21 @@ ob_start();
 
 /* ROOT SETTINGS */ require($_SERVER['DOCUMENT_ROOT'].'/root_settings.php');
 
-/* FORCE HTTPS FOR THIS PAGE */ if($use_https === TRUE){if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){header("Location: https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);exit;}}
-
-/* SET PROTOCOL FOR REDIRECT */ if($use_https === TRUE){$protocol='https';}else{$protocol='http';}
+/* FORCE HTTPS FOR THIS PAGE */ forcehttps();
 
 /* WHICH DATABASES DO WE NEED */
-	$db2use = array(
-		'db_auth' 	=> TRUE,
-		'db_main'	=> TRUE
-	);
-//
+$db2use = array(
+	'db_auth' 	=> TRUE,
+	'db_main'	=> TRUE
+);
 
 /* GET KEYS TO SITE */ require($path_to_keys);
 
 /* LOAD FUNC-CLASS-LIB */
-	require_once('classes/phnx-user.class.php');
-//
+require_once('classes/phnx-user.class.php');
 
 /* PAGE VARIABLES */
+$currentpage = 'account/';
 if(isset($_POST['redir'])){
 	$redir = $_POST['redir'];
 }else{
@@ -28,131 +25,132 @@ if(isset($_POST['redir'])){
 }
 $password = $_POST['pass'];
 $username =  strtolower($_POST['username']);
-//
 
 
+// create user object
 $user = new phnx_user;
-$user->checklogin(2);
 
+// check user login status
+$user->checklogin(1);
 
-if($user->login() === 1 || $user->login() === 2){
+if($user->login() === 1){
 	$user->regen();
 	$db_auth->close();
 	$db_main->close();
 	if(isset($redir)){
-		header("Location: $protocol://$site/$redir",TRUE,303);
+		header('Location: '.$protocol.$site.'/'.$redir,TRUE,303);
+        ob_end_flush();
 		exit;
 	}else{
-		header("Location: $protocol://$site",TRUE,303);
+		header('Location: '.$protocol.$site,TRUE,303);
+        ob_end_flush();
 		exit;
 	}
 }else{
 
-	
-	// 0. CHECK IF SUBMITTED
-	if(empty($_POST)){
-		$go = FALSE;
-		$show = TRUE;
-	}else{
-		$go = TRUE;
-		$show = FALSE;
-	}
+    $i=0;
+    switch($i){
+        case 0:
+
+            // Check if submitted
+            if(empty($_POST)){
+                break;
+            }
+
+            // Check for blanks
+            if($username == ''){
+                $msg = 'You did not enter a username.';
+                break;
+            }
+            if($_POST['pass'] == ''){
+                $msg = 'You did not enter a password.';
+                break;
+            }
+
+            // Check username
+            if($user->exists($username) !== TRUE){
+                $msg = 'The username you entered does not exist.';
+                break;
+            }
+
+            // Check password
+            $user->username = $username;
+            if($user->comparepass() !== TRUE){
+                $msg = 'You entered an incorrect password.';
+                break;
+            }
+
+            // Do the login
+            $user->newlogin();
+            $db_auth->close();
+            $db_main->close();
+            if(isset($redir)){
+                header('Location: '.$protocol.$site.'/'.$redir,TRUE,303);
+                ob_end_flush();
+                exit;
+                break;
+            }else{
+                header('Location: '.$protocol.$site,TRUE,303);
+                ob_end_flush();
+                exit;
+                break;
+            }
+
+        // What Happened?
+        default:
+            $msg = 'You were not logged in. Please try again.';
+    }
 
 
-	// 1. CHECK FOR BLANKS
-	if($go){
-		if($username == ''){
-			$go = FALSE;
-			$db_auth->close();
-			$db_main->close();
-			unset($username,$password);
-			$error = '<p>You did not enter a username.</p>';
-			$show = TRUE;
-		}elseif($password == ''){
-			$go = FALSE;
-			$db_auth->close();
-			$db_main->close();
-			unset($username,$password);
-			$error = '<p>You did not enter a password.</p>';
-			$show = TRUE;
-		}
-	}
-	
-	
-	// 2. CHECK USERNAME
-	if($go){
-		if(!$user->exists($username)){
-			$go = FALSE;
-			$db_auth->close();
-			$db_main->close();
-			unset($username,$password);
-			$error = '<p>The username you entered does not exist.</p>';
-			$show = TRUE;
-		}
-	}
-	
-	
-	// 3. CHECK PASSWORD
-	if($go){
-		$user->username = $username;
-		if($user->comparepass() === TRUE){
-			$go = TRUE;
-		}else{
-			$go = FALSE;
-			$db_auth->close();
-			$db_main->close();
-			unset($username,$password);
-			$error = '<p>You entered an incorrect password.</p>';
-			$show = TRUE;
-		}
-	}
-	
 
-	// 6. DO THE LOGIN
-	if($go){
-		$user->newlogin();
-		$db_auth->close();
-		if(isset($redir)){
-			header("Location: $protocol://$site/$redir",TRUE,303);
-			exit;
-		}else{
-			header("Location: $protocol://$site",TRUE,303);
-			exit;
-		}
-	}
-	
+    ob_end_flush();
+    /* <HEAD> */ $head=''; // </HEAD>
+    /* PAGE TITLE */ $title='Helmar Brewing Co';
+    /* HEADER */ require('layout/header0.php');
 
-	// 7. SHOW PAGE IF NO LOGIN
-	if($show){
-		/* <HEAD> */ $head=''; // </HEAD>
-		/* PAGE TITLE */ $title='Helmar - Log in';
-		include 'layout/header.php';
-		/* FOCUS CURSOR */ print'<script type="text/javascript">$(document).ready(function(){$("#username").focus()});</script>';
-		ob_end_flush();
+
+    /* HEADER */ require('layout/header2.php');
+    /* HEADER */ require('layout/header1.php');
+
+    /* FOCUS CURSOR */ print'<script type="text/javascript">$(document).ready(function(){$("#username").focus()});</script>';
+
+    print'
+		<div class="sideimage login">
+			<div class="images-wrapper"></div>
+			<div class="side-image-content">
+				<h4>Account</h4>
+				<h1>Log in</h1>
+		        <form method="post">
+    ';
+    if(isset($redir)){
+        print'
+		            <input type="hidden" name="redir" value="'.$redir.'" />
+        ';
+    }
+	if($msg != ''){
 		print'
-			<div class="page-content">
-				<div class="login">
-					<h2>Log in</h2>
-					<form method="post">
-						';if(isset($redir)){print'<input type="hidden" name="redir" value="'.$redir.'" />';}print'
-						<div class="register-left">
-							<div class="grey-seal">';if($error == ''){print'<div class="push"><p>You can use your facebook account to log in with a single click.</p></div><div class="facebook-button"><a href="https://'.$site.'/account/login/facebook/';if(isset($redir)){print'?redir='.$redir;}print'">Log in w/ Facebook</a></div>';}print''.$error.'</div>
-						</div>
-						<div class="register-right">
-							<div class="push">
-								<label class="nudge" for="username">USERNAME</label>
-								<input type="text" name="username" tabindex="1" id="username" />
-								<label for="password">Password</label>
-								<input type="password" name="pass" tabindex="2" id="password" />
-							</div>
-							<input type="submit" value="Login" tabindex="3" />
-						</div>
-						<div class="login-footer">Need an account? <a href="'.$protocol.'://'.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.'://'.$site.'/account/recover/">Account Recovery</a></div>
-					</form>
-				</div>
-			</div>
+					<p>'.$msg.'</p>
 		';
-		include 'layout/footer.php';
 	}
+    print'
+		            <label for="username">Username</label>
+		            <input type="text" name="username" tabindex="1" id="username" />
+		            <label for="password">Password</label>
+		            <input type="password" name="pass" tabindex="2" id="password" />
+		            <input type="submit" value="Login" tabindex="3" />
+		            <div class="login-footer">
+		                Need an account? <a href="'.$protocol.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.$site.'/account/recover/">Account Recovery</a>
+		            </div>
+		        </form>
+			</div>
+		</div>
+    ';
+
+    /* FOOTER */ require('layout/footer1.php');
+
+    $db_auth->close();
+    $db_main->close();
+
 }
+
 ?>

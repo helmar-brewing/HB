@@ -1,0 +1,200 @@
+/* VERSION 1.0.4 */
+
+/* DEFAULTS */
+
+$phnx_default_width:		400px;
+$phnx_default_top_margin:	50px;
+
+$phnx_load_img_width:		64px;
+$phnx_load_img_height:		64px;
+
+
+/* COMPONENTS */
+.stop-scroll{
+    overflow: hidden;
+}
+.blackout{
+	display: none;
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: black;
+	z-index:9001;
+	-moz-opacity: 0.7;
+	opacity:.70;
+	filter: alpha(opacity=70);
+}
+#fullscreenload{
+	display:none;
+	z-index:9997;
+	span{
+		display: block;
+		position: fixed;
+		top: 0%;
+		left: 0%;
+		width: 100%;
+		height: 100%;
+		background-color: white;
+		z-index:9998;
+		-moz-opacity: 0.7;
+		opacity:.70;
+		filter: alpha(opacity=70);
+	}
+	img{
+		display: block;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: $phnx_load_img_width;
+		height: $phnx_load_img_height;
+		margin: (0- $phnx_load_img_height/2) 0 0 (0 - $phnx_load_img_width/2);
+		z-index:9999;
+	}
+}
+.close{
+	display:block;
+	float:right;
+	height:32px;
+	width:32px;
+	font-size:32px;
+	line-height:32px;
+	position:absolute;
+	top:10px;
+	right:10px;
+	text-align:right;
+}
+
+/* MODAL */
+@mixin -phnx-modal-size($w,$t){
+	@if unitless($w) {
+    	@warn "Assuming #{$w} to be in pixels";
+    	$w: 1px * $w;
+  	}
+  	@if unitless($t) {
+    	@warn "Assuming #{$t} to be in pixels";
+    	$t: 1px * $t;
+  	}
+  	.modal-wrap{
+		width: $w + 20px;
+		margin-left:0-(($w + 20px)/2);
+		top: $t;
+		.modal{
+			min-height:200px;
+		}
+	}
+}
+@function -phnx-modal-scroll-mq($w){
+	@if unitless($w) {
+    	@warn "Assuming #{$w} to be in pixels";
+    	$w: 1px * $w;
+  	}
+	@return ($w+20)/.95;
+}
+@mixin -phnx-modal-scroll-responsive-modal-wrap{
+	.modal-wrap{
+		width:95%;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:20px;
+		left:auto;
+		top:auto;
+		position:relative;
+	}
+}
+
+.modal-holder{
+	@include -phnx-modal-size($phnx_default_width, $phnx_default_top_margin);
+	display: none;
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	z-index:9002;
+	overflow-x: hidden;
+	overflow-y: auto;
+	.modal-wrap{
+		position: relative;
+		left: 50%;
+		z-index: 9003;
+		overflow: visible;
+		padding-bottom:50px;
+	}
+	&.twitter-blue{ .modal-wrap{ .modal{
+		h1{
+			color:$twitter_blue;
+			border-bottom:solid 1px $twitter_blue;
+		}
+		.close{
+			color:$twitter_blue;
+		}
+	}}}
+	&.facebook-blue{ .modal-wrap{ .modal{
+		h1{
+			color:$facebook_blue;
+			border-bottom:solid 1px $facebook_blue;
+		}
+		.close{
+			color:$facebook_blue;
+		}
+	}}}
+	&.red{ .modal-wrap{ .modal{
+		background-color:$c_red;
+		h1{
+			color:white;
+			border-bottom:solid 1px white;
+		}
+		.close{
+			color:white;
+		}
+	}}}
+}
+.modal{
+	position: static;
+	margin: 0;
+	z-index: 9004;
+	padding:10px;
+	border-radius:3px;
+	background-color:white;
+	background-repeat:no-repeat;
+	background-position:center top;
+	box-shadow: 0 10px 15px -5px black;
+	h1{
+		color:black;
+		font-size:32px;
+		line-height:32px;
+		min-height:32px;
+		border-bottom:solid 1px black;
+		margin:0 0 10px 0;
+		padding:0 0 10px 0;
+	}
+	p{
+		line-height: 1.3em;
+		font-size: 1em;
+		margin-bottom: 1em;
+	}
+}
+@media screen and (max-width: -phnx-modal-scroll-mq($phnx_default_width)) {
+	.modal-holder{
+		@include -phnx-modal-scroll-responsive-modal-wrap;
+	}
+}
+
+
+@mixin -phnx-modal($id, $w: $phnx_default_width, $t: $phnx_default_top_margin){
+	#{$id}{
+		@include -phnx-modal-size($w, $t);
+		.modal-wrap{
+			.modal{
+				@content;
+			}
+		}
+	}
+	@media screen and (max-width: -phnx-modal-scroll-mq($w)) {
+		#{$id}{
+			@include -phnx-modal-scroll-responsive-modal-wrap;
+		}
+	}
+}

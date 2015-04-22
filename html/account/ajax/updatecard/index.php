@@ -6,43 +6,41 @@ ob_start();
 
 /* ROOT SETTINGS */ require($_SERVER['DOCUMENT_ROOT'].'/root_settings.php');
 
-/* FORCE HTTPS FOR THIS PAGE */ if($use_https === TRUE){if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){header("Location: https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);exit;}}
+/* FORCE HTTPS FOR THIS PAGE */ forcehttps();
 
 /* WHICH DATABASES DO WE NEED */
-	$db2use = array(
-		'db_auth'		=> TRUE,
-		'db_main'		=> TRUE
-	);
-//
+$db2use = array(
+	'db_auth' 	=> TRUE,
+	'db_main'	=> TRUE
+);
 
 /* GET KEYS TO SITE */ require($path_to_keys);
 
 /* LOAD FUNC-CLASS-LIB */
-	require_once('classes/phnx-user.class.php');
-	require_once('libraries/stripe/Stripe.php');
-//
+require_once('classes/phnx-user.class.php');
+require_once('libraries/stripe/Stripe.php');
 
 /* PAGE VARIABLES */
 $token = $_POST['t'];
-//
+
 
 $user = new phnx_user;
 $user->checklogin(2);
 if($user->login() === 2){
 
-	
-	
+
+
 	$R_userdeets = $db_main->query("SELECT * FROM users WHERE userid = ".$user->id." LIMIT 1");
 	if($R_userdeets !== FALSE){
 		$userdeets = $R_userdeets->fetch_assoc();
 		$R_userdeets->free();
-		
+
 		Stripe::setApiKey($apikey['stripe']['secret']);
-		
+
 		try {
-		
+
 			$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
-			
+
 			if($cust['cards']['total_count'] === 0){
 				$card_info = $cust->cards->create(array("card" => $token));
 				$json = array(
@@ -113,8 +111,8 @@ if($user->login() === 2){
 			'msg' => 'There was an error updating your card. (ref: user pull fail)'
 		);
 	}
-	
-	
+
+
 }else{
 	$json = array(
 		'error' => '2',

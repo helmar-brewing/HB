@@ -1,0 +1,11 @@
+.contact{
+    .images-wrapper{
+        @include background(url('/img/microphone.jpg'));
+        background-size: cover;
+        background-position: bottom;
+        @include media(max-width $large-screen){
+            background-position: top;
+            background-size: cover;
+        }
+    }
+}

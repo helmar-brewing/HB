@@ -3,223 +3,259 @@ ob_start();
 
 /* ROOT SETTINGS */ require($_SERVER['DOCUMENT_ROOT'].'/root_settings.php');
 
-/* FORCE HTTPS FOR THIS PAGE */ if($use_https === TRUE){if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){header("Location: https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);exit;}}
-
-/* SET PROTOCOL FOR REDIRECT */ if($use_https === TRUE){$protocol='https';}else{$protocol='http';}
+/* FORCE HTTPS FOR THIS PAGE */ forcehttps();
 
 /* WHICH DATABASES DO WE NEED */
-	$db2use = array(
-		'db_auth' 	=> TRUE,
-		'db_main'	=> TRUE
-	);
-//
+$db2use = array(
+	'db_auth' 	=> TRUE,
+	'db_main'	=> TRUE
+);
 
 /* GET KEYS TO SITE */ require($path_to_keys);
 
-
 /* LOAD FUNC-CLASS-LIB */
-	require_once('classes/phnx-user.class.php');
-	require_once('libraries/stripe/Stripe.php');
-//
+require_once('classes/phnx-user.class.php');
+require_once('libraries/stripe/Stripe.php');
+Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
 $currentpage = 'account/';
-$redir = $_GET['redir'];
+if(isset($_POST['redir'])){
+	$redir = $_POST['redir'];
+}else{
+	$redir = $_GET['redir'];
+}
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
-$username = $_POST['username'];
-$email = $_POST['email'];
+$username = strtolower($_POST['username']);
+$email = strtolower($_POST['email']);
 $password1 = $_POST['password1'];
 $password2 = $_POST['password2'];
-//
 
 
-
+// create user object
 $user = new phnx_user;
-$user->checklogin(2);
 
-/* <HEAD> */ $head=''; // </HEAD>
-/* PAGE TITLE */ $title='Helmar - Register';
-include 'layout/header.php';
+// check user login status
+$user->checklogin(1);
 
 
-
+// check if logged in
 if($user->login() === 1){
-	$user->regen();
-	$db_auth->close();
-	$db_main->close();
-	header("Location: $protocol://$site/",TRUE,303);
-	exit;
+    $user->regen();
+    $db_auth->close();
+    $db_main->close();
+    if(isset($redir)){
+        header('Location: '.$protocol.$site.'/'.$redir,TRUE,303);
+        ob_end_flush();
+        exit;
+    }else{
+        header('Location: '.$protocol.$site,TRUE,303);
+        ob_end_flush();
+        exit;
+    }
 }else{
-	ob_end_flush();
-	
-	
-	// 0. CHECK TO SEE IF REGISTRATION IS OPEN
-	if($gv_registraion_status == FALSE){
-		$message = 'Registration on this site is closed.';
-		$show = FALSE;
-	}else{
-		if(empty($_POST)){
-			$go = FALSE;
-		}else{
-			$go = TRUE;
-		}
-		$message = '';
-		$show = TRUE;
-	}
-	
-	// 1. CHECK DATA
-	if($go){
-		$username = strtolower($username);
-		$email = strtolower($email);
-		if($username == ''){
-			$go = FALSE;
-			$message .= 'You did not choose a username<br/>';
-		}elseif(strlen($username)<3 || strlen($username)>32){
-			$go = FALSE;
-			$message .= 'Usernames must be between 3 and 32 characters.<br/>';
-		}
-		if(preg_match('/[^a-z0-9.]+/',$username)===1){
-			$go = FALSE;
-			$message .= 'Username can only contain letters and numbers.<br/>';
-		}
-		if($user->exists($username)===TRUE){
-			$go = FALSE;
-			$message .= 'Username already taken<br/>';
-		}
-		if(filter_var($email, FILTER_VALIDATE_EMAIL)){}else{
-			$go = FALSE;
-			$message .= 'You did not enter a valid email address.<br/>';
-		}
-		if(db1($db_main, "SELECT email FROM users WHERE email ='$email' LIMIT 1")){
-			$go = FALSE;
-			$message .= 'A user with that email address already exists. <a href="https://'.$site.'/account/recover/">Account Recovery</a><br/>';
-		}
-		if($password1 == ''){
-			$go = FALSE;
-			$message .= 'You did not enter a password. (passwords, must be at least 8 characters long)<br />';
-		}else{
-			if(strlen($password1)<8){
-				$go = FALSE;
-				$message .= 'Your password must be at least 8 characters long.<br />';
-			}
-			if(preg_match('/[\'\"]+/',$password1)===1){
-				$go = FALSE;
-				$message .= 'Your password may not contain single or double quotes.<br />';
-			}
-			if($password1 != $password2){
-				$go = FALSE;
-				$message .= 'Your password did not match.<br/>';
-			}
-		}
-	}
-	
-	// 2. PROCESS DATA
-	if($go){
-	
-		$salt = mcrypt_create_iv(22, MCRYPT_DEV_URANDOM);
-		$salt = base64_encode($salt);
-		$salt = str_replace('+', '.', $salt);
-		$pepper = md5(uniqid(rand(),true));
-		
-		$saltedHash = crypt($password1, '$2y$11$'.$salt.'$');
-		$pepperedHash = substr($saltedHash,7) . $pepper;
 
-		$emailtoken = substr(md5(uniqid(rand(),true)), 0, 25);
-		
-		//$currentVer = siteSetting('currentVer');
-		$currentVer = 0;
-		
-		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
-		try{
-			Stripe::setApiKey($apikey['stripe']['secret']);
-			$cust = Stripe_Customer::create(array(
-				"description"	=> $username,
-				"email"			=> $email
-			));
-			$db_auth->query("INSERT INTO users(username, saltedHash, lastUsedVer) VALUES('$username', '$pepperedHash', '$currentVer')");
-			$userID = $db_auth->insert_id;
-			$stmt = $db_main->prepare("INSERT INTO users(userID, username, firstname, lastname, email, stripeID) VALUES(?,?,?,?,?,?)");
-			$stmt->bind_param("ssssss", $userID, $username, $firstname, $lastname, $email, $cust['id']);
-			$stmt->execute();
-			$stmt->close();
-			$message = '<p>You have successfully registerd.</p>';
-			$show = FALSE;
-		}catch(Stripe_AuthenticationError $e){
-			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 1)</p>';
-			//$message.= '<p>'.$e->getMessage().'</p>';
-		}catch (Stripe_InvalidRequestError $e){
-			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 2)</p>';
-			//$message.= '<p>'.$e->getMessage().'</p>';
-		}catch (Stripe_AuthenticationError $e){
-			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 3)</p>';
-			//$message.= '<p>'.$e->getMessage().'</p>';
-		}catch (Stripe_ApiConnectionError $e){
-			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 4)</p>';
-			//$message.= '<p>'.$e->getMessage().'</p>';
-		}catch (Stripe_Error $e){
-			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: stripe 5)</p>';
-			//$message.= '<p>'.$e->getMessage().'</p>';
-		}catch(mysqli_sql_exception $e){
-			$message = '<p>There my have been an error with your registration. <a href="http://'.$site.'/contact/">Contact us</a>. (ref: database)</p>';
-			//$message.= '<p>'.$e->getMessage().'</p>';		
-			/* Clean up in case of failure */
-			$cu = Stripe_Customer::retrieve($cust['id']);
-			$cu->delete();
-			if($userID !== null){
-				$db_auth->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
-				$db_main->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
-			}
-		}
-		mysqli_report(MYSQLI_REPORT_ERROR ^ MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
-	}
+    $i=0;
+    switch($i){
+        case 0:
 
-	print'
-		<div class="page-content">
-			<div class="register">
-				<h2>Register</h2>
-				<div class="message">'.$message.'</div>
-	';
-	if($show){
+			// check if registration is on
+			if($gv_registraion_status === FALSE){
+				$msg = '<li>Registration for this website is currently disabled.</li>';
+				break;
+			}
+
+            // check if submitted
+            if(empty($_POST)){
+                break;
+            }
+
+            // validate input data
+            $stop = FALSE;
+            if($username == ''){
+                $stop = TRUE;
+                $msg .= '<li>You did not choose a username</li>';
+            }elseif(strlen($username)<3 || strlen($username)>32){
+                $stop = TRUE;
+                $msg .= '<li>Usernames must be between 3 and 32 characters.</li>';
+            }
+            if(preg_match('/[^a-z0-9.]+/',$username)===1){
+                $stop = TRUE;
+                $msg .= '<li>Username can only contain letters and numbers.</li>';
+            }
+            if($user->exists($username)===TRUE){
+                $stop = TRUE;
+                $msg .= '<li>Username already taken</li>';
+            }
+            if(filter_var($email, FILTER_VALIDATE_EMAIL)){}else{
+                $stop = TRUE;
+                $msg .= '<li>You did not enter a valid email address.</li>';
+            }
+            if(db1($db_main, "SELECT email FROM users WHERE email ='$email' LIMIT 1")){
+                $stop = TRUE;
+                $msg .= '<li>A user with that email address already exists. <a href="https://'.$site.'/account/recover/">Account Recovery</a></li>';
+            }
+            if($password1 == ''){
+                $stop = TRUE;
+                $msg .= '<li>You did not enter a password. (passwords, must be at least 8 characters long)</li>';
+            }else{
+                if(strlen($password1)<8){
+                    $stop = TRUE;
+                    $msg .= '<li>Your password must be at least 8 characters long.</li>';
+                }
+                if(preg_match('/[\'\"]+/',$password1)===1){
+                    $stop = TRUE;
+                    $msg .= '<li>Your password may not contain single or double quotes.</li>';
+                }
+                if($password1 != $password2){
+                    $stop = TRUE;
+                    $msg .= '<li>Your password did not match.</li>';
+                }
+            }
+            if($stop){
+                break;
+            }
+
+
+            // create user
+    		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
+    		try{
+                $hash = $user->new_hash($password1);
+
+        	    //$currentVer = siteSetting('currentVer');
+        		$currentVer = 0;
+
+    			Stripe::setApiKey($apikey['stripe']['secret']);
+    			$cust = Stripe_Customer::create(array(
+    				"description"	=> $username,
+    				"email"			=> $email
+    			));
+    			$db_auth->query("INSERT INTO users(username, saltedHash, lastUsedVer) VALUES('$username', '$hash', '$currentVer')");
+    			$userID = $db_auth->insert_id;
+    			$stmt = $db_main->prepare("INSERT INTO users(userID, username, firstname, lastname, email, stripeID) VALUES(?,?,?,?,?,?)");
+    			$stmt->bind_param("ssssss", $userID, $username, $firstname, $lastname, $email, $cust['id']);
+    			$stmt->execute();
+    			$stmt->close();
+    			$msg .= '<li>You have successfully registerd.</li>';
+    		}catch(Stripe_AuthenticationError $e){
+    			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 1)</li>';
+                break;
+    		}catch (Stripe_InvalidRequestError $e){
+    			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 2)</li>';
+                break;
+    		}catch (Stripe_AuthenticationError $e){
+    			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 3)</li>';
+                break;
+    		}catch (Stripe_ApiConnectionError $e){
+    			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 4)</li>';
+                break;
+    		}catch (Stripe_Error $e){
+    			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 5)</li>';
+                break;
+    		}catch(mysqli_sql_exception $e){
+    			$msg .= '<li>There msy have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: database)</li>';
+    			/* Clean up in case of failure */
+    			$cu = Stripe_Customer::retrieve($cust['id']);
+    			$cu->delete();
+    			if($userID !== null){
+    				$db_auth->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
+    				$db_main->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
+    			}
+                break;
+    		}catch(Exception $e){
+                $msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: generic)</li>';
+                /* Clean up in case of failure */
+                if($userID !== null){
+    				$db_auth->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
+    				$db_main->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
+    			}
+                break;
+            }
+    		mysqli_report(MYSQLI_REPORT_ERROR ^ MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
+
+
+            // do the login
+            $user->username = $username;
+            $user->newlogin();
+            $db_auth->close();
+            $db_main->close();
+            if(isset($redir)){
+                header('Location: '.$protocol.$site.'/'.$redir,TRUE,303);
+                ob_end_flush();
+                exit;
+                break;
+            }else{
+                /* **** ** ** THIS SHOULD BE EDITED TO REDIRECT TO A SPLASH PAGE EXPLAINING THE SUBSCRIPTION INSTEAD OF THE ACCOUNT PAGE ***** *** ** * ** */
+                header('Location: '.$protocol.$site.'/account/',TRUE,303);
+                ob_end_flush();
+                exit;
+                break;
+            }
+
+        // What Happened?
+        default:
+            $msg = '<li>There was an error.</li>';
+    }
+
+
+
+
+    ob_end_flush();
+    /* <HEAD> */ $head=''; // </HEAD>
+    /* PAGE TITLE */ $title='Helmar Brewing Co';
+    /* HEADER */ require('layout/header0.php');
+
+
+    /* HEADER */ require('layout/header2.php');
+    /* HEADER */ require('layout/header1.php');
+
+    /* FOCUS CURSOR */ print'<script type="text/javascript">$(document).ready(function(){$("#firstname").focus()});</script>';
+
+    print'
+		<div class="sideimage login">
+			<div class="images-wrapper"></div>
+			<div class="side-image-content">
+				<h4>Account</h4>
+				<h1>Register</h1>
+		        <form method="post">
+    ';
+    if(isset($redir)){
+        print'
+		            <input type="hidden" name="redir" value="'.$redir.'" />
+        ';
+    }
+	if($msg != ''){
 		print'
-				<div class="reg-info">
-					<p>Fill out this form to register.</p>
-				</div>
-				<form method="post">
-					<input type="hidden" name="submitted" value="yes"/>
-					<div class="register-left no-border">
-						<label for="firstname">First Name</label>
-						<input type="text" name="firstname" id="firstname" tabindex="1" value="'.$firstname.'"/>
-					</div>
-					<div class="register-right no-border">
-						<label for="lastname">Last Name</label>
-						<input type="text" name="lastname" id="lastname" tabindex="2" value="'.$lastname.'"/>
-					</div>
-					<div class="register-left">
-						<label class="nudge" for="username">Username</label>
-						<input type="text" name="username" id="username" tabindex="3" value="'.$username.'"/>
-						<label for="email">Email Address</label>
-						<input type="text" name="email" id="email" tabindex="4" value="'.$email.'"/>
-					</div>
-					<div class="register-right">
-						<label class="nudge" for="password1">Password</label>
-						<input type="password" name="password1" id="password1" tabindex="5" />
-						<label for="password2">Confirm Password</label>
-						<input type="password" name="password2" id="password2" tabindex="6" />
-					</div>
-					<input type="submit" value="Register" tabindex="7" />
-				</form>
+					<ul>'.$msg.'</ul>
 		';
 	}
-	print'
+    print'
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="firstname" id="firstname" tabindex="1" value="'.$firstname.'"/>
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="lastname" id="lastname" tabindex="2" value="'.$lastname.'"/>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" tabindex="3" value="'.$username.'"/>
+                    <label for="email">Email Address</label>
+                    <input type="text" name="email" id="email" tabindex="4" value="'.$email.'"/>
+                    <label for="password1">Password</label>
+                    <input type="password" name="password1" id="password1" tabindex="5" />
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" name="password2" id="password2" tabindex="6" />
+                    <input type="submit" value="Register" tabindex="7" />
+		            <div class="login-footer">
+		                Need an account? <a href="'.$protocol.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.$site.'/account/recover/">Account Recovery</a>
+		            </div>
+		        </form>
 			</div>
 		</div>
-	';
+    ';
+
+    /* FOOTER */ require('layout/footer1.php');
+
+    $db_auth->close();
+    $db_main->close();
 }
 
-
-include 'layout/footer.php';
-
-$db_auth->close();
-$db_main->close();
 ?>
