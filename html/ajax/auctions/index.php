@@ -95,7 +95,7 @@ if($ebay->Ack == 'Success'){
 
     //run a loop on the items and display them however you want
     foreach($ebay->ItemArray->Item as $listing){
-        $html .='<li><a style="background:url(\''.$listing->PictureDetails->PictureURL.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$listing->ListingDetails->ViewItemURL.'"><span><figure style="background:url(\''.$listing->PictureDetails->PictureURL.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure></span></a></li>';
+        $html .='<li><a style="background:url(\'/img/ebay/?img='.base64_encode($listing->PictureDetails->PictureURL).'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$listing->ListingDetails->ViewItemURL.'"><span><figure style="background:url(\'/img/ebay/?img='.base64_encode($listing->PictureDetails->PictureURL).'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure></span></a></li>';
     }
 }else{
     $error = 1;
