@@ -1,7 +1,13 @@
 <?php
     $img = base64_decode($_GET['img']);
     $domain = substr($img, 0, 20);
-    $ext = reset(explode('?', end(explode('.', strtolower($img)))));
+
+    $ext = strtolower($img);
+    $ext = explode('.', $ext);
+    $ext = end($ext);
+    $ext = explode('?', $ext);
+    $ext = $ext[0];
+
     if($domain == 'http://i.ebayimg.com'){
 
         switch($ext){
@@ -27,14 +33,8 @@
             exit;
         }
 
-        $ch = curl_init($img);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
-        $rawdata=curl_exec ($ch);
-        curl_close ($ch);
-
-        echo $rawdata;
+        echo file_get_contents($img);
+        exit;
 
     }else{
         http_response_code(404);
