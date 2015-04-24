@@ -19,6 +19,7 @@ $db2use = array(
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
 require_once('libraries/stripe/Stripe.php');
+Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
 $token = $_POST['t'];
@@ -34,8 +35,6 @@ if($user->login() === 2){
 	if($R_userdeets !== FALSE){
 		$userdeets = $R_userdeets->fetch_assoc();
 		$R_userdeets->free();
-
-		Stripe::setApiKey($apikey['stripe']['secret']);
 
 		try {
 
