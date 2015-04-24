@@ -134,7 +134,7 @@ ob_end_flush();
 
 print'
 	<div class="account">
-		<h1 class="pagetitle">Account</h1>
+		<h1 class="pagetitle">Your Account</h1>
 
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
@@ -225,7 +225,7 @@ print'
 			</div>
 		</section>
 
-		<div class="yourinfo">
+		<section class="yourinfo">
 			<h2>Your Info</h2>
 			<dl>
 				<dt>Username</dt>
@@ -240,7 +240,7 @@ print'
 				<dd id="account-email">'.$user->email.'</dd>
 				<input type="button" value="Change Email" onclick="changeEmail(1)" />
 			</dl>
-		</div>
+		</section>
 
 		<div class="active-logins">
 			<h2>Active Logins</h2>

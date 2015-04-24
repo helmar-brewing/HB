@@ -77,11 +77,18 @@
     width:100%;
     padding: $base-spacing*2 $gutter;
     background: $side-image-content-background;
+    h1{
+        max-width:860px;
+        margin:0 auto .5em auto;
+    }
 }
 
 .subscription{
     @include outer-container(860px);
     @include clearfix;
+    padding-bottom:2em;
+    margin-bottom:2em;
+    border-bottom:1px solid #CCC;
 }
 .sub-buttons{
     @include row();
@@ -188,6 +195,9 @@
 .credit-card{
     @include row();
     @include span_columns(6);
+    @include media(max-width 760px) {
+        @include span_columns(12);
+    }
     #card_number{
         display:block;
         margin-bottom:1em;
@@ -270,5 +280,8 @@
         margin-top:1.6em;
         font-size:1em;
     }
-
+}
+.yourinfo{
+    @include outer-container(860px);
+    @include clearfix;
 }
