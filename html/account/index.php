@@ -136,45 +136,6 @@ print'
 	<div class="account">
 		<h1 class="pagetitle">Account</h1>
 
-		<div class="yourinfo">
-			<h2>Your Info</h2>
-			<dl>
-				<dt>Username</dt>
-				<dd>'.$user->username.'</dd>
-				<dt>First Name</dt>
-				<dd>'.$user->firstname.'</dd>
-				<dt>Last Name</dt>
-				<dd>'.$user->lastname.'</dd>
-				<input type="button" value="Update Info" />
-				<hr />
-				<dt>Email</dt>
-				<dd id="account-email">'.$user->email.'</dd>
-				<input type="button" value="Change Email" onclick="changeEmail(1)" />
-			</dl>
-		</div>
-
-		<div class="active-logins">
-			<h2>Active Logins</h2>
-			<ul>
-	';
-
-	foreach($user->get_active_logins() as $login){
-		print'
-				<li>
-					Last accessed on <span>'.date("M j Y",$login['logintime']).'</span> at <span>'.date("g:ia",$login['logintime']).'</span><br />from IP address <span>'.$login['IP'].'</span> with <span>'.$login['browser']['parent'].'</span> on <span>'.$login['browser']['platform'].'</span>
-					<input type="button" value="Log out device" />
-				</li>
-		';
-	}
-
-	print'
-			</ul>
-			<form action="logout/all/" method="post">
-				<input type="submit" value="Invalidate all logins" />
-			</form>
-		</div>
-		<hr>
-
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
 			<div>All subscriptions include full access to the website. Describe what that means.</div>
@@ -236,7 +197,7 @@ print'
 	print'
 					<h4>Digital + Paper Magazine</h2>
 					<div class="price">$36</div>
-					<p>A paper copy of the magazine sent to you when they are released as well as access to digital copies of the magazine via the website.</p>
+					<p>A paper copy of the magazine sent to you when they are released and access to digital copies of the magazine via the website.</p>
 	';
 	if($user->subscription['plan_type'] === 'sub-digital+paper'){
 		print '<div class="sub-checkbox"><i class="fa fa-check-square-o"></i></div>';
@@ -263,6 +224,53 @@ print'
 				</form>
 			</div>
 		</section>
+
+		<div class="yourinfo">
+			<h2>Your Info</h2>
+			<dl>
+				<dt>Username</dt>
+				<dd>'.$user->username.'</dd>
+				<dt>First Name</dt>
+				<dd>'.$user->firstname.'</dd>
+				<dt>Last Name</dt>
+				<dd>'.$user->lastname.'</dd>
+				<input type="button" value="Update Info" />
+				<hr />
+				<dt>Email</dt>
+				<dd id="account-email">'.$user->email.'</dd>
+				<input type="button" value="Change Email" onclick="changeEmail(1)" />
+			</dl>
+		</div>
+
+		<div class="active-logins">
+			<h2>Active Logins</h2>
+			<ul>
+	';
+
+	foreach($user->get_active_logins() as $login){
+		print'
+				<li>
+					Last accessed on <span>'.date("M j Y",$login['logintime']).'</span> at <span>'.date("g:ia",$login['logintime']).'</span><br />from IP address <span>'.$login['IP'].'</span> with <span>'.$login['browser']['parent'].'</span> on <span>'.$login['browser']['platform'].'</span>
+					<input type="button" value="Log out device" />
+				</li>
+		';
+	}
+
+	print'
+			</ul>
+			<form action="logout/all/" method="post">
+				<input type="submit" value="Invalidate all logins" />
+			</form>
+		</div>
+		<hr>
+
+
+
+
+
+
+
+
 	</div>
 ';
 
