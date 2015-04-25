@@ -231,14 +231,14 @@ print'
 				<dt>Username</dt>
 				<dd>'.$user->username.'</dd>
 				<dt>First Name</dt>
-				<dd>'.$user->firstname.'</dd>
+				<dd id="profile-firstname">'.$user->firstname.'</dd>
 				<dt>Last Name</dt>
-				<dd>'.$user->lastname.'</dd>
-				<input type="button" value="Update Info" />
+				<dd id="profile-lastname">'.$user->lastname.'</dd>
+				<button type="button" onclick="changeInfo(1)">Update Info</button>
 				<hr />
 				<dt>Email</dt>
 				<dd id="account-email">'.$user->email.'</dd>
-				<input type="button" value="Change Email" onclick="changeEmail(1)" />
+				<button type="button" onclick="changeEmail(1)">Change Email</button>
 			</dl>
 		</section>
 
@@ -262,15 +262,6 @@ print'
 				<input type="submit" value="Invalidate all logins" />
 			</form>
 		</div>
-		<hr>
-
-
-
-
-
-
-
-
 	</div>
 ';
 

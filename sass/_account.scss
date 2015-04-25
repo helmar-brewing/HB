@@ -285,3 +285,13 @@
     @include outer-container(860px);
     @include clearfix;
 }
+
+
+@include -phnx-modal('.change-info', 600px, 50px){
+    fieldset{
+        background: transparent;
+        border:none;
+        margin:0;
+        padding:0;
+    }
+}
