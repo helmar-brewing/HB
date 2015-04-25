@@ -284,6 +284,9 @@
 .yourinfo{
     @include outer-container(860px);
     @include clearfix;
+    padding-bottom:2em;
+    margin-bottom:2em;
+    border-bottom:1px solid #CCC;
 }
 
 
@@ -293,5 +296,40 @@
         border:none;
         margin:0;
         padding:0;
+    }
+}
+
+.active-logins{
+    @include outer-container(860px);
+    form.all-logins{
+        @include span-columns(6);
+        @include media(max-width 760px) {
+            @include span_columns(12);
+        }
+        margin-bottom:2em;
+    }
+    ul.login-list{
+        @include span-columns(6);
+        @include media(max-width 760px) {
+            @include span_columns(12);
+        }
+        li{
+            display:block;
+            background-color:white;
+            border: 1px solid #CCC;
+            padding:1em;
+            margin:0 0 1.5em 0;
+            border-radius:5px;
+            box-shadow:$form-box-shadow;
+            font-size:.8em;
+            span{
+                font-weight:bold;
+            }
+            button{
+                display:block;
+                width:100%;
+                margin-top: 1em;
+            }
+        }
     }
 }

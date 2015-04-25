@@ -196,3 +196,26 @@ function changeInfo(s, d1){
         }
     });
 }
+
+
+function logoutDevice(lid){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.post(
+        "/account/ajax/logout/device/",
+        {login:lid},
+        function( data ) {
+            if(data.error === '0'){
+                document.getElementById('login-list').innerHTML = data.list_html;
+                document.getElementById('fullscreenload').style.display = 'none';
+            }else{
+                alert('error');
+                document.getElementById('fullscreenload').style.display = 'none';
+            }
+        },
+        "json"
+    )
+    .fail(function() {
+        alert('ajax fail');
+        document.getElementById('fullscreenload').style.display = 'none';
+    });
+}

@@ -235,7 +235,6 @@ print'
 				<dt>Last Name</dt>
 				<dd id="profile-lastname">'.$user->lastname.'</dd>
 				<button type="button" onclick="changeInfo(1)">Update Info</button>
-				<hr />
 				<dt>Email</dt>
 				<dd id="account-email">'.$user->email.'</dd>
 				<button type="button" onclick="changeEmail(1)">Change Email</button>
@@ -244,23 +243,30 @@ print'
 
 		<div class="active-logins">
 			<h2>Active Logins</h2>
-			<ul>
+			<form class="all-logins" action="logout/all/" method="post">
+				<p>This is a list of devices that are currently logged into your account. Use the "invalidate all logins" button to log out of all devices including this one, or log out devices individually. To log out of just this device, use the log out link in the menu or footer on any page.</p>
+				<input type="submit" value="Invalidate all logins" />
+			</form>
+			<ul id="login-list" class="login-list">
 	';
 
 	foreach($user->get_active_logins() as $login){
 		print'
-				<li>
-					Last accessed on <span>'.date("M j Y",$login['logintime']).'</span> at <span>'.date("g:ia",$login['logintime']).'</span><br />from IP address <span>'.$login['IP'].'</span> with <span>'.$login['browser']['parent'].'</span> on <span>'.$login['browser']['platform'].'</span>
-					<input type="button" value="Log out device" />
-				</li>
+			<li>
+				Last accessed on <span>'.date("M j Y",$login['logintime']).'</span> at <span>'.date("g:ia",$login['logintime']).'</span><br />
+				from IP address <span>'.$login['IP'].'</span> with <span>'.$login['browser']['parent'].'</span> on <span>'.$login['browser']['platform'].'</span>
 		';
+		if($login['loginID'] === $user->loginID){
+			print '<button class="signout" disabled>This Device</button>';
+		}else{
+			print '<button class="signout" onclick="logoutDevice(\''.$login['loginID'].'\')">Log out device <i class="fa fa-sign-out"></i></button>';
+		}
+		print '</li>';
 	}
 
 	print'
 			</ul>
-			<form action="logout/all/" method="post">
-				<input type="submit" value="Invalidate all logins" />
-			</form>
+
 		</div>
 	</div>
 ';

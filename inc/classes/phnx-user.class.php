@@ -13,6 +13,7 @@
 		public $subscription;
 		public $error_cookie;
 		public $error = array();
+		public $loginID;
 
 
 
@@ -70,6 +71,7 @@
 				$db_auth->query("INSERT INTO activeLogins (username, loginID, loginTime, IP, useragent) VALUES ('".$this->username."', '$sprinkles', '$logintime', '$ipAddy', '$useragent')");
 				$this->cookieMonster('set',$cookieString);
 				$db_auth->query("UPDATE users SET lastLogin='$logintime' WHERE username='".$this->username."' LIMIT 1");
+				$this->loginID = $sprinkles;
 			}else{
 				trigger_error("UserMgmt tried to create a new login, and username is not set.", E_USER_ERROR);
 			}
