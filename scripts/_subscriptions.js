@@ -96,26 +96,55 @@ function deleteCard(){
 	});
 }
 
-function toggleSub(){
-	document.getElementById('fullscreenload').style.display = 'block';
-	$.post(
-		"/account/ajax/togglesub/",
-		{ a:1 },
-		function( data ) {
-			if(data.error === '0'){
-				document.getElementById('sub_status').innerHTML = data.status;
-				document.getElementById('sub_button').innerHTML = data.button;
-				document.getElementById('sub_error').innerHTML = data.msg;
-				document.getElementById('fullscreenload').style.display = 'none';
-			}else{
-				document.getElementById('sub_error').innerHTML = data.msg;
-				document.getElementById('fullscreenload').style.display = 'none';
-			}
-		},
-		"json"
-	)
-	.fail(function() {
-		alert('ajax failure');
-		document.getElementById('fullscreenload').style.display = 'none';
-	});
+
+
+
+
+
+function subUnbind(){
+    //$('#').unbind('click');
+}
+function subCleanup(){
+    $('#ajax-modal').removeClass('sub_modal');
+    $('#modal_close').unbind('click');
+    document.getElementById('modal_h1').innerHTML = '';
+    document.getElementById('modal_content').innerHTML = '';
+    subUnbind();
+}
+function subUpdate(a){
+    subUnbind();
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/account/ajax/changesub/",
+        {
+            action: a
+        },
+        function( data ) {
+            document.getElementById('modal_h1').innerHTML = data.h1;
+            document.getElementById('modal_content').innerHTML = data.content;
+            if(data.error === '2'){
+                window.location.href = "http://helmarbrewing.com/account/login/?redir=account/";
+            }else if(data.error === '0'){
+                document.getElementById('fullscreenload').style.display = 'none';
+            }else{
+                document.getElementById('fullscreenload').style.display = 'none';
+            }
+        },
+        "json"
+    )
+    .fail(function() {
+        $('#ajax-modal').removeClass('sub_modal');
+        document.getElementById('modal_h1').innerHTML = 'Error';
+        document.getElementById('modal_content').innerHTML = '<p>There was an error changing your subscription. Please try again.</p><p>(ref. ajax fail)<p>';
+        document.getElementById('fullscreenload').style.display = 'none';
+    });
+}
+function sub(a){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $('#modal_close').click(function() {
+        subCleanup();
+    });
+    $('#ajax-modal').addClass('sub_modal');
+    showModal('ajax-modal');
+    subUpdate(a);
 }
