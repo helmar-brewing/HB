@@ -18,8 +18,8 @@ $db2use = array(
 
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
-require_once('libraries/stripe/Stripe.php');
-Stripe::setApiKey($apikey['stripe']['secret']);
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
 $token = $_POST['t'];
@@ -31,17 +31,13 @@ if($user->login() === 2){
 
 
 
-	$R_userdeets = $db_main->query("SELECT * FROM users WHERE userid = ".$user->id." LIMIT 1");
-	if($R_userdeets !== FALSE){
-		$userdeets = $R_userdeets->fetch_assoc();
-		$R_userdeets->free();
 
 		try {
 
-			$cust = Stripe_Customer::retrieve($userdeets['stripeID']);
+			$cust = \Stripe\Customer::retrieve($user->stripeID);
 
-			if($cust['cards']['total_count'] === 0){
-				$card_info = $cust->cards->create(array("card" => $token));
+			if($cust['sources']['total_count'] === 0){
+				$card_info = $cust->sources->create(array("card" => $token));
 				$json = array(
 					'error' => '0',
 					'msg' => 'Your card has been successfully added.',
@@ -51,10 +47,10 @@ if($user->login() === 2){
 					'exp_year' => $card_info['exp_year']
 				);
 			}else{
-				$card_id_array = $cust->cards->data;
+				$card_id_array = $cust->sources->data;
 				$card_id = $card_id_array[0]['id'];
-				$card_info = $cust->cards->create(array("card" => $token));
-				$cust->cards->retrieve($card_id)->delete();
+				$card_info = $cust->sources->create(array("card" => $token));
+				$cust->sources->retrieve($card_id)->delete();
 				$json = array(
 					'error' => '0',
 					'msg' => 'Your card has been successfully updated.',
@@ -65,32 +61,32 @@ if($user->login() === 2){
 				);
 			}
 
-		} catch(Stripe_CardError $e) {
+		}catch(\Stripe\Error\Card $e) {
 			// Since it's a decline, Stripe_CardError will be caught
 			$json = array(
 				'error' => '1',
 				'msg' =>  'There was an error updating your card. (ref: stripe card error exception)'
 			);
-		} catch (Stripe_InvalidRequestError $e) {
+		}catch (\Stripe\Error\InvalidRequest $e) {
 			// Invalid parameters were supplied to Stripe's API
 			$json = array(
 				'error' => '3',
 				'json' => $e->getJsonBody()
 			);
-		} catch (Stripe_AuthenticationError $e) {
+		}catch (\Stripe\Error\Authentication $e) {
 			// Authentication with Stripe's API failed
 			// (maybe you changed API keys recently)
 			$json = array(
 				'error' => '3',
 				'json' => $e->getJsonBody()
 			);
-		} catch (Stripe_ApiConnectionError $e) {
+		}catch (\Stripe\Error\ApiConnection $e) {
 			// Network communication with Stripe failed
 			$json = array(
 				'error' => '3',
 				'json' => $e->getJsonBody()
 			);
-		} catch (Stripe_Error $e) {
+		}catch (\Stripe\Error\Base $e) {
 			// Display a very generic error to the user, and maybe send yourself an email
 			$json = array(
 				'error' => '3',
@@ -104,12 +100,7 @@ if($user->login() === 2){
 			);
 		}
 
-	}else{
-		$json = array(
-			'error' => '1',
-			'msg' => 'There was an error updating your card. (ref: user pull fail)'
-		);
-	}
+
 
 
 }else{

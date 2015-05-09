@@ -20,7 +20,7 @@ var stripeResponseHandler = function(status, response) {
 					document.getElementById('exp_year').value = data.exp_year;
 					document.getElementById('cvc').value = '';
 
-					document.getElementById('delete_card').disabled = false;
+					
 					document.getElementById('add_update_card').innerHTML = 'Update Card';
 
 					document.getElementById('fullscreenload').style.display = 'none';
