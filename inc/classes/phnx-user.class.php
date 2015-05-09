@@ -431,7 +431,7 @@
 
 		function checksub(){
 			try{
-				$sub_response = Stripe_Customer::retrieve($this->stripeID)->subscriptions->all();
+				$sub_response = \Stripe\Customer::retrieve($this->stripeID)->subscriptions->all();
 				if(empty($sub_response->data)){
 					$this->subscription = array(
 						'status' => 'none'
