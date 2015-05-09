@@ -31,7 +31,7 @@ if($user->login() === 2){
 	if($user->del_active_login($loginID)){
         $error = '0';
         foreach($user->get_active_logins() as $login){
-    		$html = '
+    		$html .= '
     			<li>
     				Last accessed on <span>'.date("M j Y",$login['logintime']).'</span> at <span>'.date("g:ia",$login['logintime']).'</span><br />
     				from IP address <span>'.$login['IP'].'</span> with <span>'.$login['browser']['parent'].'</span> on <span>'.$login['browser']['platform'].'</span>
