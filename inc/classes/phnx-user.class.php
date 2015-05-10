@@ -430,12 +430,20 @@
 
 
 		function checksub($mode){
+			session_start();
 
 			if($mode === 'no-cache'){
-				// this is so we can avoid putting the sub in the session variable for account managment;
+				unset($_SESSION['sub']);
+				$this->sub(false);
+			}else{
+				if(isset($_SESSION['sub'])){
+					$this->subscription = $_SESSION['sub'];
+				}else{
+					$this->sub(true);
+				}
 			}
-
-
+		}
+		private function sub($cache){
 
 			try{
 				$sub_response = \Stripe\Customer::retrieve($this->stripeID)->subscriptions->all();
@@ -495,6 +503,10 @@
 					'status' => 'error',
 					'msg'	 => $e->getMessage()
 				);
+			}
+
+			if($cache){
+				$_SESSION['sub'] = $this->subscription;
 			}
 		}
 
