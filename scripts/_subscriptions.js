@@ -205,16 +205,16 @@ function subUpdate(a){
 				$('#sub-none').removeClass('selected');
 				$('#sub-digital').removeClass('selected');
 				$('#sub-paper').removeClass('selected');
-				$('#sub-digital+paper').removeClass('selected');
+				$('#sub-digitalpaper').removeClass('selected');
 
 				$('#sub-none-checkbox').removeClass('fa-check-square-o');
 				$('#sub-digital-checkbox').removeClass('fa-check-square-o');
 				$('#sub-paper-checkbox').removeClass('fa-check-square-o');
-				$('#sub-digital+paper-checkbox').removeClass('fa-check-square-o');
+				$('#sub-digitalpaper-checkbox').removeClass('fa-check-square-o');
 				$('#sub-none-checkbox').addClass('fa-square-o');
 				$('#sub-digital-checkbox').addClass('fa-square-o');
 				$('#sub-paper-checkbox').addClass('fa-square-o');
-				$('#sub-digital+paper-checkbox').addClass('fa-square-o');
+				$('#sub-digitalpaper-checkbox').addClass('fa-square-o');
 
 
 
@@ -228,10 +228,10 @@ function subUpdate(a){
 					$('#sub-digital-checkbox').removeClass('fa-square-o');
 					$('#sub-digital-checkbox').addClass('fa-check-square-o');
 				}
-				if(a === 'digital+paper'){
-					$('#sub-digital+paper').addClass('selected');
-					$('#sub-digital+paper-checkbox').removeClass('fa-square-o');
-					$('#sub-digital+paper-checkbox').addClass('fa-check-square-o');
+				if(a === 'digitalpaper'){
+					$('#sub-digitalpaper').addClass('selected');
+					$('#sub-digitalpaper-checkbox').removeClass('fa-square-o');
+					$('#sub-digitalpaper-checkbox').addClass('fa-check-square-o');
 				}
 
                 document.getElementById('fullscreenload').style.display = 'none';

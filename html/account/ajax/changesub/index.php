@@ -60,8 +60,6 @@ try{
 	// check for payment methods - else do the stuff
 	if($cust['sources']['total_count'] === 0){
 
-		//
-
 		$error = '3';
 		$h1 = 'Please Add a Payment Method';
 		$html = '
@@ -92,24 +90,37 @@ try{
 				case 'paper':
 					$html .= '
 						<div id="modal-add-card-success">
-							<p>Thank your for adding your card. Click button to complete your subscription.</p>
-							<button id="modal-add-card-button" data-action="paper" >Subscribe to paper</button>
+							<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
+							<button id="modal-add-card-button" data-action="paper" >Subscribe to Paper Magazine</button>
 						</div>
 					';
 					break;
 
 					case 'digital':
-
-
+						$html .= '
+							<div id="modal-add-card-success">
+								<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
+								<button id="modal-add-card-button" data-action="digital" >Subscribe to Digital Magazine</button>
+							</div>
+						';
 						break;
 
 					case 'digitalpaper':
-
-
+						$html .= '
+							<div id="modal-add-card-success">
+								<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
+								<button id="modal-add-card-button" data-action="digitalpaper" >Subscribe to Digital + Paper Magazine</button>
+							</div>
+						';
 						break;
 
 					default:
-
+						$html .= '
+							<div id="modal-add-card-success">
+								<p>Thank your for adding your credit card.</p>
+								<p>Please close this window and try your subscription again. (ref:invalid action)</p>
+							</div>
+						';
 						break;
 
 			}

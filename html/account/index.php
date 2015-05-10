@@ -144,7 +144,7 @@ print'
 	if($user->subscription['status'] === 'none'){
 		print '<li id="sub-none" class="selected">';
 	}else{
-		print '<li id="sub-none">';
+		print '<li id="sub-none onclick="sub(\'none\')">';
 	}
 	print'
 					<h4>Website Access</h4>
@@ -160,7 +160,7 @@ print'
 	if($user->subscription['plan_type'] === 'sub-digital'){
 		print '<li id="sub-digital" class="selected">';
 	}else{
-		print '<li id="sub-digital">';
+		print '<li id="sub-digital" onclick="sub(\'digital\')">';
 	}
 	print'
 					<h4>Digital Magazine</h2>
@@ -190,9 +190,9 @@ print'
 	}
 	print'</li>';
 	if($user->subscription['plan_type'] === 'sub-digital+paper'){
-		print'<li id="sub-digital+paper" class="selected">';
+		print'<li id="sub-digitalpaper" class="selected">';
 	}else{
-		print'<li id="sub-digital+paper">';
+		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')">';
 	}
 	print'
 					<h4>Digital + Paper Magazine</h2>
@@ -200,9 +200,9 @@ print'
 					<p>A paper copy of the magazine sent to you when they are released and access to digital copies of the magazine via the website.</p>
 	';
 	if($user->subscription['plan_type'] === 'sub-digital+paper'){
-		print '<div class="sub-checkbox"><i id="sub-digital+paper-checkbox" class="fa fa-check-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
-		print '<div class="sub-checkbox"><i id="sub-digital+paper-checkbox" class="fa fa-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-square-o"></i></div>';
 	}
 	print'
 				</li>
