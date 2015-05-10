@@ -216,8 +216,11 @@ function subUpdate(a){
 				$('#sub-paper-checkbox').addClass('fa-square-o');
 				$('#sub-digitalpaper-checkbox').addClass('fa-square-o');
 
-
-
+				if(a === 'none'){
+					$('#sub-none').addClass('selected');
+					$('#sub-none-checkbox').removeClass('fa-square-o');
+					$('#sub-none-checkbox').addClass('fa-check-square-o');
+				}
 				if(a === 'paper'){
 					$('#sub-paper').addClass('selected');
 					$('#sub-paper-checkbox').removeClass('fa-square-o');

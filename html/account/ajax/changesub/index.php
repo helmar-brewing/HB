@@ -40,7 +40,7 @@ try{
     }
 
 	// test action
-    $allowed_actions = array('paper','digital','digitalpaper');
+    $allowed_actions = array('none', 'paper','digital','digitalpaper');
     $action = preg_replace('[^a-z]', '', $_GET['action']);
     if(!in_array($action, $allowed_actions, true)){
         throw new Exception('invalid action x01');
@@ -58,7 +58,7 @@ try{
 	// check for address before credit card  ***************
 
 	// check for payment methods - else do the stuff
-	if($cust['sources']['total_count'] === 0){
+	if($cust['sources']['total_count'] === 0 && $action !== 'none'){
 
 		$error = '3';
 		$h1 = 'Please Add a Payment Method';
@@ -129,27 +129,51 @@ try{
 
 	}else{
 
-		// new sub from none
 		if($user->subscription['status'] === 'none'){
 
 			switch($action){
 
-				case 'paper':
-					$rep = $cust->subscriptions->create(array("plan" => "sub-paper"));
+				case 'none':
 					$error = '0';
-
+					$h1 = 'Subscription Status';
+					$html = '
+						<p>This is your current subscription.</p>
+						<p>You get access to...</p>
+						<p>This ia a free subscription.</p>
+					';
 					break;
 
 				case 'digital':
-					$cust->subscriptions->create(array("plan" => "sub-digital"));
+					$res = $cust->subscriptions->create(array("plan" => "sub-digital"));
 					$error = '0';
+					$h1 = 'Subscription';
+					$html ='
+						<p>Thank you for subscribing to Digital Magazine</p>
+						<p>Your subscription will renew on '.date("Y m d",$res['current_period_end']).'.</p>
+						<p>Your credit card will be charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
+					';
+					break;
 
+				case 'paper':
+					$res = $cust->subscriptions->create(array("plan" => "sub-paper"));
+					$error = '0';
+					$h1 = 'Subscription';
+					$html ='
+						<p>Thank you for subscribing to Paper Magazine</p>
+						<p>Your subscription will renew on '.date("Y m d",$res['current_period_end']).'.</p>
+						<p>Your credit card will be charged '.$res['plan']['amount'].'</p>
+					';
 					break;
 
 				case 'digitalpaper':
-					$cust->subscriptions->create(array("plan" => "sub-digital+paper"));
+					$res = $cust->subscriptions->create(array("plan" => "sub-digital+paper"));
 					$error = '0';
-
+					$h1 = 'Subscription';
+					$html ='
+						<p>Thank you for subscribing to Digital + Paper Magazine</p>
+						<p>Your subscription will renew on '.date("Y m d",$res['current_period_end']).'.</p>
+						<p>Your credit card will be charged '.$res['plan']['amount'].'</p>
+					';
 					break;
 
 				default:
@@ -158,8 +182,119 @@ try{
 
 			}
 
-		}
+		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital'){
 
+			switch($action){
+
+				case 'none':
+					// full cancel
+					$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
+					$error = '0';
+					$h1 = 'Subscription Status';
+					$html = '
+						<p>Auto re-new has been disabled for you subscription.</p>
+						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
+					';
+					// flag to hide the autorenew option and show the autorenew off option
+					$autorenew = '';
+					break;
+
+				case 'digital':
+					$error = '0';
+					$h1 = 'Subscription Status';
+					$html = '
+						<p>This is your current subscription.</p>
+						<p>You get access to...</p>
+					';
+					break;
+
+				case 'paper':
+					//upgrade
+					throw new Exception('not coded yet');
+					break;
+
+				case 'digitalpaper':
+					//upgrade
+					throw new Exception('not coded yet');
+					break;
+
+				default:
+					throw new Exception('invalid action x02');
+					break;
+
+			}
+
+		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-paper'){
+
+			switch($action){
+
+				case 'none':
+					// full cancel
+					throw new Exception('not coded yet');
+					break;
+
+				case 'digital':
+					// downgrade
+					throw new Exception('not coded yet');
+					break;
+
+				case 'paper':
+					$error = '0';
+					$h1 = 'Subscription Status';
+					$html = '
+						<p>This is your current subscription.</p>
+						<p>You get access to...</p>
+					';
+					break;
+
+				case 'digitalpaper':
+					// upgrade
+					throw new Exception('not coded yet');
+					break;
+
+				default:
+					throw new Exception('invalid action x02');
+					break;
+
+			}
+
+		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital+paper'){
+
+			switch($action){
+
+				case 'none':
+					// full cancel
+					throw new Exception('not coded yet');
+					break;
+
+				case 'digital':
+					// downgrade
+					throw new Exception('not coded yet');
+					break;
+
+				case 'paper':
+					// downgrade
+					throw new Exception('not coded yet');
+					break;
+
+				case 'digitalpaper':
+					$error = '0';
+					$h1 = 'Subscription Status';
+					$html = '
+						<p>This is your current subscription.</p>
+						<p>You get access to...</p>
+					';
+					break;
+
+				default:
+					throw new Exception('invalid action x02');
+					break;
+
+			}
+
+		}else{
+			throw new Exception('no plan type');
+		}
 
 	}
 

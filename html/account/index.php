@@ -142,9 +142,9 @@ print'
 			<ul class="sub-buttons">
 	';
 	if($user->subscription['status'] === 'none'){
-		print '<li id="sub-none" class="selected">';
+		print '<li id="sub-none" onclick="sub(\'none\')" class="selected">';
 	}else{
-		print '<li id="sub-none onclick="sub(\'none\')">';
+		print '<li id="sub-none" onclick="sub(\'none\')">';
 	}
 	print'
 					<h4>Website Access</h4>
@@ -158,7 +158,7 @@ print'
 	}
 	print'</li>';
 	if($user->subscription['plan_type'] === 'sub-digital'){
-		print '<li id="sub-digital" class="selected">';
+		print '<li id="sub-digital" onclick="sub(\'digital\')" class="selected">';
 	}else{
 		print '<li id="sub-digital" onclick="sub(\'digital\')">';
 	}
@@ -174,7 +174,7 @@ print'
 	}
 	print'</li>';
 	if($user->subscription['plan_type'] === 'sub-paper'){
-		print'<li id="sub-paper" class="selected">';
+		print'<li id="sub-paper" onclick="sub(\'paper\')" class="selected">';
 	}else{
 		print'<li id="sub-paper" onclick="sub(\'paper\')">';
 	}
@@ -190,7 +190,7 @@ print'
 	}
 	print'</li>';
 	if($user->subscription['plan_type'] === 'sub-digital+paper'){
-		print'<li id="sub-digitalpaper" class="selected">';
+		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')" class="selected">';
 	}else{
 		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')">';
 	}
@@ -207,6 +207,22 @@ print'
 	print'
 				</li>
 			</ul>
+	';
+
+
+	// make this something that gets updated via ajax and call it when the page loads. give it its own loading screen that just covers its area
+
+
+	print'
+		<div id="sub-info">
+			<p>Your current sub is.</p>
+			<p>On your subscription will downgrade to. Enjoy your current benefits until the.  Your new subascription price will be.</p>
+			<p><i class="fa fa-refresh"></i> Your subscription will automatically renew on.</p>
+			<p><i class="fa fa-ban"></i> Auto re-new is tunred off. Enjoy your current benefits until</p>
+		</div>
+	';
+
+	print'
 			<div class="credit-card">
 				<form action="" method="POST" id="payment-form">
 					<div class="payment-errors" id="payment-errors">'.$msg.'</div>
