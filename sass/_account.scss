@@ -333,3 +333,102 @@
         }
     }
 }
+
+
+
+
+
+@include -phnx-modal('.sub_modal', 600px, 50px){
+    @include clearfix;
+}
+
+
+
+
+.credit-card-modal{
+    #card_number-modal{
+        display:block;
+        margin-bottom:1em;
+    }
+    input{
+        box-sizing:border-box;
+        margin:0;
+    }
+    label{
+        margin-top:0;
+        margin-bottom:.5em;
+        font-size:.8em;
+        font-weight:normal;
+        text-transform:uppercase;
+    }
+    fieldset{
+        margin:0;
+        padding:0;
+        border:none;
+        background-color:transparent;
+        float:left;
+        @include clearfix;
+        input{
+            display:block;
+            float:left;
+            padding:0;
+            border:none;
+            outline:none;
+            box-shadow:none;
+            -webkit-appearance:none;
+            line-height:2em;
+            height:2em;
+            box-sizing:border-box;
+            text-align:center;
+            border-radius:0;
+            border-top:1px solid #CCC;
+            border-bottom:1px solid #CCC;
+        }
+        span{
+            display:block;
+            float:left;
+            line-height:2em;
+            height:2em;
+            box-sizing:border-box;
+            text-align:center;
+            background-color:white;
+            border-top:1px solid #CCC;
+            border-bottom:1px solid #CCC;
+            color:#999;
+        }
+        &.cvc{
+            width:25%;
+            input{
+                border-left:1px solid #CCC;
+                border-right:1px solid #CCC;
+            }
+        }
+        &.exp{
+            width:45%;
+            input{
+                width:40%;
+            }
+            span{
+                width:20%;
+            }
+            #exp_month{
+                border-left:1px solid #CCC;
+            }
+        }
+    }
+    .add_update_card{
+        float:left;
+        width:30%;
+        padding:0;
+        box-sizing:border-box;
+        display:block;
+        line-height:2em;
+        height:2em;
+        border-radius:0;
+        margin-top:1.6em;
+        font-size:1em;
+    }    
+}
+#modal-add-card-success{
+    display:none;
+}

@@ -2,6 +2,15 @@
 "CodeKitInfo": "This is a CodeKit 2.x project configuration file. It is designed to sync project settings across multiple machines. MODIFYING THE CONTENTS OF THIS FILE IS A POOR LIFE DECISION. If you do so, you will likely cause CodeKit to crash. This file is not useful unless accompanied by the project that created it in CodeKit 2. This file is not backwards-compatible with CodeKit 1.x. For more information, see: http:\/\/incident57.com\/codekit",
 "creatorBuild": "18966",
 "files": {
+	"\/docs\/subscription.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/docs\/subscription.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/docs\/subscription.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 0,
@@ -645,317 +654,373 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe.php": {
+	"\/inc\/libraries\/stripe\/data\/test.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 95,
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/data\/test.png",
+		"outputAbbreviatedPath": "\/inc\/libraries\/stripe\/data\/test.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/inc\/libraries\/stripe\/init.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/init.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Account.php": {
+	"\/inc\/libraries\/stripe\/lib\/Account.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Account.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Account.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/ApiConnectionError.php": {
+	"\/inc\/libraries\/stripe\/lib\/ApiRequestor.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/ApiConnectionError.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/ApiRequestor.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/ApiError.php": {
+	"\/inc\/libraries\/stripe\/lib\/ApiResource.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/ApiError.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/ApiResource.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/ApiRequestor.php": {
+	"\/inc\/libraries\/stripe\/lib\/ApplicationFee.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/ApiRequestor.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/ApplicationFee.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/ApiResource.php": {
+	"\/inc\/libraries\/stripe\/lib\/ApplicationFeeRefund.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/ApiResource.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/ApplicationFeeRefund.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/ApplicationFee.php": {
+	"\/inc\/libraries\/stripe\/lib\/AttachedObject.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/ApplicationFee.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/AttachedObject.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/ApplicationFeeRefund.php": {
+	"\/inc\/libraries\/stripe\/lib\/Balance.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/ApplicationFeeRefund.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Balance.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/AttachedObject.php": {
+	"\/inc\/libraries\/stripe\/lib\/BalanceTransaction.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/AttachedObject.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/BalanceTransaction.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/AuthenticationError.php": {
+	"\/inc\/libraries\/stripe\/lib\/BitcoinReceiver.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/AuthenticationError.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/BitcoinReceiver.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Balance.php": {
+	"\/inc\/libraries\/stripe\/lib\/BitcoinTransaction.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Balance.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/BitcoinTransaction.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/BalanceTransaction.php": {
+	"\/inc\/libraries\/stripe\/lib\/Card.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/BalanceTransaction.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Card.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Card.php": {
+	"\/inc\/libraries\/stripe\/lib\/Charge.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Card.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Charge.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/CardError.php": {
+	"\/inc\/libraries\/stripe\/lib\/Collection.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/CardError.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Collection.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Charge.php": {
+	"\/inc\/libraries\/stripe\/lib\/Coupon.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Charge.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Coupon.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Coupon.php": {
+	"\/inc\/libraries\/stripe\/lib\/Customer.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Coupon.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Customer.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Customer.php": {
+	"\/inc\/libraries\/stripe\/lib\/Error\/Api.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Customer.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Error\/Api.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Error.php": {
+	"\/inc\/libraries\/stripe\/lib\/Error\/ApiConnection.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Error.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Error\/ApiConnection.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Event.php": {
+	"\/inc\/libraries\/stripe\/lib\/Error\/Authentication.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Event.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Error\/Authentication.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/InvalidRequestError.php": {
+	"\/inc\/libraries\/stripe\/lib\/Error\/Base.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/InvalidRequestError.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Error\/Base.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Invoice.php": {
+	"\/inc\/libraries\/stripe\/lib\/Error\/Card.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Invoice.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Error\/Card.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/InvoiceItem.php": {
+	"\/inc\/libraries\/stripe\/lib\/Error\/InvalidRequest.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/InvoiceItem.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Error\/InvalidRequest.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/List.php": {
+	"\/inc\/libraries\/stripe\/lib\/Error\/RateLimit.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/List.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Error\/RateLimit.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Object.php": {
+	"\/inc\/libraries\/stripe\/lib\/Event.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Object.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Event.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Plan.php": {
+	"\/inc\/libraries\/stripe\/lib\/FileUpload.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Plan.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/FileUpload.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/RateLimitError.php": {
+	"\/inc\/libraries\/stripe\/lib\/Invoice.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/RateLimitError.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Invoice.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Recipient.php": {
+	"\/inc\/libraries\/stripe\/lib\/InvoiceItem.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Recipient.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/InvoiceItem.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Refund.php": {
+	"\/inc\/libraries\/stripe\/lib\/Object.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Refund.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Object.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/SingletonApiResource.php": {
+	"\/inc\/libraries\/stripe\/lib\/Plan.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/SingletonApiResource.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Plan.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Stripe.php": {
+	"\/inc\/libraries\/stripe\/lib\/Recipient.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Stripe.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Recipient.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Subscription.php": {
+	"\/inc\/libraries\/stripe\/lib\/Refund.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Subscription.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Refund.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Token.php": {
+	"\/inc\/libraries\/stripe\/lib\/SingletonApiResource.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Token.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/SingletonApiResource.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Transfer.php": {
+	"\/inc\/libraries\/stripe\/lib\/Stripe.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Transfer.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Stripe.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Util.php": {
+	"\/inc\/libraries\/stripe\/lib\/Subscription.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Util.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Subscription.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/inc\/libraries\/stripe\/Stripe\/Util\/Set.php": {
+	"\/inc\/libraries\/stripe\/lib\/Token.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/Stripe\/Util\/Set.php",
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Token.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/inc\/libraries\/stripe\/lib\/Transfer.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Transfer.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/inc\/libraries\/stripe\/lib\/TransferReversal.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/TransferReversal.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/inc\/libraries\/stripe\/lib\/Util\/RequestOptions.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Util\/RequestOptions.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/inc\/libraries\/stripe\/lib\/Util\/Set.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Util\/Set.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/inc\/libraries\/stripe\/lib\/Util\/Util.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/inc\/libraries\/stripe\/lib\/Util\/Util.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -970,6 +1035,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/README.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/README.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/README.md": {
 		"criticStyle": 0,
