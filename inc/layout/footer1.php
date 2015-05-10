@@ -59,6 +59,9 @@
         </div>
         <div id="blackout" class="blackout"></div>
         <div id="fullscreenload" class="fullscreenload"><span></span><img src="/img/loading.gif"></div>
+    ';
+    //    /* SESSION DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($_SESSION);print'</pre>';
+    print'
     </body>
     </html>
     ';

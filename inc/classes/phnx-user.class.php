@@ -429,7 +429,7 @@
 		}
 
 
-		function checksub($mode){
+		function checksub($mode=NULL){
 			session_start();
 
 			if($mode === 'no-cache'){
