@@ -83,47 +83,45 @@ try{
 				</div>
 			</div>
 		';
-		if($user->subscription['status'] === 'none'){
 
-			switch($action){
+		switch($action){
 
-				case 'paper':
-					$html .= '
-						<div id="modal-add-card-success">
-							<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
-							<button id="modal-add-card-button" data-action="paper" >Subscribe to Paper Magazine</button>
-						</div>
-					';
-					break;
+			case 'paper':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="paper" >Subscribe to Paper Magazine</button>
+					</div>
+				';
+				break;
 
-					case 'digital':
-						$html .= '
-							<div id="modal-add-card-success">
-								<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
-								<button id="modal-add-card-button" data-action="digital" >Subscribe to Digital Magazine</button>
-							</div>
-						';
-						break;
+			case 'digital':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="digital" >Subscribe to Digital Magazine</button>
+					</div>
+				';
+				break;
 
-					case 'digitalpaper':
-						$html .= '
-							<div id="modal-add-card-success">
-								<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
-								<button id="modal-add-card-button" data-action="digitalpaper" >Subscribe to Digital + Paper Magazine</button>
-							</div>
-						';
-						break;
+			case 'digitalpaper':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="digitalpaper" >Subscribe to Digital + Paper Magazine</button>
+					</div>
+				';
+				break;
 
-					default:
-						$html .= '
-							<div id="modal-add-card-success">
-								<p>Thank your for adding your credit card.</p>
-								<p>Please close this window and try your subscription again. (ref:invalid action)</p>
-							</div>
-						';
-						break;
+			default:
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for adding your credit card.</p>
+						<p>Please close this window and try your subscription again. (ref:invalid action)</p>
+					</div>
+				';
+				break;
 
-			}
 		}
 
 
@@ -195,6 +193,12 @@ try{
 						<p>Auto re-new has been disabled for you subscription.</p>
 						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
 					';
+
+					// on the main page we need to check if the there is a current plan that is cancel at end of period
+					// is so disable the change subscription buttons un they turn auto renew back on
+					// this is to stop people from upgrading from a canceled plan
+					// this might not be necessary
+
 					// flag to hide the autorenew option and show the autorenew off option
 					$autorenew = '';
 					break;
@@ -230,12 +234,29 @@ try{
 
 				case 'none':
 					// full cancel
-					throw new Exception('not coded yet');
-					break;
+					// full cancel
+					$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
+					$error = '0';
+					$h1 = 'Subscription Status';
+					$html = '
+						<p>Auto re-new has been disabled for you subscription.</p>
+						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
+					';
 
 				case 'digital':
 					// downgrade
-					throw new Exception('not coded yet');
+					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+					$meta = $subscription->metadata->__toArray();
+					$subscription->plan = "sub-digital";
+					$subscription->prorate = FALSE;
+					if($meta['downgrade'] !== 'yes'){
+						$subscription->metadata = array('downgrade' => 'yes', 'downgrade_from' => 'sub-paper' ,'downgrade_date' => $user->subscription['current_period_end']);
+					}
+					$subscription->save();
+					$html = '
+						<p>downgrade</p>
+						<p>Thank you for subscribing to Digital Magazine</p>
+					';
 					break;
 
 				case 'paper':
@@ -264,17 +285,44 @@ try{
 
 				case 'none':
 					// full cancel
-					throw new Exception('not coded yet');
-					break;
+					$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
+					$error = '0';
+					$h1 = 'Subscription Status';
+					$html = '
+						<p>Auto re-new has been disabled for you subscription.</p>
+						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
+					';
 
 				case 'digital':
 					// downgrade
-					throw new Exception('not coded yet');
+					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+					$meta = $subscription->metadata->__toArray();
+					$subscription->plan = "sub-digital";
+					$subscription->prorate = FALSE;
+					if($meta['downgrade'] !== 'yes'){
+						$subscription->metadata = array('downgrade' => 'yes', 'downgrade_from' => 'sub-digital+paper' ,'downgrade_date' => $user->subscription['current_period_end']);
+					}
+					$subscription->save();
+					$html = '
+						<p>downgrade</p>
+						<p>Thank you for subscribing to Digital Magazine</p>
+					';
 					break;
 
 				case 'paper':
 					// downgrade
-					throw new Exception('not coded yet');
+					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+					$meta = $subscription->metadata->__toArray();
+					$subscription->plan = "sub-paper";
+					$subscription->prorate = FALSE;
+					if($meta['downgrade'] !== 'yes'){
+						$subscription->metadata = array('downgrade' => 'yes', 'downgrade_from' => 'sub-digital+paper' ,'downgrade_date' => $user->subscription['current_period_end']);
+					}
+					$subscription->save();
+					$html = '
+						<p>downgrade</p>
+						<p>Thank you for subscribing to Paper Magazine</p>
+					';
 					break;
 
 				case 'digitalpaper':
