@@ -210,6 +210,7 @@ try{
 					$html = '
 						<p>This is your current subscription.</p>
 						<p>You get access to...</p>
+						<p>'.$user->subscription['next_plan'].'</p>
 					';
 					break;
 
@@ -221,7 +222,7 @@ try{
 						$year = $year = 60*60*24*365;
 					}
 					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
-					$bal = ceil( 0 - ( $diff * $user->subscription['last_paid'] ) );
+					$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
 					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
 					$cust->account_balance = $bal;
 					$cust->save();
@@ -240,11 +241,11 @@ try{
 						$year = $year = 60*60*24*365;
 					}
 					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
-					$bal = ceil( 0 - ( $diff * $user->subscription['last_paid'] ) );
+					$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
 					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
 					$cust->account_balance = $bal;
 					$cust->save();
-					$res2 = $cust->subscriptions->create(array("plan" => "sub-paper"));
+					$res2 = $cust->subscriptions->create(array("plan" => "sub-digital+paper"));
 					$html = '
 						<p>upgrade</p>
 						<p>Thank you for subscribing to Digital + Paper Magazine</p>
@@ -309,11 +310,11 @@ try{
 						$year = $year = 60*60*24*365;
 					}
 					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
-					$bal = ceil( 0 - ( $diff * $user->subscription['last_paid'] ) );
+					$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
 					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
 					$cust->account_balance = $bal;
 					$cust->save();
-					$res2 = $cust->subscriptions->create(array("plan" => "sub-paper"));
+					$res2 = $cust->subscriptions->create(array("plan" => "sub-digital+paper"));
 					$html = '
 						<p>upgrade</p>
 						<p>Thank you for subscribing to Digital + Paper Magazine</p>
@@ -349,7 +350,7 @@ try{
 					if($meta['downgrade'] !== 'yes'){
 						$subscription->metadata = array(
 							'downgrade' => 'yes',
-							'downgrade_from' => 'sub-paper',
+							'downgrade_from' => 'sub-digital+paper',
 							'downgrade_date' => $user->subscription['current_period_end'],
 							'downgrade_paid' => $user->subscription['next_payment']
 						);
@@ -370,7 +371,7 @@ try{
 					if($meta['downgrade'] !== 'yes'){
 						$subscription->metadata = array(
 							'downgrade' => 'yes',
-							'downgrade_from' => 'sub-paper',
+							'downgrade_from' => 'sub-digital+paper',
 							'downgrade_date' => $user->subscription['current_period_end'],
 							'downgrade_paid' => $user->subscription['next_payment']
 						);
