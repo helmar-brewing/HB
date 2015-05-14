@@ -457,14 +457,20 @@
 					if($sub_response->data[0]['metadata']['downgrade'] === 'yes'){
 						if(time() < $sub_response->data[0]['metadata']['downgrade_date']){
 							$plan_type = $sub_response->data[0]['metadata']['downgrade_from'];
+							$last_paid = $sub_response->data[0]['metadata']['downgrade_paid'];
+							$next_payment = $sub_response->data[0]->plan['amount'];
 						}else{
 							$subscription = \Stripe\Customer::retrieve($this->stripeID)->subscriptions->retrieve($sub_response->data[0]['id']);
 							$subscription->metadata = array('downgrade' => NULL, 'downgrade_from' => NULL ,'downgrade_date' => NULL);
 							$subscription->save();
 							$plan_type = $sub_response->data[0]->plan['id'];
+							$last_paid = $sub_response->data[0]->plan['amount'];
+							$next_payment = $sub_response->data[0]->plan['amount'];
 						}
 					}else{
 						$plan_type = $sub_response->data[0]->plan['id'];
+						$last_paid = $sub_response->data[0]->plan['amount'];
+						$next_payment = $sub_response->data[0]->plan['amount'];
 					}
 					$this->subscription = array(
 						'status' => $sub_response->data[0]['status'],
@@ -472,7 +478,9 @@
 						'cancel_at_period_end' => $sub_response->data[0]['cancel_at_period_end'],
 						'current_period_end' => $sub_response->data[0]['current_period_end'],
 						'plan_type' => $plan_type,
-						'next_plan' => $sub_response->data[0]->plan['id']
+						'next_plan' => $sub_response->data[0]->plan['id'],
+						'last_paid' => $last_paid,
+						'next_payment' => $next_payment
 					);
 					if($plan_type === 'sub-digital'){
 						$this->subscription['digital'] = TRUE;

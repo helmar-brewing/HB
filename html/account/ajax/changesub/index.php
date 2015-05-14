@@ -204,6 +204,7 @@ try{
 					break;
 
 				case 'digital':
+
 					$error = '0';
 					$h1 = 'Subscription Status';
 					$html = '
@@ -213,13 +214,41 @@ try{
 					break;
 
 				case 'paper':
-					//upgrade
-					throw new Exception('not coded yet');
+					// upgrade
+					if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
+						$year = 60*60*24*366;
+					}else{
+						$year = $year = 60*60*24*365;
+					}
+					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
+					$bal = ceil( 0 - ( $diff * $user->subscription['last_paid'] ) );
+					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
+					$cust->account_balance = $bal;
+					$cust->save();
+					$res2 = $cust->subscriptions->create(array("plan" => "sub-paper"));
+					$html = '
+						<p>upgrade</p>
+						<p>Thank you for subscribing to Paper Magazine</p>
+					';
 					break;
 
 				case 'digitalpaper':
-					//upgrade
-					throw new Exception('not coded yet');
+					// upgrade
+					if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
+						$year = 60*60*24*366;
+					}else{
+						$year = $year = 60*60*24*365;
+					}
+					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
+					$bal = ceil( 0 - ( $diff * $user->subscription['last_paid'] ) );
+					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
+					$cust->account_balance = $bal;
+					$cust->save();
+					$res2 = $cust->subscriptions->create(array("plan" => "sub-paper"));
+					$html = '
+						<p>upgrade</p>
+						<p>Thank you for subscribing to Digital + Paper Magazine</p>
+					';
 					break;
 
 				default:
@@ -233,7 +262,6 @@ try{
 			switch($action){
 
 				case 'none':
-					// full cancel
 					// full cancel
 					$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
 					$error = '0';
@@ -250,7 +278,12 @@ try{
 					$subscription->plan = "sub-digital";
 					$subscription->prorate = FALSE;
 					if($meta['downgrade'] !== 'yes'){
-						$subscription->metadata = array('downgrade' => 'yes', 'downgrade_from' => 'sub-paper' ,'downgrade_date' => $user->subscription['current_period_end']);
+						$subscription->metadata = array(
+							'downgrade' => 'yes',
+							'downgrade_from' => 'sub-paper',
+							'downgrade_date' => $user->subscription['current_period_end'],
+							'downgrade_paid' => $user->subscription['next_payment']
+						);
 					}
 					$subscription->save();
 					$html = '
@@ -270,7 +303,21 @@ try{
 
 				case 'digitalpaper':
 					// upgrade
-					throw new Exception('not coded yet');
+					if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
+						$year = 60*60*24*366;
+					}else{
+						$year = $year = 60*60*24*365;
+					}
+					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
+					$bal = ceil( 0 - ( $diff * $user->subscription['last_paid'] ) );
+					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
+					$cust->account_balance = $bal;
+					$cust->save();
+					$res2 = $cust->subscriptions->create(array("plan" => "sub-paper"));
+					$html = '
+						<p>upgrade</p>
+						<p>Thank you for subscribing to Digital + Paper Magazine</p>
+					';
 					break;
 
 				default:
@@ -300,7 +347,12 @@ try{
 					$subscription->plan = "sub-digital";
 					$subscription->prorate = FALSE;
 					if($meta['downgrade'] !== 'yes'){
-						$subscription->metadata = array('downgrade' => 'yes', 'downgrade_from' => 'sub-digital+paper' ,'downgrade_date' => $user->subscription['current_period_end']);
+						$subscription->metadata = array(
+							'downgrade' => 'yes',
+							'downgrade_from' => 'sub-paper',
+							'downgrade_date' => $user->subscription['current_period_end'],
+							'downgrade_paid' => $user->subscription['next_payment']
+						);
 					}
 					$subscription->save();
 					$html = '
@@ -316,7 +368,12 @@ try{
 					$subscription->plan = "sub-paper";
 					$subscription->prorate = FALSE;
 					if($meta['downgrade'] !== 'yes'){
-						$subscription->metadata = array('downgrade' => 'yes', 'downgrade_from' => 'sub-digital+paper' ,'downgrade_date' => $user->subscription['current_period_end']);
+						$subscription->metadata = array(
+							'downgrade' => 'yes',
+							'downgrade_from' => 'sub-paper',
+							'downgrade_date' => $user->subscription['current_period_end'],
+							'downgrade_paid' => $user->subscription['next_payment']
+						);
 					}
 					$subscription->save();
 					$html = '
