@@ -147,7 +147,7 @@ try{
 					$h1 = 'Subscription';
 					$html ='
 						<p>Thank you for subscribing to Digital Magazine</p>
-						<p>Your subscription will renew on '.date("Y m d",$res['current_period_end']).'.</p>
+						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 						<p>Your credit card will be charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 					';
 					break;
@@ -158,8 +158,8 @@ try{
 					$h1 = 'Subscription';
 					$html ='
 						<p>Thank you for subscribing to Paper Magazine</p>
-						<p>Your subscription will renew on '.date("Y m d",$res['current_period_end']).'.</p>
-						<p>Your credit card will be charged '.$res['plan']['amount'].'</p>
+						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
+						<p>Your credit card will be charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 					';
 					break;
 
@@ -169,8 +169,8 @@ try{
 					$h1 = 'Subscription';
 					$html ='
 						<p>Thank you for subscribing to Digital + Paper Magazine</p>
-						<p>Your subscription will renew on '.date("Y m d",$res['current_period_end']).'.</p>
-						<p>Your credit card will be charged '.$res['plan']['amount'].'</p>
+						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
+						<p>Your credit card will be charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 					';
 					break;
 
@@ -204,14 +204,34 @@ try{
 					break;
 
 				case 'digital':
+					if($user->subscription['cancel_at_period_end'] === true){
 
+						/********************/
+
+						throw new Exception('resuming subscription not coded yet');
+					}else{
+						if($meta['downgrade'] === 'yes'){
+							$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+							$meta = $subscription->metadata->__toArray();
+							$subscription->plan = "sub-digital";
+							$subscription->prorate = FALSE;
+							if($meta['downgrade'] === 'yes'){
+								$subscription->metadata = array(
+									'downgrade' => null,
+									'downgrade_from' => null,
+									'downgrade_date' => null,
+									'downgrade_paid' => null
+								);
+							}
+							$subscription->save();
+							$html .= '<p>Your subscription will renew.</p>';
+							$html .= '<p>Your card has not been charged.</p>';
+						}else{
+							$html = '<p>This is your current subscription.</p>';
+						}
+					}
 					$error = '0';
 					$h1 = 'Subscription Status';
-					$html = '
-						<p>This is your current subscription.</p>
-						<p>You get access to...</p>
-						<p>'.$user->subscription['next_plan'].'</p>
-					';
 					break;
 
 				case 'paper':
@@ -294,12 +314,34 @@ try{
 					break;
 
 				case 'paper':
+					if($user->subscription['cancel_at_period_end'] === true){
+
+						/********************/
+
+						throw new Exception('resuming subscription not coded yet');
+					}else{
+						if($meta['downgrade'] === 'yes'){
+							$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+							$meta = $subscription->metadata->__toArray();
+							$subscription->plan = "sub-paper";
+							$subscription->prorate = FALSE;
+							if($meta['downgrade'] === 'yes'){
+								$subscription->metadata = array(
+									'downgrade' => null,
+									'downgrade_from' => null,
+									'downgrade_date' => null,
+									'downgrade_paid' => null
+								);
+							}
+							$subscription->save();
+							$html .= '<p>Your subscription will renew.</p>';
+							$html .= '<p>Your card has not been charged.</p>';
+						}else{
+							$html = '<p>This is your current subscription.</p>';
+						}
+					}
 					$error = '0';
 					$h1 = 'Subscription Status';
-					$html = '
-						<p>This is your current subscription.</p>
-						<p>You get access to...</p>
-					';
 					break;
 
 				case 'digitalpaper':
@@ -384,12 +426,34 @@ try{
 					break;
 
 				case 'digitalpaper':
+					if($user->subscription['cancel_at_period_end'] === true){
+
+						/********************/
+
+						throw new Exception('resuming subscription not coded yet');
+					}else{
+						if($meta['downgrade'] === 'yes'){
+							$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+							$meta = $subscription->metadata->__toArray();
+							$subscription->plan = "sub-digital+paper";
+							$subscription->prorate = FALSE;
+							if($meta['downgrade'] === 'yes'){
+								$subscription->metadata = array(
+									'downgrade' => null,
+									'downgrade_from' => null,
+									'downgrade_date' => null,
+									'downgrade_paid' => null
+								);
+							}
+							$subscription->save();
+							$html .= '<p>Your subscription will renew.</p>';
+							$html .= '<p>Your card has not been charged.</p>';
+						}else{
+							$html = '<p>This is your current subscription.</p>';
+						}
+					}
 					$error = '0';
 					$h1 = 'Subscription Status';
-					$html = '
-						<p>This is your current subscription.</p>
-						<p>You get access to...</p>
-					';
 					break;
 
 				default:
