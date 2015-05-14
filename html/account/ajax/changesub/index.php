@@ -210,9 +210,9 @@ try{
 
 						throw new Exception('resuming subscription not coded yet');
 					}else{
+						$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+						$meta = $subscription->metadata->__toArray();
 						if($meta['downgrade'] === 'yes'){
-							$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-							$meta = $subscription->metadata->__toArray();
 							$subscription->plan = "sub-digital";
 							$subscription->prorate = FALSE;
 							if($meta['downgrade'] === 'yes'){
@@ -320,9 +320,9 @@ try{
 
 						throw new Exception('resuming subscription not coded yet');
 					}else{
+						$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+						$meta = $subscription->metadata->__toArray();
 						if($meta['downgrade'] === 'yes'){
-							$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-							$meta = $subscription->metadata->__toArray();
 							$subscription->plan = "sub-paper";
 							$subscription->prorate = FALSE;
 							if($meta['downgrade'] === 'yes'){
@@ -432,9 +432,9 @@ try{
 
 						throw new Exception('resuming subscription not coded yet');
 					}else{
+						$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+						$meta = $subscription->metadata->__toArray();
 						if($meta['downgrade'] === 'yes'){
-							$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-							$meta = $subscription->metadata->__toArray();
 							$subscription->plan = "sub-digital+paper";
 							$subscription->prorate = FALSE;
 							if($meta['downgrade'] === 'yes'){
