@@ -291,6 +291,7 @@ try{
 						<p>Auto re-new has been disabled for you subscription.</p>
 						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
 					';
+					break;
 
 				case 'digital':
 					// downgrade
@@ -382,6 +383,7 @@ try{
 						<p>Auto re-new has been disabled for you subscription.</p>
 						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
 					';
+					break;
 
 				case 'digital':
 					// downgrade
