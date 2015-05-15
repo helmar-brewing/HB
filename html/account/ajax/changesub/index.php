@@ -204,13 +204,14 @@ try{
 					break;
 
 				case 'digital':
+					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
 					if($user->subscription['cancel_at_period_end'] === true){
-
-						/********************/
-
-						throw new Exception('resuming subscription not coded yet');
+						$subscription->plan = "sub-digital";
+						$subscription->prorate = FALSE;
+						$subscription->save();
+						$html .= '<p>Your subscription will renew.</p>';
+						$html .= '<p>Your card has not been charged.</p>';
 					}else{
-						$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
 						$meta = $subscription->metadata->__toArray();
 						if($meta['downgrade'] === 'yes'){
 							$subscription->plan = "sub-digital";
@@ -315,13 +316,14 @@ try{
 					break;
 
 				case 'paper':
+					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
 					if($user->subscription['cancel_at_period_end'] === true){
-
-						/********************/
-
-						throw new Exception('resuming subscription not coded yet');
+						$subscription->plan = "sub-paper";
+						$subscription->prorate = FALSE;
+						$subscription->save();
+						$html .= '<p>Your subscription will renew.</p>';
+						$html .= '<p>Your card has not been charged.</p>';
 					}else{
-						$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
 						$meta = $subscription->metadata->__toArray();
 						if($meta['downgrade'] === 'yes'){
 							$subscription->plan = "sub-paper";
@@ -428,13 +430,14 @@ try{
 					break;
 
 				case 'digitalpaper':
+					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
 					if($user->subscription['cancel_at_period_end'] === true){
-
-						/********************/
-
-						throw new Exception('resuming subscription not coded yet');
+						$subscription->plan = "sub-digital+paper";
+						$subscription->prorate = FALSE;
+						$subscription->save();
+						$html .= '<p>Your subscription will renew.</p>';
+						$html .= '<p>Your card has not been charged.</p>';
 					}else{
-						$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
 						$meta = $subscription->metadata->__toArray();
 						if($meta['downgrade'] === 'yes'){
 							$subscription->plan = "sub-digital+paper";
