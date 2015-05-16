@@ -23,9 +23,102 @@ require_once('classes/phnx-user.class.php');
 require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
+/* PAGE FUNCTIONS */
+function downgrade($to = NULL, $from = NULL){
+	if( $to === NULL || $from === NULL ){ throw new Exception('no plan set for downgrade.'); }
+	global $cust, $user;
+	$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+	$meta = $subscription->metadata->__toArray();
+	$subscription->plan = $to;
+	$subscription->prorate = FALSE;
+	if($meta['downgrade'] !== 'yes'){
+		$subscription->metadata = array(
+			'downgrade' => 'yes',
+			'downgrade_from' => $from,
+			'downgrade_date' => $user->subscription['current_period_end'],
+			'downgrade_paid' => $user->subscription['next_payment']
+		);
+	}
+	$subscription->save();
+	$html = array(
+		'sub-digital' => '',
+		'sub-paper' => '',
+		'sub-digital+paper' => ''
+	);
+	return $html[$to];
+}
 
-$user = new phnx_user;
-$user->checklogin(2);
+function upgrade($to = NULL){
+	if( $to === NULL ){ throw new Exception('no plan set for upgrade.'); }
+	global $cust, $user;
+	if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
+		$year = 60*60*24*366;
+	}else{
+		$year = $year = 60*60*24*365;
+	}
+	$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
+	$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
+	$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
+	$cust->account_balance = $bal;
+	$cust->save();
+	$res = $cust->subscriptions->create(array("plan" => $to));
+	$html = array(
+		'sub-paper' => '',
+		'sub-digital+paper' => ''
+	);
+	return $html[$to];
+}
+function cancel(){
+	global $cust, $user;
+	$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
+	$html = '
+		<p>Auto re-new has been disabled for you subscription.</p>
+		<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
+	';
+	return $html;
+}
+function renew($to){
+	global $cust, $user;
+	$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
+	if($user->subscription['cancel_at_period_end'] === true){
+		$subscription->plan = $to;
+		$subscription->prorate = FALSE;
+		$subscription->save();
+		$h .= '<p>Your subscription will renew.</p>';
+		$h .= '<p>Your card has not been charged.</p>';
+	}else{
+		$meta = $subscription->metadata->__toArray();
+		if($meta['downgrade'] === 'yes'){
+			$subscription->plan = $to;
+			$subscription->prorate = FALSE;
+			if($meta['downgrade'] === 'yes'){
+				$subscription->metadata = array(
+					'downgrade' => null,
+					'downgrade_from' => null,
+					'downgrade_date' => null,
+					'downgrade_paid' => null
+				);
+			}
+			$subscription->save();
+			$h .= '<p>Your subscription will renew.</p>';
+			$h .= '<p>Your card has not been charged.</p>';
+		}else{
+			$h .= '<p>This is your current subscription.</p>';
+		}
+	}
+	$html = array(
+		'sub-digital' => $h,
+		'sub-paper' => $h,
+		'sub-digital+paper' => $h
+	);
+	return $html[$to];
+}
+
+
+
+
+
+
 
 
 
@@ -34,7 +127,9 @@ $user->checklogin(2);
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 try{
 
-    // test for login
+    // get the user and test for login
+	$user = new phnx_user;
+	$user->checklogin(2);
 	if($user->login() !== 2){
         throw new AuthException('');
     }
@@ -55,7 +150,7 @@ try{
 	// get the stripe customer
 	$cust = \Stripe\Customer::retrieve($user->stripeID);
 
-	// check for address before credit card  ***************
+	// check for address before credit card  **************************************************************
 
 	// check for payment methods - else do the stuff
 	if($cust['sources']['total_count'] === 0 && $action !== 'none'){
@@ -181,292 +276,83 @@ try{
 			}
 
 		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital'){
-
 			switch($action){
-
 				case 'none':
-					// full cancel
-					$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
+					$html = cancel();
 					$error = '0';
 					$h1 = 'Subscription Status';
-					$html = '
-						<p>Auto re-new has been disabled for you subscription.</p>
-						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
-					';
-
-					// on the main page we need to check if the there is a current plan that is cancel at end of period
-					// is so disable the change subscription buttons un they turn auto renew back on
-					// this is to stop people from upgrading from a canceled plan
-					// this might not be necessary
-
-					// flag to hide the autorenew option and show the autorenew off option
-					$autorenew = '';
 					break;
-
 				case 'digital':
-					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-					if($user->subscription['cancel_at_period_end'] === true){
-						$subscription->plan = "sub-digital";
-						$subscription->prorate = FALSE;
-						$subscription->save();
-						$html .= '<p>Your subscription will renew.</p>';
-						$html .= '<p>Your card has not been charged.</p>';
-					}else{
-						$meta = $subscription->metadata->__toArray();
-						if($meta['downgrade'] === 'yes'){
-							$subscription->plan = "sub-digital";
-							$subscription->prorate = FALSE;
-							if($meta['downgrade'] === 'yes'){
-								$subscription->metadata = array(
-									'downgrade' => null,
-									'downgrade_from' => null,
-									'downgrade_date' => null,
-									'downgrade_paid' => null
-								);
-							}
-							$subscription->save();
-							$html .= '<p>Your subscription will renew.</p>';
-							$html .= '<p>Your card has not been charged.</p>';
-						}else{
-							$html = '<p>This is your current subscription.</p>';
-						}
-					}
+					$html = renew('sub-digital');
 					$error = '0';
 					$h1 = 'Subscription Status';
 					break;
-
 				case 'paper':
-					// upgrade
-					if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
-						$year = 60*60*24*366;
-					}else{
-						$year = $year = 60*60*24*365;
-					}
-					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
-					$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
-					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
-					$cust->account_balance = $bal;
-					$cust->save();
-					$res2 = $cust->subscriptions->create(array("plan" => "sub-paper"));
-					$html = '
-						<p>upgrade</p>
-						<p>Thank you for subscribing to Paper Magazine</p>
-					';
+					$html = upgrade('sub-paper');
+					$error = '0';
+					$h1 = 'Subscription Status';
 					break;
-
 				case 'digitalpaper':
-					// upgrade
-					if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
-						$year = 60*60*24*366;
-					}else{
-						$year = $year = 60*60*24*365;
-					}
-					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
-					$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
-					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
-					$cust->account_balance = $bal;
-					$cust->save();
-					$res2 = $cust->subscriptions->create(array("plan" => "sub-digital+paper"));
-					$html = '
-						<p>upgrade</p>
-						<p>Thank you for subscribing to Digital + Paper Magazine</p>
-					';
+					$html = upgrade('sub-digital+paper');
+					$error = '0';
+					$h1 = 'Subscription Status';
 					break;
-
 				default:
 					throw new Exception('invalid action x02');
 					break;
-
 			}
-
 		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-paper'){
-
 			switch($action){
-
 				case 'none':
-					// full cancel
-					$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
+					$html = cancel();
 					$error = '0';
 					$h1 = 'Subscription Status';
-					$html = '
-						<p>Auto re-new has been disabled for you subscription.</p>
-						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
-					';
 					break;
-
 				case 'digital':
-					// downgrade
-					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-					$meta = $subscription->metadata->__toArray();
-					$subscription->plan = "sub-digital";
-					$subscription->prorate = FALSE;
-					if($meta['downgrade'] !== 'yes'){
-						$subscription->metadata = array(
-							'downgrade' => 'yes',
-							'downgrade_from' => 'sub-paper',
-							'downgrade_date' => $user->subscription['current_period_end'],
-							'downgrade_paid' => $user->subscription['next_payment']
-						);
-					}
-					$subscription->save();
-					$html = '
-						<p>downgrade</p>
-						<p>Thank you for subscribing to Digital Magazine</p>
-					';
-					break;
-
-				case 'paper':
-					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-					if($user->subscription['cancel_at_period_end'] === true){
-						$subscription->plan = "sub-paper";
-						$subscription->prorate = FALSE;
-						$subscription->save();
-						$html .= '<p>Your subscription will renew.</p>';
-						$html .= '<p>Your card has not been charged.</p>';
-					}else{
-						$meta = $subscription->metadata->__toArray();
-						if($meta['downgrade'] === 'yes'){
-							$subscription->plan = "sub-paper";
-							$subscription->prorate = FALSE;
-							if($meta['downgrade'] === 'yes'){
-								$subscription->metadata = array(
-									'downgrade' => null,
-									'downgrade_from' => null,
-									'downgrade_date' => null,
-									'downgrade_paid' => null
-								);
-							}
-							$subscription->save();
-							$html .= '<p>Your subscription will renew.</p>';
-							$html .= '<p>Your card has not been charged.</p>';
-						}else{
-							$html = '<p>This is your current subscription.</p>';
-						}
-					}
+					$html = downgrade('sub-digital', 'sub-paper');
 					$error = '0';
 					$h1 = 'Subscription Status';
 					break;
-
-				case 'digitalpaper':
-					// upgrade
-					if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
-						$year = 60*60*24*366;
-					}else{
-						$year = $year = 60*60*24*365;
-					}
-					$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
-					$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
-					$cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel();
-					$cust->account_balance = $bal;
-					$cust->save();
-					$res2 = $cust->subscriptions->create(array("plan" => "sub-digital+paper"));
-					$html = '
-						<p>upgrade</p>
-						<p>Thank you for subscribing to Digital + Paper Magazine</p>
-					';
+				case 'paper':
+					$html = renew('sub-paper');
+					$error = '0';
+					$h1 = 'Subscription Status';
 					break;
-
+				case 'digitalpaper':
+					$html = upgrade('sub-digital+paper');
+					$error = '0';
+					$h1 = 'Subscription Status';
+					break;
 				default:
 					throw new Exception('invalid action x02');
 					break;
-
 			}
-
 		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital+paper'){
-
 			switch($action){
-
 				case 'none':
-					// full cancel
-					$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
+					$html = cancel();
 					$error = '0';
 					$h1 = 'Subscription Status';
-					$html = '
-						<p>Auto re-new has been disabled for you subscription.</p>
-						<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
-					';
 					break;
-
 				case 'digital':
-					// downgrade
-					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-					$meta = $subscription->metadata->__toArray();
-					$subscription->plan = "sub-digital";
-					$subscription->prorate = FALSE;
-					if($meta['downgrade'] !== 'yes'){
-						$subscription->metadata = array(
-							'downgrade' => 'yes',
-							'downgrade_from' => 'sub-digital+paper',
-							'downgrade_date' => $user->subscription['current_period_end'],
-							'downgrade_paid' => $user->subscription['next_payment']
-						);
-					}
-					$subscription->save();
-					$html = '
-						<p>downgrade</p>
-						<p>Thank you for subscribing to Digital Magazine</p>
-					';
-					break;
-
-				case 'paper':
-					// downgrade
-					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-					$meta = $subscription->metadata->__toArray();
-					$subscription->plan = "sub-paper";
-					$subscription->prorate = FALSE;
-					if($meta['downgrade'] !== 'yes'){
-						$subscription->metadata = array(
-							'downgrade' => 'yes',
-							'downgrade_from' => 'sub-digital+paper',
-							'downgrade_date' => $user->subscription['current_period_end'],
-							'downgrade_paid' => $user->subscription['next_payment']
-						);
-					}
-					$subscription->save();
-					$html = '
-						<p>downgrade</p>
-						<p>Thank you for subscribing to Paper Magazine</p>
-					';
-					break;
-
-				case 'digitalpaper':
-					$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-					if($user->subscription['cancel_at_period_end'] === true){
-						$subscription->plan = "sub-digital+paper";
-						$subscription->prorate = FALSE;
-						$subscription->save();
-						$html .= '<p>Your subscription will renew.</p>';
-						$html .= '<p>Your card has not been charged.</p>';
-					}else{
-						$meta = $subscription->metadata->__toArray();
-						if($meta['downgrade'] === 'yes'){
-							$subscription->plan = "sub-digital+paper";
-							$subscription->prorate = FALSE;
-							if($meta['downgrade'] === 'yes'){
-								$subscription->metadata = array(
-									'downgrade' => null,
-									'downgrade_from' => null,
-									'downgrade_date' => null,
-									'downgrade_paid' => null
-								);
-							}
-							$subscription->save();
-							$html .= '<p>Your subscription will renew.</p>';
-							$html .= '<p>Your card has not been charged.</p>';
-						}else{
-							$html = '<p>This is your current subscription.</p>';
-						}
-					}
+					$html = downgrade('sub-digital', 'sub-digital+paper');
 					$error = '0';
 					$h1 = 'Subscription Status';
 					break;
-
+				case 'paper':
+					$html = downgrade('sub-paper', 'sub-digital+paper');
+					$error = '0';
+					$h1 = 'Subscription Status';
+					break;
+				case 'digitalpaper':
+					$html = renew('sub-digital+paper');
+					$error = '0';
+					$h1 = 'Subscription Status';
+					break;
 				default:
 					throw new Exception('invalid action x02');
 					break;
-
 			}
-
 		}else{
 			throw new Exception('no plan type');
 		}
