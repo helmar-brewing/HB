@@ -150,7 +150,7 @@ try{
 	// get the stripe customer
 	$cust = \Stripe\Customer::retrieve($user->stripeID);
 
-	// check for address before credit card  **************************************************************
+	// check for address before credit card  **********************************************************
 
 	// check for payment methods - else do the stuff
 	if($cust['sources']['total_count'] === 0 && $action !== 'none'){
