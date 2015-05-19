@@ -236,7 +236,7 @@ function subUpdate(a){
 					$('#sub-digitalpaper-checkbox').removeClass('fa-square-o');
 					$('#sub-digitalpaper-checkbox').addClass('fa-check-square-o');
 				}
-
+				currentSub()
                 document.getElementById('fullscreenload').style.display = 'none';
             }else{
                 document.getElementById('fullscreenload').style.display = 'none';
@@ -259,4 +259,34 @@ function sub(a){
     $('#ajax-modal').addClass('sub_modal');
     showModal('ajax-modal');
     subUpdate(a);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function currentSub(){
+	document.getElementById('sub-info').innerHTML = '<p><i class="fa fa-spin fa-cog"></i> loading subscription...</p>';
+    $.get(
+        "/account/ajax/currentsub/",
+        {a:1},
+        function( data ) {
+            document.getElementById('sub-info').innerHTML = data.content;
+            if(data.error === '2'){
+                window.location.href = "/account/login/?redir=account/";
+			}
+        },
+        "json"
+    )
+    .fail(function() {
+        document.getElementById('modal_content').innerHTML = '<p>There was an error getting your subscription. Please try again.</p><p>(ref. ajax fail)<p>';
+    });
 }

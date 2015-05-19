@@ -194,50 +194,9 @@ print'
 	';
 
 
-	// make this something that gets updated via ajax and call it when the page loads. give it its own loading screen that just covers its area
-	function subName($sub){
-		switch($sub){
-			case 'sub-digital':
-				return 'Digital Magazine';
-				break;
-			case 'sub-paper':
-				return 'Paper Magazine';
-				break;
-			case 'sub-digital+paper':
-				return 'Digital + Paper Magazine';
-				break;
-			default: throw new Exception('Cannot get subscription name, invalid plan type.');
-		}
-	}
-	switch($user->subscription[status]){
-		case 'error':
-			$html = '<p>There was an error determining you subscription status.</p>';
-			break;
-		case 'none':
-			$html = '<p>You do not have an active subscription.</p>';
-			break;
-		case 'active':
-			$html = '<p>You are currently subscribed to <span>'.subName($user->subscription['plan_type']).'</span></p>';
-			if($user->subscription['cancel_at_period_end'] === true){
-				$html .= '<p><i class="fa fa-ban"></i> Auto re-new is turned off. Your subscription will be canceled on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
-				$html .= '<button>Resume Subscription</button>';
-			}else{
-				if($user->subscription['plan_type'] === $user->subscription['next_plan']){
-					$html .= '<p><i class="fa fa-refresh"></i> Your subscription will renew on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
-					$html .= '<p>Next Payment: $'.substr($user->subscription['next_payment'],0,-2).'.'.substr($user->subscription['next_payment'],-2).' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
-				}else{
-					$html .= '<p><i class="fa fa-level-down"></i> You have elected to change your subscription to <span>'.subName($user->subscription['next_plan']).'</span>.</p>';
-					$html .= '<p>Enjoy your current benefits until <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
-					$html .= '<p>Next Payment: $'.substr($user->subscription['next_payment'],0,-2).'.'.substr($user->subscription['next_payment'],-2).' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
-				}
-			}
-			break;
-		default:
-			$html = '<p>There was an error determining you subscription status.</p>';
-			break;
-	}
 
-	print'<div id="sub-info">'.$html.'</div>';
+
+	print'<div id="sub-info"></div>';
 
 	print'
 			<div class="credit-card">
@@ -304,6 +263,15 @@ print'
 	</div>
 ';
 
+?>
+
+<script>
+	$( document ).ready(function() {
+		currentSub();
+	});
+</script>
+
+<?php
 /* FOOTER */ require('layout/footer1.php');
 
 
