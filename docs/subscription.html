@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h2 id="checkingforsubscription">Checking for subscription</h2>
+
+<p>Make sure to call include the stripe library on the page
+<code>php
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
+</code></p>
+
+<p>You have to add the check subscription line right below the check login line.
+<code>php
+$user-&gt;checklogin(1);
+$user-&gt;checksub();
+</code></p>
+
+<p>Then the following variables will be available in <code>$user</code>:</p>
+
+<h3 id="status">status</h3>
+
+<pre><code class="php">$user-&gt;subscription['status']
+</code></pre>
+
+<p>Possible values:</p>
+
+<ul>
+<li>error</li>
+<li>none</li>
+<li>active</li>
+</ul>
+
+<h3 id="msg">msg</h3>
+
+<pre><code class="php">$user-&gt;subscription['msg']
+</code></pre>
+
+<p>This will only be there is the status is &#8220;error&#8221;, and can be used for debugging purposes, or error messages.</p>
+
+<h3 id="plan_type">plan_type</h3>
+
+<pre><code class="php">$user-&gt;subscription['plan_type']
+</code></pre>
+
+<p>Possible values:</p>
+
+<ul>
+<li>sub-paper</li>
+<li>sub-digital</li>
+<li>sub-digital+paper</li>
+</ul>
+
+<p>This can be used to find out what type of subscription they have, but should not be used for things like displaying the digital mag&#8230;</p>
+
+<h3 id="digital">digital</h3>
+
+<pre><code class="php">$user-&gt;subscription['digital']
+</code></pre>
+
+<p>Possible values:</p>
+
+<ul>
+<li>true</li>
+<li>false</li>
+<li>error</li>
+</ul>
+
+<p>This is the one that can be used to for display the digital mag, and related things.</p>
+
+<h3 id="paper">paper</h3>
+
+<pre><code class="php">$user-&gt;subscription['paper']
+</code></pre>
+
+<p>Possible values:</p>
+
+<ul>
+<li>true</li>
+<li>false</li>
+<li>error</li>
+</ul>
+
+<p>Used to find out if they receive the paper mag.</p>
+
+<h3 id="cancel_at_period_end">cancel_at_period_end</h3>
+
+<pre><code class="php">$user-&gt;subscription['cancel_at_period_end']
+</code></pre>
+
+<p>Possible values:</p>
+
+<ul>
+<li>true</li>
+<li>false</li>
+</ul>
+
+<p>This lets us know if their subscription will renew or not at the end of their period. <code>true</code> means it will cancel, <code>false</code> means it will renew</p>
+
+<h3 id="current_period_end">current_period_end</h3>
+
+<pre><code class="php">$user-&gt;subscription['current_period_end']
+</code></pre>
+
+<p>This is a unix time stamp of when the users subscription period ends</p>
+
+</body>
+</html>

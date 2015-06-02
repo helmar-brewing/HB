@@ -11,11 +11,10 @@ function recover(a){
     });
     $('#ajax-modal').addClass('recover-modal');
     if(a === 'pword'){
-        var u = "/account/ajax/password/"
+        var u = "/account/ajax/password/";
         var e = document.getElementById('recover_pword_email').value;
-    }
-    if(a === 'uname'){
-        var u = "/account/ajax/username/"
+    }else if(a === 'uname'){
+        var u = "/account/ajax/username/";
         var e = document.getElementById('recover_uname_email').value;
     }
     $.get(
@@ -152,11 +151,10 @@ function changeInfo(s, d1){
                         var dd = {
                             "firstname" : document.getElementById('change-info-firstname').value,
                             "lastname" : document.getElementById('change-info-lastname').value,
-                            "year1" : document.getElementById('change-info-year1').value,
-                            "year2" : document.getElementById('change-info-year2').value,
-                            "dept" : document.getElementById('change-info-dept').value,
-                            "agency" : document.getElementById('change-info-agency').value,
-                            "phone" : document.getElementById('change-info-phone').value
+                            "address" : document.getElementById('change-info-address').value,
+                            "city" : document.getElementById('change-info-city').value,
+                            "state" : document.getElementById('change-info-state').value,
+                            "zip" : document.getElementById('change-info-zip').value
                         };
                         changeInfo(2, dd);
                     });
@@ -166,24 +164,18 @@ function changeInfo(s, d1){
                 if(data.error === '0'){
                     document.getElementById('profile-firstname').innerHTML = data.return.firstname;
                     document.getElementById('profile-lastname').innerHTML = data.return.lastname;
-                    document.getElementById('profile-year1').innerHTML = data.return.year1;
-                    document.getElementById('profile-year2').innerHTML = data.return.year2;
-                    document.getElementById('profile-dept').innerHTML = data.return.dept;
-                    document.getElementById('profile-agency').innerHTML = data.return.agency;
-                    document.getElementById('profile-phone').innerHTML = data.return.phone;
+                    //document.getElementById('profile-fulladdress').innerHTML = data.return.fulladdress;
                     changeInfoCleanup();
                     hideModal('ajax-modal');
-
                 }else{
                     $('#change-info-button').click(function() {
                         var dd = {
                             "firstname" : document.getElementById('change-info-firstname').value,
                             "lastname" : document.getElementById('change-info-lastname').value,
-                            "year1" : document.getElementById('change-info-year1').value,
-                            "year2" : document.getElementById('change-info-year2').value,
-                            "dept" : document.getElementById('change-info-dept').value,
-                            "agency" : document.getElementById('change-info-agency').value,
-                            "phone" : document.getElementById('change-info-phone').value
+                            "address" : document.getElementById('change-info-address').value,
+                            "city" : document.getElementById('change-info-city').value,
+                            "state" : document.getElementById('change-info-state').value,
+                            "zip" : document.getElementById('change-info-zip').value
                         };
                         changeInfo(2, dd);
                     });
@@ -201,5 +193,29 @@ function changeInfo(s, d1){
         if(s === 1){
             showModal('ajax-modal');
         }
+    });
+}
+
+
+function logoutDevice(lid){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.post(
+        "/account/ajax/logout/device/",
+        {login:lid},
+        function( data ) {
+            if(data.error === '0'){
+                document.getElementById('login-list').innerHTML = data.list_html;
+                document.getElementById('fullscreenload').style.display = 'none';
+            }else{
+                // need to add error handling
+                alert('error');
+                document.getElementById('fullscreenload').style.display = 'none';
+            }
+        },
+        "json"
+    )
+    .fail(function() {
+        alert('ajax fail');
+        document.getElementById('fullscreenload').style.display = 'none';
     });
 }
