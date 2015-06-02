@@ -31,8 +31,8 @@ if($series_sql !== FALSE){
 
       $series_tag = $seriesinfo->series_tag;
       $series_name = $seriesinfo->series_name;
-      $front_img = $seriesinfo->front_img;
-      $back_img = $seriesinfo->back_img;
+      $front_img = $protocol.$site.'/'.$seriesinfo->front_img;
+      $back_img = $protocol.$site.'/'.$seriesinfo->back_img;
       $series_desc = $seriesinfo->series_desc;
     }
 } else {
