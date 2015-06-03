@@ -194,9 +194,9 @@ print'    </div>
 
                     // define the pictures
                     $frontpic = '/images/cardPics/'.$card->series.'_'.$card->cardnum.'_Front.jpg';
-                    $frontthumb = '/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Front_small.jpg';
+                    $frontthumb = '/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Front.jpg';
                     $backpic  = '/images/cardPics/'.$card->series.'_'.$card->cardnum.'_Back.jpg';
-                    $backthumb  = '/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Back_small.jpg';
+                    $backthumb  = '/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Back.jpg';
 
                     //check if either pic exists
                     if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic) || file_exists($_SERVER['DOCUMENT_ROOT'].$backpic) ){
