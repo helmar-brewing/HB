@@ -15,8 +15,8 @@ $db2use = array(
 
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
-require_once('libraries/stripe/Stripe.php');
-Stripe::setApiKey($apikey['stripe']['secret']);
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
 $currentpage = 'account/';
@@ -126,8 +126,7 @@ if($user->login() === 1){
         	    //$currentVer = siteSetting('currentVer');
         		$currentVer = 0;
 
-    			Stripe::setApiKey($apikey['stripe']['secret']);
-    			$cust = Stripe_Customer::create(array(
+    			$cust = \Stripe\Customer::create(array(
     				"description"	=> $username,
     				"email"			=> $email
     			));
@@ -141,22 +140,22 @@ if($user->login() === 1){
     		}catch(Stripe_AuthenticationError $e){
     			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 1)</li>';
                 break;
-    		}catch (Stripe_InvalidRequestError $e){
+    		}catch(Stripe_InvalidRequestError $e){
     			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 2)</li>';
                 break;
-    		}catch (Stripe_AuthenticationError $e){
+    		}catch(Stripe_AuthenticationError $e){
     			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 3)</li>';
                 break;
-    		}catch (Stripe_ApiConnectionError $e){
+    		}catch(Stripe_ApiConnectionError $e){
     			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 4)</li>';
                 break;
-    		}catch (Stripe_Error $e){
+    		}catch(Stripe_Error $e){
     			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 5)</li>';
                 break;
     		}catch(mysqli_sql_exception $e){
     			$msg .= '<li>There msy have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: database)</li>';
     			/* Clean up in case of failure */
-    			$cu = Stripe_Customer::retrieve($cust['id']);
+    			$cu = \Stripe\Customer::retrieve($cust['id']);
     			$cu->delete();
     			if($userID !== null){
     				$db_auth->query("DELETE FROM users WHERE userID=$userID LIMIT 1");
