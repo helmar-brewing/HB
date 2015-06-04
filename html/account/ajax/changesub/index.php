@@ -62,9 +62,18 @@ function upgrade($to = NULL){
 	$cust->account_balance = $bal;
 	$cust->save();
 	$res = $cust->subscriptions->create(array("plan" => $to));
+	$charge = $res['plan']['amount'] + $bal;
 	$html = array(
-		'sub-paper' => '',
-		'sub-digital+paper' => ''
+		'sub-paper' => '
+			<p>Thank you for upgrading to Paper Magazine</p>
+			<p>Your credit card was charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
+			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
+		',
+		'sub-digital+paper' => '
+			<p>Thank you for upgrading to Digital + Paper Magazine</p>
+			<p>Your credit card was charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
+			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
+		'
 	);
 	return $html[$to];
 }
@@ -242,8 +251,8 @@ try{
 					$h1 = 'Subscription';
 					$html ='
 						<p>Thank you for subscribing to Digital Magazine</p>
+						<p>Your credit card was charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
-						<p>Your credit card will be charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 					';
 					break;
 
@@ -253,8 +262,8 @@ try{
 					$h1 = 'Subscription';
 					$html ='
 						<p>Thank you for subscribing to Paper Magazine</p>
+						<p>Your credit card was charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
-						<p>Your credit card will be charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 					';
 					break;
 
@@ -264,8 +273,8 @@ try{
 					$h1 = 'Subscription';
 					$html ='
 						<p>Thank you for subscribing to Digital + Paper Magazine</p>
+						<p>Your credit card was charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
-						<p>Your credit card will be charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
 					';
 					break;
 
