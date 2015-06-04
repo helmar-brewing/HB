@@ -15,7 +15,7 @@
                 <ul>
                     <li><h3>Connect</h3></li>
                     <li><a href="">Facebook</a></li>
-                    <li><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">Ebay</a></li>
+                    <li><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">eBay</a></li>
                     <li><a href="'.$protocol.$site.'/contact/">Contact</a></li>
                 </ul>
                 <ul>
