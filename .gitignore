@@ -3,3 +3,4 @@
 html/root_settings.php
 inc/keys.php
 inc/keys*.php
+cron/
