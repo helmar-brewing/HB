@@ -15,8 +15,8 @@ $db2use = array(
 
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
-require_once('libraries/stripe/Stripe.php');
-Stripe::setApiKey($apikey['stripe']['secret']);
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
 $currentpage = 'artwork/series/'.$_GET['series'].'/';
@@ -31,8 +31,8 @@ if($series_sql !== FALSE){
 
       $series_tag = $seriesinfo->series_tag;
       $series_name = $seriesinfo->series_name;
-      $front_img = $seriesinfo->front_img;
-      $back_img = $seriesinfo->back_img;
+      $front_img = $protocol.$site.'/'.$seriesinfo->front_img;
+      $back_img = $protocol.$site.'/'.$seriesinfo->back_img;
       $series_desc = $seriesinfo->series_desc;
     }
 } else {
@@ -194,9 +194,9 @@ print'    </div>
 
                     // define the pictures
                     $frontpic = '/images/cardPics/'.$card->series.'_'.$card->cardnum.'_Front.jpg';
-                    $frontthumb = '/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Front_small.jpg';
+                    $frontthumb = '/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Front.jpg';
                     $backpic  = '/images/cardPics/'.$card->series.'_'.$card->cardnum.'_Back.jpg';
-                    $backthumb  = '/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Back_small.jpg';
+                    $backthumb  = '/images/cardPics/thumb/'.$card->series.'_'.$card->cardnum.'_Back.jpg';
 
                     //check if either pic exists
                     if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic) || file_exists($_SERVER['DOCUMENT_ROOT'].$backpic) ){

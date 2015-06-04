@@ -55,7 +55,7 @@ print'
 
 				$series_id = $seriesinfo->series_id;
 				$series_name = $seriesinfo->series_name;
-				$cover_img = $seriesinfo->cover_img;
+				$cover_img = $protocol.$site.'/'.$seriesinfo->cover_img;
 
 
 

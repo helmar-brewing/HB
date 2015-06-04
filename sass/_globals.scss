@@ -9,3 +9,48 @@ a.link-button{
     margin:1em auto;
     max-width:100%;
 }
+
+
+
+
+.input-icon-button{
+    display:block;
+    position:relative;
+    margin:0;
+    padding:0 60px 0 0;
+    box-sizing:border-box;
+    width:100%;
+    border:none;
+    background:transparent;
+    input[type="text"],input[type="email"]{
+        display:inline-block;
+        margin:0;
+        width:100%;
+        box-sizing: border-box !important;
+        border:1px solid #CCC;
+        border-right:none;
+        background:transparent;
+        font-size: 2em;
+        line-height:1.5em;
+        height:1.5em;
+        padding:0 .2em;
+        outline:none;
+        box-shadow:none;
+        -webkit-appearance: none;
+        border-radius: 3px 0 0 3px;
+    }
+    button{
+        display:inline-block;
+        position:absolute;
+        right: 0;
+        width: 60px;
+        box-sizing: border-box !important;
+        -webkit-appearance: none;
+        font-size: 2em;
+        line-height:1.5em;
+        height:1.5em;
+        padding:0 .2em;
+        outline: none;
+        border-radius: 0 3px 3px 0;
+    }
+}

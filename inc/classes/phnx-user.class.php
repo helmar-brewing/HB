@@ -13,6 +13,7 @@
 		public $subscription;
 		public $error_cookie;
 		public $error = array();
+		public $loginID;
 
 
 
@@ -70,6 +71,7 @@
 				$db_auth->query("INSERT INTO activeLogins (username, loginID, loginTime, IP, useragent) VALUES ('".$this->username."', '$sprinkles', '$logintime', '$ipAddy', '$useragent')");
 				$this->cookieMonster('set',$cookieString);
 				$db_auth->query("UPDATE users SET lastLogin='$logintime' WHERE username='".$this->username."' LIMIT 1");
+				$this->loginID = $sprinkles;
 			}else{
 				trigger_error("UserMgmt tried to create a new login, and username is not set.", E_USER_ERROR);
 			}
@@ -427,28 +429,66 @@
 		}
 
 
-		function checksub(){
+
+
+
+		/* THE SUBSCRIPTION CHECK */
+		function checksub($mode=NULL){
+			session_start();
+			if($mode === 'no-cache'){
+				unset($_SESSION['sub']);
+				$this->sub(false);
+			}else{
+				if(isset($_SESSION['sub'])){
+					$this->subscription = $_SESSION['sub'];
+				}else{
+					$this->sub(true);
+				}
+			}
+		}
+		private function sub($cache){
 			try{
-				$sub_response = Stripe_Customer::retrieve($this->stripeID)->subscriptions->all();
+				$sub_response = \Stripe\Customer::retrieve($this->stripeID)->subscriptions->all();
 				if(empty($sub_response->data)){
 					$this->subscription = array(
 						'status' => 'none'
 					);
 				}else{
+					if($sub_response->data[0]['metadata']['downgrade'] === 'yes'){
+						if(time() < $sub_response->data[0]['metadata']['downgrade_date']){
+							$plan_type = $sub_response->data[0]['metadata']['downgrade_from'];
+							$last_paid = $sub_response->data[0]['metadata']['downgrade_paid'];
+							$next_payment = $sub_response->data[0]->plan['amount'];
+						}else{
+							$subscription = \Stripe\Customer::retrieve($this->stripeID)->subscriptions->retrieve($sub_response->data[0]['id']);
+							$subscription->metadata = array('downgrade' => NULL, 'downgrade_from' => NULL ,'downgrade_date' => NULL);
+							$subscription->save();
+							$plan_type = $sub_response->data[0]->plan['id'];
+							$last_paid = $sub_response->data[0]->plan['amount'];
+							$next_payment = $sub_response->data[0]->plan['amount'];
+						}
+					}else{
+						$plan_type = $sub_response->data[0]->plan['id'];
+						$last_paid = $sub_response->data[0]->plan['amount'];
+						$next_payment = $sub_response->data[0]->plan['amount'];
+					}
 					$this->subscription = array(
 						'status' => $sub_response->data[0]['status'],
 						'sub_id' => $sub_response->data[0]['id'],
 						'cancel_at_period_end' => $sub_response->data[0]['cancel_at_period_end'],
 						'current_period_end' => $sub_response->data[0]['current_period_end'],
-						'plan_type' => $sub_response->data[0]->plan['id'],
+						'plan_type' => $plan_type,
+						'next_plan' => $sub_response->data[0]->plan['id'],
+						'last_paid' => $last_paid,
+						'next_payment' => $next_payment
 					);
-					if($sub_response->data[0]->plan['id'] === 'sub-digital'){
+					if($plan_type === 'sub-digital'){
 						$this->subscription['digital'] = TRUE;
 						$this->subscription['paper'] = FALSE;
-					}elseif($sub_response->data[0]->plan['id'] === 'sub-paper'){
+					}elseif($plan_type === 'sub-paper'){
 						$this->subscription['digital'] = FALSE;
 						$this->subscription['paper'] = TRUE;
-					}elseif($sub_response->data[0]->plan['id'] === 'sub-digital+paper'){
+					}elseif($plan_type === 'sub-digital+paper'){
 						$this->subscription['digital'] = TRUE;
 						$this->subscription['paper'] = TRUE;
 					}else{
@@ -487,10 +527,16 @@
 					'msg'	 => $e->getMessage()
 				);
 			}
+			if($cache){
+				$_SESSION['sub'] = $this->subscription;
+			}
 		}
 
 
 
+
+
+		/* PASSWORD HASH GENERATOR */
 		function new_hash($pword = NULL){
 			if($pword === NULL){
 				throw new Exception("UserMgmt tried to create a new hash, and the password is not set.");

@@ -1,5 +1,12 @@
 ## Checking for subscription
 
+Make sure to call include the stripe library on the page
+```php
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
+```
+
+
 You have to add the check subscription line right below the check login line.
 ```php
 $user->checklogin(1);

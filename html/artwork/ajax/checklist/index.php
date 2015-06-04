@@ -16,8 +16,8 @@ ob_start();
 
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
-require_once('libraries/stripe/Stripe.php');
-Stripe::setApiKey($apikey['stripe']['secret']);
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 // create user object
 $user = new phnx_user;
