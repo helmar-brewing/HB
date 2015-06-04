@@ -39,8 +39,8 @@
         ';
     }
     print'
-            <!--        <li><a href="'.$protocol.$site.'/account/">Manage Account</a>
-                    <li><a href="">Subscription</a></li> -->
+                    <li><a href="'.$protocol.$site.'/account/">Manage Account</a>
+                    <li><a href="">Subscription</a></li>
                 <!--    <li><a href="">Terms and Conditions</a></li>    -->
                 <!--    <li><a href="">Privacy Policy</a></li>          -->
                 </ul>
