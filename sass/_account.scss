@@ -192,12 +192,30 @@
         }
     }
 }
-.credit-card{
+
+
+
+.sub-row{
     @include row();
+    margin-top:1em;
+}
+
+#sub-info{
     @include span_columns(6);
     @include media(max-width 760px) {
         @include span_columns(12);
     }
+    border-top: 1px solid #CCC;
+    padding-top:1em;
+}
+
+.credit-card{
+    @include span_columns(6);
+    @include media(max-width 760px) {
+        @include span_columns(12);
+    }
+    border-top: 1px solid #CCC;
+    padding-top:1em;
     #card_number{
         display:block;
         margin-bottom:1em;
@@ -427,7 +445,7 @@
         border-radius:0;
         margin-top:1.6em;
         font-size:1em;
-    }    
+    }
 }
 #modal-add-card-success{
     display:none;

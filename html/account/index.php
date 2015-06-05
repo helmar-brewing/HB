@@ -196,24 +196,27 @@ print'
 
 
 
-	print'<div id="sub-info"></div>';
+
 
 	print'
-			<div class="credit-card">
-				<form action="" method="POST" id="payment-form">
-					<div class="payment-errors" id="payment-errors">'.$msg.'</div>
-					<label>Card Number</label>
-					<input type="text" maxlength="30" id="card_number" data-stripe="number" value="'.$card_num.'" />
-					<fieldset class="exp">
-						<label>Expiration</label>
-						<input type="text" placeholder="MM" maxlength="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/><span>/</span><input type="text" placeholder="YYYY" maxlength="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
-					</fieldset>
-					<fieldset class="cvc">
-						<label>CVC</label>
-						<input type="text" maxlength="4" id="cvc" data-stripe="cvc"/>
-					</fieldset>
-					<button id="add_update_card" type="submit">'.$card_button_text.'</button>
-				</form>
+			<div class="sub-row">
+				<div id="sub-info"></div>
+				<div class="credit-card">
+					<form action="" method="POST" id="payment-form">
+						<div class="payment-errors" id="payment-errors">'.$msg.'</div>
+						<label>Card Number</label>
+						<input type="text" maxlength="30" id="card_number" data-stripe="number" value="'.$card_num.'" />
+						<fieldset class="exp">
+							<label>Expiration</label>
+							<input type="text" placeholder="MM" maxlength="2" id="exp_month" data-stripe="exp-month" value="'.$exp_month.'"/><span>/</span><input type="text" placeholder="YYYY" maxlength="4" id="exp_year" data-stripe="exp-year" value="'.$exp_year.'"/>
+						</fieldset>
+						<fieldset class="cvc">
+							<label>CVC</label>
+							<input type="text" maxlength="4" id="cvc" data-stripe="cvc"/>
+						</fieldset>
+						<button id="add_update_card" type="submit">'.$card_button_text.'</button>
+					</form>
+				</div>
 			</div>
 		</section>
 
