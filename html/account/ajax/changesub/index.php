@@ -39,11 +39,20 @@ function downgrade($to = NULL, $from = NULL){
 			'downgrade_paid' => $user->subscription['next_payment']
 		);
 	}
-	$subscription->save();
+	$res = $subscription->save();
 	$html = array(
-		'sub-digital' => '',
-		'sub-paper' => '',
-		'sub-digital+paper' => ''
+		'sub-digital' => '
+			<p>You have reduced your subscription to Digital Magazine.</p>
+			<p>You can continue to enjoy your current benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
+			<p>Your credit card was not charged.</p>
+			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
+		',
+		'sub-paper' => '
+			<p>You have reduced your subscription to Paper Magazine.</p>
+			<p>You can continue to enjoy your current benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
+			<p>Your credit card was not charged.</p>
+			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
+		',
 	);
 	return $html[$to];
 }
