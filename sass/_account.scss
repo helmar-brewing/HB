@@ -95,35 +95,7 @@
 }
 .sub-buttons{
     @include row();
-    min-height: 355px;
     li{
-        &.free{
-            float:none;
-            width:100%;
-            min-height:150px;
-            margin:1em 0;
-            .price{
-                position: absolute;
-                top:15px;
-                left:15px;
-                margin:0;
-            }
-            .sub-checkbox{
-                left:15px;
-                margin:0;
-            }
-            h4{
-                text-align:left;
-                padding-left:120px;
-                min-height:1.5em;
-            }
-            p{
-                padding-left:120px;
-            }
-            &:hover{
-                margin:1em 0;
-            }
-        }
         @include span-columns(4);
         @include transition(all 0.3333s);
         position:relative;
@@ -176,6 +148,33 @@
                 color:$base-link-color;
             }
         }
+        &.free{
+            @include reset-display;
+            width:100%;
+            min-height:150px;
+            margin:1em 0;
+            .price{
+                position: absolute;
+                top:15px;
+                left:15px;
+                margin:0;
+            }
+            .sub-checkbox{
+                left:15px;
+                margin:0;
+            }
+            h4{
+                text-align:left;
+                padding-left:120px;
+                min-height:1.5em;
+            }
+            p{
+                padding-left:120px;
+            }
+            &:hover{
+                margin:1em 0;
+            }
+        }
         &:hover{
             margin-bottom:5px;
             margin-top:0;
@@ -201,7 +200,8 @@
             float:none;
             width:100%;
             min-height:150px;
-            margin:1em 0;
+            margin-top:1em;
+            margin-bottom:1em;
             .price{
                 position: absolute;
                 top:15px;
@@ -220,8 +220,20 @@
             p{
                 padding-left:120px;
             }
+            &.free{
+                margin-top:0;
+            }
             &:hover{
-                margin:1em 0;
+                margin-top:1em;
+                margin-bottom:1em;
+                &.free{
+                    margin-top:0;
+                }
+                &.selected{
+                    margin-top:1em;
+                    margin-bottom:1em;
+                    box-shadow:none;    
+                }
             }
         }
     }

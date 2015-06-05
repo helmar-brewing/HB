@@ -124,59 +124,10 @@ print'
 			<p>Click or tap an option to change your subscription.</p>
 			<ul class="sub-buttons">
 	';
-	if($user->subscription['status'] === 'none'){
-		print '<li id="sub-none" onclick="sub(\'none\')" class="selected free">';
-	}else{
-		print '<li id="sub-none" onclick="sub(\'none\')" class="free">';
-	}
-	print'
-					<h4>Website Access</h4>
-					<div class="price">FREE</div>
-					<p>Join our email list</p>
-					<p>View our basic card art list</p>
-	';
-	if($user->subscription['status'] === 'none'){
-		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-check-square-o"></i></div>';
-	}else{
-		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-square-o"></i></div>';
-	}
-	print'</li>';
-	if($user->subscription['plan_type'] === 'sub-digital'){
-		print '<li id="sub-digital" onclick="sub(\'digital\')" class="selected">';
-	}else{
-		print '<li id="sub-digital" onclick="sub(\'digital\')">';
-	}
-	print'
-					<h4>Digital Magazine</h2>
-					<div class="price">$19.95</div>
-					<p>Access to digital copies of our quarterly magazine via the website</p>
-					<p>Enhanced card art lists</p>
-					<p>Track your personal Helmar card collection</p>
-	';
-	if($user->subscription['plan_type'] === 'sub-digital'){
-		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-check-square-o"></i></div>';
-	}else{
-		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-square-o"></i></div>';
-	}
-	print'</li>';
-	if($user->subscription['plan_type'] === 'sub-paper'){
-		print'<li id="sub-paper" onclick="sub(\'paper\')" class="selected">';
-	}else{
-		print'<li id="sub-paper" onclick="sub(\'paper\')">';
-	}
-	print'
-					<h4>Paper Magazine</h2>
-					<div class="price">$29.95</div>
-					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-					<p>Enhanced card art lists</p>
-					<p>Track your personal Helmar card collection</p>
-	';
-	if($user->subscription['plan_type'] === 'sub-paper'){
-		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div>';
-	}else{
-		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-square-o"></i></div>';
-	}
-	print'</li>';
+
+
+
+
 	if($user->subscription['plan_type'] === 'sub-digital+paper'){
 		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')" class="selected">';
 	}else{
@@ -197,8 +148,84 @@ print'
 	}
 	print'
 				</li>
-			</ul>
 	';
+
+
+
+
+
+
+
+
+	if($user->subscription['plan_type'] === 'sub-paper'){
+		print'<li id="sub-paper" onclick="sub(\'paper\')" class="selected">';
+	}else{
+		print'<li id="sub-paper" onclick="sub(\'paper\')">';
+	}
+	print'
+					<h4>Paper Magazine</h2>
+					<div class="price">$29.95</div>
+					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+					<p>Enhanced card art lists</p>
+					<p>Track your personal Helmar card collection</p>
+	';
+	if($user->subscription['plan_type'] === 'sub-paper'){
+		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div>';
+	}else{
+		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-square-o"></i></div>';
+	}
+	print'</li>';
+
+
+
+	if($user->subscription['plan_type'] === 'sub-digital'){
+		print '<li id="sub-digital" onclick="sub(\'digital\')" class="selected">';
+	}else{
+		print '<li id="sub-digital" onclick="sub(\'digital\')">';
+	}
+	print'
+					<h4>Digital Magazine</h2>
+					<div class="price">$19.95</div>
+					<p>Access to digital copies of our quarterly magazine via the website</p>
+					<p>Enhanced card art lists</p>
+					<p>Track your personal Helmar card collection</p>
+	';
+	if($user->subscription['plan_type'] === 'sub-digital'){
+		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-check-square-o"></i></div>';
+	}else{
+		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-square-o"></i></div>';
+	}
+	print'</li>';
+
+
+
+
+
+
+
+
+
+	print'</ul>';
+
+	print '<ul class="sub-buttons">';
+	if($user->subscription['status'] === 'none'){
+		print '<li id="sub-none" onclick="sub(\'none\')" class="selected free">';
+	}else{
+		print '<li id="sub-none" onclick="sub(\'none\')" class="free">';
+	}
+	print'
+					<h4>Website Access</h4>
+					<div class="price">FREE</div>
+					<p>Join our email list</p>
+					<p>View our basic card art list</p>
+	';
+	if($user->subscription['status'] === 'none'){
+		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-check-square-o"></i></div>';
+	}else{
+		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-square-o"></i></div>';
+	}
+	print'</li>';
+	print'</ul>';
 
 
 
