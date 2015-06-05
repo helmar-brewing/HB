@@ -235,12 +235,16 @@
 }
 
 #sub-info{
-    @include span_columns(6);
-    @include media(max-width 760px) {
-        @include span_columns(12);
+    background-color:white;
+    border: 1px solid #CCC;
+    padding:1em;
+    border-radius:5px;
+    box-shadow:$form-box-shadow;
+    box-sizing: border-box;
+    min-height:7em;
+    span{
+        font-weight:bold;
     }
-    border-top: 1px solid #CCC;
-    padding-top:1em;
 }
 
 .credit-card{

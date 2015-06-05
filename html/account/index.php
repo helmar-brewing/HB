@@ -119,7 +119,6 @@ ob_end_flush();
 print'
 	<div class="account">
 		<h1 class="pagetitle">Your Account</h1>
-
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
 			<p>Click or tap an option to change your subscription.</p>
@@ -208,7 +207,10 @@ print'
 
 	print'
 			<div class="sub-row">
-				<div id="sub-info"></div>
+				<div class="credit-card">
+					<label>Current Subscription</label>
+					<div id="sub-info"></div>
+				</div>
 				<div class="credit-card">
 					<form action="" method="POST" id="payment-form">
 						<div class="payment-errors" id="payment-errors">'.$msg.'</div>
