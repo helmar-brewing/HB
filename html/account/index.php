@@ -122,18 +122,19 @@ print'
 
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
-			<div>All subscriptions include full access to the website. Describe what that means.</div>
+			<p>Click or tap an option to change your subscription.</p>
 			<ul class="sub-buttons">
 	';
 	if($user->subscription['status'] === 'none'){
-		print '<li id="sub-none" onclick="sub(\'none\')" class="selected">';
+		print '<li id="sub-none" onclick="sub(\'none\')" class="selected free">';
 	}else{
-		print '<li id="sub-none" onclick="sub(\'none\')">';
+		print '<li id="sub-none" onclick="sub(\'none\')" class="free">';
 	}
 	print'
 					<h4>Website Access</h4>
 					<div class="price">FREE</div>
-					<p>Description</p>
+					<p>Join our email list</p>
+					<p>View our basic card art list</p>
 	';
 	if($user->subscription['status'] === 'none'){
 		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-check-square-o"></i></div>';
@@ -148,8 +149,10 @@ print'
 	}
 	print'
 					<h4>Digital Magazine</h2>
-					<div class="price">$20</div>
-					<p>Access to digital copies of the magazine via the website.</p>
+					<div class="price">$19.95</div>
+					<p>Access to digital copies of our quarterly magazine via the website</p>
+					<p>Enhanced card art lists</p>
+					<p>Track your personal Helmar card collection</p>
 	';
 	if($user->subscription['plan_type'] === 'sub-digital'){
 		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-check-square-o"></i></div>';
@@ -164,8 +167,10 @@ print'
 	}
 	print'
 					<h4>Paper Magazine</h2>
-					<div class="price">$30</div>
-					<p>A paper copy of the magazine sent to you when they are released.</p>
+					<div class="price">$29.95</div>
+					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+					<p>Enhanced card art lists</p>
+					<p>Track your personal Helmar card collection</p>
 	';
 	if($user->subscription['plan_type'] === 'sub-paper'){
 		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div>';
@@ -180,8 +185,11 @@ print'
 	}
 	print'
 					<h4>Digital + Paper Magazine</h2>
-					<div class="price">$36</div>
-					<p>A paper copy of the magazine sent to you when they are released and access to digital copies of the magazine via the website.</p>
+					<div class="price">$34.95</div>
+					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+					<p>Access to the digital copy of the quarterly magazine via the website</p>
+					<p>Enhanced card art lists</p>
+					<p>Track your personal Helmar card collection</p>
 	';
 	if($user->subscription['plan_type'] === 'sub-digital+paper'){
 		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-check-square-o"></i></div>';
