@@ -33,14 +33,10 @@ if($go){
 if($go){
 
 	$comment = $_GET['comment'];
-
-	$to =	array(
-                array("email" => "topshelfsmith@gmail.com", "name" => "Robert")
-			);
+    
+	$to = $apikey['mandrill_email'];
 	$headers = array(
-        "Reply-To" => $email,
-        "Bcc" => 'smith@stev.co',
-//        "Bcc" => 'djradam@tek13.com'
+        "Reply-To" => $email
     );
 	$args = array(
 		'key' => $apikey['mandrill'],
