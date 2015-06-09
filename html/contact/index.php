@@ -42,14 +42,14 @@ print'
 		<div class="side-image-content">
 			<h4>Stay In Touch</h4>
 			<h1>Send us a message</h1>
-			<p>Text here about what type of messages we\'d like to receive, and how quickly you can expect a response.</p>
+<!--			<p>Text here about what type of messages we\'d like to receive, and how quickly you can expect a response.</p> -->
 			<label>Name</label>
-			<input type="text" name="name" id="name">
+			<input type="text" name="name" id="contact_name">
 			<label>Email</label>
-			<input type="email" name="email" id="email">
+			<input type="email" name="email" id="contact_email">
 			<label>Message</label>
-			<textarea></textarea>
-			<button>Send</button>
+			<textarea id="contact_comment"></textarea>
+			<button onclick="contactus()">Send</button>
 		</div>
 	</div>
 ';
