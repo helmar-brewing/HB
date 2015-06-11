@@ -1,17 +1,22 @@
+// body{
+//         background:url('/img/sprinkles.png');
+// }
+// @include hidpi(1.5) {
+//     body{
+//         background:url('/img/sprinkles@2x.png');
+//         background-size:10px 5px;
+//     }
+// }
+
 body{
-        background:url('/img/sprinkles.png');
-}
-@include hidpi(1.5) {
-    body{
-        background:url('/img/sprinkles@2x.png');
-        background-size:10px 5px;
-    }
+    background-color: #F9F9F9;
 }
 
 
 .header2{
     @include clearfix;
-    background: url('/img/baseball-bg.jpg');
+    //background: url('/img/baseball-bg.jpg');
+    background: url('/img/helmar-bg.jpg');
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;
