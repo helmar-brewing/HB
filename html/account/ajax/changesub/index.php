@@ -63,7 +63,7 @@ function upgrade($to = NULL){
 	if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
 		$year = 60*60*24*366;
 	}else{
-		$year = $year = 60*60*24*365;
+		$year = 60*60*24*365;
 	}
 	$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
 	$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
