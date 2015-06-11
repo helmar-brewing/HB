@@ -16,9 +16,10 @@ body{
 .header2{
     @include clearfix;
     //background: url('/img/baseball-bg.jpg');
-    background: url('/img/helmar-bg.jpg');
+    //background: url('/img/helmar-bg.jpg');
+    background: url('/img/cards-bg.jpg');
     background-repeat: no-repeat;
-    background-position: bottom;
+    background-position: center;
     background-size: cover;
     padding: 2em 0;
     .logo2{
