@@ -333,6 +333,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/html\/img\/cards-bg.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 315909,
+		"inputAbbreviatedPath": "\/html\/img\/cards-bg.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/cards-bg.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/html\/img\/checklist-sample.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
