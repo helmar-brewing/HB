@@ -141,7 +141,7 @@ print'
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 	';
-	if($user->subscription['plan_type'] === 'sub-digital+paper'){
+	if($user->subscription['next_plan'] === 'sub-digital+paper'){
 		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
 		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-square-o"></i></div>';
@@ -169,7 +169,7 @@ print'
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 	';
-	if($user->subscription['plan_type'] === 'sub-paper'){
+	if($user->subscription['next_plan'] === 'sub-paper'){
 		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
 		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-square-o"></i></div>';
@@ -190,7 +190,7 @@ print'
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 	';
-	if($user->subscription['plan_type'] === 'sub-digital'){
+	if($user->subscription['next_plan'] === 'sub-digital'){
 		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
 		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-square-o"></i></div>';

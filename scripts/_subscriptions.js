@@ -287,7 +287,6 @@ function sub(a){
     $('#ajax-modal').addClass('sub_modal');
     showModal('ajax-modal');
 	subPreview(a);
-    //subUpdate(a);
 }
 
 

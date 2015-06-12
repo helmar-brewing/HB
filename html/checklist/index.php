@@ -41,6 +41,9 @@ ob_end_flush();
 /* HEADER */ require('layout/header2.php');
 /* HEADER */ require('layout/header1.php');
 
+
+
+
 print'
 <div class="artwork">
     <h4>Your Personal Helmar Artwork Collection</h4>';

@@ -40,19 +40,20 @@ function subName($sub){
 }
 function downgrade($to = NULL){
 	global $user;
+	global $action;
 	if( $to === NULL ){ throw new Exception('no plan set for downgrade.'); }
 	$html = array(
 		'sub-digital' => '
 			<p>You are changing your subscription from '.subName($user->subscription['plan_type']).' to <span>Digital Magazine</span>.</p>
 			<p>You will continue to have your current benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>. Your new subscription benefits will be available on your renewal date of '.date('M j Y', $user->subscription['current_period_end']).'.</p>
 			<p>Your credit card will not be charged at this time.</p>
-			<button>Confirm</button>
+			<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>
 		',
 		'sub-paper' => '
 			<p>You are changing your subscription from <span>'.subName($user->subscription['plan_type']).'</span> to <span>Paper Magazine</span>.</p>
 			<p>You will continue to have your current benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>. Your new subscription benefits will be available on your renewal date of '.date('M j Y', $user->subscription['current_period_end']).'.</p>
 			<p>Your credit card will not be charged at this time.</p>
-			<button>Confirm</button>
+			<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>
 		',
 	);
 	return $html[$to];
@@ -61,6 +62,7 @@ function downgrade($to = NULL){
 function upgrade($to = NULL){
 	if( $to === NULL ){ throw new Exception('no plan set for upgrade.'); }
 	global $cust, $user;
+	global $action;
 	if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
 		$year = 60*60*24*366;
 	}else{
@@ -75,37 +77,41 @@ function upgrade($to = NULL){
 			<p>You are upgrading your subscription to <span>Paper Magazine</span>.</p>
 			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today.</p>
 			<p>Your credit card will be charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
+			<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>
 		',
 		'sub-digital+paper' => '
 			<p>You are upgrading your subscription to <span>Digital + Paper Magazine</span>.</p>
 			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today.</p>
 			<p>Your credit card will be charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
+			<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>
 		'
 	);
 	return $html[$to];
 }
 function cancel(){
 	global $user;
+	global $action;
 	$html = '
 		<p>You are about to disable auto-renew for your <span>'.subName($user->subscription['plan_type']).'</span> subscription.</p>
 		<p>You can continue to enjoy your benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>
-		<button>Disable Auto-Renew</button>
+		<button onclick="subUpdate(\''.$action.'\')">Disable Auto-Renew</button>
 	';
 	return $html;
 }
 function renew($to){
 	global $cust, $user;
+	global $action;
 	$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
 	if($user->subscription['cancel_at_period_end'] === true){
 		$h .= '<p>You are about to enable auto-renew for your <span>'.subName($user->subscription['plan_type']).'</span> subscription.</p>';
-		$h .= '<button>Enable Auto-Renew</button>';
+		$h .= '<button onclick="subUpdate(\''.$action.'\')">Enable Auto-Renew</button>';
 	}else{
 		$meta = $subscription->metadata->__toArray();
 		if($meta['downgrade'] === 'yes'){
 			$h .= '<p>You are switching your subscription back to <span>'.subName($user->subscription['plan_type']).'</span>.</p>';
 			$h .= '<p>Your subscription will renew on <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>';
 			$h .= '<p>Your credit card will not be charged at this time.</p>';
-			$h .= '<button>Change Subscription</button>';
+			$h .= '<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>';
 		}else{
 			$h .= '<p>This is your current subscription.</p>';
 		}
@@ -176,7 +182,7 @@ try{
 				$html ='
 					<p>You are signup up for <span>Digital Magazine</span>.</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
-					<button>Subscribe</button>
+					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
 				';
 				break;
 
@@ -187,7 +193,7 @@ try{
 				$html ='
 					<p>You are signup up for <span>Paper Magazine</span>.</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
-					<button>Subscribe</button>
+					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
 				';
 				break;
 
@@ -198,7 +204,7 @@ try{
 				$html ='
 					<p>You are signup up for <span>Digital + Paper Magazine</span>.</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
-					<button>Subscribe</button>
+					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
 				';
 				break;
 
