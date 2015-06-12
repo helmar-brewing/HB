@@ -80,8 +80,7 @@ try{
 					$html .= '<p><i class="fa fa-refresh"></i> Your subscription will renew on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
 					$html .= '<p>Next Payment: $'.substr($user->subscription['next_payment'],0,-2).'.'.substr($user->subscription['next_payment'],-2).' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
 				}else{
-					$html .= '<p><i class="fa fa-level-down"></i> You have elected to change your subscription to <span>'.subName($user->subscription['next_plan']).'</span>.</p>';
-					$html .= '<p>Enjoy your current benefits until <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
+					$html .= '<p><i class="fa fa-level-down"></i> You have elected to change your subscription to <span>'.subName($user->subscription['next_plan']).'</span> effective on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
 					$html .= '<p>Next Payment: $'.substr($user->subscription['next_payment'],0,-2).'.'.substr($user->subscription['next_payment'],-2).' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
 				}
 			}
