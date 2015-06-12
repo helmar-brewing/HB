@@ -121,14 +121,14 @@ print'
 		<h1 class="pagetitle">Your Account</h1>
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
-			<p>Click or tap an option to change your subscription.</p>
+			<label>Choose Your Subscription</label>
 			<ul class="sub-buttons">
 	';
 
 
 
 
-	if($user->subscription['plan_type'] === 'sub-digital+paper'){
+	if($user->subscription['next_plan'] === 'sub-digital+paper'){
 		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')" class="selected">';
 	}else{
 		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')">';
@@ -157,7 +157,7 @@ print'
 
 
 
-	if($user->subscription['plan_type'] === 'sub-paper'){
+	if($user->subscription['next_plan'] === 'sub-paper'){
 		print'<li id="sub-paper" onclick="sub(\'paper\')" class="selected">';
 	}else{
 		print'<li id="sub-paper" onclick="sub(\'paper\')">';
@@ -178,7 +178,7 @@ print'
 
 
 
-	if($user->subscription['plan_type'] === 'sub-digital'){
+	if($user->subscription['next_plan'] === 'sub-digital'){
 		print '<li id="sub-digital" onclick="sub(\'digital\')" class="selected">';
 	}else{
 		print '<li id="sub-digital" onclick="sub(\'digital\')">';
