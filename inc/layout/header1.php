@@ -19,7 +19,7 @@ print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/about/">Helmar &amp; Charles</a></li>
                 <li class="nav-link"><a href="'.$protocol.$site.'/contact/">Stay In Touch</a></li>
                 <li class="nav-link"><a href="http://helmarblog.com/" target="_blank">Blog</a></li>
-                <li class="nav-link"><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">ebay Store</a></li>
+                <li class="nav-link"><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">eBay Store</a></li>
 ';
 if(isset($user)){
     if( $user->login() == 1 || $user->login() == 2 ){
