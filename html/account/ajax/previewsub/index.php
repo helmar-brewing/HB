@@ -43,16 +43,16 @@ function downgrade($to = NULL){
 	if( $to === NULL ){ throw new Exception('no plan set for downgrade.'); }
 	$html = array(
 		'sub-digital' => '
-			<p>You are changing your subscription from '.subName($user->subscription['plan_type']).' to Digital Magazine.</p>
-			<p>You will continue to have your current benefits until '.date('m/d/Y', $user->subscription['current_period_end']).'. Your new subscription benefits will be available on your renewal date of '.date('M j Y', $user->subscription['current_period_end']).'.</p>
+			<p>You are changing your subscription from '.subName($user->subscription['plan_type']).' to <span>Digital Magazine</span>.</p>
+			<p>You will continue to have your current benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>. Your new subscription benefits will be available on your renewal date of '.date('M j Y', $user->subscription['current_period_end']).'.</p>
 			<p>Your credit card will not be charged at this time.</p>
-			<button>Confirm</button> <button>Cancel</button>
+			<button>Confirm</button>
 		',
 		'sub-paper' => '
 			<p>You are changing your subscription from <span>'.subName($user->subscription['plan_type']).'</span> to <span>Paper Magazine</span>.</p>
-			<p>You will continue to have your current benefits until '.date('m/d/Y', $user->subscription['current_period_end']).'. Your new subscription benefits will be available on your renewal date of '.date('M j Y', $user->subscription['current_period_end']).'.</p>
+			<p>You will continue to have your current benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>. Your new subscription benefits will be available on your renewal date of '.date('M j Y', $user->subscription['current_period_end']).'.</p>
 			<p>Your credit card will not be charged at this time.</p>
-			<button>Confirm</button> <button>Cancel</button>
+			<button>Confirm</button>
 		',
 	);
 	return $html[$to];
@@ -72,12 +72,12 @@ function upgrade($to = NULL){
 	$charge = $plan['amount'] + $bal;
 	$html = array(
 		'sub-paper' => '
-			<p>You are upgrading your subscription to Paper Magazine.</p>
+			<p>You are upgrading your subscription to <span>Paper Magazine</span>.</p>
 			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today.</p>
 			<p>Your credit card will be charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 		',
 		'sub-digital+paper' => '
-			<p>You are upgrading your subscription to Digital + Paper Magazine.</p>
+			<p>You are upgrading your subscription to <span>Digital + Paper Magazine</span>.</p>
 			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today.</p>
 			<p>Your credit card will be charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 		'
@@ -85,11 +85,11 @@ function upgrade($to = NULL){
 	return $html[$to];
 }
 function cancel(){
-	global $cust, $user;
-	$res = $cust->subscriptions->retrieve($user->subscription['sub_id'])->cancel(array('at_period_end' => true));
+	global $user;
 	$html = '
-		<p>Auto re-new has been disabled for you subscription.</p>
-		<p>You can continue to enjoy your benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
+		<p>You are about to disable auto-renew for your <span>'.subName($user->subscription['plan_type']).'</span> subscription.</p>
+		<p>You can continue to enjoy your benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>
+		<button>Disable Auto-Renew</button>
 	';
 	return $html;
 }
@@ -97,27 +97,15 @@ function renew($to){
 	global $cust, $user;
 	$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
 	if($user->subscription['cancel_at_period_end'] === true){
-		$subscription->plan = $to;
-		$subscription->prorate = FALSE;
-		$subscription->save();
-		$h .= '<p>Your subscription will renew.</p>';
-		$h .= '<p>Your card has not been charged.</p>';
+		$h .= '<p>You are about to enable auto-renew for your <span>'.subName($user->subscription['plan_type']).'</span> subscription.</p>';
+		$h .= '<button>Enable Auto-Renew</button>';
 	}else{
 		$meta = $subscription->metadata->__toArray();
 		if($meta['downgrade'] === 'yes'){
-			$subscription->plan = $to;
-			$subscription->prorate = FALSE;
-			if($meta['downgrade'] === 'yes'){
-				$subscription->metadata = array(
-					'downgrade' => null,
-					'downgrade_from' => null,
-					'downgrade_date' => null,
-					'downgrade_paid' => null
-				);
-			}
-			$subscription->save();
-			$h .= '<p>Your subscription will renew.</p>';
-			$h .= '<p>Your card has not been charged.</p>';
+			$h .= '<p>You are switching your subscription back to <span>'.subName($user->subscription['plan_type']).'</span>.</p>';
+			$h .= '<p>Your subscription will renew on <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>';
+			$h .= '<p>Your credit card will not be charged at this time.</p>';
+			$h .= '<button>Change Subscription</button>';
 		}else{
 			$h .= '<p>This is your current subscription.</p>';
 		}
@@ -166,213 +154,140 @@ try{
 	// get the stripe customer
 	$cust = \Stripe\Customer::retrieve($user->stripeID);
 
-	// check for address before credit card  **********************************************************
 
-	// check for payment methods - else do the stuff
-	if($cust['sources']['total_count'] === 0 && $action !== 'none'){
 
-		$error = '3';
-		$h1 = 'Please Add a Payment Method';
-		$html = '
-			<div id="modal-add-card">
-				<p>Please add a credit card to your account.</p>
-				<div class="credit-card-modal">
-					<form action="" method="POST" id="payment-form-modal">
-						<div class="payment-errors" id="payment-errors"></div>
-						<label>Card Number</label>
-						<input type="text" maxlength="30" id="card_number" data-stripe="number" value="" />
-						<fieldset class="exp">
-							<label>Expiration</label>
-							<input type="text" placeholder="MM" maxlength="2" id="exp_month" data-stripe="exp-month" value=""/><span>/</span><input type="text" placeholder="YYYY" maxlength="4" id="exp_year" data-stripe="exp-year" value=""/>
-						</fieldset>
-						<fieldset class="cvc">
-							<label>CVC</label>
-							<input type="text" maxlength="4" id="cvc" data-stripe="cvc"/>
-						</fieldset>
-						<button class="add_update_card" type="submit">Add Card</button>
-					</form>
-				</div>
-			</div>
-		';
+
+	if($user->subscription['status'] === 'none'){
 
 		switch($action){
 
-			case 'paper':
-				$html .= '
-					<div id="modal-add-card-success">
-						<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
-						<button id="modal-add-card-button" data-action="paper" >Subscribe to Paper Magazine</button>
-					</div>
+			case 'none':
+				$error = '0';
+				$h1 = 'Subscription Status';
+				$html = '
+					<p>This is your current subscription.</p>
 				';
 				break;
 
 			case 'digital':
-				$html .= '
-					<div id="modal-add-card-success">
-						<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
-						<button id="modal-add-card-button" data-action="digital" >Subscribe to Digital Magazine</button>
-					</div>
+				$res = $cust->subscriptions->create(array("plan" => "sub-digital"));
+				$error = '0';
+				$h1 = 'Subscription';
+				$html ='
+					<p>You are signup up for <span>Digital Magazine</span>.</p>
+					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
+					<button>Subscribe</button>
+				';
+				break;
+
+			case 'paper':
+				$res = $cust->subscriptions->create(array("plan" => "sub-paper"));
+				$error = '0';
+				$h1 = 'Subscription';
+				$html ='
+					<p>You are signup up for <span>Paper Magazine</span>.</p>
+					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
+					<button>Subscribe</button>
 				';
 				break;
 
 			case 'digitalpaper':
-				$html .= '
-					<div id="modal-add-card-success">
-						<p>Thank your for adding your credit card. Click button to complete your subscription.</p>
-						<button id="modal-add-card-button" data-action="digitalpaper" >Subscribe to Digital + Paper Magazine</button>
-					</div>
+				$res = $cust->subscriptions->create(array("plan" => "sub-digital+paper"));
+				$error = '0';
+				$h1 = 'Subscription';
+				$html ='
+					<p>You are signup up for <span>Digital + Paper Magazine</span>.</p>
+					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
+					<button>Subscribe</button>
 				';
 				break;
 
 			default:
-				$html .= '
-					<div id="modal-add-card-success">
-						<p>Thank your for adding your credit card.</p>
-						<p>Please close this window and try your subscription again. (ref:invalid action)</p>
-					</div>
-				';
+				throw new Exception('invalid action x02');
 				break;
 
 		}
 
-
-	}else{
-
-		if($user->subscription['status'] === 'none'){
-
-			switch($action){
-
-				case 'none':
-					$error = '0';
-					$h1 = 'Subscription Status';
-					$html = '
-						<p>This is your current subscription.</p>
-						<p>You get access to...</p>
-						<p>This ia a free subscription.</p>
-					';
-					break;
-
-				case 'digital':
-					$res = $cust->subscriptions->create(array("plan" => "sub-digital"));
-					$error = '0';
-					$h1 = 'Subscription';
-					$html ='
-						<p>Thank you for subscribing to Digital Magazine</p>
-						<p>Your credit card was charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
-						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
-					';
-					break;
-
-				case 'paper':
-					$res = $cust->subscriptions->create(array("plan" => "sub-paper"));
-					$error = '0';
-					$h1 = 'Subscription';
-					$html ='
-						<p>Thank you for subscribing to Paper Magazine</p>
-						<p>Your credit card was charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
-						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
-					';
-					break;
-
-				case 'digitalpaper':
-					$res = $cust->subscriptions->create(array("plan" => "sub-digital+paper"));
-					$error = '0';
-					$h1 = 'Subscription';
-					$html ='
-						<p>Thank you for subscribing to Digital + Paper Magazine</p>
-						<p>Your credit card was charged $'.substr($res['plan']['amount'],0,-2).'.'.substr($res['plan']['amount'],-2).'</p>
-						<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
-					';
-					break;
-
-				default:
-					throw new Exception('invalid action x02');
-					break;
-
-			}
-
-		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital'){
-			switch($action){
-				case 'none':
-					$html = cancel();
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'digital':
-					$html = renew('sub-digital');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'paper':
-					$html = upgrade('sub-paper');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'digitalpaper':
-					$html = upgrade('sub-digital+paper');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				default:
-					throw new Exception('invalid action x02');
-					break;
-			}
-		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-paper'){
-			switch($action){
-				case 'none':
-					$html = cancel();
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'digital':
-					$html = downgrade('sub-digital', 'sub-paper');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'paper':
-					$html = renew('sub-paper');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'digitalpaper':
-					$html = upgrade('sub-digital+paper');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				default:
-					throw new Exception('invalid action x02');
-					break;
-			}
-		}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital+paper'){
-			switch($action){
-				case 'none':
-					$html = cancel();
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'digital':
-					$html = downgrade('sub-digital', 'sub-digital+paper');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'paper':
-					$html = downgrade('sub-paper', 'sub-digital+paper');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				case 'digitalpaper':
-					$html = renew('sub-digital+paper');
-					$error = '0';
-					$h1 = 'Subscription Status';
-					break;
-				default:
-					throw new Exception('invalid action x02');
-					break;
-			}
-		}else{
-			throw new Exception('no plan type');
+	}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital'){
+		switch($action){
+			case 'none':
+				$html = cancel();
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'digital':
+				$html = renew('sub-digital');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'paper':
+				$html = upgrade('sub-paper');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'digitalpaper':
+				$html = upgrade('sub-digital+paper');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			default:
+				throw new Exception('invalid action x02');
+				break;
 		}
-
+	}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-paper'){
+		switch($action){
+			case 'none':
+				$html = cancel();
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'digital':
+				$html = downgrade('sub-digital', 'sub-paper');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'paper':
+				$html = renew('sub-paper');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'digitalpaper':
+				$html = upgrade('sub-digital+paper');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			default:
+				throw new Exception('invalid action x02');
+				break;
+		}
+	}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital+paper'){
+		switch($action){
+			case 'none':
+				$html = cancel();
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'digital':
+				$html = downgrade('sub-digital', 'sub-digital+paper');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'paper':
+				$html = downgrade('sub-paper', 'sub-digital+paper');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			case 'digitalpaper':
+				$html = renew('sub-digital+paper');
+				$error = '0';
+				$h1 = 'Subscription Status';
+				break;
+			default:
+				throw new Exception('invalid action x02');
+				break;
+		}
+	}else{
+		throw new Exception('no plan type');
 	}
 
 

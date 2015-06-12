@@ -251,6 +251,34 @@ function subUpdate(a){
         document.getElementById('fullscreenload').style.display = 'none';
     });
 }
+function subPreview(a){
+    subUnbind();
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/account/ajax/previewsub/",
+        {
+            action: a
+        },
+        function( data ) {
+            document.getElementById('modal_h1').innerHTML = data.h1;
+            document.getElementById('modal_content').innerHTML = data.content;
+            if(data.error === '2'){
+                window.location.href = "/account/login/?redir=account/";
+            }else if(data.error === '0'){
+                document.getElementById('fullscreenload').style.display = 'none';
+            }else{
+                document.getElementById('fullscreenload').style.display = 'none';
+            }
+        },
+        "json"
+    )
+    .fail(function() {
+        $('#ajax-modal').removeClass('sub_modal');
+        document.getElementById('modal_h1').innerHTML = 'Error';
+        document.getElementById('modal_content').innerHTML = '<p>There was an error changing your subscription. Please try again.</p><p>(ref. ajax fail)<p>';
+        document.getElementById('fullscreenload').style.display = 'none';
+    });
+}
 function sub(a){
     document.getElementById('fullscreenload').style.display = 'block';
     $('#modal_close').click(function() {
@@ -258,8 +286,8 @@ function sub(a){
     });
     $('#ajax-modal').addClass('sub_modal');
     showModal('ajax-modal');
-	//subPreview(a);
-    subUpdate(a);
+	subPreview(a);
+    //subUpdate(a);
 }
 
 

@@ -249,8 +249,6 @@ try{
 					$h1 = 'Subscription Status';
 					$html = '
 						<p>This is your current subscription.</p>
-						<p>You get access to...</p>
-						<p>This ia a free subscription.</p>
 					';
 					break;
 
