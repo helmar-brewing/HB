@@ -42,16 +42,12 @@ function downgrade($to = NULL, $from = NULL){
 	$res = $subscription->save();
 	$html = array(
 		'sub-digital' => '
-			<p>You have reduced your subscription to Digital Magazine.</p>
+			<p>You have changed your subscription to <span>Digital Magazine</span>. You will receive these benefits on your next renewal date of '.date("m-d-Y", $res['current_period_end']).'. Your credit card will not be charged at this time.</p>
 			<p>You can continue to enjoy your current benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
-			<p>Your credit card was not charged.</p>
-			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		',
 		'sub-paper' => '
-			<p>You have reduced your subscription to Paper Magazine.</p>
+			<p>You have changed your subscription to <span>Paper Magazine</span>. You will receive these benefits on your next renewal date of '.date("m-d-Y", $res['current_period_end']).'. Your credit card will not be charged at this time.</p>
 			<p>You can continue to enjoy your current benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
-			<p>Your credit card was not charged.</p>
-			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		',
 	);
 	return $html[$to];
@@ -74,12 +70,12 @@ function upgrade($to = NULL){
 	$charge = $res['plan']['amount'] + $bal;
 	$html = array(
 		'sub-paper' => '
-			<p>Thank you for upgrading to Paper Magazine</p>
+			<p>Thank you for upgrading to Paper Magazine. Your benefits will take effect immediately.</p>
 			<p>Your credit card was charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		',
 		'sub-digital+paper' => '
-			<p>Thank you for upgrading to Digital + Paper Magazine</p>
+			<p>Thank you for upgrading to Digital + Paper Magazine. Your benefits will take effect immediately.</p>
 			<p>Your credit card was charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		'

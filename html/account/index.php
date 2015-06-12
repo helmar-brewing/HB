@@ -122,6 +122,7 @@ print'
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
 			<label>Choose Your Subscription</label>
+			<p>When you downgrade your subscription your plan will change on your next renewal date. When you upgrade your subscription your current subscription will end and your new subscription will begin immediately.</p>
 			<ul class="sub-buttons">
 	';
 
