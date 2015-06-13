@@ -200,6 +200,12 @@ function subUpdate(a){
 
 				document.getElementById('fullscreenload').style.display = 'none';
 
+			}else if(data.error === '4'){
+
+				// do the address update is successful show the hidden continue button
+
+				document.getElementById('fullscreenload').style.display = 'none';
+
             }else if(data.error === '0'){
 
 				$('#sub-none').removeClass('selected');

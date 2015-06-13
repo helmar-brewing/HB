@@ -11,6 +11,7 @@
 		public $email;
 		public $stripeID;
 		public $subscription;
+		public $address;
 		public $error_cookie;
 		public $error = array();
 		public $loginID;
@@ -365,6 +366,13 @@
 					$this->lastname = $info['lastname'];
 					$this->email = $info['email'];
 					$this->stripeID = $info['stripeID'];
+					$this->address = array(
+						'address' => $info['address'],
+						'city' => $info['city'],
+						'state' => $info['state'],
+						'zip5' => $info['zip5'],
+						'zip4' => $info['zip4']
+					);
 					$R_info->free();
 					unset($R_info);
 				}

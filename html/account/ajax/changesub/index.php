@@ -164,10 +164,70 @@ try{
 	// get the stripe customer
 	$cust = \Stripe\Customer::retrieve($user->stripeID);
 
-	// check for address before credit card  **********************************************************
 
-	// check for payment methods - else do the stuff
-	if($cust['sources']['total_count'] === 0 && $action !== 'none'){
+	// check address, then check for payment methods - else do the stuff
+	if($user->address['address'] == '' && $action != 'none'){
+
+		$error = '4';
+		$h1 = 'Please Add Your Address';
+		$html = '
+			<div class="modal-address">
+				<label for="sub-address">Address</label>
+				<input type="text" id="sub-address">
+				<fieldset>
+					<label for="sub-city">City</label>
+					<input type="text" id="sub-city">
+					<label for="sub-state">State</label>
+					<input type="text" id="sub-state">
+				</fieldset>
+				<fieldset>
+					<label for="sub-zip5">Zip</label>
+					<input type="text" id="sub-zip5">-<input type="text" id="sub-zip4">
+				</fieldset>
+				<button>Update Address</button>
+			</div>
+		';
+		switch($action){
+
+			case 'paper':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for updating your address. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="paper" >Subscribe to Paper Magazine</button>
+					</div>
+				';
+				break;
+
+			case 'digital':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for updating your address. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="digital" >Subscribe to Digital Magazine</button>
+					</div>
+				';
+				break;
+
+			case 'digitalpaper':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for updating your address. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="digitalpaper" >Subscribe to Digital + Paper Magazine</button>
+					</div>
+				';
+				break;
+
+			default:
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for updating your address.</p>
+						<p>Please close this window and try your subscription again. (ref:invalid action)</p>
+					</div>
+				';
+				break;
+
+		}
+
+	}elseif($cust['sources']['total_count'] === 0 && $action !== 'none'){
 
 		$error = '3';
 		$h1 = 'Please Add a Payment Method';
