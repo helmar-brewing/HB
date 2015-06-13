@@ -176,7 +176,6 @@ try{
 				break;
 
 			case 'digital':
-				$res = $cust->subscriptions->create(array("plan" => "sub-digital"));
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
@@ -187,7 +186,6 @@ try{
 				break;
 
 			case 'paper':
-				$res = $cust->subscriptions->create(array("plan" => "sub-paper"));
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
@@ -198,7 +196,6 @@ try{
 				break;
 
 			case 'digitalpaper':
-				$res = $cust->subscriptions->create(array("plan" => "sub-digital+paper"));
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
@@ -315,12 +312,12 @@ try{
 	$body = $e->getJsonBody();
 	$s_err  = $body['error'];
 
-
+	$s_err_s = print_r($s_err,true);
 
 
 	$error  = '1';
     $h1     = 'Error';
-	$html   = '<p>There was an error.</p><p>(ref: stripe x01)</p><p>Please try again.</p>';
+	$html   = '<p>There was an error.</p><p>(ref: stripe x01)</p><p>Please try again.</p>'.$s_err_s;
 	$msg	= $e->getMessage();
 
 

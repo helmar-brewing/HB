@@ -171,7 +171,7 @@ try{
 		$error = '4';
 		$h1 = 'Please Add Your Address';
 		$html = '
-			<div class="modal-address">
+			<div id="modal-address-form" class="modal-address">
 				<label for="sub-address">Address</label>
 				<input type="text" id="sub-address">
 				<fieldset>

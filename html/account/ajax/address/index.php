@@ -40,7 +40,22 @@ try{
     }
 
 
-    // address validation using USPS
+    // address validation using USPS...
+
+    $address = $_GET['address'];
+    $city = $_GET['city'];
+    $state = $_GET['state'];
+    $zip5 = $_GET['zip5'];
+    $zip4 = $_GET['sip4'];
+
+    // upload address
+    $stmt = $db_main->prepare("UPDATE users SET address=?, city=?, state=?, zip5=?, zip4=? WHERE username='".$user->username."' LIMIT 1");
+    $stmt->bind_param("sssss", $address, $city, $state, $zip5, $zip4);
+    $stmt->execute();
+    $stmt->close;
+
+    $error = '0';
+
 
 
 }catch(mysqli_sql_exception $e){

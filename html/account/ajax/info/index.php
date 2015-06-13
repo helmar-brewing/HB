@@ -34,21 +34,19 @@ if($user->login() === 2){
 		$error = '0';
 		$h1 = 'Update Info';
 		$content = '
-			<fieldset>
 				<label for="change-info-firstname">First Name</label>
 				<input type="text" id="change-info-firstname" value="'.$user->firstname.'">
 				<label for="change-info-lastname">Last Name</label>
 				<input type="text" id="change-info-lastname" value="'.$user->lastname.'">
-			</fieldset>
-			<fieldset>
 				<label for="change-info-address">Address</label>
 				<input type="text" id="change-info-address" value="" disabled>
 				<label for="change-info-city">City</label>
 				<input type="text" id="change-info-city" value="" disabled>
 				<label for="change-info-state">State</label>
 				<input type="text" id="change-info-state" value="" disabled>
-				<label for="change-info-zip">ZIP Code</label>
-				<input type="text" id="change-info-zip" value="" disabled>
+			<fieldset>
+				<label for="change-info-zip5">ZIP Code</label>
+				<input type="text" id="change-info-zip5" value="" disabled> - <input type="text" id="change-info-zip4" value="" disabled>
 			</fieldset>
 			<button id="change-info-button">Update Info</button>
 		';

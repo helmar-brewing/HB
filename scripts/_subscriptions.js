@@ -124,7 +124,7 @@ var stripeResponseHandlerModal = function(status, response) {
 					document.getElementById('modal-add-card-success').style.display = 'block';
 
 					var a = $('#modal-add-card-button').attr("data-action");
-					$('#modal-add-card-button').on("click", subUpdate(a));
+					$('#modal-add-card-button').on("click", function(){subUpdate(a);} );
 
 
 					document.getElementById('fullscreenload').style.display = 'none';
@@ -298,6 +298,7 @@ function sub(a){
 
 
 
+
 function address(){
 	document.getElementById('fullscreenload').style.display = 'block';
 	var aa = document.getElementById('sub-address').value;
@@ -318,7 +319,11 @@ function address(){
             if(data.error === '2'){
                 window.location.href = "/account/login/?redir=account/";
             }else if(data.error === '0'){
-                document.getElementById('fullscreenload').style.display = 'none';
+				document.getElementById('modal-address-form').style.display = 'none';
+				document.getElementById('modal-add-card-success').style.display = 'block';
+				var a = $('#modal-add-card-button').attr("data-action");
+				$('#modal-add-card-button').on("click", function(){subUpdate(a);});
+				document.getElementById('fullscreenload').style.display = 'none';
             }else{
 				document.getElementById('modal_h1').innerHTML = data.h1;
 	            document.getElementById('modal_content').innerHTML = data.content;
@@ -334,9 +339,6 @@ function address(){
         document.getElementById('fullscreenload').style.display = 'none';
     });
 }
-
-
-
 
 
 
