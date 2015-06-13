@@ -184,7 +184,7 @@ try{
 					<label for="sub-zip5">Zip</label>
 					<input type="text" id="sub-zip5">-<input type="text" id="sub-zip4">
 				</fieldset>
-				<button>Update Address</button>
+				<button onclick="address()">Update Address</button>
 			</div>
 		';
 		switch($action){
