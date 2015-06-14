@@ -206,7 +206,7 @@ print'    </div>
                         // print the front pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic)){
                             print'
-                                <a href="http://www.helmarbrewing.com/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$frontthumb.'"></a>
+                                <a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$frontthumb.'"></a>
                             ';
                         }
 
@@ -218,7 +218,7 @@ print'    </div>
                         // print the back pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$backpic)){
                             print'
-                                <a href="http://www.helmarbrewing.com/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$backthumb.'"></a>
+                                <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$backthumb.'"></a>
                             ';
 
                         }
