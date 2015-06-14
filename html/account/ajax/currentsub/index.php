@@ -63,6 +63,20 @@ try{
 			default: throw new Exception('Cannot get subscription name, invalid plan type.');
 		}
 	}
+	function subAction($sub){
+		switch($sub){
+			case 'sub-digital':
+				return 'digital';
+				break;
+			case 'sub-paper':
+				return 'paper';
+				break;
+			case 'sub-digital+paper':
+				return 'digitalpaper';
+				break;
+			default: throw new Exception('Cannot get subscription action, invalid plan type.');
+		}
+	}
 	switch($user->subscription[status]){
 		case 'error':
 			$html = '<p>There was an error determining you subscription status.</p>';
@@ -74,14 +88,13 @@ try{
 			$html = '<p>You are currently subscribed to <span>'.subName($user->subscription['plan_type']).'</span></p>';
 			if($user->subscription['cancel_at_period_end'] === true){
 				$html .= '<p><i class="fa fa-ban"></i> Auto re-new is turned off. Your subscription will be canceled on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
-				$html .= '<button>Resume Subscription</button>';
+				$html .= '<button onclick="subUpdate(\''.subAction($user->subscription['plan_type']).'\')">Resume Subscription</button>';
 			}else{
 				if($user->subscription['plan_type'] === $user->subscription['next_plan']){
 					$html .= '<p><i class="fa fa-refresh"></i> Your subscription will renew on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
 					$html .= '<p>Next Payment: $'.substr($user->subscription['next_payment'],0,-2).'.'.substr($user->subscription['next_payment'],-2).' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
 				}else{
-					$html .= '<p><i class="fa fa-level-down"></i> You have elected to change your subscription to <span>'.subName($user->subscription['next_plan']).'</span>.</p>';
-					$html .= '<p>Enjoy your current benefits until <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
+					$html .= '<p><i class="fa fa-level-down"></i> You have elected to change your subscription to <span>'.subName($user->subscription['next_plan']).'</span> effective on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
 					$html .= '<p>Next Payment: $'.substr($user->subscription['next_payment'],0,-2).'.'.substr($user->subscription['next_payment'],-2).' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
 				}
 			}

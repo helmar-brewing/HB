@@ -121,14 +121,15 @@ print'
 		<h1 class="pagetitle">Your Account</h1>
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
-			<p>Click or tap an option to change your subscription.</p>
+			<label>Choose Your Subscription</label>
+			<p>When you downgrade your subscription your plan will change on your next renewal date. When you upgrade your subscription your current subscription will end and your new subscription will begin immediately.</p>
 			<ul class="sub-buttons">
 	';
 
 
 
 
-	if($user->subscription['plan_type'] === 'sub-digital+paper'){
+	if($user->subscription['next_plan'] === 'sub-digital+paper'){
 		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')" class="selected">';
 	}else{
 		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')">';
@@ -141,7 +142,7 @@ print'
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 	';
-	if($user->subscription['plan_type'] === 'sub-digital+paper'){
+	if($user->subscription['next_plan'] === 'sub-digital+paper'){
 		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
 		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-square-o"></i></div>';
@@ -157,7 +158,7 @@ print'
 
 
 
-	if($user->subscription['plan_type'] === 'sub-paper'){
+	if($user->subscription['next_plan'] === 'sub-paper'){
 		print'<li id="sub-paper" onclick="sub(\'paper\')" class="selected">';
 	}else{
 		print'<li id="sub-paper" onclick="sub(\'paper\')">';
@@ -169,7 +170,7 @@ print'
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 	';
-	if($user->subscription['plan_type'] === 'sub-paper'){
+	if($user->subscription['next_plan'] === 'sub-paper'){
 		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
 		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-square-o"></i></div>';
@@ -178,7 +179,7 @@ print'
 
 
 
-	if($user->subscription['plan_type'] === 'sub-digital'){
+	if($user->subscription['next_plan'] === 'sub-digital'){
 		print '<li id="sub-digital" onclick="sub(\'digital\')" class="selected">';
 	}else{
 		print '<li id="sub-digital" onclick="sub(\'digital\')">';
@@ -190,7 +191,7 @@ print'
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 	';
-	if($user->subscription['plan_type'] === 'sub-digital'){
+	if($user->subscription['next_plan'] === 'sub-digital'){
 		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
 		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-square-o"></i></div>';
@@ -260,13 +261,15 @@ print'
 		<section class="yourinfo">
 			<h2>Your Info</h2>
 			<dl>
+				<dt>Name</dt>
+				<dd id="account-name">'.$user->firstname.' '.$user->lastname.'</dd>
+				<dt>Address</dt>
+				<dd id="account-address">'.$user->address['address'].'<br>'.$user->address['city'].' '.$user->address['state'].' '.$user->address['zip5'].'-'.$user->address['zip4'].'</dd>
+				<button type="button" onclick="changeInfo(1)">Update Info</button>
+			</dl>
+			<dl>
 				<dt>Username</dt>
 				<dd>'.$user->username.'</dd>
-				<dt>First Name</dt>
-				<dd id="profile-firstname">'.$user->firstname.'</dd>
-				<dt>Last Name</dt>
-				<dd id="profile-lastname">'.$user->lastname.'</dd>
-				<button type="button" onclick="changeInfo(1)">Update Info</button>
 				<dt>Email</dt>
 				<dd id="account-email">'.$user->email.'</dd>
 				<button type="button" onclick="changeEmail(1)">Change Email</button>

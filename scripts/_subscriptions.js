@@ -124,7 +124,7 @@ var stripeResponseHandlerModal = function(status, response) {
 					document.getElementById('modal-add-card-success').style.display = 'block';
 
 					var a = $('#modal-add-card-button').attr("data-action");
-					$('#modal-add-card-button').on("click", subUpdate(a));
+					$('#modal-add-card-button').on("click", function(){subUpdate(a);} );
 
 
 					document.getElementById('fullscreenload').style.display = 'none';
@@ -200,6 +200,12 @@ function subUpdate(a){
 
 				document.getElementById('fullscreenload').style.display = 'none';
 
+			}else if(data.error === '4'){
+
+				// do the address update is successful show the hidden continue button
+
+				document.getElementById('fullscreenload').style.display = 'none';
+
             }else if(data.error === '0'){
 
 				$('#sub-none').removeClass('selected');
@@ -251,6 +257,34 @@ function subUpdate(a){
         document.getElementById('fullscreenload').style.display = 'none';
     });
 }
+function subPreview(a){
+    subUnbind();
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/account/ajax/previewsub/",
+        {
+            action: a
+        },
+        function( data ) {
+            document.getElementById('modal_h1').innerHTML = data.h1;
+            document.getElementById('modal_content').innerHTML = data.content;
+            if(data.error === '2'){
+                window.location.href = "/account/login/?redir=account/";
+            }else if(data.error === '0'){
+                document.getElementById('fullscreenload').style.display = 'none';
+            }else{
+                document.getElementById('fullscreenload').style.display = 'none';
+            }
+        },
+        "json"
+    )
+    .fail(function() {
+        $('#ajax-modal').removeClass('sub_modal');
+        document.getElementById('modal_h1').innerHTML = 'Error';
+        document.getElementById('modal_content').innerHTML = '<p>There was an error changing your subscription. Please try again.</p><p>(ref. ajax fail)<p>';
+        document.getElementById('fullscreenload').style.display = 'none';
+    });
+}
 function sub(a){
     document.getElementById('fullscreenload').style.display = 'block';
     $('#modal_close').click(function() {
@@ -258,17 +292,54 @@ function sub(a){
     });
     $('#ajax-modal').addClass('sub_modal');
     showModal('ajax-modal');
-	//subPreview(a);
-    subUpdate(a);
+	subPreview(a);
 }
 
 
 
 
 
-
-
-
+function address(){
+	document.getElementById('fullscreenload').style.display = 'block';
+	var aa = document.getElementById('sub-address').value;
+	var cc = document.getElementById('sub-city').value;
+	var ss = document.getElementById('sub-state').value;
+	var z5 = document.getElementById('sub-zip5').value;
+	var z4 = document.getElementById('sub-zip4').value;
+    $.get(
+        "/account/ajax/address/",
+        {
+			address: aa,
+			city: cc,
+			state: ss,
+			zip5: z5,
+			zip4: z4
+		},
+        function( data ) {
+            if(data.error === '2'){
+                window.location.href = "/account/login/?redir=account/";
+            }else if(data.error === '0'){
+				document.getElementById('modal-address-form').style.display = 'none';
+				document.getElementById('modal-add-card-success').style.display = 'block';
+				var a = $('#modal-add-card-button').attr("data-action");
+				$('#modal-add-card-button').on("click", function(){subUpdate(a);});
+				document.getElementById('account-address').innerHTML = data.return.fulladdress;
+				document.getElementById('fullscreenload').style.display = 'none';
+            }else{
+				document.getElementById('modal_h1').innerHTML = data.h1;
+	            document.getElementById('modal_content').innerHTML = data.content;
+                document.getElementById('fullscreenload').style.display = 'none';
+            }
+        },
+        "json"
+    )
+    .fail(function() {
+        $('#ajax-modal').removeClass('sub_modal');
+        document.getElementById('modal_h1').innerHTML = 'Error';
+        document.getElementById('modal_content').innerHTML = '<p>There was an error updating your address. Please try again.</p><p>(ref. ajax fail)<p>';
+        document.getElementById('fullscreenload').style.display = 'none';
+    });
+}
 
 
 

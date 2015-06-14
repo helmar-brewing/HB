@@ -68,6 +68,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/html\/account\/ajax\/address\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/account\/ajax\/address\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/html\/account\/ajax\/changesub\/index.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -284,6 +293,24 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/html\/checklist\/csv\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/checklist\/csv\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/html\/checklist\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/checklist\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/html\/contact\/ajax\/contact\/index.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -302,6 +329,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/html\/css\/lightbox.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/css\/lightbox.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/html\/css\/style.css": {
 		"fileType": 16,
 		"ignore": 1,
@@ -310,6 +346,94 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
+		},
+	"\/html\/images\/cardPics\/large\/R319-Helmar_1_Back.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 53513,
+		"inputAbbreviatedPath": "\/html\/images\/cardPics\/large\/R319-Helmar_1_Back.jpg",
+		"outputAbbreviatedPath": "\/html\/images\/cardPics\/large\/R319-Helmar_1_Back.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/images\/cardPics\/large\/R319-Helmar_1_Front.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 49989,
+		"inputAbbreviatedPath": "\/html\/images\/cardPics\/large\/R319-Helmar_1_Front.jpg",
+		"outputAbbreviatedPath": "\/html\/images\/cardPics\/large\/R319-Helmar_1_Front.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/images\/cardPics\/medium\/R319-Helmar_1_Back.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 15929,
+		"inputAbbreviatedPath": "\/html\/images\/cardPics\/medium\/R319-Helmar_1_Back.jpg",
+		"outputAbbreviatedPath": "\/html\/images\/cardPics\/medium\/R319-Helmar_1_Back.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/images\/cardPics\/medium\/R319-Helmar_1_Front.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 17915,
+		"inputAbbreviatedPath": "\/html\/images\/cardPics\/medium\/R319-Helmar_1_Front.jpg",
+		"outputAbbreviatedPath": "\/html\/images\/cardPics\/medium\/R319-Helmar_1_Front.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/images\/cardPics\/R319-Helmar_1_Back.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 0,
+		"inputAbbreviatedPath": "\/html\/images\/cardPics\/R319-Helmar_1_Back.jpg",
+		"outputAbbreviatedPath": "\/html\/images\/cardPics\/R319-Helmar_1_Back.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/images\/cardPics\/R319-Helmar_1_Front.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 410409,
+		"inputAbbreviatedPath": "\/html\/images\/cardPics\/R319-Helmar_1_Front.jpg",
+		"outputAbbreviatedPath": "\/html\/images\/cardPics\/R319-Helmar_1_Front.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Back.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1325,
+		"inputAbbreviatedPath": "\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Back.jpg",
+		"outputAbbreviatedPath": "\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Back.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Front.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1485,
+		"inputAbbreviatedPath": "\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Front.jpg",
+		"outputAbbreviatedPath": "\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Front.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/html\/img\/about-card.jpg": {
 		"fileType": 16384,
@@ -333,6 +457,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/html\/img\/cards-bg.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 315909,
+		"inputAbbreviatedPath": "\/html\/img\/cards-bg.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/cards-bg.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/html\/img\/checklist-sample.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -340,6 +475,17 @@
 		"initialSize": 79340,
 		"inputAbbreviatedPath": "\/html\/img\/checklist-sample.jpg",
 		"outputAbbreviatedPath": "\/html\/img\/checklist-sample.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/close.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 280,
+		"inputAbbreviatedPath": "\/html\/img\/close.png",
+		"outputAbbreviatedPath": "\/html\/img\/close.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -360,6 +506,17 @@
 		"initialSize": 2056,
 		"inputAbbreviatedPath": "\/html\/img\/h.png",
 		"outputAbbreviatedPath": "\/html\/img\/h.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/helmar-bg.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 483822,
+		"inputAbbreviatedPath": "\/html\/img\/helmar-bg.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/helmar-bg.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -437,6 +594,28 @@
 		"initialSize": 170271,
 		"inputAbbreviatedPath": "\/html\/img\/microphone.jpg",
 		"outputAbbreviatedPath": "\/html\/img\/microphone.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/next.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1350,
+		"inputAbbreviatedPath": "\/html\/img\/next.png",
+		"outputAbbreviatedPath": "\/html\/img\/next.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/prev.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1360,
+		"inputAbbreviatedPath": "\/html\/img\/prev.png",
+		"outputAbbreviatedPath": "\/html\/img\/prev.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -2796,6 +2975,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
+	"\/sass\/lightbox.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/sass\/lightbox.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/sass\/neat\/_neat-helpers.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -3209,6 +3397,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/scripts\/jquery-1.11.1.min.js",
 		"outputAbbreviatedPath": "\/html\/js\/jquery-1.11.1.min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/scripts\/lightbox.min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/scripts\/lightbox.min.js",
+		"outputAbbreviatedPath": "\/html\/js\/lightbox.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,

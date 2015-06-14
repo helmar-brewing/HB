@@ -154,7 +154,8 @@ function changeInfo(s, d1){
                             "address" : document.getElementById('change-info-address').value,
                             "city" : document.getElementById('change-info-city').value,
                             "state" : document.getElementById('change-info-state').value,
-                            "zip" : document.getElementById('change-info-zip').value
+                            "zip5" : document.getElementById('change-info-zip5').value,
+                            "zip4" : document.getElementById('change-info-zip4').value
                         };
                         changeInfo(2, dd);
                     });
@@ -162,9 +163,8 @@ function changeInfo(s, d1){
                 showModal('ajax-modal');
             }else if(s === 2){
                 if(data.error === '0'){
-                    document.getElementById('profile-firstname').innerHTML = data.return.firstname;
-                    document.getElementById('profile-lastname').innerHTML = data.return.lastname;
-                    //document.getElementById('profile-fulladdress').innerHTML = data.return.fulladdress;
+                    document.getElementById('account-name').innerHTML = data.return.firstname + ' ' + data.return.lastname;
+                    document.getElementById('account-address').innerHTML = data.return.fulladdress;
                     changeInfoCleanup();
                     hideModal('ajax-modal');
                 }else{

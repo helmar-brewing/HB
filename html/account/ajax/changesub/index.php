@@ -42,16 +42,12 @@ function downgrade($to = NULL, $from = NULL){
 	$res = $subscription->save();
 	$html = array(
 		'sub-digital' => '
-			<p>You have reduced your subscription to Digital Magazine.</p>
+			<p>You have changed your subscription to <span>Digital Magazine</span>. You will receive these benefits on your next renewal date of '.date("m-d-Y", $res['current_period_end']).'. Your credit card will not be charged at this time.</p>
 			<p>You can continue to enjoy your current benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
-			<p>Your credit card was not charged.</p>
-			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		',
 		'sub-paper' => '
-			<p>You have reduced your subscription to Paper Magazine.</p>
+			<p>You have changed your subscription to <span>Paper Magazine</span>. You will receive these benefits on your next renewal date of '.date("m-d-Y", $res['current_period_end']).'. Your credit card will not be charged at this time.</p>
 			<p>You can continue to enjoy your current benefits until '.date("m-d-Y", $res['current_period_end']).'.</p>
-			<p>Your credit card was not charged.</p>
-			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		',
 	);
 	return $html[$to];
@@ -63,7 +59,7 @@ function upgrade($to = NULL){
 	if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
 		$year = 60*60*24*366;
 	}else{
-		$year = $year = 60*60*24*365;
+		$year = 60*60*24*365;
 	}
 	$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
 	$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
@@ -74,12 +70,12 @@ function upgrade($to = NULL){
 	$charge = $res['plan']['amount'] + $bal;
 	$html = array(
 		'sub-paper' => '
-			<p>Thank you for upgrading to Paper Magazine</p>
+			<p>Thank you for upgrading to Paper Magazine. Your benefits will take effect immediately.</p>
 			<p>Your credit card was charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		',
 		'sub-digital+paper' => '
-			<p>Thank you for upgrading to Digital + Paper Magazine</p>
+			<p>Thank you for upgrading to Digital + Paper Magazine. Your benefits will take effect immediately.</p>
 			<p>Your credit card was charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		'
@@ -168,10 +164,68 @@ try{
 	// get the stripe customer
 	$cust = \Stripe\Customer::retrieve($user->stripeID);
 
-	// check for address before credit card  **********************************************************
 
-	// check for payment methods - else do the stuff
-	if($cust['sources']['total_count'] === 0 && $action !== 'none'){
+	// check address, then check for payment methods - else do the stuff
+	if($user->address['address'] == '' && $action != 'none'){
+
+		$error = '4';
+		$h1 = 'Please Add Your Address';
+		$html = '
+			<div id="modal-address-form" class="modal-address">
+				<label for="sub-address">Address</label>
+				<input type="text" id="sub-address" value="'.$data1['address'].'" >
+				<label for="sub-city">City</label>
+				<input type="text" id="sub-city" value="'.$data1['city'].'" >
+				<label for="sub-state">State</label>
+				<input type="text" id="sub-state" value="'.$data1['state'].'" >
+				<fieldset class="zip">
+					<label for="sub-zip5">ZIP Code</label>
+					<input type="text" id="sub-zip5" placeholder="zip code" maxlength="5" value="'.$data1['zip5'].'" > - <input type="text" id="sub-zip4" placeholder="+4" maxlength="4" value="'.$data1['zip4'].'" >
+				</fieldset>
+				<button onclick="address()">Update Address</button>
+			</div>
+		';
+		switch($action){
+
+			case 'paper':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for updating your address. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="paper" >Subscribe to Paper Magazine</button>
+					</div>
+				';
+				break;
+
+			case 'digital':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for updating your address. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="digital" >Subscribe to Digital Magazine</button>
+					</div>
+				';
+				break;
+
+			case 'digitalpaper':
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for updating your address. Click button to complete your subscription.</p>
+						<button id="modal-add-card-button" data-action="digitalpaper" >Subscribe to Digital + Paper Magazine</button>
+					</div>
+				';
+				break;
+
+			default:
+				$html .= '
+					<div id="modal-add-card-success">
+						<p>Thank your for updating your address.</p>
+						<p>Please close this window and try your subscription again. (ref:invalid action)</p>
+					</div>
+				';
+				break;
+
+		}
+
+	}elseif($cust['sources']['total_count'] === 0 && $action !== 'none'){
 
 		$error = '3';
 		$h1 = 'Please Add a Payment Method';
@@ -249,8 +303,6 @@ try{
 					$h1 = 'Subscription Status';
 					$html = '
 						<p>This is your current subscription.</p>
-						<p>You get access to...</p>
-						<p>This ia a free subscription.</p>
 					';
 					break;
 

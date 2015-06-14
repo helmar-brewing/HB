@@ -232,7 +232,7 @@
                 &.selected{
                     margin-top:1em;
                     margin-bottom:1em;
-                    box-shadow:none;    
+                    box-shadow:none;
                 }
             }
         }
@@ -355,6 +355,13 @@
     padding-bottom:2em;
     margin-bottom:2em;
     border-bottom:1px solid #CCC;
+
+    dl{
+        @include span-columns(6);
+        @include media(max-width 760px) {
+            @include span_columns(12);
+        }
+    }
 }
 
 
@@ -499,4 +506,19 @@
 }
 #modal-add-card-success{
     display:none;
+}
+
+.zip{
+    margin:0;
+    padding:0;
+    border:none;
+    background-color:transparent;
+    label{
+        display:block;
+    }
+    input[type="text"]{
+        width:auto;
+        max-witdh:45%;
+        display:inline-block;
+    }
 }
