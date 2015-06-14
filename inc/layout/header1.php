@@ -24,6 +24,7 @@ print'
 if(isset($user)){
     if( $user->login() == 1 || $user->login() == 2 ){
         print'
+                <li class="nav-link"><a href="'.$protocol.$site.'/checklist/">My Checklist</a></li>
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/logout">Log out</a></li>
         ';
     }else{
