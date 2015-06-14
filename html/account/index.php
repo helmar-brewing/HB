@@ -261,13 +261,15 @@ print'
 		<section class="yourinfo">
 			<h2>Your Info</h2>
 			<dl>
+				<dt>Name</dt>
+				<dd id="account-name">'.$user->firstname.' '.$user->lastname.'</dd>
+				<dt>Address</dt>
+				<dd id="account-address">'.$user->address['address'].'<br>'.$user->address['city'].' '.$user->address['state'].' '.$user->address['zip5'].'-'.$user->address['zip4'].'</dd>
+				<button type="button" onclick="changeInfo(1)">Update Info</button>
+			</dl>
+			<dl>
 				<dt>Username</dt>
 				<dd>'.$user->username.'</dd>
-				<dt>First Name</dt>
-				<dd id="profile-firstname">'.$user->firstname.'</dd>
-				<dt>Last Name</dt>
-				<dd id="profile-lastname">'.$user->lastname.'</dd>
-				<button type="button" onclick="changeInfo(1)">Update Info</button>
 				<dt>Email</dt>
 				<dd id="account-email">'.$user->email.'</dd>
 				<button type="button" onclick="changeEmail(1)">Change Email</button>

@@ -323,6 +323,7 @@ function address(){
 				document.getElementById('modal-add-card-success').style.display = 'block';
 				var a = $('#modal-add-card-button').attr("data-action");
 				$('#modal-add-card-button').on("click", function(){subUpdate(a);});
+				document.getElementById('account-address').innerHTML = data.return.fulladdress;
 				document.getElementById('fullscreenload').style.display = 'none';
             }else{
 				document.getElementById('modal_h1').innerHTML = data.h1;

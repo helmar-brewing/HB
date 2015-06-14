@@ -34,19 +34,19 @@ if($user->login() === 2){
 		$error = '0';
 		$h1 = 'Update Info';
 		$content = '
-				<label for="change-info-firstname">First Name</label>
-				<input type="text" id="change-info-firstname" value="'.$user->firstname.'">
-				<label for="change-info-lastname">Last Name</label>
-				<input type="text" id="change-info-lastname" value="'.$user->lastname.'">
-				<label for="change-info-address">Address</label>
-				<input type="text" id="change-info-address" value="" disabled>
-				<label for="change-info-city">City</label>
-				<input type="text" id="change-info-city" value="" disabled>
-				<label for="change-info-state">State</label>
-				<input type="text" id="change-info-state" value="" disabled>
-			<fieldset>
+			<label for="change-info-firstname">First Name</label>
+			<input type="text" id="change-info-firstname" value="'.$user->firstname.'">
+			<label for="change-info-lastname">Last Name</label>
+			<input type="text" id="change-info-lastname" value="'.$user->lastname.'">
+			<label for="change-info-address">Address</label>
+			<input type="text" id="change-info-address" value="'.$user->address['address'].'" >
+			<label for="change-info-city">City</label>
+			<input type="text" id="change-info-city" value="'.$user->address['city'].'" >
+			<label for="change-info-state">State</label>
+			<input type="text" id="change-info-state" value="'.$user->address['state'].'" >
+			<fieldset class="zip">
 				<label for="change-info-zip5">ZIP Code</label>
-				<input type="text" id="change-info-zip5" value="" disabled> - <input type="text" id="change-info-zip4" value="" disabled>
+				<input type="text" id="change-info-zip5" placeholder="zip code" maxlength="5" value="'.$user->address['zip5'].'" > - <input type="text" id="change-info-zip4" placeholder="+4" maxlength="4" value="'.$user->address['zip4'].'" >
 			</fieldset>
 			<button id="change-info-button">Update Info</button>
 		';
@@ -63,21 +63,20 @@ if($user->login() === 2){
 
 
 
-			// if paper subscription validate mailing address
-			// there will have ot be a step 3
 
 
 			// do the update
 
-			$stmt = $db_main->prepare("UPDATE users SET firstName=?, lastName=? WHERE username='".$user->username."' LIMIT 1");
-			$stmt->bind_param("ss", $data1['firstname'], $data1['lastname']);
+			$stmt = $db_main->prepare("UPDATE users SET firstName=?, lastName=?, address=?, city=?, state=?, zip5=?, zip4=? WHERE username='".$user->username."' LIMIT 1");
+			$stmt->bind_param("sssssss", $data1['firstname'], $data1['lastname'], $data1['address'], $data1['city'], $data1['state'], $data1['zip5'], $data1['zip4']);
 			$stmt->execute();
 			$stmt->close;
 
 			$error = '0';
-			$content = '<p>Your name was successfully updated</p>';
+			$content = '<p>Your info was successfully updated</p>';
 
-			// pull this from the datbase instead  ***********
+			// pull this from the datbase instead of this ***********
+			$data1['fulladdress'] = $data1['address'].'<br>'.$data1['city'].' '.$data1['state'].' '.$data1['zip5'].'-'.$data1['zip4'];
 			$return = $data1;
 
 
@@ -97,21 +96,19 @@ if($user->login() === 2){
 			$h1 = 'Update Info';
 			$content = '
 				<ul>'.$msg.'</ul>
-				<fieldset>
-					<label for="change-info-firstname">First Name</label>
-					<input type="text" id="change-info-firstname" value="'.$data1['firstname'].'">
-					<label for="change-info-lastname">Last Name</label>
-					<input type="text" id="change-info-lastname" value="'.$data1['lastname'].'">
-				</fieldset>
-				<fieldset>
-					<label for="change-info-address">Address</label>
-					<input type="text" id="change-info-address" value="" disabled>
-					<label for="change-info-city">City</label>
-					<input type="text" id="change-info-city" value="" disabled>
-					<label for="change-info-state">State</label>
-					<input type="text" id="change-info-state" value="" disabled>
-					<label for="change-info-zip">ZIP Code</label>
-					<input type="text" id="change-info-zip" value="" disabled>
+				<label for="change-info-firstname">First Name</label>
+				<input type="text" id="change-info-firstname" value="'.$data1['firstname'].'">
+				<label for="change-info-lastname">Last Name</label>
+				<input type="text" id="change-info-lastname" value="'.$data1['lastname'].'">
+				<label for="change-info-address">Address</label>
+				<input type="text" id="change-info-address" value="'.$data1['address'].'" >
+				<label for="change-info-city">City</label>
+				<input type="text" id="change-info-city" value="'.$data1['city'].'" >
+				<label for="change-info-state">State</label>
+				<input type="text" id="change-info-state" value="'.$data1['state'].'" >
+				<fieldset class="zip">
+					<label for="change-info-zip5">ZIP Code</label>
+					<input type="text" id="change-info-zip5" placeholder="zip code" maxlength="5" value="'.$data1['zip5'].'" > - <input type="text" id="change-info-zip4" placeholder="+4" maxlength="4" value="'.$data1['zip4'].'" >
 				</fieldset>
 				<button id="change-info-button">Update Info</button>
 			';

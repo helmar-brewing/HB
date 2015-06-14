@@ -46,7 +46,7 @@ try{
     $city = $_GET['city'];
     $state = $_GET['state'];
     $zip5 = $_GET['zip5'];
-    $zip4 = $_GET['sip4'];
+    $zip4 = $_GET['zip4'];
 
     // upload address
     $stmt = $db_main->prepare("UPDATE users SET address=?, city=?, state=?, zip5=?, zip4=? WHERE username='".$user->username."' LIMIT 1");
@@ -55,6 +55,8 @@ try{
     $stmt->close;
 
     $error = '0';
+
+	$return['fulladdress'] = $address.'<br>'.$city.' '.$state.' '.$zip5.'-'.$zip4;
 
 
 
@@ -76,6 +78,7 @@ $json = array(
     'h1'        => $h1,
     'content'   => $html,
 	'msg'		=> $msg,
+	'return'	=> $return
 );
 
 $db_main->close();
