@@ -9,13 +9,14 @@
 // }
 
 body{
-    background-color: #F9F9F9;
+  //  background-color: #F9F9F9;
+    background-image: url('/img/tile.jpg');
 }
 
 
 .header2{
     @include clearfix;
-    background: url('/img/baseball-bg.jpg');
+    background: url('/img/bkg_test.jpg');
     //background: url('/img/helmar-bg.jpg');
     //background: url('/img/cards-bg.jpg');
     background-repeat: no-repeat;
@@ -54,6 +55,8 @@ body{
   height: $centered-navigation-height;
   width: 100%;
   z-index: 9999;
+
+  background-image: url('/img/bar.jpg');
 
   // Mobile view
 
