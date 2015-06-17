@@ -220,7 +220,7 @@ foreach ($custs->data as $cu){
 
 
 
-   /* DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($list);print'</pre>';
+ //  /* DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($list);print'</pre>';
 
 
 ?>
