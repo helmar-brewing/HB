@@ -136,91 +136,91 @@ foreach ($custs->data as $cu){
 
 
 
-   // set the name of the files to be downloaded
-   $file = 'users.csv';
+//    // set the name of the files to be downloaded
+//    $file = 'users.csv';
+//
+//    // open a file on the server to be written
+//    $fp = fopen($file, 'w');
+//
+//    // set the headers for the spreadsheet,
+//    $csvheaders = array('username','name','email','Stripe ID','address','city','state','zip','current subscription','renewal date','next subscription');
+//
+//    // write the headers to the file
+//    fputcsv($fp, $csvheaders);
+//
+//
+//
+//
+//     $result =$db_main->query("SELECT * FROM users");
+//     if($result != FALSE){
+//         $result->data_seek(0);
+//         while($ulist = $result->fetch_object()){
+//
+//             foreach($list as $l){
+//                 if($ulist->stripeID == $l['id']){
+//                     $sub = $l['subscription'];
+//                 }else{
+//                     $sub = array();
+//                 }
+//             }
+//
+//             if($sub['current_period_end'] > 1){
+//                 $d = date("m/d/Y",$sub['current_period_end']);
+//             }else{
+//                 $d = '';
+//             }
+//
+//             $csvline = array(
+//                 $ulist->username,
+//                 $ulist->firstname.' '.$ulist->lastname,
+//                 $ulist->email,
+//                 $ulist->stripeID,
+//                 $ulist->address,
+//                 $ulist->city,
+//                 $ulist->state,
+//                 $ulist->zip5.'-'.$ulist->zip4,
+//                 $sub['plan_type'],
+//                 $d,
+//                 $sub['next_plan']
+//             );
+//             fputcsv($fp, $csvline);
+//         }
+//     }
+//
+//
+//
+//
+//     // close the connection to file you are writign to
+//     fclose($fp);
+//
+//     // close database connections
+//     $result->free();
+//
+//
+//     // send the HTTP headers
+//     header('Content-Description: File Transfer');
+//     header('Content-Type: application/octet-stream');
+//     header('Content-Disposition: attachment; filename='.basename($file));
+//     header('Content-Transfer-Encoding: binary');
+//     header('Expires: 0');
+//     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+//     header('Pragma: public');
+//     header('Content-Length: ' . filesize($file));
+//
+//     // clear the output buffer
+//     ob_clean();
+//     ob_end_flush();
+//     flush();
+//
+//     // send the file to the browser
+//     readfile($file);
+//
+//     // delete the file from the server
+//     unlink($file);
 
-   // open a file on the server to be written
-   $fp = fopen($file, 'w');
-
-   // set the headers for the spreadsheet,
-   $csvheaders = array('username','name','email','Stripe ID','address','city','state','zip','current subscription','renewal date','next subscription');
-
-   // write the headers to the file
-   fputcsv($fp, $csvheaders);
 
 
-
-
-    $result =$db_main->query("SELECT * FROM users");
-    if($result != FALSE){
-        $result->data_seek(0);
-        while($ulist = $result->fetch_object()){
-
-            foreach($list as $l){
-                if($ulist->stripeID == $l['id']){
-                    $sub = $l['subscription'];
-                }else{
-                    $sub = array();
-                }
-            }
-
-            if($sub['current_period_end'] > 1){
-                $d = date("m/d/Y",$sub['current_period_end']);
-            }else{
-                $d = '';
-            }
-
-            $csvline = array(
-                $ulist->username,
-                $ulist->firstname.' '.$ulist->lastname,
-                $ulist->email,
-                $ulist->stripeID,
-                $ulist->address,
-                $ulist->city,
-                $ulist->state,
-                $ulist->zip5.'-'.$ulist->zip4,
-                $sub['plan_type'],
-                $d,
-                $sub['next_plan']
-            );
-            fputcsv($fp, $csvline);
-        }
-    }
-
-
-
-
-    // close the connection to file you are writign to
-    fclose($fp);
-
-    // close database connections
-    $result->free();
-
-
-    // send the HTTP headers
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename='.basename($file));
-    header('Content-Transfer-Encoding: binary');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($file));
-
-    // clear the output buffer
-    ob_clean();
-    ob_end_flush();
-    flush();
-
-    // send the file to the browser
-    readfile($file);
-
-    // delete the file from the server
-    unlink($file);
-
-
-
- //  /* DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($list);print'</pre>';
+   /* DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($list);print'</pre>';
 
 
 ?>
