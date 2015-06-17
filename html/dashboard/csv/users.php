@@ -155,12 +155,11 @@ foreach ($custs->data as $cu){
     if($result != FALSE){
         $result->data_seek(0);
         while($ulist = $result->fetch_object()){
-			$temp = $list;
             foreach($temp as $l){
+				$unset($sub);
                 if($ulist->stripeID == $l['id']){
                     $sub = $l['subscription'];
-                }else{
-                    $sub = array();
+					break;
                 }
             }
 
