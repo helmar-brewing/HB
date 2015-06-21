@@ -44,7 +44,7 @@ try{
             throw new SubException('');
 			break;
 		case 'none':
-            print 'no sub'; // redirect to sub page with error
+            echo 'no sub'; // redirect to sub page with error
 			break;
 		case 'active':
 			if($user->subscription['digital'] === TRUE){
@@ -54,9 +54,10 @@ try{
                     readfile($file);
                 }else{
                     http_response_code(404);
+                    echo '404';
                 }
             }else{
-                print 'no paper sub'; // redirect to sub page with error
+                echo 'no paper sub'; // redirect to sub page with error
             }
 			break;
 		default:
@@ -66,24 +67,32 @@ try{
 
 }catch(SubException $e){
     http_response_code(500);
+    echo '500';
 }catch(AuthException $e){
     header('Location: '.$protocol.$site.'/account/login/?redir='.$currentpage,TRUE,303);
     ob_end_flush();
     exit;
 }catch(\Stripe\Error\Card $e) {
     http_response_code(503);
+    echo '503';
 }catch(\Stripe\Error\InvalidRequest $e) {
     http_response_code(503);
+    echo '503';
 }catch(\Stripe\Error\Authentication $e) {
     http_response_code(503);
+    echo '503';
 }catch(\Stripe\Error\ApiConnection $e) {
     http_response_code(503);
+    echo '503';
 }catch(\Stripe\Error\Base $e) {
     http_response_code(503);
+    echo '503';
 }catch(mysqli_sql_exception $e){
-    http_response_code(503);
+    http_response_code(500);
+    echo '500';
 }catch(Exception $e){
     http_response_code(500);
+    echo '500';
 }
 mysqli_report(MYSQLI_REPORT_ERROR ^ MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 
