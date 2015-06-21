@@ -1,0 +1,6 @@
+#Fix Rewrite
+Options -Multiviews
+
+RewriteEngine on
+RewriteBase /magazine/
+RewriteRule ^(.*)$ index.php?file=$1 [L]
