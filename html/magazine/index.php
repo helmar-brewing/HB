@@ -19,7 +19,8 @@ require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
-$currentpage = '';
+$file = $magazine_path.$_GET['f'];
+$currentpage = 'magazine/'.$_GET['f'];
 class AuthException extends Exception{}
 class SubException extends Exception{}
 
@@ -32,8 +33,6 @@ $db_main->close();
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 try{
-
-    $file = $magazine_path.$_GET['f'];
 
 	if($user->login() !== 1){
         throw new AuthException('');
