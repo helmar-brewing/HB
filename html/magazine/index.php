@@ -55,6 +55,7 @@ try{
                 }else{
                     http_response_code(404);
                     echo '404';
+                    echo $file;
                 }
             }else{
                 echo 'no paper sub'; // redirect to sub page with error
