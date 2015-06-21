@@ -40,7 +40,7 @@ try{
 
 	switch($user->subscription[status]){
 		case 'error':
-            throw new SubException('');
+            throw new SubException('x1');
 			break;
 		case 'none':
             echo 'no sub'; // redirect to sub page with error
@@ -61,13 +61,14 @@ try{
             }
 			break;
 		default:
-            throw new SubException('');
+            throw new SubException('x2');
 			break;
 	}
 
 }catch(SubException $e){
     http_response_code(500);
-    echo '500 x1';
+    echo '500 ';
+	echo $e->getMessage();
 }catch(AuthException $e){
     header('Location: '.$protocol.$site.'/account/login/?redir='.$currentpage,TRUE,303);
     ob_end_flush();
