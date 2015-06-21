@@ -3,4 +3,5 @@ Options -Multiviews
 
 RewriteEngine on
 RewriteBase /magazine/
+RewriteRule ^$ index.html
 RewriteRule ^([0-9]{4}/.*)$ index.php?f=$1 [L]
