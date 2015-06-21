@@ -33,7 +33,7 @@ $db_main->close();
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 try{
 
-    $file = 'content/magazine/'.$_GET['file'];
+    $file = 'content/magazine/'.$_GET['f'];
 
 	if($user->login() !== 1){
         throw new AuthException('');
@@ -53,8 +53,8 @@ try{
                     header('Content-Length: ' . filesize($file));
                     readfile($file);
                 }else{
-                    http_response_code(404);
-                    echo '404';
+                //    http_response_code(404);
+                    echo '404 ';
                     echo $file;
                 }
             }else{

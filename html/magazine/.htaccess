@@ -3,4 +3,4 @@ Options -Multiviews
 
 RewriteEngine on
 RewriteBase /magazine/
-RewriteRule ^(.*)$ protected_file_server.php?file=$1 [L]
+RewriteRule ^([0-9]{4}/.*)$ index.php?f=$1 [L]
