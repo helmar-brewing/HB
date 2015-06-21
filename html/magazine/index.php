@@ -33,7 +33,7 @@ $db_main->close();
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 try{
 
-    $file = 'content/'.$_GET['file'];
+    $file = 'content/magazine/'.$_GET['file'];
 
 	if($user->login() !== 1){
         throw new AuthException('');
