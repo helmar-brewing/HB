@@ -448,6 +448,10 @@
 				$this->sub(false);
 			}else{
 				if(isset($_SESSION['sub'])){
+					if($_SESSION['sub']['status'] == 'error'){
+						unset($_SESSION['sub']);
+						$this->sub(true);
+					}
 					$this->subscription = $_SESSION['sub'];
 				}else{
 					$this->sub(true);

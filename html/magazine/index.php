@@ -52,7 +52,7 @@ try{
                     header('Content-Length: ' . filesize($file));
                     readfile($file);
                 }else{
-                //    http_response_code(404);
+                    http_response_code(404);
                     echo '404 ';
                     echo $file;
                 }
@@ -69,6 +69,7 @@ try{
     http_response_code(500);
     echo '500 ';
 	echo $e->getMessage();
+	/* SESSION DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($_SESSION);print'</pre>';
 }catch(AuthException $e){
     header('Location: '.$protocol.$site.'/account/login/?redir='.$currentpage,TRUE,303);
     ob_end_flush();
@@ -90,10 +91,10 @@ try{
     echo '503';
 }catch(mysqli_sql_exception $e){
     http_response_code(500);
-    echo '500';
+    echo '500 x3';
 }catch(Exception $e){
     http_response_code(500);
-    echo '500 x2';
+    echo '500 x4';
 }
 mysqli_report(MYSQLI_REPORT_ERROR ^ MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 
