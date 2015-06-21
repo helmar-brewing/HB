@@ -47,15 +47,19 @@ try{
 			break;
 		case 'active':
 			if($user->subscription['digital'] === TRUE){
-                if(file_exists($file)){
-                    header('Content-Type: ' . mime_content_type($file));
-                    header('Content-Length: ' . filesize($file));
-                    readfile($file);
-                }else{
-                    http_response_code(404);
-                    echo '404 ';
-                    echo $file;
-                }
+				if($_GET['f'] == '/' || $_GET['f'] == ''){
+					http_response_code(404);
+					echo '404';
+				}else{
+	                if(file_exists($file)){
+	                    header('Content-Type: ' . mime_content_type($file));
+	                    header('Content-Length: ' . filesize($file));
+	                    readfile($file);
+	                }else{
+	                    http_response_code(404);
+	                    echo '404';
+	                }
+				}
             }else{
                 echo 'no paper sub'; // redirect to sub page with error
             }
