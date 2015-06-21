@@ -3,5 +3,6 @@ Options -Multiviews
 
 RewriteEngine on
 RewriteBase /magazine/
-RewriteRule ^([0-9]{4}/[0-9]{2})/?$ index.php?f=$1/index.html [L]
+RewriteRule ^([0-9]{4}/[0-9]{2})/$ index.php?f=$1/index.html [L]
+RewriteRule ^([0-9]{4}/[0-9]{2})$ index.php?f=$1/index.html [L]
 RewriteRule ^([0-9]{4}/.*)$ index.php?f=$1 [L]
