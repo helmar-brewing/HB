@@ -67,7 +67,7 @@ try{
 
 }catch(SubException $e){
     http_response_code(500);
-    echo '500';
+    echo '500 x1';
 }catch(AuthException $e){
     header('Location: '.$protocol.$site.'/account/login/?redir='.$currentpage,TRUE,303);
     ob_end_flush();
@@ -92,7 +92,7 @@ try{
     echo '500';
 }catch(Exception $e){
     http_response_code(500);
-    echo '500';
+    echo '500 x2';
 }
 mysqli_report(MYSQLI_REPORT_ERROR ^ MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 
