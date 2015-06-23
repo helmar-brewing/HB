@@ -36,7 +36,7 @@ print'
 	        <a href="" class="hero-logo"><img src="/img/helmar_logo_framed.jpg" alt="Helmar Brewing"></a>
 	    		<div class="hero-copy">
 					<p>Introducing, Baseball History & Art, shares joyous insight into the history and art of the National Game.</p>
-					<img src="/img/mag-2015-06.jpg">
+					<img src="/img/mag-2015-06.png">
 	    		</div>
 				<a class="button">Subscribe Now</a>
 	    	</div>
