@@ -29,6 +29,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/css\/style.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/css\/style.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/docs\/subscription.html": {
 		"fileType": 8192,
 		"ignore": 1,
@@ -446,6 +455,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/html\/img\/bar.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 18888,
+		"inputAbbreviatedPath": "\/html\/img\/bar.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/bar.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/html\/img\/baseball-bg.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -453,6 +473,17 @@
 		"initialSize": 212961,
 		"inputAbbreviatedPath": "\/html\/img\/baseball-bg.jpg",
 		"outputAbbreviatedPath": "\/html\/img\/baseball-bg.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/bkg_test.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 848508,
+		"inputAbbreviatedPath": "\/html\/img\/bkg_test.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/bkg_test.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -528,6 +559,17 @@
 		"initialSize": 74918,
 		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_centered.png",
 		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_centered.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/helmar_logo_framed.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 27194,
+		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_framed.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_framed.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -638,6 +680,17 @@
 		"initialSize": 309,
 		"inputAbbreviatedPath": "\/html\/img\/sprinkles@2x.png",
 		"outputAbbreviatedPath": "\/html\/img\/sprinkles@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/tile.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 20479,
+		"inputAbbreviatedPath": "\/html\/img\/tile.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/tile.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
