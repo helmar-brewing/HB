@@ -88,19 +88,21 @@
   }
 
 
-  .hero-twocol{
-      @include row;
-      div{
-          @include span-columns(6);
-      }
-      div.l{
-          img{
-              margin-bottom:2em;
-          }
+    .hero-twocol{
+        @include row;
+        @include media(400px){
+            div{
+                @include span-columns(6);
+            }
         }
-      div.r{
-      }
-  }
+        div.l{
+            img{
+                margin-bottom:2em;
+            }
+        }
+        div.r{
+        }
+    }
 
 
 
