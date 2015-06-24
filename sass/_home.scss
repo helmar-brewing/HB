@@ -93,7 +93,7 @@ em{
 
     .hero-twocol{
         @include row;
-        @include media(400px){
+        @include media(750px){
             div{
                 @include span-columns(6);
             }
@@ -104,6 +104,9 @@ em{
             }
         }
         div.r{
+            img{
+                max-height:400px;
+            }
         }
     }
 
@@ -112,7 +115,10 @@ em{
   .hero-inner {
     @include outer-container;
     @include clearfix;
-    padding: 3em;
+    padding: 3em 3em;
+    @include media(1100px){
+        padding: 3em 0;
+    }
     margin: auto;
     text-align: center;
     color: $hero-color;
