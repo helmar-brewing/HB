@@ -41,7 +41,9 @@ print'
 						<a class="button">Subscribe Now</a>
 					</div>
 					<div class="r">
-						<img src="/img/mag-2015-06.png">
+						<a href="http://helmarbrewing.com/magazine-preview/2015/06/">
+							<img src="/img/mag-2015-06.png">
+						</a>
 					</div>
 				</div>
 

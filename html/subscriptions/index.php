@@ -1,4 +1,9 @@
 <?php
+exit;
+
+
+
+
 ob_start();
 
 /* ROOT SETTINGS */ require($_SERVER['DOCUMENT_ROOT'].'/root_settings.php');
