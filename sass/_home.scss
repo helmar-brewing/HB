@@ -87,6 +87,23 @@
     margin-bottom: 2.5em;
   }
 
+
+  .hero-twocol{
+      @include row;
+      div{
+          @include span-columns(6);
+      }
+      div.l{
+          img{
+              margin-bottom:2em;
+          }
+        }
+      div.r{
+      }
+  }
+
+
+
   .hero-inner {
     @include outer-container;
     @include clearfix;
