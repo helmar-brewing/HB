@@ -3,7 +3,9 @@
     $seconds_to_cache = 60*60*24*7;
     $ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . " GMT";
 
-    $img = base64_decode($_GET['img']);
+
+
+    $img = base64_decode(strtr($_GET['img'], '-_~', '+/='));
     $domain = substr($img, 0, 20);
 
     $ext = strtolower($img);
@@ -41,8 +43,8 @@
                 break;
 
             default:
-            http_response_code(404);
-            echo 'unsupported type';
+        //    http_response_code(404);
+            echo 'unsupported type - '.$img;
             exit;
         }
 
