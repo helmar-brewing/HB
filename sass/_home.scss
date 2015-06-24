@@ -87,6 +87,9 @@
     margin-bottom: 2.5em;
   }
 
+em{
+    font-style: italic;
+}
 
     .hero-twocol{
         @include row;
