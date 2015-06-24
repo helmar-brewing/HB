@@ -31,14 +31,12 @@ if(isset($user)){
         print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Log in</a></li>
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/register">Register</a></li>
-                <li class="nav-link"><a href="'.$protocol.$site.'/subscriptions">Subscriptions</a></li>
         ';
     }
 }else{
     print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Log in</a></li>
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/register">Register</a></li>
-                <li class="nav-link"><a href="'.$protocol.$site.'/subscriptions">Subscriptions</a></li>
     ';
 }
 print'
