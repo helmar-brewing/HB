@@ -36,7 +36,8 @@ print'
 				<div class="hero-twocol">
 					<div class="l">
 						<img src="/img/helmar_logo_framed.jpg" alt="Helmar Brewing">
-						<p>Introducing, Baseball History & Art, shares joyous insight into the history and art of the National Game.</p>
+						<p>Welcome to the Helmar Brewing Company. Helmar is the consummate originator of fine, hand-made art cards for serious sports enthusiasts.</p>
+						<p>Our Magazine, <em>Baseball History & Art</em>, shares joyous insight into the history and art of the National Game.</p>
 						<a class="button">Subscribe Now</a>
 					</div>
 					<div class="r">
@@ -51,8 +52,6 @@ print'
 /* HEADER */ require('layout/header1.php');
 print'
 	    <div class="auctions">
-
-			<p>Welcome to the Helmar Brewing Company. Helmar is the consummate originator of fine, hand-made art cards for serious sports enthusiasts.</p>
 	        <h1>Current Auctions</h1>
 	        <p id="auction_end">Auctions end on Tueday evenings</p>
 	        <ul id="auction_list">
