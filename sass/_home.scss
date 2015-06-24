@@ -62,7 +62,22 @@
 
 
 
+
+
+$hero-image: '/img/bkg_test.jpg';
+//$hero-image: '/img/baseball-bg.jpg';
+//$hero-image: '/img/helmar-bg.jpg';
+//$hero-image: '/img/cards-bg.jpg';
+
 .hero {
+
+
+
+    @include media(min-width 1400px){
+        display:none;
+    }
+
+
 
 //    @include outer-container;
 
@@ -70,12 +85,13 @@
   $hero-background-bottom: adjust-hue($hero-background-top, +40);
   $hero-color: white;
   $gradient-angle: 10deg;
-  $hero-image: '/img/bkg_test.jpg';
+//  $hero-image: '/img/bkg_test.jpg';
   //$hero-image: '/img/baseball-bg.jpg';
   //$hero-image: '/img/helmar-bg.jpg';
   //$hero-image: '/img/cards-bg.jpg';
 
   @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
+
 
   background-repeat: no-repeat;
   background-position: bottom;
@@ -160,4 +176,47 @@ em{
       }
     }
   }
+}
+
+
+
+
+
+.hero2{
+    display:none;
+    @include media(1400px){
+        display:block;
+    }
+
+    @include background(url($hero-image));
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    color:white;
+    text-shadow: 1px 1px #333;
+    p{
+        text-align:center;
+    }
+    a.button {
+      @include button(simple, $base-background-color);
+      font-size: $base-font-size;
+      outline: none;
+      margin-right:40px;
+
+    }
+    .hero2-row{
+        @include row;
+        margin: 0 auto;
+        width:95%;
+        padding:3em 0;
+        div{
+            @include span-columns(4);
+            &.r{
+                text-align:right;
+                img{
+                    max-height:230px;
+                }
+            }
+        }
+    }
 }

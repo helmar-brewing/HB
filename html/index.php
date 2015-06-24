@@ -51,6 +51,26 @@ print'
 ';
 
 
+print'
+	    <div class="hero2">
+			<div class="hero2-row">
+				<div class="l">
+					<img src="/img/helmar_logo_striped.png" alt="Helmar Brewing">
+				</div>
+				<div class="c">
+					<p>Welcome to the Helmar Brewing Company. Helmar is the consummate originator of fine, hand-made art cards for serious sports enthusiasts.</p>
+					<p>Our magazine, <em>Baseball History & Art</em>, shares joyous insight into the history and art of the National Game.</p>
+				</div>
+				<div class="r">
+					<img src="/img/mag-2015-06.png"><br><br>
+					<a class="button" href="http://helmarbrewing.com/magazine-preview/2015/06/" target="_blank">Preview</a>
+				</div>
+			</div>
+
+	    </div>
+';
+
+
 
 
 
