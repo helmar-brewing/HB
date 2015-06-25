@@ -60,26 +60,13 @@
     }
 }
 
-
-
-
-
-$hero-image: '/img/bkg_test.jpg';
-//$hero-image: '/img/baseball-bg.jpg';
-//$hero-image: '/img/helmar-bg.jpg';
-//$hero-image: '/img/cards-bg.jpg';
-
 .hero {
-//    @include outer-container;
 
   $hero-background-top: darken($base-accent-color, 25);
   $hero-background-bottom: adjust-hue($hero-background-top, +40);
   $hero-color: white;
   $gradient-angle: 10deg;
-//  $hero-image: '/img/bkg_test.jpg';
-  //$hero-image: '/img/baseball-bg.jpg';
-  //$hero-image: '/img/helmar-bg.jpg';
-  //$hero-image: '/img/cards-bg.jpg';
+  $hero-image: '/img/helmar_bg.jpg';
 
   @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
 

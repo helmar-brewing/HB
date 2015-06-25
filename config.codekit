@@ -444,17 +444,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/html\/img\/about-card.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 154668,
-		"inputAbbreviatedPath": "\/html\/img\/about-card.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/about-card.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/html\/img\/bar.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -462,39 +451,6 @@
 		"initialSize": 18888,
 		"inputAbbreviatedPath": "\/html\/img\/bar.jpg",
 		"outputAbbreviatedPath": "\/html\/img\/bar.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/baseball-bg.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 212961,
-		"inputAbbreviatedPath": "\/html\/img\/baseball-bg.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/baseball-bg.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/bkg_test.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 848508,
-		"inputAbbreviatedPath": "\/html\/img\/bkg_test.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/bkg_test.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/cards-bg.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 315909,
-		"inputAbbreviatedPath": "\/html\/img\/cards-bg.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/cards-bg.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -541,46 +497,13 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/html\/img\/helmar-bg.jpg": {
+	"\/html\/img\/helmar_bg.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 483822,
-		"inputAbbreviatedPath": "\/html\/img\/helmar-bg.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/helmar-bg.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/helmar_logo_centered.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 74918,
-		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_centered.png",
-		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_centered.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/helmar_logo_framed.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 27194,
-		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_framed.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_framed.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/helmar_logo_lg_2.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 73960,
-		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_lg_2.png",
-		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_lg_2.png",
+		"initialSize": 848508,
+		"inputAbbreviatedPath": "\/html\/img\/helmar_bg.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/helmar_bg.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -592,17 +515,6 @@
 		"initialSize": 178742,
 		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_striped.png",
 		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_striped.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/helmar_logo_watermark.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 44584,
-		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_watermark.png",
-		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_watermark.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -680,28 +592,6 @@
 		"initialSize": 1360,
 		"inputAbbreviatedPath": "\/html\/img\/prev.png",
 		"outputAbbreviatedPath": "\/html\/img\/prev.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/sprinkles.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 160,
-		"inputAbbreviatedPath": "\/html\/img\/sprinkles.png",
-		"outputAbbreviatedPath": "\/html\/img\/sprinkles.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/sprinkles@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 309,
-		"inputAbbreviatedPath": "\/html\/img\/sprinkles@2x.png",
-		"outputAbbreviatedPath": "\/html\/img\/sprinkles@2x.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
