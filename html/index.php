@@ -44,8 +44,6 @@ print'
 						<a class="button" href="http://helmarbrewing.com/magazine-preview/2015/06/" target="_blank">Preview</a>
 					</div>
 				</div>
-
-
 	    	</div>
 	    </div>
 ';

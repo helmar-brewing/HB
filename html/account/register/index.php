@@ -185,8 +185,7 @@ if($user->login() === 1){
                 exit;
                 break;
             }else{
-                /* **** ** ** THIS SHOULD BE EDITED TO REDIRECT TO A SPLASH PAGE EXPLAINING THE SUBSCRIPTION INSTEAD OF THE ACCOUNT PAGE ***** *** ** * ** */
-                header('Location: '.$protocol.$site.'/account/',TRUE,303);
+                header('Location: '.$protocol.$site.'/subscription/',TRUE,303);
                 ob_end_flush();
                 exit;
                 break;

@@ -522,3 +522,16 @@
         display:inline-block;
     }
 }
+
+
+
+
+#login_or_register{
+    .button{
+        @include button(#333);
+        display:block;
+        width:80%;
+        margin:3em auto;
+        text-align:center;
+    }
+}
