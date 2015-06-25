@@ -70,15 +70,6 @@ $hero-image: '/img/bkg_test.jpg';
 //$hero-image: '/img/cards-bg.jpg';
 
 .hero {
-
-
-
-    @include media(min-width 1400px){
-        display:none;
-    }
-
-
-
 //    @include outer-container;
 
   $hero-background-top: darken($base-accent-color, 25);
