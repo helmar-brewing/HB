@@ -20,6 +20,7 @@ print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/contact/">Stay In Touch</a></li>
                 <li class="nav-link"><a href="http://helmarblog.com/" target="_blank">Blog</a></li>
                 <li class="nav-link"><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">eBay Store</a></li>
+                <li class="nav-link"><a href="'.$protocol.$site.'/subscription/">Subscription</a></li>
 ';
 if(isset($user)){
     if( $user->login() == 1 || $user->login() == 2 ){
@@ -31,14 +32,12 @@ if(isset($user)){
         print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Log in</a></li>
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/register">Register</a></li>
-                <li class="nav-link"><a href="'.$protocol.$site.'/subscriptions">Subscriptions</a></li>
         ';
     }
 }else{
     print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Log in</a></li>
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/register">Register</a></li>
-                <li class="nav-link"><a href="'.$protocol.$site.'/subscriptions">Subscriptions</a></li>
     ';
 }
 print'
