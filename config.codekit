@@ -29,6 +29,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/css\/style.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/css\/style.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/docs\/subscription.html": {
 		"fileType": 8192,
 		"ignore": 1,
@@ -444,35 +453,13 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/html\/img\/about-card.jpg": {
+	"\/html\/img\/bar.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 154668,
-		"inputAbbreviatedPath": "\/html\/img\/about-card.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/about-card.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/baseball-bg.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 212961,
-		"inputAbbreviatedPath": "\/html\/img\/baseball-bg.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/baseball-bg.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/cards-bg.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 315909,
-		"inputAbbreviatedPath": "\/html\/img\/cards-bg.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/cards-bg.jpg",
+		"initialSize": 18888,
+		"inputAbbreviatedPath": "\/html\/img\/bar.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/bar.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -519,46 +506,24 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/html\/img\/helmar-bg.jpg": {
+	"\/html\/img\/helmar_bg.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 483822,
-		"inputAbbreviatedPath": "\/html\/img\/helmar-bg.jpg",
-		"outputAbbreviatedPath": "\/html\/img\/helmar-bg.jpg",
+		"initialSize": 848508,
+		"inputAbbreviatedPath": "\/html\/img\/helmar_bg.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/helmar_bg.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/html\/img\/helmar_logo_centered.png": {
+	"\/html\/img\/helmar_logo_striped.png": {
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 74918,
-		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_centered.png",
-		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_centered.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/helmar_logo_lg_2.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 73960,
-		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_lg_2.png",
-		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_lg_2.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/helmar_logo_watermark.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 44584,
-		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_watermark.png",
-		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_watermark.png",
+		"initialSize": 178742,
+		"inputAbbreviatedPath": "\/html\/img\/helmar_logo_striped.png",
+		"outputAbbreviatedPath": "\/html\/img\/helmar_logo_striped.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -581,6 +546,17 @@
 		"initialSize": 94440,
 		"inputAbbreviatedPath": "\/html\/img\/login-card.jpg",
 		"outputAbbreviatedPath": "\/html\/img\/login-card.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/html\/img\/mag-2015-06.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 330753,
+		"inputAbbreviatedPath": "\/html\/img\/mag-2015-06.png",
+		"outputAbbreviatedPath": "\/html\/img\/mag-2015-06.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -629,24 +605,13 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/html\/img\/sprinkles.png": {
-		"fileType": 32768,
+	"\/html\/img\/tile.jpg": {
+		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 160,
-		"inputAbbreviatedPath": "\/html\/img\/sprinkles.png",
-		"outputAbbreviatedPath": "\/html\/img\/sprinkles.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/html\/img\/sprinkles@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 309,
-		"inputAbbreviatedPath": "\/html\/img\/sprinkles@2x.png",
-		"outputAbbreviatedPath": "\/html\/img\/sprinkles@2x.png",
+		"initialSize": 20479,
+		"inputAbbreviatedPath": "\/html\/img\/tile.jpg",
+		"outputAbbreviatedPath": "\/html\/img\/tile.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -676,6 +641,51 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/html\/root_settings.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/html\/subscription\/ajax\/address\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/subscription\/ajax\/address\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/html\/subscription\/ajax\/changesub\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/subscription\/ajax\/changesub\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/html\/subscription\/ajax\/previewsub\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/subscription\/ajax\/previewsub\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/html\/subscription\/ajax\/updatecard\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/subscription\/ajax\/updatecard\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/html\/subscription\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/subscription\/index.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -757,6 +767,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/inc\/layout\/header2.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/inc\/layout\/old_header1.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/inc\/layout\/old_header1.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -3395,6 +3414,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/scripts\/_subscriptions.js",
 		"outputAbbreviatedPath": "\/html\/js\/_subscriptions.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/scripts\/_subscriptions2.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/scripts\/_subscriptions2.js",
+		"outputAbbreviatedPath": "\/html\/js\/_subscriptions2.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,

@@ -33,15 +33,23 @@ ob_end_flush();
 print'
 	    <div class="hero">
 	    	<div class="hero-inner">
-	        <a href="" class="hero-logo"><img src="/img/helmar_logo_centered.png" alt="Helmar Brewing"></a>
-	    		<div class="hero-copy">
-	    			<h1>Welcome to the Helmar Brewing Company</h1>
-	    			<p>Helmar Brewing Co. produces fine, hand-made art cards, mainly of sports and history subjects.</p>
-	    		</div>
-	        <a class="button" href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/">Visit Our Store</a>
+				<div class="hero-twocol">
+					<div class="l">
+						<img src="/img/helmar_logo_striped.png" alt="Helmar Brewing">
+						<p>Welcome to the Helmar Brewing Company. Helmar is the consummate originator of fine, hand-made art cards for serious sports enthusiasts.</p>
+						<p>Our magazine, <em>Baseball History & Art</em>, shares joyous insight into the history and art of the National Game.</p>
+					</div>
+					<div class="r">
+						<img src="/img/mag-2015-06.png"><br><br>
+						<a class="button" href="http://helmarbrewing.com/magazine-preview/2015/06/" target="_blank">Preview</a>
+					</div>
+				</div>
 	    	</div>
 	    </div>
 ';
+
+
+
 /* HEADER */ require('layout/header1.php');
 print'
 	    <div class="auctions">

@@ -1,40 +1,29 @@
-// body{
-//         background:url('/img/sprinkles.png');
-// }
-// @include hidpi(1.5) {
-//     body{
-//         background:url('/img/sprinkles@2x.png');
-//         background-size:10px 5px;
-//     }
-// }
+
 
 body{
-    background-color: #F9F9F9;
+    background-image: url('/img/tile.jpg');
 }
 
 
 .header2{
     @include clearfix;
-    background: url('/img/baseball-bg.jpg');
-    //background: url('/img/helmar-bg.jpg');
-    //background: url('/img/cards-bg.jpg');
+    background: url('/img/helmar_bg.jpg');
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;
-    padding: 2em 0;
+    padding: 1em 0;
     .logo2{
         display:block;
         img{
             display:block;
             margin:0 auto;
-            height:5em;
+            height:7em;
         }
     }
 }
 
 
 .centered-navigation {
-//    @include outer-container;
 
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
@@ -46,7 +35,7 @@ body{
   $centered-navigation-submenu-padding: 1em;
   $centered-navigation-submenu-width: 12em;
   $centered-navigation-item-nudge: 2.2em;
-  $horizontal-bar-mode: $large-screen;
+  $horizontal-bar-mode: 1050px;
 
   background-color: $centered-navigation-background;
   border-bottom: 1px solid darken($centered-navigation-background, 6);
@@ -54,6 +43,8 @@ body{
   height: $centered-navigation-height;
   width: 100%;
   z-index: 9999;
+
+  background-image: url('/img/bar.jpg');
 
   // Mobile view
 

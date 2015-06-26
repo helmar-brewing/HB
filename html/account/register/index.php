@@ -185,8 +185,7 @@ if($user->login() === 1){
                 exit;
                 break;
             }else{
-                /* **** ** ** THIS SHOULD BE EDITED TO REDIRECT TO A SPLASH PAGE EXPLAINING THE SUBSCRIPTION INSTEAD OF THE ACCOUNT PAGE ***** *** ** * ** */
-                header('Location: '.$protocol.$site.'/account/',TRUE,303);
+                header('Location: '.$protocol.$site.'/subscription/',TRUE,303);
                 ob_end_flush();
                 exit;
                 break;
@@ -217,6 +216,8 @@ if($user->login() === 1){
 			<div class="side-image-content">
 				<h4>Account</h4>
 				<h1>Register</h1>
+				<p>You are registering for a free membership. After creating an account, you will be able to
+				select a paid subscription or remain with the free membership. <a href="'.$protocol.$site.'/subscriptions">Click to view the available subscription plans.</a></p>
 		        <form method="post">
     ';
     if(isset($redir)){
@@ -244,12 +245,15 @@ if($user->login() === 1){
                     <input type="password" name="password2" id="password2" tabindex="6" />
                     <input type="submit" value="Register" tabindex="7" />
 		            <div class="login-footer">
-		                Need an account? <a href="'.$protocol.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.$site.'/account/recover/">Account Recovery</a>
+		                Already have an account? <a href="'.$protocol.$site.'/account/login?redir=account/">Log in</a>
 		            </div>
 		        </form>
 			</div>
 		</div>
     ';
+
+/*		                Need an account? <a href="'.$protocol.$site.'/account/register/">Register</a> | Having trouble logging in? <a href="'.$protocol.$site.'/account/recover/">Account Recovery</a>
+*/
 
     /* FOOTER */ require('layout/footer1.php');
 

@@ -1,6 +1,7 @@
 
 
 .auctions{
+    color:white;
     font-family:$serif;
     padding-top:1em;
     @include clearfix;
@@ -59,21 +60,16 @@
     }
 }
 
-
-
 .hero {
-
-//    @include outer-container;
 
   $hero-background-top: darken($base-accent-color, 25);
   $hero-background-bottom: adjust-hue($hero-background-top, +40);
   $hero-color: white;
   $gradient-angle: 10deg;
-  $hero-image: '/img/baseball-bg.jpg';
-  //$hero-image: '/img/helmar-bg.jpg';
-  //$hero-image: '/img/cards-bg.jpg';
+  $hero-image: '/img/helmar_bg.jpg';
 
   @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
+
 
   background-repeat: no-repeat;
   background-position: bottom;
@@ -85,10 +81,34 @@
     margin-bottom: 2.5em;
   }
 
+    .hero-twocol{
+        @include row;
+        @include media(750px){
+            div{
+                @include span-columns(6);
+            }
+        }
+        div.l{
+            img{
+                margin-bottom:2em;
+            }
+        }
+        div.r{
+            img{
+                max-height:400px;
+            }
+        }
+    }
+
+
+
   .hero-inner {
     @include outer-container;
     @include clearfix;
-    padding: 3em;
+    padding: 3em 3em;
+    @include media(1100px){
+        padding: 3em 0;
+    }
     margin: auto;
     text-align: center;
     color: $hero-color;

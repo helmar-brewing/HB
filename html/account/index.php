@@ -108,7 +108,7 @@ ob_end_flush();
         Stripe.setPublishableKey(\''.$apikey['stripe']['public'].'\');
     </script>
 '; // </HEAD>
-/* PAGE TITLE */ $title='Helmar Brewing Co';
+/* PAGE TITLE */ $title='Account - Helmar Brewing Co';
 /* HEADER */ require('layout/header0.php');
 
 

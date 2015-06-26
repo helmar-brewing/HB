@@ -8,6 +8,7 @@
 // @koala-prepend "_home.js"
 // @koala-prepend "_account.js"
 // @koala-prepend "_subscriptions.js"
+// @koala-prepend "_subscriptions2.js"
 // @koala-prepend "_contact.js"
 
 
@@ -22,4 +23,5 @@
 // @codekit-prepend "_home.js"
 // @codekit-prepend "_account.js"
 // @codekit-prepend "_subscriptions.js"
+// @codekit-prepend "_subscriptions2.js"
 // @codekit-prepend "_contact.js"
