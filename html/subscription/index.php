@@ -107,9 +107,19 @@ if($user->login() === 1){
 			<div class="sub-row">
 				<div class="credit-card">
 					<h2>Issues</h2>
+		';
+		if($user->subscription['digital'] == TRUE){
+			print'
 					<ul>
 						<li><a href="'.$protocol.$site.'/magazine/2015/06/">Summer 2015</a></li>
 					</ul>
+			';
+		}else{
+			print'
+					<p>You do not have access to the digital magazine. <a href="'.$protocol.$site.'/account/">Manage your subscription</a> on the <a href="'.$protocol.$site.'/account/">account</a> page.</p>
+			';
+		}
+		print'
 				</div>
 				<div class="credit-card">
 					<label>Current Subscription</label>
