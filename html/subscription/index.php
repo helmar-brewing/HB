@@ -78,7 +78,7 @@ if($user->login() === 1){
 		print'
 			<label>Choose Your Subscription</label>
 			<ul class="sub-buttons">
-				<li id="sub-digitalpaper" class="selected">
+				<li id="sub-digitalpaper" onclick="sub2(\'digitalpaper\')" class="selected">
 					<h4>Digital + Paper Magazine</h2>
 					<div class="price">$34.95</div>
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
@@ -86,14 +86,14 @@ if($user->login() === 1){
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 				</li>
-				<li id="sub-paper" class="selected">
+				<li id="sub-paper" onclick="sub2(\'paper\')" class="selected">
 					<h4>Paper Magazine</h2>
 					<div class="price">$29.95</div>
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 				</li>
-				<li id="sub-digital" class="selected">
+				<li id="sub-digital" onclick="sub2(\'digital\')" class="selected">
 					<h4>Digital Magazine</h2>
 					<div class="price">$19.95</div>
 					<p>Access to digital copies of our quarterly magazine via the website</p>
