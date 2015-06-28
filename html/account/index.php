@@ -215,7 +215,7 @@ print'
 		print '<li id="sub-none" onclick="sub(\'none\')" class="free">';
 	}
 	print'
-					<h4>Website Access</h4>
+					<h4>Website Access / Cancel Paid Subscription</h4>
 					<div class="price">FREE</div>
 					<p>Join our email list</p>
 					<p>View our basic card art list</p>
