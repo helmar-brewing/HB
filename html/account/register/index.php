@@ -217,7 +217,7 @@ if($user->login() === 1){
 				<h4>Account</h4>
 				<h1>Register</h1>
 				<p>You are registering for a free membership. After creating an account, you will be able to
-				select a paid subscription or remain with the free membership. <a href="'.$protocol.$site.'/subscriptions">Click to view the available subscription plans.</a></p>
+				select a paid subscription or remain with the free membership. <a href="'.$protocol.$site.'/subscription">Click to view the available subscription plans.</a></p>
 		        <form method="post">
     ';
     if(isset($redir)){

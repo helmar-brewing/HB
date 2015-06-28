@@ -111,7 +111,7 @@ if($user->login() === 1){
 		if($user->subscription['digital'] == TRUE){
 			print'
 					<ul>
-						<li><a href="'.$protocol.$site.'/magazine/2015/06/">Summer 2015</a></li>
+						<li><a href="'.$protocol.$site.'/magazine/2015/06/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summer 2015</a></li>
 					</ul>
 			';
 		}else{
