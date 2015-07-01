@@ -39,6 +39,18 @@ function recover(a){
 
 
 
+$(function() {
+    $('#ebay-check').change(function() {
+        if(this.checked) {
+            document.getElementById('ebay-hide').style.display = 'block';
+        }else{
+            document.getElementById('ebay-hide').style.display = 'none';
+            document.getElementById('ebay').value = '';
+        }
+    });
+});
+
+
 
 
 
