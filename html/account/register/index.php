@@ -31,6 +31,7 @@ $username = strtolower($_POST['username']);
 $email = strtolower($_POST['email']);
 $password1 = $_POST['password1'];
 $password2 = $_POST['password2'];
+$ebay = strtolower($_POST['ebay']);
 
 
 // create user object
@@ -132,8 +133,8 @@ if($user->login() === 1){
     			));
     			$db_auth->query("INSERT INTO users(username, saltedHash, lastUsedVer) VALUES('$username', '$hash', '$currentVer')");
     			$userID = $db_auth->insert_id;
-    			$stmt = $db_main->prepare("INSERT INTO users(userID, username, firstname, lastname, email, stripeID) VALUES(?,?,?,?,?,?)");
-    			$stmt->bind_param("ssssss", $userID, $username, $firstname, $lastname, $email, $cust['id']);
+    			$stmt = $db_main->prepare("INSERT INTO users(userID, username, firstname, lastname, email, stripeID, ebayID) VALUES(?,?,?,?,?,?,?)");
+    			$stmt->bind_param("sssssss", $userID, $username, $firstname, $lastname, $email, $cust['id'], $ebay);
     			$stmt->execute();
     			$stmt->close();
     			$msg .= '<li>You have successfully registerd.</li>';
@@ -243,6 +244,11 @@ if($user->login() === 1){
                     <input type="password" name="password1" id="password1" tabindex="5" />
                     <label for="password2">Confirm Password</label>
                     <input type="password" name="password2" id="password2" tabindex="6" />
+					<label><input type="checkbox" id="ebay-check" ';if($ebay != ''){print' checked';}print'> I have an ebay account.</label>
+					<div id="ebay-hide" ';if($ebay != ''){print' style="display:block;"';}print'>
+						<label for="ebay">eBay Username</label>
+						<input type="text" name="ebay" id="ebay" value="'.$ebay.'"/>
+					</div>
                     <input type="submit" value="Register" tabindex="7" />
 		            <div class="login-footer">
 		                Already have an account? <a href="'.$protocol.$site.'/account/login?redir=account/">Log in</a>
