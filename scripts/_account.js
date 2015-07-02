@@ -131,6 +131,89 @@ function changeEmail(s, d1){
 
 
 
+function updateEbayUnBindForms(){
+    $('#change-email-field').unbind('keypress');
+    $('#change-email-button').unbind('click');
+}
+function updateEbayCleanup(){
+    $('#ajax-modal').removeClass('change-email');
+    $('#modal_close').unbind('click');
+    updateEbayUnBindForms();
+    document.getElementById('modal_h1').innerHTML = '';
+    document.getElementById('modal_content').innerHTML = '';
+}
+function updateEbay(s, d1){
+    changeEmailUnBindForms();
+    document.getElementById('fullscreenload').style.display = 'block';
+    $('#modal_close').click(function() {
+        updateEbayCleanup();
+    });
+    $.get(
+        "/account/ajax/ebay/",
+        { step:s,  data1:d1},
+        function( data ) {
+            document.getElementById('modal_h1').innerHTML = data.h1;
+            document.getElementById('modal_content').innerHTML = data.content;
+            $('#ajax-modal').addClass('change-email');
+            if(s === 1){
+                if(data.error === '0'){
+                    $('#change-email-field').keypress(function(event) {
+                        if (event.keyCode === 13) {
+                            var dd;
+                            dd = document.getElementById('change-email-field').value;
+                            updateEbay(2, dd);
+                        }
+                    });
+                    $('#change-email-button').click(function() {
+                        var dd;
+                        dd = document.getElementById('change-email-field').value;
+                        updateEbay(2, dd);
+                    });
+                }
+                showModal('ajax-modal');
+            }else if(s === 2){
+                if(data.error === '0'){
+                    document.getElementById('account-ebay').innerHTML = data.ebay;
+                }else{
+                    $('#change-email-field').keypress(function(event) {
+                        if (event.keyCode === 13) {
+                            var dd;
+                            dd = document.getElementById('change-email-field').value;
+                            updateEbay(2, dd);
+                        }
+                    });
+                    $('#change-email-button').click(function() {
+                        var dd;
+                        dd = document.getElementById('change-email-field').value;
+                        updateEbay(2, dd);
+                    });
+                }
+            }
+            document.getElementById('fullscreenload').style.display = 'none';
+        },
+        "json"
+    )
+    .fail(function() {
+        $('#ajax-modal').removeClass('change-email');
+        document.getElementById('modal_h1').innerHTML = 'Error';
+        document.getElementById('modal_content').innerHTML = '<p>There was an error updating your account. Please refresh the page and try again.</p><p>(ref. ajax fail)<p>';
+        document.getElementById('fullscreenload').style.display = 'none';
+        if(s === 1){
+            showModal('ajax-modal');
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
