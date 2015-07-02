@@ -10,11 +10,13 @@
 		public $lastname;
 		public $email;
 		public $stripeID;
+		public $ebay;
 		public $subscription;
 		public $address;
 		public $error_cookie;
 		public $error = array();
 		public $loginID;
+
 
 
 
@@ -366,6 +368,7 @@
 					$this->lastname = $info['lastname'];
 					$this->email = $info['email'];
 					$this->stripeID = $info['stripeID'];
+					$this->ebay = $info['ebayID'];
 					$this->address = array(
 						'address' => $info['address'],
 						'city' => $info['city'],

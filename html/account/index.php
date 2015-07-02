@@ -273,6 +273,9 @@ print'
 				<dt>Email</dt>
 				<dd id="account-email">'.$user->email.'</dd>
 				<button type="button" onclick="changeEmail(1)">Change Email</button>
+				<dt>eBay Account</dt>
+				<dd id="account-ebay">'.$user->ebay.'</dd>
+				<button type="button" onclick="updateEbay(1)">Update eBay</button>
 			</dl>
 		</section>
 
