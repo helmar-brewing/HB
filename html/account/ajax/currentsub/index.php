@@ -88,7 +88,7 @@ try{
 			$html = '<p>You are currently subscribed to <span>'.subName($user->subscription['plan_type']).'</span></p>';
 			if($user->subscription['cancel_at_period_end'] === true){
 				$html .= '<p><i class="fa fa-ban"></i> Auto re-new is turned off. Your subscription will be canceled on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
-				$html .= '<button onclick="subUpdate(\''.subAction($user->subscription['plan_type']).'\')">Resume Subscription</button>';
+				$html .= '<button onclick="sub(\''.subAction($user->subscription['plan_type']).'\')">Resume Subscription</button>';
 			}else{
 				if($user->subscription['plan_type'] === $user->subscription['next_plan']){
 					$html .= '<p><i class="fa fa-refresh"></i> Your subscription will renew on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';

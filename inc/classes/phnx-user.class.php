@@ -483,13 +483,18 @@
 						$last_paid = $sub_response->data[0]->plan['amount'];
 						$next_payment = $sub_response->data[0]->plan['amount'];
 					}
+					if($sub_response->data[0]['cancel_at_period_end'] == true){
+						$next_plan = 'none';
+					}else{
+						$next_plan = $sub_response->data[0]->plan['id'];
+					}
 					$this->subscription = array(
 						'status' => $sub_response->data[0]['status'],
 						'sub_id' => $sub_response->data[0]['id'],
 						'cancel_at_period_end' => $sub_response->data[0]['cancel_at_period_end'],
 						'current_period_end' => $sub_response->data[0]['current_period_end'],
 						'plan_type' => $plan_type,
-						'next_plan' => $sub_response->data[0]->plan['id'],
+						'next_plan' => $next_plan,
 						'last_paid' => $last_paid,
 						'next_payment' => $next_payment
 					);
