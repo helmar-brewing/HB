@@ -209,7 +209,7 @@ print'
 	print'</ul>';
 
 	print '<ul class="sub-buttons">';
-	if($user->subscription['status'] === 'none'){
+	if($user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
 		print '<li id="sub-none" onclick="sub(\'none\')" class="selected free">';
 	}else{
 		print '<li id="sub-none" onclick="sub(\'none\')" class="free">';
@@ -220,7 +220,7 @@ print'
 					<p>Join our email list</p>
 					<p>View our basic card art list</p>
 	';
-	if($user->subscription['status'] === 'none'){
+	if($user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
 		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
 		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-square-o"></i></div>';
