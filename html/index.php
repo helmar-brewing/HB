@@ -52,7 +52,13 @@ print'
 
 /* HEADER */ require('layout/header1.php');
 print'
+
+
+
 	    <div class="auctions">
+
+					<h1><a href="subscription/"><img src="/img/join_free.png" alt="Helmar Brewing"></a></h1>
+
 	        <h1>Current Auctions</h1>
 	        <p id="auction_end">Auctions end on Tueday evenings</p>
 	        <ul id="auction_list">
