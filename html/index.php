@@ -27,7 +27,9 @@ $user->checklogin(1);
 
 ob_end_flush();
 /* <HEAD> */ $head=''; // </HEAD>
-/* PAGE TITLE */ $title='Helmar Brewing Co2';
+
+/* PAGE TITLE */ $title='Helmar Brewing Co';
+
 /* HEADER */ require('layout/header0.php');
 
 print'
