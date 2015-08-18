@@ -76,7 +76,7 @@ print'
 if($user->login() === 1){
 	if($user->subscription['status'] != 'active') {
 		print'
-			<label>Choose Your Subscription</label>
+			<label>Choose Your Annual Subscription</label>
 			<ul class="sub-buttons">
 				<li id="sub-digitalpaper" onclick="sub2(\'digitalpaper\')" class="selected">
 					<h4>Digital + Paper Magazine</h2>
