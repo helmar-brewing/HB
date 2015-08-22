@@ -33,6 +33,29 @@ if($user->login() === 1){
 
 
 ob_end_flush();
+
+// date formulas
+date_default_timezone_set('US/Eastern');
+
+ $currentmonth = date('n');
+ $currentyear = date('Y');
+
+if ($currentmonth == 1 ||$currentmonth == 2 ){
+	$dateReturn = 'March '.$currentyear;
+} elseif ($currentmonth == 12 ){
+	$dateReturn = 'March '.$currentyear+1;
+} elseif ($currentmonth == 3 ||$currentmonth == 4 ||$currentmonth == 5 ){
+	$dateReturn = 'June '.$currentyear;
+} elseif ($currentmonth == 6 ||$currentmonth == 7 ||$currentmonth == 8 ){
+	$dateReturn = 'September '.$currentyear;
+} elseif ($currentmonth == 9 ||$currentmonth == 10 ||$currentmonth == 11 ){
+	$dateReturn = 'December '.$currentyear;
+} else{
+	$dateReturn = 'Error! well, this isn\'t good! there isn\'t a 13th month!';
+}
+
+
+
 /* <HEAD> */ $head='
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
@@ -85,6 +108,7 @@ if($user->login() === 1){
 					<p>Access to the digital copy of the quarterly magazine via the website</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
+					<p><b><i>Note: You will receive your first magazine starting next period ('.$dateReturn.')</i></b></p>
 				</li>
 				<li id="sub-paper" onclick="sub2(\'paper\')" class="selected">
 					<h4>Paper Magazine</h2>
@@ -92,6 +116,7 @@ if($user->login() === 1){
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
+					<p><b><i>Note: You will receive your first magazine starting next period ('.$dateReturn.')</i></b></p>
 				</li>
 				<li id="sub-digital" onclick="sub2(\'digital\')" class="selected">
 					<h4>Digital Magazine</h2>
