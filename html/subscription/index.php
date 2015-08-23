@@ -170,7 +170,7 @@ if($user->login() === 1){
 					<p>Access to the digital copy of the quarterly magazine via the website</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
-					<p><b><i>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</i></b></p>
+					<label>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</label>
 				</li>
 				<li id="sub-paper" onclick="showModal(\'login_or_register\')" class="selected">
 					<h4>Paper Magazine</h2>
@@ -178,7 +178,7 @@ if($user->login() === 1){
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
-					<p><b><i>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</i></b></p>
+					<h3>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</h3>
 				</li>
 				<li id="sub-digital" onclick="showModal(\'login_or_register\')" class="selected">
 					<h4>Digital Magazine</h2>
