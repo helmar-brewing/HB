@@ -23,6 +23,26 @@ require_once('classes/phnx-user.class.php');
 require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
+// date formulas
+date_default_timezone_set('US/Eastern');
+
+ $currentmonth = date('n');
+ $currentyear = date('Y');
+
+if ($currentmonth == 1 ||$currentmonth == 2 ){
+	$dateReturn = 'March '.$currentyear;
+} elseif ($currentmonth == 12 ){
+	$dateReturn = 'March '.$currentyear+1;
+} elseif ($currentmonth == 3 ||$currentmonth == 4 ||$currentmonth == 5 ){
+	$dateReturn = 'June '.$currentyear;
+} elseif ($currentmonth == 6 ||$currentmonth == 7 ||$currentmonth == 8 ){
+	$dateReturn = 'September '.$currentyear;
+} elseif ($currentmonth == 9 ||$currentmonth == 10 ||$currentmonth == 11 ){
+	$dateReturn = 'December '.$currentyear;
+} else{
+	$dateReturn = 'Error! well, this isn\'t good! there isn\'t a 13th month!';
+}
+
 /* PAGE FUNCTIONS */
 function subName($sub){
 	switch($sub){
@@ -75,13 +95,15 @@ function upgrade($to = NULL){
 	$html = array(
 		'sub-paper' => '
 			<p>You are upgrading your subscription to <span>Paper Magazine</span>.</p>
-			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today.</p>
+			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today. Based on today\'s
+			date, you will receive your new subscription\'s magazine in the next quarter, '.$dateReturn.'.</p>
 			<p>Your credit card will be charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 			<button onclick="subUpdate2(\''.$action.'\')">Change Subscription</button>
 		',
 		'sub-digital+paper' => '
 			<p>You are upgrading your subscription to <span>Digital + Paper Magazine</span>.</p>
-			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today.</p>
+			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today. Based on today\'s
+			date, you will receive your new subscription\'s magazine in the next quarter, '.$dateReturn.'.</p>
 			<p>Your credit card will be charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 			<button onclick="subUpdate2(\''.$action.'\')">Change Subscription</button>
 		'
@@ -190,7 +212,8 @@ try{
 				$h1 = 'Subscription';
 				$html ='
 					<p>You are signup up for <span>Paper Magazine</span>.</p>
-					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
+					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'. Based on today\'s
+					date, you will receive your magazine in the next quarter, '.$dateReturn.'. If you would like the current magazine, <a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">click to visit our eBay store!</a></p>
 					<button onclick="subUpdate2(\''.$action.'\')">Subscribe</button>
 				';
 				break;
@@ -200,7 +223,9 @@ try{
 				$h1 = 'Subscription';
 				$html ='
 					<p>You are signup up for <span>Digital + Paper Magazine</span>.</p>
-					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
+					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'. Based on today\'s
+					date, you will receive your magazine in the next quarter, '.$dateReturn.'. Your digital copy will be available as soon as it is released
+					online. If you would like the current magazine, <a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">click to visit our eBay store!</a></p>
 					<button onclick="subUpdate2(\''.$action.'\')">Subscribe</button>
 				';
 				break;
