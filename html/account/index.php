@@ -163,7 +163,7 @@ print'
 					<p>Track your personal Helmar card collection</p>
 
 	';
-	if($user->subscription['next_plan'] === 'sub-digital'){
+	if($user->subscription['next_plan'] === 'sub-digital' || $user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
 		print '<label>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</label>';
 	}
 	if($user->subscription['next_plan'] === 'sub-digital+paper'){
@@ -194,7 +194,7 @@ print'
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 	';
-		if($user->subscription['next_plan'] === 'sub-digital'){
+		if($user->subscription['next_plan'] === 'sub-digital' || $user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
 			print '<label>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</label>';
 		}
 	if($user->subscription['next_plan'] === 'sub-paper'){
