@@ -22,6 +22,26 @@ require_once('libraries/stripe/init.php');
 $currentpage = 'account/';
 
 
+// date formulas
+date_default_timezone_set('US/Eastern');
+
+ $currentmonth = date('n');
+ $currentyear = date('Y');
+
+if ($currentmonth == 1 ||$currentmonth == 2 ){
+	$dateReturn = 'March '.$currentyear;
+} elseif ($currentmonth == 12 ){
+	$dateReturn = 'March '.$currentyear+1;
+} elseif ($currentmonth == 3 ||$currentmonth == 4 ||$currentmonth == 5 ){
+	$dateReturn = 'June '.$currentyear;
+} elseif ($currentmonth == 6 ||$currentmonth == 7 ||$currentmonth == 8 ){
+	$dateReturn = 'September '.$currentyear;
+} elseif ($currentmonth == 9 ||$currentmonth == 10 ||$currentmonth == 11 ){
+	$dateReturn = 'December '.$currentyear;
+} else{
+	$dateReturn = 'Error! well, this isn\'t good! there isn\'t a 13th month!';
+}
+
 // create user object
 $user = new phnx_user;
 
@@ -141,7 +161,11 @@ print'
 					<p>Access to the digital copy of the quarterly magazine via the website</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
+
 	';
+	if($user->subscription['next_plan'] === 'sub-digital'){
+		print '<label>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</label>';
+	}
 	if($user->subscription['next_plan'] === 'sub-digital+paper'){
 		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
@@ -170,6 +194,9 @@ print'
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
 	';
+		if($user->subscription['next_plan'] === 'sub-digital'){
+			print '<label>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</label>';
+		}
 	if($user->subscription['next_plan'] === 'sub-paper'){
 		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div>';
 	}else{
