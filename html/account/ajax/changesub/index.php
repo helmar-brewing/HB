@@ -19,6 +19,14 @@ $db2use = array(
 /* GET KEYS TO SITE */ require($path_to_keys);
 
 
+
+
+/* LOAD FUNC-CLASS-LIB */
+require_once('classes/phnx-user.class.php');
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
+
+
 // date formulas
 date_default_timezone_set('US/Eastern');
 
@@ -39,10 +47,6 @@ if ($currentmonth == 1 ||$currentmonth == 2 ){
 	$dateReturn = 'Error! well, this isn\'t good! there isn\'t a 13th month!';
 }
 
-/* LOAD FUNC-CLASS-LIB */
-require_once('classes/phnx-user.class.php');
-require_once('libraries/stripe/init.php');
-\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE FUNCTIONS */
 function downgrade($to = NULL, $from = NULL){
