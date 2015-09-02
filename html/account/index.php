@@ -195,7 +195,7 @@ print'
 					<p>Track your personal Helmar card collection</p>
 	';
 		if($user->subscription['next_plan'] === 'sub-digital' || $user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
-			print '<label>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</label>';
+			print '<label>Note: You will receive your first paper magazine starting next quarter ('.$dateReturn.')</label>';
 		}
 	if($user->subscription['next_plan'] === 'sub-paper'){
 		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div>';
