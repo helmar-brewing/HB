@@ -202,7 +202,7 @@ try{
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
-					<p>You are signup up for <span>Digital Magazine</span>.</p>
+					<p>You are signing up for <span>Digital Magazine</span>.</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
 					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
 				';
@@ -212,7 +212,7 @@ try{
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
-					<p>You are signup up for <span>Paper Magazine</span>. Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>
+					<p>You are signing up for <span>Paper Magazine</span>. Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
 					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
 				';
@@ -222,7 +222,7 @@ try{
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
-					<p>You are signup up for <span>Digital + Paper Magazine</span>. Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>
+					<p>You are signing up for <span>Digital + Paper Magazine</span>. Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
 					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
 				';

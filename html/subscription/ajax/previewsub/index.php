@@ -201,7 +201,7 @@ try{
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
-					<p>You are signup up for <span>Digital Magazine</span>.</p>
+					<p>You are signing up for <span>Digital Magazine</span>.</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
 					<button onclick="subUpdate2(\''.$action.'\')">Subscribe</button>
 				';
@@ -211,7 +211,7 @@ try{
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
-					<p>You are signup up for <span>Paper Magazine</span>.</p>
+					<p>You are signing up for <span>Paper Magazine</span>.</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'. Based on today\'s
 					date, you will receive your magazine in the next quarter, '.$dateReturn.'. If you would like the current magazine, <a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">click to visit our eBay store!</a></p>
 					<button onclick="subUpdate2(\''.$action.'\')">Subscribe</button>
@@ -222,7 +222,7 @@ try{
 				$error = '0';
 				$h1 = 'Subscription';
 				$html ='
-					<p>You are signup up for <span>Digital + Paper Magazine</span>.</p>
+					<p>You are signing up for <span>Digital + Paper Magazine</span>.</p>
 					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'. Based on today\'s
 					date, you will receive your magazine in the next quarter, '.$dateReturn.'. Your digital copy will be available as soon as it is released
 					online. If you would like the current magazine, <a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">click to visit our eBay store!</a></p>
