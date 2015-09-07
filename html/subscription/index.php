@@ -33,6 +33,29 @@ if($user->login() === 1){
 
 
 ob_end_flush();
+
+// date formulas
+date_default_timezone_set('US/Eastern');
+
+ $currentmonth = date('n');
+ $currentyear = date('Y');
+
+if ($currentmonth == 1 ||$currentmonth == 2 ){
+	$dateReturn = 'March '.$currentyear;
+} elseif ($currentmonth == 12 ){
+	$dateReturn = 'March '.$currentyear+1;
+} elseif ($currentmonth == 3 ||$currentmonth == 4 ||$currentmonth == 5 ){
+	$dateReturn = 'June '.$currentyear;
+} elseif ($currentmonth == 6 ||$currentmonth == 7 ||$currentmonth == 8 ){
+	$dateReturn = 'September '.$currentyear;
+} elseif ($currentmonth == 9 ||$currentmonth == 10 ||$currentmonth == 11 ){
+	$dateReturn = 'December '.$currentyear;
+} else{
+	$dateReturn = 'Error! well, this isn\'t good! there isn\'t a 13th month!';
+}
+
+
+
 /* <HEAD> */ $head='
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
@@ -79,22 +102,24 @@ if($user->login() === 1){
 			<label>Choose Your Annual Subscription</label>
 			<ul class="sub-buttons">
 				<li id="sub-digitalpaper" onclick="sub2(\'digitalpaper\')" class="selected">
-					<h4>Digital + Paper Magazine</h2>
+					<h4>Digital + Paper Magazine</h4>
 					<div class="price">$34.95</div>
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 					<p>Access to the digital copy of the quarterly magazine via the website</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
+					<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
 				</li>
 				<li id="sub-paper" onclick="sub2(\'paper\')" class="selected">
-					<h4>Paper Magazine</h2>
+					<h4>Paper Magazine</h4>
 					<div class="price">$29.95</div>
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
+					<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
 				</li>
 				<li id="sub-digital" onclick="sub2(\'digital\')" class="selected">
-					<h4>Digital Magazine</h2>
+					<h4>Digital Magazine</h4>
 					<div class="price">$19.95</div>
 					<p>Access to digital copies of our quarterly magazine via the website</p>
 					<p>Enhanced card art lists</p>
@@ -139,22 +164,24 @@ if($user->login() === 1){
 			<label>Choose Your Subscription</label>
 			<ul class="sub-buttons">
 				<li id="sub-digitalpaper" onclick="showModal(\'login_or_register\')" class="selected">
-					<h4>Digital + Paper Magazine</h2>
+					<h4>Digital + Paper Magazine</h4>
 					<div class="price">$34.95</div>
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 					<p>Access to the digital copy of the quarterly magazine via the website</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
+					<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
 				</li>
 				<li id="sub-paper" onclick="showModal(\'login_or_register\')" class="selected">
-					<h4>Paper Magazine</h2>
+					<h4>Paper Magazine</h4>
 					<div class="price">$29.95</div>
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 					<p>Enhanced card art lists</p>
 					<p>Track your personal Helmar card collection</p>
+					<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
 				</li>
 				<li id="sub-digital" onclick="showModal(\'login_or_register\')" class="selected">
-					<h4>Digital Magazine</h2>
+					<h4>Digital Magazine</h4>
 					<div class="price">$19.95</div>
 					<p>Access to digital copies of our quarterly magazine via the website</p>
 					<p>Enhanced card art lists</p>

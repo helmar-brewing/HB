@@ -18,6 +18,27 @@ $db2use = array(
 
 /* GET KEYS TO SITE */ require($path_to_keys);
 
+
+// date formulas
+date_default_timezone_set('US/Eastern');
+
+ $currentmonth = date('n');
+ $currentyear = date('Y');
+
+if ($currentmonth == 1 ||$currentmonth == 2 ){
+	$dateReturn = 'March '.$currentyear;
+} elseif ($currentmonth == 12 ){
+	$dateReturn = 'March '.$currentyear+1;
+} elseif ($currentmonth == 3 ||$currentmonth == 4 ||$currentmonth == 5 ){
+	$dateReturn = 'June '.$currentyear;
+} elseif ($currentmonth == 6 ||$currentmonth == 7 ||$currentmonth == 8 ){
+	$dateReturn = 'September '.$currentyear;
+} elseif ($currentmonth == 9 ||$currentmonth == 10 ||$currentmonth == 11 ){
+	$dateReturn = 'December '.$currentyear;
+} else{
+	$dateReturn = 'Error! well, this isn\'t good! there isn\'t a 13th month!';
+}
+
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
 require_once('libraries/stripe/init.php');
@@ -70,12 +91,14 @@ function upgrade($to = NULL){
 	$charge = $res['plan']['amount'] + $bal;
 	$html = array(
 		'sub-paper' => '
-			<p>Thank you for upgrading to Paper Magazine. Your benefits will take effect immediately.</p>
+			<p>Thank you for upgrading to Paper Magazine. Your benefits will take effect immediately. Based on today\'s
+			date, you will receive your new subscription\'s paper magazine in the next quarter, '.$dateReturn.'.</p>
 			<p>Your credit card was charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		',
 		'sub-digital+paper' => '
-			<p>Thank you for upgrading to Digital + Paper Magazine. Your benefits will take effect immediately.</p>
+			<p>Thank you for upgrading to Digital + Paper Magazine. Your benefits will take effect immediately. Based on today\'s
+			date, you will receive your new subscription\'s paper magazine in the next quarter, '.$dateReturn.'.</p>
 			<p>Your credit card was charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
 			<p>Your subscription will renew on '.date("m/d/Y",$res['current_period_end']).'.</p>
 		'
