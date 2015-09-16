@@ -62,69 +62,71 @@ switch($user->login()){
 
 
 // build the stripe array - need to add handling for more than 100 customers
-$custs = \Stripe\Customer::all(array("limit" => 100));
+
 
 $i = 1;
-foreach ($custs->data as $cu){
-    $sub_response = $cu['subscriptions']->data;
-
-    $list[$i]['id'] = $cu['id'];
-    if(empty($sub_response)){
-        $list[$i]['subscription'] = array(
-            'status' => 'none'
-        );
-    }else{
-        if($sub_response[0]['metadata']['downgrade'] === 'yes'){
-            if(time() < $sub_response[0]['metadata']['downgrade_date']){
-                $plan_type = $sub_response[0]['metadata']['downgrade_from'];
-                $last_paid = $sub_response[0]['metadata']['downgrade_paid'];
-                $next_payment = $sub_response[0]->plan['amount'];
-            }else{
-                $plan_type = $sub_response[0]->plan['id'];
-                $last_paid = $sub_response[0]->plan['amount'];
-                $next_payment = $sub_response[0]->plan['amount'];
-            }
-        }else{
-            $plan_type = $sub_response[0]->plan['id'];
-            $last_paid = $sub_response[0]->plan['amount'];
-            $next_payment = $sub_response[0]->plan['amount'];
-        }
-        $list[$i]['subscription'] = array(
-            'status' => $sub_response[0]['status'],
-            'sub_id' => $sub_response[0]['id'],
-            'cancel_at_period_end' => $sub_response[0]['cancel_at_period_end'],
-            'current_period_end' => $sub_response[0]['current_period_end'],
-            'plan_type' => $plan_type,
-            'next_plan' => $sub_response[0]->plan['id'],
-            'last_paid' => $last_paid,
-            'next_payment' => $next_payment
-        );
-        if($plan_type === 'sub-digital'){
-            $list[$i]['subscription']['digital'] = TRUE;
-            $list[$i]['subscription']['paper'] = FALSE;
-        }elseif($plan_type === 'sub-paper'){
-            $list[$i]['subscription']['digital'] = FALSE;
-            $list[$i]['subscription']['paper'] = TRUE;
-        }elseif($plan_type === 'sub-digital+paper'){
-            $list[$i]['subscription']['digital'] = TRUE;
-            $list[$i]['subscription']['paper'] = TRUE;
-        }else{
-            $list[$i]['subscription']['digital'] = 'error';
-            $list[$i]['subscription']['paper'] = 'error';
-        }
-    }
-
-    $i++;
-}
+$custs = \Stripe\Customer::all(array("limit" => 100));
 
 
 
+do{
 
+	foreach ($custs->data as $cu){
+	    $sub_response = $cu['subscriptions']->data;
 
+	    $list[$i]['id'] = $cu['id'];
+	    if(empty($sub_response)){
+	        $list[$i]['subscription'] = array(
+	            'status' => 'none'
+	        );
+	    }else{
+	        if($sub_response[0]['metadata']['downgrade'] === 'yes'){
+	            if(time() < $sub_response[0]['metadata']['downgrade_date']){
+	                $plan_type = $sub_response[0]['metadata']['downgrade_from'];
+	                $last_paid = $sub_response[0]['metadata']['downgrade_paid'];
+	                $next_payment = $sub_response[0]->plan['amount'];
+	            }else{
+	                $plan_type = $sub_response[0]->plan['id'];
+	                $last_paid = $sub_response[0]->plan['amount'];
+	                $next_payment = $sub_response[0]->plan['amount'];
+	            }
+	        }else{
+	            $plan_type = $sub_response[0]->plan['id'];
+	            $last_paid = $sub_response[0]->plan['amount'];
+	            $next_payment = $sub_response[0]->plan['amount'];
+	        }
+	        $list[$i]['subscription'] = array(
+	            'status' => $sub_response[0]['status'],
+	            'sub_id' => $sub_response[0]['id'],
+	            'cancel_at_period_end' => $sub_response[0]['cancel_at_period_end'],
+	            'current_period_end' => $sub_response[0]['current_period_end'],
+	            'plan_type' => $plan_type,
+	            'next_plan' => $sub_response[0]->plan['id'],
+	            'last_paid' => $last_paid,
+	            'next_payment' => $next_payment
+	        );
+	        if($plan_type === 'sub-digital'){
+	            $list[$i]['subscription']['digital'] = TRUE;
+	            $list[$i]['subscription']['paper'] = FALSE;
+	        }elseif($plan_type === 'sub-paper'){
+	            $list[$i]['subscription']['digital'] = FALSE;
+	            $list[$i]['subscription']['paper'] = TRUE;
+	        }elseif($plan_type === 'sub-digital+paper'){
+	            $list[$i]['subscription']['digital'] = TRUE;
+	            $list[$i]['subscription']['paper'] = TRUE;
+	        }else{
+	            $list[$i]['subscription']['digital'] = 'error';
+	            $list[$i]['subscription']['paper'] = 'error';
+	        }
+	    }
 
+	    $i++;
+	}
 
+	$starting_after = $cu['id'];
+	$custs = \Stripe\Customer::all(array("limit" => 100, "starting_after" => $starting_after));
 
-
+}while(!empty($custs->data));
 
 
 
@@ -219,7 +221,7 @@ foreach ($custs->data as $cu){
 
 
 
- //  /* DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($list);print'</pre>';
+	//  /* DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($custs);print'</pre>';
 
 
 ?>
