@@ -72,8 +72,9 @@ print'
 				';
 		    }
 				print '
-				</ul>
-				<h1>Discontinued Sets</h1>
+				</ul></div>
+				<h2>Discontinued Sets</h2>
+				<div class="auctions">
 				<ul id="auction_list">';
 
 				$series_sql2->data_seek(0);
