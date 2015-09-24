@@ -35,7 +35,8 @@ ob_end_flush();
 /* HEADER */ require('layout/header1.php');
 
 
-$series_sql = $db_main->query("SELECT * FROM series_info WHERE sort>0 ORDER BY sort ASC");
+$series_sql = $db_main->query("SELECT * FROM series_info WHERE sort>0 AND series_status <> 'discontinued' ORDER BY sort ASC");
+$series_sql2 = $db_main->query("SELECT * FROM series_info WHERE sort>0 AND series_status = 'discontinued'  ORDER BY sort ASC");
 
 
 print'
@@ -52,6 +53,31 @@ print'
 
 		    $series_sql->data_seek(0);
 		    while($seriesinfo = $series_sql->fetch_object()){
+
+				$series_id = $seriesinfo->series_id;
+				$series_name = $seriesinfo->series_name;
+				$cover_img = $protocol.$site.'/'.$seriesinfo->cover_img;
+
+
+
+				print'
+					<li>
+						<a style="background:url(\''.$cover_img.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$protocol.$site.'/artwork/series/'.$series_id.'">
+							<span>
+								<figure style="background:url(\''.$cover_img.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
+							</span>
+						</a>
+						<p class="nameplate">'.$series_name.'</p>
+					</li>
+				';
+		    }
+				print '
+				</ul>
+				<h3>Discontinued Sets</h3>
+				<ul id="auction_list">';
+
+				$series_sql2->data_seek(0);
+		    while($seriesinfo = $series_sql2->fetch_object()){
 
 				$series_id = $seriesinfo->series_id;
 				$series_name = $seriesinfo->series_name;
