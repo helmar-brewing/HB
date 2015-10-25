@@ -73,7 +73,7 @@ print'
 		    }
 				print '
 				</ul></div>
-				<h2>Discontinued Sets</h2>
+				<h2>Retired Sets</h2>
 				<div class="auctions">
 				<ul id="auction_list">';
 
