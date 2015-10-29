@@ -161,6 +161,9 @@
 
 
 		/* CHECK TO SEE IF A USERNAME EXISTS */
+
+		// this accepts user input directly, needs to be cleaned, or check before passing.
+
 		function exists($username){
 			global $db_auth;
 			$a = db1($db_auth, "SELECT username FROM users WHERE username='$username' LIMIT 1");
