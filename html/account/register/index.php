@@ -15,6 +15,8 @@ $db2use = array(
 
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
+require_once('classes/mailchimp.class.php');
+$chimp = new \DrewM\MailChimp\MailChimp($apikey['mailchimp']);
 require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
@@ -122,6 +124,7 @@ if($user->login() === 1){
             // create user
     		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
     		try{
+
                 $hash = $user->new_hash($password1);
 
         	    //$currentVer = siteSetting('currentVer');
@@ -137,6 +140,19 @@ if($user->login() === 1){
     			$stmt->bind_param("sssssss", $userID, $username, $firstname, $lastname, $email, $cust['id'], $ebay);
     			$stmt->execute();
     			$stmt->close();
+
+				if(isset($_POST['newsletter-check'])){
+					$params = array(
+						'email_address'	=> $email,
+						'status'		=> 'subscribed',
+						'merge_fields'	=> array(
+							'FNAME'	=>	$firstname,
+							'NAME'	=>	$lastname
+						)
+					);
+					$r = $chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $params);
+				}
+
     			$msg .= '<li>You have successfully registerd.</li>';
     		}catch(Stripe_AuthenticationError $e){
     			$msg .= '<li>There may have been an error with your registration. <a href="'.$protocol.$site.'/contact/">Contact us</a>. (ref: stripe 1)</li>';
@@ -249,6 +265,7 @@ if($user->login() === 1){
 						<label for="ebay">eBay Username</label>
 						<input type="text" name="ebay" id="ebay" value="'.$ebay.'"/>
 					</div>
+					<label><input type="checkbox" name="newsletter-check" id="newsletter-check" checked> Receive news about cards and upcoming auctions.</label>
                     <input type="submit" value="Register" tabindex="7" />
 		            <div class="login-footer">
 		                Already have an account? <a href="'.$protocol.$site.'/account/login?redir=account/">Log in</a>
