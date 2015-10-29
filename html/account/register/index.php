@@ -142,15 +142,23 @@ if($user->login() === 1){
     			$stmt->close();
 
 				if(isset($_POST['newsletter-check'])){
-					$params = array(
+					$args = array(
 						'email_address'	=> $email,
 						'status'		=> 'subscribed',
 						'merge_fields'	=> array(
-							'FNAME'	=>	$firstname,
-							'NAME'	=>	$lastname
+							'FNAME'		=> $firstname,
+							'NAME'		=> $lastname
 						)
 					);
-					$r = $chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $params);
+					$r = $chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $args);
+					// if($r === FALSE){
+					//
+					// }else{
+					// 	$r_json = json_decode($r);
+					// 	if(isset($r_json['type'])){
+					//
+					// 	}
+					// }
 				}
 
     			$msg .= '<li>You have successfully registerd.</li>';
