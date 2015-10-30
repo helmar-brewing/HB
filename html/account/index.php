@@ -17,6 +17,8 @@ $db2use = array(
 require_once('classes/phnx-user.class.php');
 require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
+require_once('classes/mailchimp.class.php');
+$chimp = new \DrewM\MailChimp\MailChimp($apikey['mailchimp']);
 
 /* PAGE VARIABLES */
 $currentpage = 'account/';
@@ -119,6 +121,20 @@ switch($user->login()){
 	//show renewal date for subscription
 
 
+
+
+
+
+
+	// find out if they are already subscribed to the newsletter
+	$subscriber = md5(strtolower($user->email));
+	$r = $chimp->get('lists/'.$apikey['mailchimp_list'].'/members/'.$subscriber);
+
+	if($r['status'] === 'subscribed'){
+		$email_sub_check = ' checked';
+	}else{
+		$email_sub_check = '';
+	}
 
 
 ob_end_flush();
@@ -302,7 +318,7 @@ print'
 				<button type="button" onclick="changeEmail(1)">Change Email</button>
 				<dt>Email Subscription</dt>
 				<dd>
-					<input type="checkbox"> Recieve updates about auctions and new cards.
+					<input type="checkbox" id="email-sub-checkbox" onclick="changeEmailSub()"'.$email_sub_check.'> Receive updates about auctions and new cards.
 					<p id="emali-sub-msg"></p>
 				</dd>
 				<dt>eBay Account</dt>

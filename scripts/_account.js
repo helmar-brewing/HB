@@ -292,6 +292,34 @@ function changeInfo(s, d1){
 }
 
 
+
+function changeEmailSub(){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/account/ajax/email/subscription/",
+        {a:1},
+        function( data ) {
+            if(data.error === '0'){
+
+            }else{
+
+            }
+            if( data.check === 'yes' ){
+                document.getElementById('email-sub-checkbox').check = true;
+            }
+            if( data.check === 'no' ){
+                document.getElementById('email-sub-checkbox').check = false;
+            }
+            document.getElementById('fullscreenload').style.display = 'none';
+        },
+        "json"
+    )
+    .fail(function() {
+        alert('ajax fail');
+        document.getElementById('fullscreenload').style.display = 'none';
+    });
+}
+
 function logoutDevice(lid){
     document.getElementById('fullscreenload').style.display = 'block';
     $.post(
