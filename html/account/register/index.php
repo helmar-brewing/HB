@@ -147,18 +147,10 @@ if($user->login() === 1){
 						'status'		=> 'subscribed',
 						'merge_fields'	=> array(
 							'FNAME'		=> $firstname,
-							'NAME'		=> $lastname
+							'LNAME'		=> $lastname
 						)
 					);
 					$r = $chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $args);
-					// if($r === FALSE){
-					//
-					// }else{
-					// 	$r_json = json_decode($r);
-					// 	if(isset($r_json['type'])){
-					//
-					// 	}
-					// }
 				}
 
     			$msg .= '<li>You have successfully registerd.</li>';
