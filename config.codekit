@@ -131,6 +131,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/html\/account\/ajax\/email\/subscription\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/html\/account\/ajax\/email\/subscription\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/html\/account\/ajax\/info\/index.php": {
 		"fileType": 8192,
 		"ignore": 0,

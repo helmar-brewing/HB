@@ -300,6 +300,11 @@ print'
 				<dt>Email</dt>
 				<dd id="account-email">'.$user->email.'</dd>
 				<button type="button" onclick="changeEmail(1)">Change Email</button>
+				<dt>Email Subscription</dt>
+				<dd>
+					<input type="checkbox"> Recieve updates about auctions and new cards.
+					<p id="emali-sub-msg"></p>
+				</dd>
 				<dt>eBay Account</dt>
 				<dd id="account-ebay">'.$user->ebay.'</dd>
 				<button type="button" onclick="updateEbay(1)">Update eBay</button>
