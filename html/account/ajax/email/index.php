@@ -20,6 +20,8 @@ $db2use = array(
 require_once('classes/phnx-user.class.php');
 require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
+require_once('classes/mailchimp.class.php');
+$chimp = new \DrewM\MailChimp\MailChimp($apikey['mailchimp']);
 
 /* PAGE VARIABLES */
 $step = $_GET['step'];
@@ -69,9 +71,138 @@ if($user->login() === 2){
 				mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
 				try{
 					$db_main->query("UPDATE users SET email='$email' WHERE username='".$user->username."' LIMIT 1");
-					$cust = Stripe_Customer::retrieve($user->stripeID);
+					$cust = \Stripe\Customer::retrieve($user->stripeID);
 					$cust->email = $email;
 					$cust->save();
+
+
+					$mc_old_hash = md5(strtolower($user->email));
+					$mc_new_hash = md5(strtolower($email));
+
+					$mc_old = $chimp->get('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);;
+					$mc_new = $chimp->get('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_new_hash);;
+
+					if($mc_new['status'] === 'subscribed'){
+						switch($mc_old['status']){
+				            case 'subscribed':
+								// delete the old address
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+				        		break;
+				            case 'unsubscribed':
+								// delete the old address
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+								break;
+				            case 'cleaned':
+								// delete the old address
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+				        		break;
+				            case 'pending':
+								// delete the old address
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+								break;
+							default:
+								// do nothing
+								break;
+						}
+					}elseif($mc_new === 'unsubscribed'){
+						switch($mc_old['status']){
+				            case 'subscribed':
+								// delete the old address
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+								// update the new address to subscribed
+								$args = array('status' => 'subscribed');
+				                $chimp->patch('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_new_hash, $args);
+				        		break;
+				            case 'unsubscribed':
+								// delete the old address
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+								break;
+				            case 'cleaned':
+								// delete the old address
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+				        		break;
+				            case 'pending':
+								// delete the old address
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+								break;
+							default:
+								// do nothing
+								break;
+						}
+					}elseif($mc_new === 'cleaned'){
+						// delete the old address
+						$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+					}else{
+						switch($mc_old['status']){
+							case 'subscribed':
+								// delete the old Email
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+								// add new address with status of subscribed
+								$args = array(
+									'email_address'	=> $email,
+									'status'		=> 'subscribed',
+									'merge_fields'	=> array(
+										'FNAME'		=> $user->firstname,
+										'LNAME'		=> $user->lastname
+									)
+								);
+								$chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $args);
+								break;
+							case 'unsubscribed':
+								// delete the old Email
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+								// add new address with status of unsubscribed
+								$args = array(
+									'email_address'	=> $email,
+									'status'		=> 'unsubscribed',
+									'merge_fields'	=> array(
+										'FNAME'		=> $user->firstname,
+										'LNAME'		=> $user->lastname
+									)
+								);
+								$chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $args);
+								break;
+							case 'cleaned':
+								// add new address with status of unsubscribed
+								$args = array(
+									'email_address'	=> $email,
+									'status'		=> 'unsubscribed',
+									'merge_fields'	=> array(
+										'FNAME'		=> $user->firstname,
+										'LNAME'		=> $user->lastname
+									)
+								);
+								$chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $args);
+								break;
+							case 'pending':
+								// delete the old Email
+								$chimp->delete('lists/'.$apikey['mailchimp_list'].'/members/'.$mc_old_hash);
+								// add new address with status of pending
+								$args = array(
+									'email_address'	=> $email,
+									'status'		=> 'pending',
+									'merge_fields'	=> array(
+										'FNAME'		=> $user->firstname,
+										'LNAME'		=> $user->lastname
+									)
+								);
+								$chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $args);
+								break;
+							default:
+								// add new address with status of unsubscribed
+								$args = array(
+									'email_address'	=> $email,
+									'status'		=> 'unsubscribed',
+									'merge_fields'	=> array(
+										'FNAME'		=> $user->firstname,
+										'LNAME'		=> $user->lastname
+									)
+								);
+								$chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $args);
+								break;
+						}
+					}
+					
 					$error  = '0';
 				}catch(Stripe_CardError $e){
 					// Since it's a decline, Stripe_CardError will be caught
