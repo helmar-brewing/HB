@@ -142,15 +142,15 @@ if($user->login() === 1){
     			$stmt->close();
 
 				if(isset($_POST['newsletter-check'])){
-					$params = array(
+					$args = array(
 						'email_address'	=> $email,
 						'status'		=> 'subscribed',
 						'merge_fields'	=> array(
-							'FNAME'	=>	$firstname,
-							'NAME'	=>	$lastname
+							'FNAME'		=> $firstname,
+							'LNAME'		=> $lastname
 						)
 					);
-					$r = $chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $params);
+					$r = $chimp->post('lists/'.$apikey['mailchimp_list'].'/members', $args);
 				}
 
     			$msg .= '<li>You have successfully registerd.</li>';
