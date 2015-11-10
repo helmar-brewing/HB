@@ -60,6 +60,10 @@ ob_end_flush();
 /* HEADER */ require('layout/header1.php');
 
 print'
+
+<script language="javascript" type="text/javascript" src="table.js"></script>
+<link rel="stylesheet" type="text/css" href="sorting.css">
+
 <div class="artwork">
     <h4>Artwork</h4>
     <h1>'.$series_name.'</h1>
@@ -96,18 +100,18 @@ print'    </div>
 
       // if user does NOT have subscription:
       if($user->subscription['status'] != 'active') {
-                print '
-                        <table class="tables">
-                          <thead>
-                            <tr>
-                              <th>Card Number</th>
-                              <th>Player</th>
-                              <th>Stance / Position</th>
-                              <th>Team</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                ';
+				print'
+				<table id="t1" class="tables table-autosort table-autofilter table-stripeclass:alternate table-page-number:t1page table-page-count:t1pages table-filtered-rowcount:t1filtercount table-rowcount:t1allcount">
+									<thead>
+										<tr>
+											<th class="table-sortable:numeric">Card Number</th>
+											<th class="table-filterable table-sortable:default">Player</th>
+											<th class="table-filterable table-sortable:default">Stance / Position</th>
+											<th class="table-filterable table-sortable:default">Team</th>
+										</tr>
+									</thead>
+									<tbody>
+				';
 
                 $i = 0;
                 if($R_cards !== FALSE){
@@ -147,22 +151,22 @@ print'    </div>
       }else{
         // do this if the user subscription = active
 
-            print'
-                    <table class="tables">
-                      <thead>
-                        <tr>
-                          <th>Card Number</th>
-                          <th>Player</th>
-                          <th>Stance / Position</th>
-                          <th>Team</th>
-                          <th>Last Sold Date</th>
-                          <th>Max Sell Price</th>
-                          <th>Pictures</th>
-            			        <th>Personal Checklist</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-            ';
+				print'
+				<table id="t1" class="tables table-autosort table-autofilter table-stripeclass:alternate table-page-number:t1page table-page-count:t1pages table-filtered-rowcount:t1filtercount table-rowcount:t1allcount">
+									<thead>
+										<tr>
+											<th class="table-sortable:numeric">Card Number</th>
+											<th class="table-filterable table-sortable:default">Player</th>
+											<th class="table-filterable table-sortable:default">Stance / Position</th>
+											<th class="table-filterable table-sortable:default">Team</th>
+											<th class="table-sortable:date">Last Sold Date</th>
+											<th class="table-sortable:currency">Max Sell Price</th>
+											<th>Pictures</th>
+											<th>Personal Checklist</th>
+										</tr>
+									</thead>
+									<tbody>
+				';
             $i = 0;
             if($R_cards !== FALSE){
                 $R_cards->data_seek(0);
