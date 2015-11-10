@@ -58,9 +58,43 @@ print'
 
 
 	    <div class="auctions">
+';
 
-					<h1><a href="subscription/"><img src="/img/join_free.png" alt="Helmar Brewing"></a></h1>
 
+
+
+if(isset($user)){
+	 if( $user->login() === 1 || $user->login() === 2 ){
+	 /* do this code if user is logged in */
+		 // if user does NOT have subscription:
+		 if($user->subscription['status'] != 'active') {
+			 print'
+								<h1><a href="subscription/"><img src="/img/upgrade_account.png" alt="Helmar Brewing"></a></h1>
+			 ';
+
+		 }else{
+			 // do this if the user subscription = active
+			 	// NO PICTURE TO SHOW!
+
+		 }
+
+
+	 /* END code if user is logged in, but not paid subscription */
+	 }else{
+	 /* do this if user is not logged in */
+	 print'
+						<h1><a href="subscription/"><img src="/img/join_free.png" alt="Helmar Brewing"></a></h1>
+	 ';
+ }
+}else{
+	 /* do this if user is not logged in */
+	 print'
+	 					<h1><a href="subscription/"><img src="/img/join_free.png" alt="Helmar Brewing"></a></h1>
+	 ';
+
+}
+
+print'
 	        <h1>Current Auctions</h1>
 	        <p id="auction_end">Auctions end on Tuesday evenings</p>
 	        <ul id="auction_list">
