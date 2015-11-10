@@ -61,8 +61,8 @@ ob_end_flush();
 
 print'
 
-<script language="javascript" type="text/javascript" src="table.js"></script>
-<link rel="stylesheet" type="text/css" href="sorting.css">
+<script language="javascript" type="text/javascript" src="/artwork/table.js"></script>
+<link rel="stylesheet" type="text/css" href="/artwork/sorting.css">
 
 <div class="artwork">
     <h4>Artwork</h4>
