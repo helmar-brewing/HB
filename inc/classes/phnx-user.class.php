@@ -1,4 +1,7 @@
 <?php
+
+	class AuthException extends Exception{}
+
 	class phnx_user{
 
 		private $login;
