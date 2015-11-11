@@ -376,6 +376,8 @@
 					$this->stripeID = $info['stripeID'];
 					$this->ebay = $info['ebayID'];
 					$this->address = array(
+						'firmname' => $info['firmname'],
+						'unit' => $info['unit'],
 						'address' => $info['address'],
 						'city' => $info['city'],
 						'state' => $info['state'],
