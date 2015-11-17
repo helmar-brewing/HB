@@ -2,3 +2,5 @@
 
 
 [Checking for Subscription](docs/subscription.md)
+
+[Address Verification](docs/address.md)
