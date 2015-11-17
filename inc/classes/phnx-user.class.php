@@ -341,6 +341,34 @@
 
 
 
+		/* POPULATE OR REFRESH USER DATA */
+		public function updateInfo(){
+			global $db_main;
+			$R_info = $db_main->query("SELECT * FROM users WHERE username = '".$this->username."' LIMIT 1");
+			if($R_info != FALSE){
+				$info = $R_info->fetch_assoc();
+				$this->id = $info['userid'];
+				$this->firstname = $info['firstname'];
+				$this->lastname = $info['lastname'];
+				$this->email = $info['email'];
+				$this->stripeID = $info['stripeID'];
+				$this->ebay = $info['ebayID'];
+				$this->address = array(
+					'firmname' => $info['firmname'],
+					'unit' => $info['unit'],
+					'address' => $info['address'],
+					'city' => $info['city'],
+					'state' => $info['state'],
+					'zip5' => $info['zip5'],
+					'zip4' => $info['zip4']
+				);
+				$R_info->free();
+				unset($R_info);
+			}
+		}
+
+
+
 		/* THE LEVEL 1 CHECK */
 		private function level1(){
 			global $db_auth;
@@ -366,27 +394,7 @@
 			$R_activeLogins->free();
 			unset($R_activeLogins);
 			if($this->login === 1){
-				$R_info = $db_main->query("SELECT * FROM users WHERE username = '".$this->username."' LIMIT 1");
-				if($R_info != FALSE){
-					$info = $R_info->fetch_assoc();
-					$this->id = $info['userid'];
-					$this->firstname = $info['firstname'];
-					$this->lastname = $info['lastname'];
-					$this->email = $info['email'];
-					$this->stripeID = $info['stripeID'];
-					$this->ebay = $info['ebayID'];
-					$this->address = array(
-						'firmname' => $info['firmname'],
-						'unit' => $info['unit'],
-						'address' => $info['address'],
-						'city' => $info['city'],
-						'state' => $info['state'],
-						'zip5' => $info['zip5'],
-						'zip4' => $info['zip4']
-					);
-					$R_info->free();
-					unset($R_info);
-				}
+				$this->updateInfo();
 			}
 		}
 
