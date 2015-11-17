@@ -340,6 +340,8 @@ function changeInfo(s, d1, d2){
                     });
 
                     document.getElementById('account-name').innerHTML = data.return.firstname + ' ' + data.return.lastname;
+
+                    $('#ajax-modal').animate({ scrollTop: 0 }, 'slow');
                 }
 
                 if(s === 3 || s === 4){
