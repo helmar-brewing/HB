@@ -87,7 +87,8 @@ class USPSBase {
     CURLOPT_FRESH_CONNECT  => 1,
     CURLOPT_PORT       => 443,
     CURLOPT_USERAGENT      => 'usps-php',
-    CURLOPT_FOLLOWLOCATION => true,
+    //CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_FOLLOWLOCATION => false,
     CURLOPT_RETURNTRANSFER => true,
   );
   /**
