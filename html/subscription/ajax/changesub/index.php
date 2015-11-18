@@ -195,17 +195,7 @@ try{
 		$h1 = 'Please Add Your Address';
 		$html = '
 			<div id="modal-address-form" class="modal-address">
-				<label for="sub-address">Address</label>
-				<input type="text" id="sub-address" value="'.$data1['address'].'" >
-				<label for="sub-city">City</label>
-				<input type="text" id="sub-city" value="'.$data1['city'].'" >
-				<label for="sub-state">State</label>
-				<input type="text" id="sub-state" value="'.$data1['state'].'" >
-				<fieldset class="zip">
-					<label for="sub-zip5">ZIP Code</label>
-					<input type="text" id="sub-zip5" placeholder="zip code" maxlength="5" value="'.$data1['zip5'].'" > - <input type="text" id="sub-zip4" placeholder="+4" maxlength="4" value="'.$data1['zip4'].'" >
-				</fieldset>
-				<button onclick="address2()">Update Address</button>
+			
 			</div>
 		';
 		switch($action){
