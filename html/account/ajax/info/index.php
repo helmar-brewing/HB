@@ -129,7 +129,6 @@ try{
 			$h1 = 'Update Info';
 			$html = addressForm($user);
 			$html .= '<button id="change-info-button">Update Info</button>';
-			$nextstep = '2';
 			break;
 
 		case '2':
