@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 function recoverCleanup(){
     $('#ajax-modal').removeClass('recover-modal');
     $('#modal_close').unbind('click');
