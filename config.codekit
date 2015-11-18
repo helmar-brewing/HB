@@ -706,15 +706,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/html\/subscription\/ajax\/address\/index.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/html\/subscription\/ajax\/address\/index.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/html\/subscription\/ajax\/changesub\/index.php": {
 		"fileType": 8192,
 		"ignore": 0,
