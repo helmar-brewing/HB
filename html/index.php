@@ -15,6 +15,8 @@ $db2use = array(
 
 /* LOAD FUNC-CLASS-LIB */
 require_once('classes/phnx-user.class.php');
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
 $currentpage = '';
@@ -24,6 +26,9 @@ $user = new phnx_user;
 
 // check user login status
 $user->checklogin(1);
+
+// check user subscription status
+$user->checksub();
 
 ob_end_flush();
 /* <HEAD> */ $head=''; // </HEAD>

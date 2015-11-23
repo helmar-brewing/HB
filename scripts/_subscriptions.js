@@ -202,9 +202,7 @@ function subUpdate(a){
 
 			}else if(data.error === '4'){
 
-				// do the address update is successful show the hidden continue button
-
-				document.getElementById('fullscreenload').style.display = 'none';
+				address2(1);
 
             }else if(data.error === '0'){
 
@@ -297,54 +295,6 @@ function sub(a){
 
 
 
-
-
-function address(){
-	document.getElementById('fullscreenload').style.display = 'block';
-	var aa = document.getElementById('sub-address').value;
-	var cc = document.getElementById('sub-city').value;
-	var ss = document.getElementById('sub-state').value;
-	var z5 = document.getElementById('sub-zip5').value;
-	var z4 = document.getElementById('sub-zip4').value;
-    $.get(
-        "/account/ajax/address/",
-        {
-			address: aa,
-			city: cc,
-			state: ss,
-			zip5: z5,
-			zip4: z4
-		},
-        function( data ) {
-            if(data.error === '2'){
-                window.location.href = "/account/login/?redir=account/";
-            }else if(data.error === '0'){
-				document.getElementById('modal-address-form').style.display = 'none';
-				document.getElementById('modal-add-card-success').style.display = 'block';
-				var a = $('#modal-add-card-button').attr("data-action");
-				$('#modal-add-card-button').on("click", function(){subUpdate(a);});
-				document.getElementById('account-address').innerHTML = data.return.fulladdress;
-				document.getElementById('fullscreenload').style.display = 'none';
-            }else{
-				document.getElementById('modal_h1').innerHTML = data.h1;
-	            document.getElementById('modal_content').innerHTML = data.content;
-                document.getElementById('fullscreenload').style.display = 'none';
-            }
-        },
-        "json"
-    )
-    .fail(function() {
-        $('#ajax-modal').removeClass('sub_modal');
-        document.getElementById('modal_h1').innerHTML = 'Error';
-        document.getElementById('modal_content').innerHTML = '<p>There was an error updating your address. Please try again.</p><p>(ref. ajax fail)<p>';
-        document.getElementById('fullscreenload').style.display = 'none';
-    });
-}
-
-
-
-
-
 function currentSub(){
 	document.getElementById('sub-info').innerHTML = '<p><i class="fa fa-spin fa-cog"></i> loading subscription...</p>';
     $.get(
@@ -360,5 +310,131 @@ function currentSub(){
     )
     .fail(function() {
         document.getElementById('modal_content').innerHTML = '<p>There was an error getting your subscription. Please try again.</p><p>(ref. ajax fail)<p>';
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function address(s, d1, d2){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/account/ajax/address/",
+        { step:s, data1:d1, data2:d2},
+        function( data ) {
+
+            if(data.error === '0' || data.error === '1'){
+
+
+                document.getElementById('modal-address-form').innerHTML = data.html;
+
+
+
+                if(s === 1 || s === 2){
+                    $('#change-info-button').click(function() {
+                        var dd = {
+                            "firmname" : document.getElementById('change-info-firmname').value,
+                            "unit" : document.getElementById('change-info-unit').value,
+                            "address" : document.getElementById('change-info-address').value,
+                            "city" : document.getElementById('change-info-city').value,
+                            "state" : document.getElementById('change-info-state').value,
+                            "zip5" : document.getElementById('change-info-zip5').value,
+                            "zip4" : document.getElementById('change-info-zip4').value
+                        };
+                        var ddd = {
+                            "firmname" : document.getElementById('change-info-firmname').dataset.original,
+                            "unit" : document.getElementById('change-info-unit').dataset.original,
+                            "address" : document.getElementById('change-info-address').dataset.original,
+                            "city" : document.getElementById('change-info-city').dataset.original,
+                            "state" : document.getElementById('change-info-state').dataset.original,
+                            "zip5" : document.getElementById('change-info-zip5').dataset.original,
+                            "zip4" : document.getElementById('change-info-zip4').dataset.original
+                        };
+                        address(2, dd, ddd);
+                    });
+                }
+
+
+                if(s === 2){
+                    $('#change-info-use').click(function() {
+                        var dd = {
+                            "firmname" : document.getElementById('change-info-firmname').value,
+                            "unit" : document.getElementById('change-info-unit').value,
+                            "address" : document.getElementById('change-info-address').value,
+                            "city" : document.getElementById('change-info-city').value,
+                            "state" : document.getElementById('change-info-state').value,
+                            "zip5" : document.getElementById('change-info-zip5').value,
+                            "zip4" : document.getElementById('change-info-zip4').value
+                        };
+                        var ddd = {
+                            "firmname" : document.getElementById('change-info-firmname').dataset.original,
+                            "unit" : document.getElementById('change-info-unit').dataset.original,
+                            "address" : document.getElementById('change-info-address').dataset.original,
+                            "city" : document.getElementById('change-info-city').dataset.original,
+                            "state" : document.getElementById('change-info-state').dataset.original,
+                            "zip5" : document.getElementById('change-info-zip5').dataset.original,
+                            "zip4" : document.getElementById('change-info-zip4').dataset.original
+                        };
+                        address(3, dd, ddd);
+                    });
+
+                    $('#change-info-save').click(function() {
+                        var dd = {
+                            "firmname" : document.getElementById('change-info-firmname').value,
+                            "unit" : document.getElementById('change-info-unit').value,
+                            "address" : document.getElementById('change-info-address').value,
+                            "city" : document.getElementById('change-info-city').value,
+                            "state" : document.getElementById('change-info-state').value,
+                            "zip5" : document.getElementById('change-info-zip5').value,
+                            "zip4" : document.getElementById('change-info-zip4').value
+                        };
+                        var ddd = {
+                            "firmname" : document.getElementById('change-info-firmname').dataset.original,
+                            "unit" : document.getElementById('change-info-unit').dataset.original,
+                            "address" : document.getElementById('change-info-address').dataset.original,
+                            "city" : document.getElementById('change-info-city').dataset.original,
+                            "state" : document.getElementById('change-info-state').dataset.original,
+                            "zip5" : document.getElementById('change-info-zip5').dataset.original,
+                            "zip4" : document.getElementById('change-info-zip4').dataset.original
+                        };
+                        address(4, dd, ddd);
+                    });
+
+                    $('#ajax-modal').animate({ scrollTop: 0 }, 'slow');
+                }
+
+                if(s === 3 || s === 4){
+					document.getElementById('modal-add-card-success').style.display = 'block';
+					var a = $('#modal-add-card-button').attr("data-action");
+					$('#modal-add-card-button').on("click", function(){subUpdate(a);});
+					document.getElementById('account-address').innerHTML = data.return.fulladdress;
+					document.getElementById('fullscreenload').style.display = 'none';
+                }
+
+
+
+                document.getElementById('fullscreenload').style.display = 'none';
+
+            }else if(data.error === '2'){
+                window.location=data.redir;
+            }
+        },
+        "json"
+    )
+    .fail(function() {
+        $('#ajax-modal').removeClass('sub_modal');
+        document.getElementById('modal_h1').innerHTML = 'Error';
+        document.getElementById('modal_content').innerHTML = '<p>There was an error updating your address.</p><p>(ref. ajax fail)<p>';
+        document.getElementById('fullscreenload').style.display = 'none';
     });
 }

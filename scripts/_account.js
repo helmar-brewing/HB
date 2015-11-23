@@ -227,7 +227,7 @@ function changeInfoCleanup(){
     document.getElementById('modal_h1').innerHTML = '';
     document.getElementById('modal_content').innerHTML = '';
 }
-function changeInfo(s, d1){
+function changeInfo(s, d1, d2){
     changeInfoUnBindForms();
     document.getElementById('fullscreenload').style.display = 'block';
     $('#modal_close').click(function() {
@@ -235,48 +235,120 @@ function changeInfo(s, d1){
     });
     $.get(
         "/account/ajax/info/",
-        { step:s,  data1:d1},
+        { step:s, data1:d1, data2:d2},
         function( data ) {
-            document.getElementById('modal_h1').innerHTML = data.h1;
-            document.getElementById('modal_content').innerHTML = data.content;
-            $('#ajax-modal').addClass('change-info');
-            if(s === 1){
-                if(data.error === '0'){
+
+            if(data.error === '0' || data.error === '1'){
+
+                document.getElementById('modal_h1').innerHTML = data.h1;
+                document.getElementById('modal_content').innerHTML = data.html;
+                $('#ajax-modal').addClass('change-info');
+
+
+                if(s === 1){
+                    showModal('ajax-modal');
+                }
+
+
+                if(s === 1 || s === 2){
                     $('#change-info-button').click(function() {
                         var dd = {
                             "firstname" : document.getElementById('change-info-firstname').value,
                             "lastname" : document.getElementById('change-info-lastname').value,
+                            "firmname" : document.getElementById('change-info-firmname').value,
+                            "unit" : document.getElementById('change-info-unit').value,
                             "address" : document.getElementById('change-info-address').value,
                             "city" : document.getElementById('change-info-city').value,
                             "state" : document.getElementById('change-info-state').value,
                             "zip5" : document.getElementById('change-info-zip5').value,
                             "zip4" : document.getElementById('change-info-zip4').value
                         };
-                        changeInfo(2, dd);
+                        var ddd = {
+                            "firstname" : document.getElementById('change-info-firstname').dataset.original,
+                            "lastname" : document.getElementById('change-info-lastname').dataset.original,
+                            "firmname" : document.getElementById('change-info-firmname').dataset.original,
+                            "unit" : document.getElementById('change-info-unit').dataset.original,
+                            "address" : document.getElementById('change-info-address').dataset.original,
+                            "city" : document.getElementById('change-info-city').dataset.original,
+                            "state" : document.getElementById('change-info-state').dataset.original,
+                            "zip5" : document.getElementById('change-info-zip5').dataset.original,
+                            "zip4" : document.getElementById('change-info-zip4').dataset.original
+                        };
+                        changeInfo(2, dd, ddd);
                     });
                 }
-                showModal('ajax-modal');
-            }else if(s === 2){
-                if(data.error === '0'){
-                    document.getElementById('account-name').innerHTML = data.return.firstname + ' ' + data.return.lastname;
-                    document.getElementById('account-address').innerHTML = data.return.fulladdress;
-                    changeInfoCleanup();
-                    hideModal('ajax-modal');
-                }else{
-                    $('#change-info-button').click(function() {
+
+
+                if(s === 2){
+                    $('#change-info-use').click(function() {
                         var dd = {
                             "firstname" : document.getElementById('change-info-firstname').value,
                             "lastname" : document.getElementById('change-info-lastname').value,
+                            "firmname" : document.getElementById('change-info-firmname').value,
+                            "unit" : document.getElementById('change-info-unit').value,
                             "address" : document.getElementById('change-info-address').value,
                             "city" : document.getElementById('change-info-city').value,
                             "state" : document.getElementById('change-info-state').value,
-                            "zip" : document.getElementById('change-info-zip').value
+                            "zip5" : document.getElementById('change-info-zip5').value,
+                            "zip4" : document.getElementById('change-info-zip4').value
                         };
-                        changeInfo(2, dd);
+                        var ddd = {
+                            "firstname" : document.getElementById('change-info-firstname').dataset.original,
+                            "lastname" : document.getElementById('change-info-lastname').dataset.original,
+                            "firmname" : document.getElementById('change-info-firmname').dataset.original,
+                            "unit" : document.getElementById('change-info-unit').dataset.original,
+                            "address" : document.getElementById('change-info-address').dataset.original,
+                            "city" : document.getElementById('change-info-city').dataset.original,
+                            "state" : document.getElementById('change-info-state').dataset.original,
+                            "zip5" : document.getElementById('change-info-zip5').dataset.original,
+                            "zip4" : document.getElementById('change-info-zip4').dataset.original
+                        };
+                        changeInfo(3, dd, ddd);
                     });
+
+                    $('#change-info-save').click(function() {
+                        var dd = {
+                            "firstname" : document.getElementById('change-info-firstname').value,
+                            "lastname" : document.getElementById('change-info-lastname').value,
+                            "firmname" : document.getElementById('change-info-firmname').value,
+                            "unit" : document.getElementById('change-info-unit').value,
+                            "address" : document.getElementById('change-info-address').value,
+                            "city" : document.getElementById('change-info-city').value,
+                            "state" : document.getElementById('change-info-state').value,
+                            "zip5" : document.getElementById('change-info-zip5').value,
+                            "zip4" : document.getElementById('change-info-zip4').value
+                        };
+                        var ddd = {
+                            "firstname" : document.getElementById('change-info-firstname').dataset.original,
+                            "lastname" : document.getElementById('change-info-lastname').dataset.original,
+                            "firmname" : document.getElementById('change-info-firmname').dataset.original,
+                            "unit" : document.getElementById('change-info-unit').dataset.original,
+                            "address" : document.getElementById('change-info-address').dataset.original,
+                            "city" : document.getElementById('change-info-city').dataset.original,
+                            "state" : document.getElementById('change-info-state').dataset.original,
+                            "zip5" : document.getElementById('change-info-zip5').dataset.original,
+                            "zip4" : document.getElementById('change-info-zip4').dataset.original
+                        };
+                        changeInfo(4, dd, ddd);
+                    });
+
+                    document.getElementById('account-name').innerHTML = data.return.firstname + ' ' + data.return.lastname;
+
+                    $('#ajax-modal').animate({ scrollTop: 0 }, 'slow');
                 }
+
+                if(s === 3 || s === 4){
+                    document.getElementById('account-name').innerHTML = data.return.firstname + ' ' + data.return.lastname;
+                    document.getElementById('account-address').innerHTML = data.return.fulladdress;
+                }
+
+
+
+                document.getElementById('fullscreenload').style.display = 'none';
+
+            }else if(data.error === '2'){
+                window.location=data.redir;
             }
-            document.getElementById('fullscreenload').style.display = 'none';
         },
         "json"
     )
