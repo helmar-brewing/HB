@@ -1,0 +1,6 @@
+#Fix Rewrite
+Options -Multiviews
+
+RewriteEngine on
+RewriteBase /dashboard/csv/
+RewriteRule ^([A-Za-z0-9-]+).csv?$ $1.php [L]
