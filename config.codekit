@@ -677,15 +677,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/html\/index.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/html\/index.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/html\/js\/scripts.js": {
 		"fileType": 64,
 		"ignore": 1,
