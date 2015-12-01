@@ -21,7 +21,7 @@ require_once('libraries/stripe/init.php');
 /* PAGE VARIABLES */
 $file = $magazine_path.$_GET['f'];
 $currentpage = 'magazine/'.$_GET['f'];
-class AuthException extends Exception{}
+
 class SubException extends Exception{}
 
 $user = new phnx_user;
@@ -73,7 +73,7 @@ try{
     http_response_code(500);
     echo '500 ';
 	echo $e->getMessage();
-	/* SESSION DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($_SESSION);print'</pre>';
+	///* SESSION DEBUGGING */ print'<pre style="font-family:monospace;background-color:#444;padding:1em;color:white;">';var_dump($_SESSION);print'</pre>';
 }catch(AuthException $e){
     header('Location: '.$protocol.$site.'/account/login/?redir='.$currentpage,TRUE,303);
     ob_end_flush();
