@@ -33,7 +33,7 @@ date_default_timezone_set('US/Eastern');
 if ($currentmonth == 1 ||$currentmonth == 2 ){
 	$dateReturn = 'March '.$currentyear;
 } elseif ($currentmonth == 12 ){
-	$dateReturn = 'March '.$currentyear+1;
+	$dateReturn = 'March '.date('Y',strtotime('+1 year'));
 } elseif ($currentmonth == 3 ||$currentmonth == 4 ||$currentmonth == 5 ){
 	$dateReturn = 'June '.$currentyear;
 } elseif ($currentmonth == 6 ||$currentmonth == 7 ||$currentmonth == 8 ){
