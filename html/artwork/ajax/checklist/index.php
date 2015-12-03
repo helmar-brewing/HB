@@ -68,14 +68,14 @@ try{
 	if($quantity === '0'){
 		// if the qty is 0 set it to 1
 		$db_main->query("UPDATE userCardChecklist SET quantity=1 WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
-		$msg = 'You have added card '.$_GET['cardnum'].' to your list';
+		$msg = 'You have added card '.$_GET['cardnum'].' to your collection';
 	}elseif($quantity === '1'){
 		// if the qty is 1 set it to 0
 		$db_main->query("UPDATE userCardChecklist SET quantity=0 WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
-		$msg = 'You have removed card '.$_GET['cardnum'].' to your list';
+		$msg = 'You have removed card '.$_GET['cardnum'].' from your collection';
 	}elseif($quantity === 'none'){
 		$db_main->query("INSERT INTO userCardChecklist (userid, series, cardnum, quantity) VALUES ('".$user->id."', '$series', '".$_GET['cardnum']."', 1)");
-		$msg = 'You have added card '.$_GET['cardnum'].' to your list';
+		$msg = 'You have added card '.$_GET['cardnum'].' to your collection';
 	}else{
 		throw new Exception('There was an error updating the card. [0x1]');
 	}
