@@ -1,0 +1,6 @@
+#Fix Rewrite
+Options -Multiviews
+
+RewriteEngine on
+RewriteBase /pay/
+RewriteRule ^([0-9.]+)/?$ index.php?amount=$1 [L]

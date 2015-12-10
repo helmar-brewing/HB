@@ -1,0 +1,143 @@
+<?php
+ob_start();
+
+/* ROOT SETTINGS */ require($_SERVER['DOCUMENT_ROOT'].'/root_settings.php');
+
+/* FORCE HTTPS FOR THIS PAGE */ forcehttps();
+
+/* WHICH DATABASES DO WE NEED */
+$db2use = array(
+	'db_auth' 	=> FALSE,
+	'db_main'	=> FALSE
+);
+
+/* GET KEYS TO SITE */ require($path_to_keys);
+
+/* LOAD FUNC-CLASS-LIB */
+require_once('classes/phnx-user.class.php');
+require_once('libraries/stripe/init.php');
+\Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
+require_once('classes/mailchimp.class.php');
+$chimp = new \DrewM\MailChimp\MailChimp($apikey['mailchimp']);
+
+
+
+
+
+$token = $_POST['stripeToken'];
+
+$amount = preg_replace('/[^0-9.]/', '', $_POST['amount']);
+
+$amount = $amount * 100;
+$amount_disp = $amount / 100;
+
+ob_end_flush();
+
+print'
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Custom Payment Form</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="initial-scale=1.0">
+        <style>
+            body{
+                background-color:#EEEEEE;
+            }
+            .custom_payment{
+                width:100%;
+                max-width:400px;
+                margin:1em auto;
+                padding:1em;
+                border-radius:3px;
+                background-color:white;
+                font-family:arial;
+            }
+            label{
+                display:block;
+            }
+            input[type="text"]{
+                font-size:1em;
+                width:100%;
+                display:block;
+                padding:0;
+                border:none;
+                outline:none;
+                box-shadow:none;
+                -webkit-appearance:none;
+                line-height:2em;
+                height:2em;
+                box-sizing:border-box;
+                text-align:center;
+                border-radius:5px;
+                border:1px solid #CCC;
+                margin:1em 0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="custom_payment">
+';
+
+try {
+  $charge = \Stripe\Charge::create(array(
+    "amount" => $amount,
+    "currency" => "usd",
+    "source" => $token,
+    "description" => "Custom Payment",
+    "receipt_email" => $_POST['stripeEmail']
+    ));
+
+    print'
+        Your payment has been processed. Thank you.
+    ';
+} catch(\Stripe\Error\Card $e) {
+    $body = $e->getJsonBody();
+    $err  = $body['error'];
+    print $err['message'];
+
+} catch (\Stripe\Error\RateLimit $e) {
+
+    print'
+        <p>There was an error charging your card, please try again.</p>
+        <a href="/pay/'.$amount_disp.'/">Start Over</a>
+    ';
+
+} catch (\Stripe\Error\Authentication $e) {
+
+    print'
+        <p>There was an error charging your card, please try again.</p>
+        <a href="/pay/'.$amount_disp.'/">Start Over</a>
+    ';
+
+} catch (\Stripe\Error\ApiConnection $e) {
+
+    print'
+        <p>There was an error charging your card, please try again.</p>
+        <a href="/pay/'.$amount_disp.'/">Start Over</a>
+    ';
+
+} catch (\Stripe\Error\Base $e) {
+
+    print'
+        <p>There was an error charging your card, please try again.</p>
+        <a href="/pay/'.$amount_disp.'/">Start Over</a>
+    ';
+
+} catch (Exception $e) {
+
+    print'
+        <p>There was an error charging your card, please try again.</p>
+        <a href="/pay/'.$amount_disp.'/">Start Over</a>
+    ';
+
+}
+
+print'
+        </div>
+    </body>
+</html>
+';
