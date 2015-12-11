@@ -47,7 +47,7 @@ print'
                 background-color:#EEEEEE;
             }
             .custom_payment{
-                width:100%;
+                width:90%;
                 max-width:400px;
                 margin:1em auto;
                 padding:1em;
