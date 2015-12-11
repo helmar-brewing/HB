@@ -113,7 +113,7 @@ try {
     ';
 
 	$html = '
-		<p>You received a payemnt via the helmarbrewing.com/pay/.  Please log in to Stripe to verify the payemnt before taking further aciton.</p>
+		<p>You received a payemnt via helmarbrewing.com/pay. Please log in to Stripe to verify the payemnt before taking further aciton.</p>
 		<p>
 			From: '.$_POST['stripeEmail'].'<br>
 			Amount: '.$amount_disp.'<br>
