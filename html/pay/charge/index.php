@@ -42,7 +42,7 @@ print'
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width">
         <meta name="viewport" content="initial-scale=1.0">
-        <style>
+		<style>
             body{
                 background-color:#EEEEEE;
             }
@@ -54,6 +54,7 @@ print'
                 border-radius:3px;
                 background-color:white;
                 font-family:arial;
+                text-align:center;
             }
             label{
                 display:block;
@@ -75,11 +76,26 @@ print'
                 border:1px solid #CCC;
                 margin:1em 0;
             }
-
+            .custom_payment_logo{
+                display:block;
+                width:100%;
+                margin:0 auto;
+            }
+			.custom_payment_footer{
+				font-size:.8em;
+				padding-top:1em;
+				margin-top:1em;
+				border-top:1px solid #EEEEEE;
+				color:#999999;
+			}
+			.custom_payment_footer a{
+				color:#999999;
+			}
         </style>
     </head>
     <body>
         <div class="custom_payment">
+			<img class="custom_payment_logo" src="/img/helmar_logo_lg_color.png">
 ';
 
 try {
@@ -137,6 +153,7 @@ try {
 }
 
 print'
+			<div class="custom_payment_footer">Your info protected by <a href="http://en.wikipedia.org/wiki/Secure_Socket_Layer" target="_blank">SSL</a> and <a href="https://stripe.com/help/security" target="_blank">Stripe</a>.</div>
         </div>
     </body>
 </html>

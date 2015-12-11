@@ -68,14 +68,24 @@ print'
             }
             .custom_payment_logo{
                 display:block;
-                width:50%;
+                width:100%;
                 margin:0 auto;
             }
+			.custom_payment_footer{
+				font-size:.8em;
+				padding-top:1em;
+				margin-top:1em;
+				border-top:1px solid #EEEEEE;
+				color:#999999;
+			}
+			.custom_payment_footer a{
+				color:#999999;
+			}
         </style>
     </head>
     <body>
         <div class="custom_payment">
-        <img class="custom_payment_logo" src="/img/receipt.png">
+	        <img class="custom_payment_logo" src="/img/helmar_logo_lg_color.png">
             <h1>Custom Payment</h1>
             <form action="/pay/charge/" method="POST">
 ';
@@ -102,6 +112,7 @@ print'
                 data-locale="auto">
                 </script>
             </form>
+			<div class="custom_payment_footer">Your info protected by <a href="http://en.wikipedia.org/wiki/Secure_Socket_Layer" target="_blank">SSL</a> and <a href="https://stripe.com/help/security" target="_blank">Stripe</a>.</div>
 ';
 
 
