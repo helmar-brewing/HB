@@ -13,10 +13,23 @@ $db2use = array(
 
 /* GET KEYS TO SITE */ require($path_to_keys);
 
-
-if($_POST['amount']){
+if($_POST['amount'] && $_POST['desc']){
+	header('Location: '.$protocol.$site.'/pay/'.$_POST['amount'].'/'.$_POST['desc'],TRUE,303);
+}elseif($_POST['amount']){
     header('Location: '.$protocol.$site.'/pay/'.$_POST['amount'],TRUE,303);
+}elseif($_POST['desc']){
+	header('Location: '.$protocol.$site.'/pay/x/'.$_POST['desc'],TRUE,303);
 }
+
+$desc = $_GET['desc'];
+if($desc == ''){
+	$desc = 'Custom Payment';
+}else{
+	$desc = preg_replace('/[-]/', ' ', $desc);
+}
+
+
+
 $amount = $_GET['amount'] * 100;
 
 $amount_disp = $amount / 100;
@@ -86,7 +99,7 @@ print'
     <body>
         <div class="custom_payment">
 	        <img class="custom_payment_logo" src="/img/helmar_logo_lg_color.png">
-            <h1>Custom Payment</h1>
+            <h1>Pay</h1>
             <form action="/pay/charge/" method="POST">
 ';
 if($amount === 0){
@@ -100,13 +113,25 @@ if($amount === 0){
                 <input type="hidden" name="amount" value="'.$amount_disp.'">
     ';
 }
+if($desc == 'Custom Payment'){
+	print'
+		<label>What is this payment for?</label>
+		<input type="text" name="desc">
+	';
+}else{
+	print'
+		<h2>For: '.$desc.'</h2>
+		<input type="hidden" name="desc" value="'.$desc.'">
+	';
+}
 print'
+
                 <script
                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="'.$apikey['stripe']['public'].'"
                 data-image="/img/receipt.png"
                 data-name="Helmar Brewing"
-                data-description="Custom Payment"
+                data-description="'.$desc.'"
                 data-amount="'.$amount.'"
                 data-allow-remember-me="false"
                 data-locale="auto">

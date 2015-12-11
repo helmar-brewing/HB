@@ -17,8 +17,7 @@ $db2use = array(
 require_once('classes/phnx-user.class.php');
 require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
-require_once('classes/mailchimp.class.php');
-$chimp = new \DrewM\MailChimp\MailChimp($apikey['mailchimp']);
+require_once('libraries/drill/drill.php');
 
 
 
@@ -27,6 +26,8 @@ $chimp = new \DrewM\MailChimp\MailChimp($apikey['mailchimp']);
 $token = $_POST['stripeToken'];
 
 $amount = preg_replace('/[^0-9.]/', '', $_POST['amount']);
+
+$desc = $_POST['desc'];
 
 $amount = $amount * 100;
 $amount_disp = $amount / 100;
@@ -103,13 +104,44 @@ try {
     "amount" => $amount,
     "currency" => "usd",
     "source" => $token,
-    "description" => "Custom Payment",
+    "description" => $desc,
     "receipt_email" => $_POST['stripeEmail']
     ));
 
     print'
         Your payment has been processed. Thank you.
     ';
+
+	$html = '
+		<p>You received a payemnt via the helmarbrewing.com/pay/.  Please log in to Stripe to verify the payemnt before taking further aciton.</p>
+		<p>
+			From: '.$_POST['stripeEmail'].'<br>
+			Amount: '.$amount_disp.'<br>
+			For: '.$desc.'<br>
+
+		</p>
+	';
+	$to = $apikey['mandrill_email'];
+	$args = array(
+		'key' => $apikey['mandrill'],
+		'message' => array(
+			"html" => $html,
+			"from_email" => "no-reply@helmarbrewing.com",
+			"from_name" => "Helmar Custom Payment",
+			"subject" => "Helmar Custom Payment (Timestamp ".time()." )",
+			"to" => $to,
+			"track_opens" => true,
+			"track_clicks" => false,
+			"auto_text" => true
+		)
+	);
+
+	$drill = new \Gajus\Drill\Client($apikey['mandrill']);
+    $r = $drill->api('messages/send', $args);
+	if($r['status']== 'error'){
+		// maybe create a log?
+	}
+
 } catch(\Stripe\Error\Card $e) {
     $body = $e->getJsonBody();
     $err  = $body['error'];
