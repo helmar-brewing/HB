@@ -108,11 +108,11 @@ try{
 			throw new AuthException('account/');
 	        break;
 	    case 1:
-			throw new AuthException('account/');
+			$user->regen();
 			break;
 	    case 2:
-	        $user->regen();
-	        break;
+			$user->regen();
+			break;
 	    default:
 			throw new AuthException('account/');
 	        break;
