@@ -145,7 +145,7 @@ do{
    $fp = fopen($file, 'w');
 
    // set the headers for the spreadsheet,
-   $csvheaders = array('username','name','email','Stripe ID','address','city','state','zip','current subscription','renewal date','next subscription');
+   $csvheaders = array('username','name','email','Stripe ID','ebayID','firmname','building','address','city','state','zip','current subscription','renewal date','next subscription');
 
    // write the headers to the file
    fputcsv($fp, $csvheaders);
@@ -176,6 +176,9 @@ do{
                 $ulist->firstname.' '.$ulist->lastname,
                 $ulist->email,
                 $ulist->stripeID,
+								$ulist->ebayID,
+								$ulist->firmname,
+								$ulist->unit,
                 $ulist->address,
                 $ulist->city,
                 $ulist->state,
