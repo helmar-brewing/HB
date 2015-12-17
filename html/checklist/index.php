@@ -84,7 +84,7 @@ print'
 				$R_cards = $db_main->query("
 
 				SELECT
-userCardChecklist.quantity, userCardChecklist.dateadded,
+userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.dateadded,
 cardList.series, cardList.cardnum, cardList.player, cardList.description, cardList.team,
 series_info.series_name, series_info.series_tag, series_info.sort
 
@@ -95,7 +95,7 @@ FROM userCardChecklist
 					LEFT JOIN series_info
 						ON userCardChecklist.series = series_info.series_tag
 
-					WHERE userCardChecklist.quantity > 0 AND userCardChecklist.userid ='".$user->id."'
+					WHERE userCardChecklist.quantity + userCardChecklist.wishlistQuantity > 0 AND userCardChecklist.userid ='".$user->id."'
 					ORDER BY series_info.sort, userCardChecklist.cardnum
 					"
 				);
@@ -113,10 +113,29 @@ FROM userCardChecklist
 
                           <th>Pictures</th>
 													<th>Checklist</th>
+													<th>Wishlist</th>
+													<th>Active Auction</th>
                         </tr>
                       </thead>
                       <tbody>
             ';
+
+						// load active auctions in array
+						$R_cards2 = $db_main->query("
+						SELECT *
+						FROM activeEbayAuctions
+							"
+						);
+						$R_cards2->data_seek(0);
+						$wishlist = array();
+
+						while($card = $R_cards2->fetch_object()){
+
+							$wishlist[$card->series_tag.'-'.$card->cardnum]['auctionID'] = $card->auctionID;
+
+						}
+
+
             $i = 0;
             if($R_cards !== FALSE){
                 $R_cards->data_seek(0);
@@ -129,6 +148,7 @@ FROM userCardChecklist
                             <td>'.$card->player.'</td>
                             <td>'.$card->description.'</td>
                             <td>'.$card->team.'</td>
+
                     ';
                     if($card->averagesold == 0){
                   //      print'
@@ -197,6 +217,14 @@ FROM userCardChecklist
 						print '<td><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'_'.$card->series.'"></i></td>';
 					}
 
+					if($card->wishlistQuantity > 0){
+						print '<td><i class="fa fa-check-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'_'.$card->series.'"></i></td>';
+					} else{
+						print '<td><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'_'.$card->series.'"></i></td>';
+					}
+
+						// add ebay auction if active
+							print '<td><a href="http://www.ebay.com/itm/'. $wishlist[$card->series_tag.'-'.$card->cardnum]['auctionID'].'/" target="_blank">'.$wishlist[$card->series_tag.'-'.$card->cardnum]['auctionID'].'</a></td>';
 
             		/* end row */
             		print '</tr>';
@@ -207,16 +235,13 @@ FROM userCardChecklist
                 $R_cards->free();
             }else{
                 print'
-                    <tr><td colspan="7">could not get list of cards</td></tr>
+                    <tr><td colspan="8">could not get list of cards</td></tr>
                 ';
             }
             print'
                       </tbody>
                     </table>
-                    <p>
-                        Card list last updated: '.$updated.'<br/>
-                        Number of Records: '.$i.'
-                    </p>
+
 
                 </div>
 
@@ -269,6 +294,36 @@ function checklist(s, c){
 				}else if(data.qty === '0'){
 						$('#' + c + '_' + s).removeClass('fa-check-square-o');
 						$('#' + c + '_' + s).addClass('fa-square-o');
+				} else {
+					alert("else part...");
+				}
+			}else{
+				alert(data.msg);
+			}
+            document.getElementById('fullscreenload').style.display = 'none';
+        },
+        "json"
+    )
+    .fail(function() {
+        alert('There was an error, refresh the page.');
+    });
+}
+</script>
+
+<script>
+function wishlist(s, c){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/artwork/ajax/wishlist/",
+		{ series:s, cardnum:c },
+        function( data ) {
+			if(data.error === 0){
+				if(data.qty === '1'){
+						$('#WISH' + c + '_' + s).removeClass('fa-square-o');
+						$('#WISH' + c + '_' + s).addClass('fa-check-square-o');
+				}else if(data.qty === '0'){
+						$('#WISH' + c + '_' + s).removeClass('fa-check-square-o');
+						$('#WISH' + c + '_' + s).addClass('fa-square-o');
 				} else {
 					alert("else part...");
 				}
