@@ -61,8 +61,9 @@ ob_end_flush();
 
 print'
 
-<script language="javascript" type="text/javascript" src="/artwork/table.js"></script>
-<link rel="stylesheet" type="text/css" href="/artwork/sorting.css">
+<script language="javascript" type="text/javascript" src="table.js"></script>
+<link rel="stylesheet" type="text/css" href="sorting.css">
+
 
 <div class="artwork">
     <h4>Artwork</h4>
@@ -87,16 +88,34 @@ print'    </div>
     if( $user->login() === 1 || $user->login() === 2 ){
 		/* do this code if user is logged in */
 
-		print '<div class="series_desc"><p><a href="/artwork/csv/'.$series_id.'"><i class="fa fa-download"></i> Download Card List</a></p></div>';
+		// load active auctions in array
+		$R_cards2 = $db_main->query("
+		SELECT *
+		FROM activeEbayAuctions
+			"
+		);
+		$R_cards2->data_seek(0);
+		$wishlist = array();
 
-    $R_cards = $db_main->query("
-		SELECT cardList.*, userCardChecklist.quantity FROM cardList
-		LEFT JOIN userCardChecklist
-			ON cardList.series = userCardChecklist.series
-			AND cardList.cardnum = userCardChecklist.cardnum
-			AND userCardChecklist.userid = '".$user->id."'
-		WHERE cardList.series = '".$series_tag."'"
-	);
+		while($card2 = $R_cards2->fetch_object()){
+
+			$wishlist[$card2->series_tag.'-'.$card2->cardnum]['auctionID'] = $card2->auctionID;
+
+		}
+
+		print '<div class="series_desc"><p><a href="/artwork/csv/'.$series_id.'"><i class="fa fa-download"></i> Download Complete Card List</a></p></div>';
+
+
+	$R_cards = $db_main->query("
+	SELECT cardList.*, userCardChecklist.quantity, userCardChecklist.wishlistQuantity FROM cardList
+	LEFT JOIN userCardChecklist
+		ON cardList.series = userCardChecklist.series
+		AND cardList.cardnum = userCardChecklist.cardnum
+		AND userCardChecklist.userid = '".$user->id."'
+	WHERE cardList.series = '".$series_tag."'"
+);
+
+
 
       // if user does NOT have subscription:
       if($user->subscription['status'] != 'active') {
@@ -108,6 +127,7 @@ print'    </div>
 											<th class="table-filterable table-sortable:default">Player</th>
 											<th class="table-filterable table-sortable:default">Stance / Position</th>
 											<th class="table-filterable table-sortable:default">Team</th>
+											<th class="table-sortable:numeric">Active Auction</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -123,7 +143,11 @@ print'    </div>
                                 <td>'.$card->player.'</td>
                                 <td>'.$card->description.'</td>
                                 <td>'.$card->team.'</td>
+
                         ';
+												// add ebay auction if active
+													print '<td><a href="http://www.ebay.com/itm/'. $wishlist[$series_tag.'-'.$card->cardnum]['auctionID'].'/" target="_blank">'.$wishlist[$series_tag.'-'.$card->cardnum]['auctionID'].'</a></td>';
+
 
                         print'
                                 </td>
@@ -151,22 +175,24 @@ print'    </div>
       }else{
         // do this if the user subscription = active
 
-				print'
-				<table id="t1" class="tables table-autosort table-autofilter table-stripeclass:alternate table-page-number:t1page table-page-count:t1pages table-filtered-rowcount:t1filtercount table-rowcount:t1allcount">
-									<thead>
-										<tr>
-											<th class="table-sortable:numeric">Card Number</th>
-											<th class="table-filterable table-sortable:default">Player</th>
-											<th class="table-filterable table-sortable:default">Stance / Position</th>
-											<th class="table-filterable table-sortable:default">Team</th>
-											<th class="table-sortable:date">Last Sold Date</th>
-											<th class="table-sortable:currency">Max Sell Price</th>
-											<th>Pictures</th>
-											<th>Personal Checklist</th>
-										</tr>
-									</thead>
-									<tbody>
-				';
+            print'
+						<table id="t1" class="tables table-autosort table-autofilter table-stripeclass:alternate table-page-number:t1page table-page-count:t1pages table-filtered-rowcount:t1filtercount table-rowcount:t1allcount">
+                      <thead>
+                        <tr>
+                          <th class="table-sortable:numeric">Card Number</th>
+                          <th class="table-filterable table-sortable:default">Player</th>
+                          <th class="table-filterable table-sortable:default">Stance / Position</th>
+                          <th class="table-filterable table-sortable:default">Team</th>
+                          <th class="table-sortable:date">Last Sold Date</th>
+                          <th class="table-sortable:currency">Max Sell Price</th>
+                          <th>Pictures</th>
+            			        <th>Personal Checklist</th>
+													<th>Personal Wishlist</th>
+													<th class="table-sortable:numeric">Active Auction</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+            ';
             $i = 0;
             if($R_cards !== FALSE){
                 $R_cards->data_seek(0);
@@ -210,7 +236,7 @@ print'    </div>
                         // print the front pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic)){
                             print'
-                                <a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$frontthumb.'"></a>
+                                <a href="'.$protocol.$site.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com'.$frontthumb.'"></a>
                             ';
                         }
 
@@ -222,7 +248,7 @@ print'    </div>
                         // print the back pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$backpic)){
                             print'
-                                <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$backthumb.'"></a>
+                                <a href="'.$protocol.$site.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com'.$backthumb.'"></a>
                             ';
 
                         }
@@ -237,12 +263,22 @@ print'    </div>
                     print'</td>';
 
 
-            		/* add icon */
+            		/* add CHECKLIST icon */
 					if($card->quantity > 0){
 						print '<td><i class="fa fa-check-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
 					} else{
 						print '<td><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
 					}
+
+					/* add WISHLIST icon */
+		if($card->wishlistQuantity > 0){
+			print '<td><i class="fa fa-check-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></td>';
+		} else{
+			print '<td><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></td>';
+		}
+
+		// add ebay auction if active
+			print '<td><a href="http://www.ebay.com/itm/'. $wishlist[$series_tag.'-'.$card->cardnum]['auctionID'].'/" target="_blank">'.$wishlist[$series_tag.'-'.$card->cardnum]['auctionID'].'</a></td>';
 
 
             		/* end row */
@@ -260,6 +296,7 @@ print'    </div>
             print'
                       </tbody>
                     </table>
+
                     <p>
                         Card list last updated: '.$updated.'<br/>
                         Number of Records: '.$i.'
@@ -271,6 +308,7 @@ print'    </div>
             ';
 
       }
+
 
 
 		/* END code if user is logged in, but not paid subscription */
@@ -308,6 +346,36 @@ function checklist(s, c){
 				}else if(data.qty === '0'){
 						$('#' + c).removeClass('fa-check-square-o');
 						$('#' + c).addClass('fa-square-o');
+				} else {
+					alert("else part...");
+				}
+			}else{
+				alert(data.msg);
+			}
+            document.getElementById('fullscreenload').style.display = 'none';
+        },
+        "json"
+    )
+    .fail(function() {
+        alert('There was an error, refresh the page.');
+    });
+}
+</script>
+
+<script>
+function wishlist(s, c){
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/artwork/ajax/wishlist/",
+		{ series:s, cardnum:c },
+        function( data ) {
+			if(data.error === 0){
+				if(data.qty === '1'){
+						$('#WISH' + c).removeClass('fa-square-o');
+						$('#WISH' + c).addClass('fa-check-square-o');
+				}else if(data.qty === '0'){
+						$('#WISH' + c).removeClass('fa-check-square-o');
+						$('#WISH' + c).addClass('fa-square-o');
 				} else {
 					alert("else part...");
 				}
