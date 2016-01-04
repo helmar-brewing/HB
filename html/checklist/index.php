@@ -185,8 +185,8 @@ FROM userCardChecklist
 						We are able to add cards that you\'ve purchased from Helmar Brewing Company
 						 and add them to your personal checklist! It looks like your ebay username
 						 is "'.$ebayID.'". Unfortunately, we don\'t see any auctions
-						 tied to your username. If your information is correct, please send us an email and we
-						 can look into this. To update your upsername,
+						 tied to your username. If your information is correct, please send us an email with some detail of the issue
+						 and we can look into this. To update your username,
 						 <a href="https://helmarbrewing.com/account/">click to add your ebay username on the account
 						  info page.</a> Please note, in the future if you win any of our card auctions,
 						  come back and we can import those auctions to your personal checklist!
