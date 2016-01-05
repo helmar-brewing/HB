@@ -236,7 +236,7 @@ print'    </div>
                         // print the front pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic)){
                             print'
-                                <a href="'.$protocol.$site.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'$protocol.$site.$frontthumb.'"></a>
+                                <a href="'.$protocol.$site.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
                             ';
                         }
 
@@ -248,7 +248,7 @@ print'    </div>
                         // print the back pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$backpic)){
                             print'
-                                <a href="'.$protocol.$site.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'$protocol.$site.$backthumb.'"></a>
+                                <a href="'.$protocol.$site.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
                             ';
 
                         }
