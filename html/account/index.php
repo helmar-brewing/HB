@@ -30,7 +30,7 @@ date_default_timezone_set('US/Eastern');
  $currentmonth = date('n');
  $currentyear = date('Y');
 
-if ($currentmonth == 1 ||$currentmonth == 2 ){
+if ($currentmonth == 1 || $currentmonth == 2 ){
 	$dateReturn = 'March '.$currentyear;
 } elseif ($currentmonth == 12 ){
 	$dateReturn = 'March '.date('Y',strtotime('+1 year'));
@@ -171,21 +171,25 @@ print'
 		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')">';
 	}
 	print'
-					<h4>Digital + Paper Magazine</h4>
-					<div class="price">$34.95</div>
-					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-					<p>Access to the digital copy of the quarterly magazine via the website</p>
-					<p>Enhanced card art lists</p>
-					<p>Track your personal Helmar card collection</p>
+				<a href="javascript:;">
+				<h4>Digital + Paper Magazine</h4>
+				<div class="price">$34.95</div>
+				<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+				<p>Website access to all digital magazines</p>
+				<p>Personal card checklist</p>
+				<p>Import eBay card purchases to checklist</p>
+				<p>Wishlist: eBay auction email notification</p>
+				<p>Enhanced card art lists</p>
+
 
 	';
 	if($user->subscription['next_plan'] === 'sub-digital' || $user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
 		print '<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>';
 	}
 	if($user->subscription['next_plan'] === 'sub-digital+paper'){
-		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-check-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-check-square-o"></i></div></a>';
 	}else{
-		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-square-o"></i></div></a>';
 	}
 	print'
 				</li>
@@ -204,19 +208,23 @@ print'
 		print'<li id="sub-paper" onclick="sub(\'paper\')">';
 	}
 	print'
-					<h4>Paper Magazine</h4>
-					<div class="price">$29.95</div>
-					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-					<p>Enhanced card art lists</p>
-					<p>Track your personal Helmar card collection</p>
+			<a href="javascript:;">
+			<h4>Paper Magazine</h4>
+			<div class="price">$29.95</div>
+			<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+			<p>Personal card checklist</p>
+			<p>Import eBay card purchases to checklist</p>
+			<p>Wishlist: eBay auction email notification</p>
+			<p>Enhanced card art lists</p>
+
 	';
 		if($user->subscription['next_plan'] === 'sub-digital' || $user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
 			print '<p><strong>Note: You will receive your first paper magazine starting next quarter ('.$dateReturn.')</strong></p>';
 		}
 	if($user->subscription['next_plan'] === 'sub-paper'){
-		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div></a>';
 	}else{
-		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-square-o"></i></div></a>';
 	}
 	print'</li>';
 
@@ -228,16 +236,20 @@ print'
 		print '<li id="sub-digital" onclick="sub(\'digital\')">';
 	}
 	print'
-					<h4>Digital Magazine</h4>
-					<div class="price">$19.95</div>
-					<p>Access to digital copies of our quarterly magazine via the website</p>
-					<p>Enhanced card art lists</p>
-					<p>Track your personal Helmar card collection</p>
+				<a href="javascript:;">
+				<h4>Digital Magazine</h4>
+				<div class="price">$19.95</div>
+				<p>Website access to all digital magazines</p>
+				<p>Personal card checklist</p>
+				<p>Import eBay card purchases to checklist</p>
+				<p>Wishlist: eBay auction email notification</p>
+				<p>Enhanced card art lists</p>
+
 	';
 	if($user->subscription['next_plan'] === 'sub-digital'){
-		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-check-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-check-square-o"></i></div></a>';
 	}else{
-		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-square-o"></i></div></a>';
 	}
 	print'</li>';
 
@@ -258,15 +270,17 @@ print'
 		print '<li id="sub-none" onclick="sub(\'none\')" class="free">';
 	}
 	print'
+				<a href="javascript:;">
 					<h4>Website Access / Cancel Paid Subscription</h4>
 					<div class="price">FREE</div>
 					<p>Join our email list</p>
 					<p>View our basic card art list</p>
+
 	';
 	if($user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
-		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-check-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-check-square-o"></i></div></a>';
 	}else{
-		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-square-o"></i></div>';
+		print '<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa fa-square-o"></i></div></a>';
 	}
 	print'</li>';
 	print'</ul>';
