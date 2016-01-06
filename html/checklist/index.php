@@ -185,8 +185,8 @@ FROM userCardChecklist
 						We are able to add cards that you\'ve purchased from Helmar Brewing Company
 						 and add them to your personal checklist! It looks like your ebay username
 						 is "'.$ebayID.'". Unfortunately, we don\'t see any auctions
-						 tied to your username. If your information is correct, please send us an email with some detail of the issue
-						 and we can look into this. To update your username,
+						 tied to your username. If your information is correct, please send us an email and we
+						 can look into this. To update your upsername,
 						 <a href="https://helmarbrewing.com/account/">click to add your ebay username on the account
 						  info page.</a> Please note, in the future if you win any of our card auctions,
 						  come back and we can import those auctions to your personal checklist!
@@ -200,7 +200,7 @@ FROM userCardChecklist
 							 <br><br>
 							 The ebay summary was last updated on '.$ebaySummaryDate.' and our database shows you purchased '.$totalSummary.' card(s).
 							 <br><br>
-							 <i class="fa fa-list" onclick="ebayImport(\''.$ebayID.'\')" > Import your ebay history to update your checklist</i>
+							 <a href="javascript:;" ><i class="fa fa-list" onclick="ebayImport(\''.$ebayID.'\')" > Import your ebay history to update your checklist</i></a>
 							</p>';
 						}
 				}
@@ -322,7 +322,7 @@ FROM userCardChecklist
 					                        // print the front pic if exists
 					                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic)){
 					                            print'
-					                                <a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$frontthumb.'"></a>
+																			<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
 					                            ';
 					                        }
 
@@ -334,7 +334,7 @@ FROM userCardChecklist
 					                        // print the back pic if exists
 					                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$backpic)){
 					                            print'
-					                                <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="http://www.helmarbrewing.com/'.$backthumb.'"></a>
+																			<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
 					                            ';
 
 					                        }
@@ -351,15 +351,15 @@ FROM userCardChecklist
 
 					            		/* add icon */
 										if($card->quantity > 0){
-											print '<td><i class="fa fa-check-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'_'.$card->series.'"></i></td>';
+											print '<td><a href="javascript:;"><i class="fa fa-check-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
 										} else{
-											print '<td><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'_'.$card->series.'"></i></td>';
+											print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
 										}
 
 										if($card->wishlistQuantity > 0){
-											print '<td><i class="fa fa-check-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'_'.$card->series.'"></i></td>';
+											print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
 										} else{
-											print '<td><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'_'.$card->series.'"></i></td>';
+											print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
 										}
 
 											// add ebay auction if active

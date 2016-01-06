@@ -236,7 +236,7 @@ print'    </div>
                         // print the front pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic)){
                             print'
-                                <a href="'.$protocol.$site.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
+                                <a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
                             ';
                         }
 
@@ -248,7 +248,7 @@ print'    </div>
                         // print the back pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$backpic)){
                             print'
-                                <a href="'.$protocol.$site.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
+                                <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
                             ';
 
                         }
@@ -265,16 +265,16 @@ print'    </div>
 
             		/* add CHECKLIST icon */
 					if($card->quantity > 0){
-						print '<td><i class="fa fa-check-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+						print '<td><a href="javascript:;"><i class="fa fa-check-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></a></td>';
 					} else{
-						print '<td><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></td>';
+						print '<td><a href="javascript:;"><i class="fa fa-square-o" onclick="checklist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="'.$card->cardnum.'"></i></a></td>';
 					}
 
 					/* add WISHLIST icon */
 		if($card->wishlistQuantity > 0){
-			print '<td><i class="fa fa-check-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></td>';
+			print '<td><a href="javascript:;"><i class="fa fa-check-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></a></td>';
 		} else{
-			print '<td><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></td>';
+			print '<td><a href="javascript:;"><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></a></td>';
 		}
 
 		// add ebay auction if active
