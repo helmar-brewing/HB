@@ -54,7 +54,14 @@ if ($currentmonth == 1 || $currentmonth == 2 ){
 	$dateReturn = 'Error! well, this isn\'t good! there isn\'t a 13th month!';
 }
 
+function folder_exist($folder)
+{
+    // Get canonicalized absolute pathname
+    $path = realpath($folder);
 
+    // If it exist, check if it's a directory
+    return ($path !== false AND is_dir($path)) ? $path : false;
+}
 
 /* <HEAD> */ $head='
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
@@ -146,13 +153,40 @@ if($user->login() === 1){
 					<h2>Issues</h2>
 		';
 		if($user->subscription['digital'] == TRUE){
-			print'
-					<ul>
-					<li><a href="'.$protocol.$site.'/magazine/2015/12/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Winter 2015</a></li>
-					<li><a href="'.$protocol.$site.'/magazine/2015/09/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fall 2015</a></li>
-					<li><a href="'.$protocol.$site.'/magazine/2015/06/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summer 2015</a></li>
-					</ul>
-			';
+			print'<ul>';
+			$magStart = date("Y");
+			$magEnd = 2015;
+
+			for ($x = $magStart; $x >= $magEnd; $x--) {
+				$f12 = realpath($_SERVER['DOCUMENT_ROOT'] . '/../').'/inc/content/magazine/'.$x.'/12/';
+				$f09 = realpath($_SERVER['DOCUMENT_ROOT'] . '/../').'/inc/content/magazine/'.$x.'/09/';
+				$f06 = realpath($_SERVER['DOCUMENT_ROOT'] . '/../').'/inc/content/magazine/'.$x.'/06/';
+				$f03 = realpath($_SERVER['DOCUMENT_ROOT'] . '/../').'/inc/content/magazine/'.$x.'/03/';
+
+				if(FALSE !== ($path = folder_exist($f12)))
+				{
+				    print '<li><a href="'.$protocol.$site.'/magazine/'.$x.'/12/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Winter '.$x.'</a></li>';
+				}
+
+				if(FALSE !== ($path = folder_exist($f09)))
+				{
+				    print '<li><a href="'.$protocol.$site.'/magazine/'.$x.'/09/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fall '.$x.'</a></li>';
+				}
+
+				if(FALSE !== ($path = folder_exist($f06)))
+				{
+						print '<li><a href="'.$protocol.$site.'/magazine/'.$x.'/06/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summer '.$x.'</a></li>';
+				}
+
+				if(FALSE !== ($path = folder_exist($f03)))
+				{
+						print '<li><a href="'.$protocol.$site.'/magazine/'.$x.'/03/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spring '.$x.'</a></li>';
+				}
+
+			}
+			print'</ul>';
+
+
 		}else{
 			print'
 					<p>You do not have access to the digital magazine. <a href="'.$protocol.$site.'/account/">Manage your subscription</a> on the <a href="'.$protocol.$site.'/account/">account</a> page.</p>
