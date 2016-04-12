@@ -31,6 +31,7 @@ $start_time = $date2;
 // set ebay headers
 $http_headers = $apikey['ebay']['headers'];
 
+$pagenum = (isset($_GET['pagenum'])) ? $_GET['pagenum'] : 1;
 
 $xml_request = '
     <?xml version="1.0" encoding="utf-8"?>
@@ -46,7 +47,7 @@ $xml_request = '
         <IncludeWatchCount>true</IncludeWatchCount>
         <Pagination>
             <EntriesPerPage>8</EntriesPerPage>
-            <PageNumber>'.$_GET['pagenum'].'</PageNumber>
+            <PageNumber>'.$pagenum.'</PageNumber>
         </Pagination>
     </GetSellerListRequest>
 ';
@@ -81,6 +82,11 @@ curl_close( $curl );
 // Convert the XML into an object
 $ebay = new SimpleXMLElement($xml_response);
 
+
+$debug_ebay = (isset($_GET['debug-ebay'])) ? $_GET['debug-ebay'] : false;
+if( $debug_ebay === 'true'){ var_dump($ebay); }
+
+
 // Test for success
 if($ebay->Ack == 'Success'){
 
@@ -101,6 +107,8 @@ if($ebay->Ack == 'Success'){
     }
 }else{
     $error = 1;
+	$html = null;
+	$nextpage = null;
 }
 
 
