@@ -173,7 +173,7 @@ print'
 	print'
 				<a href="javascript:;">
 				<h4>Digital + Paper Magazine</h4>
-				<div class="price">$34.95</div>
+				<div class="price">$39.99</div>
 				<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 				<p>Website access to all digital magazines</p>
 				<p>Personal card checklist</p>
@@ -202,56 +202,7 @@ print'
 
 
 
-	if($user->subscription['next_plan'] === 'sub-paper'){
-		print'<li id="sub-paper" onclick="sub(\'paper\')" class="selected">';
-	}else{
-		print'<li id="sub-paper" onclick="sub(\'paper\')">';
-	}
-	print'
-			<a href="javascript:;">
-			<h4>Paper Magazine</h4>
-			<div class="price">$29.95</div>
-			<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-			<p>Personal card checklist</p>
-			<p>Import eBay card purchases to checklist</p>
-			<p>Wishlist: eBay auction email notification</p>
-			<p>Enhanced card art lists</p>
 
-	';
-		if($user->subscription['next_plan'] === 'sub-digital' || $user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
-			print '<p><strong>Note: You will receive your first paper magazine starting next quarter ('.$dateReturn.')</strong></p>';
-		}
-	if($user->subscription['next_plan'] === 'sub-paper'){
-		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-check-square-o"></i></div></a>';
-	}else{
-		print '<div class="sub-checkbox"><i id="sub-paper-checkbox" class="fa fa-square-o"></i></div></a>';
-	}
-	print'</li>';
-
-
-
-	if($user->subscription['next_plan'] === 'sub-digital'){
-		print '<li id="sub-digital" onclick="sub(\'digital\')" class="selected">';
-	}else{
-		print '<li id="sub-digital" onclick="sub(\'digital\')">';
-	}
-	print'
-				<a href="javascript:;">
-				<h4>Digital Magazine</h4>
-				<div class="price">$19.95</div>
-				<p>Website access to all digital magazines</p>
-				<p>Personal card checklist</p>
-				<p>Import eBay card purchases to checklist</p>
-				<p>Wishlist: eBay auction email notification</p>
-				<p>Enhanced card art lists</p>
-
-	';
-	if($user->subscription['next_plan'] === 'sub-digital'){
-		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-check-square-o"></i></div></a>';
-	}else{
-		print '<div class="sub-checkbox"><i id="sub-digital-checkbox" class="fa fa-square-o"></i></div></a>';
-	}
-	print'</li>';
 
 
 
