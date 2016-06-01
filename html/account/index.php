@@ -173,7 +173,7 @@ print'
 	print'
 				<a href="javascript:;">
 				<h4>Digital + Paper Magazine</h4>
-				<div class="price">$39.99</div>
+				<div class="price">$39.95</div>
 				<p>A paper copy of the quarterly magazine sent to you when they are released</p>
 				<p>Website access to all digital magazines</p>
 				<p>Personal card checklist</p>
