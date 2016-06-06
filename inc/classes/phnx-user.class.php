@@ -485,51 +485,29 @@
 						'status' => 'none'
 					);
 				}else{
-					if($sub_response->data[0]['metadata']['downgrade'] === 'yes'){
-						if(time() < $sub_response->data[0]['metadata']['downgrade_date']){
-							$plan_type = $sub_response->data[0]['metadata']['downgrade_from'];
-							$last_paid = $sub_response->data[0]['metadata']['downgrade_paid'];
-							$next_payment = $sub_response->data[0]->plan['amount'];
-						}else{
-							$subscription = \Stripe\Customer::retrieve($this->stripeID)->subscriptions->retrieve($sub_response->data[0]['id']);
-							$subscription->metadata = array('downgrade' => NULL, 'downgrade_from' => NULL ,'downgrade_date' => NULL);
-							$subscription->save();
-							$plan_type = $sub_response->data[0]->plan['id'];
-							$last_paid = $sub_response->data[0]->plan['amount'];
-							$next_payment = $sub_response->data[0]->plan['amount'];
+					$good_sub = 0;
+					foreach($sub_response->data as $sub_data){
+						if($sub_data->plan['id'] === 'helmar16'){
+							$this->subscription = array(
+								'status' => $sub_data['status'],
+								'cancel_at_period_end' => $sub_data['cancel_at_period_end'],
+								'current_period_end' => $sub_data['current_period_end'],
+								'next_payment' => $sub_data->plan['amount']
+							);
+							$good_sub++;
 						}
-					}else{
-						$plan_type = $sub_response->data[0]->plan['id'];
-						$last_paid = $sub_response->data[0]->plan['amount'];
-						$next_payment = $sub_response->data[0]->plan['amount'];
 					}
-					if($sub_response->data[0]['cancel_at_period_end'] == true){
-						$next_plan = 'none';
-					}else{
-						$next_plan = $sub_response->data[0]->plan['id'];
-					}
-					$this->subscription = array(
-						'status' => $sub_response->data[0]['status'],
-						'sub_id' => $sub_response->data[0]['id'],
-						'cancel_at_period_end' => $sub_response->data[0]['cancel_at_period_end'],
-						'current_period_end' => $sub_response->data[0]['current_period_end'],
-						'plan_type' => $plan_type,
-						'next_plan' => $next_plan,
-						'last_paid' => $last_paid,
-						'next_payment' => $next_payment
-					);
-					if($plan_type === 'sub-digital'){
-						$this->subscription['digital'] = TRUE;
-						$this->subscription['paper'] = FALSE;
-					}elseif($plan_type === 'sub-paper'){
-						$this->subscription['digital'] = FALSE;
-						$this->subscription['paper'] = TRUE;
-					}elseif($plan_type === 'sub-digital+paper'){
-						$this->subscription['digital'] = TRUE;
-						$this->subscription['paper'] = TRUE;
-					}else{
-						$this->subscription['digital'] = 'error';
-						$this->subscription['paper'] = 'error';
+					if($good_sub === 0){
+						$this->subscription = array(
+							'status' => 'none'
+						);
+					}elseif($good_sub === 1){
+						// do nothing
+					}elseif($good_sub > 1){
+						$this->subscription = array(
+							'status' => 'error',
+							'msg'	 => 'Multiple subscriptions found, contact support.';
+						);
 					}
 				}
 			}catch(Stripe_CardError $e){
