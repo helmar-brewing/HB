@@ -24,6 +24,10 @@ Possible values:
 * error
 * none
 * active
+* trialing
+* past_due
+* unpaid
+* canceled
 
 ### id
 

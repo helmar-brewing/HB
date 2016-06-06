@@ -485,11 +485,17 @@
 						'status' => 'none'
 					);
 				}else{
+
+					// put break here that gives access to everyone while we convert
+
+
+
+
 					$good_sub = 0;
 					foreach($sub_response->data as $sub_data){
 						if($sub_data->plan['id'] === 'helmar16'){
 							$this->subscription = array(
-								'status' => $sub_data['status'],
+								'status' => 'active',
 								'id' => $sub_data['id'],
 								'cancel_at_period_end' => $sub_data['cancel_at_period_end'],
 								'current_period_end' => $sub_data['current_period_end'],
