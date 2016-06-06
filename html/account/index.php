@@ -163,14 +163,13 @@ print'
 	';
 
 
+	$status_test = (in_array($user->subscription['status'], array('active','trialing'), TRUE)) ? TRUE : FALSE;
+	$sub_pay_class = ($status_test) ? 'selected' : '';
+	$sub_pay_xnote = ($status_test) ? '' : '<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>';
+	$sub_pay_check = ($status_test) ? 'fa-check-square-o' : 'fa-square-o';
 
-
-	if($user->subscription['next_plan'] === 'sub-digital+paper'){
-		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')" class="selected">';
-	}else{
-		print'<li id="sub-digitalpaper" onclick="sub(\'digitalpaper\')">';
-	}
 	print'
+			<li id="sub-digitalpaper" onclick="sub()" class="'.$sub_pay_class.'">
 				<a href="javascript:;">
 				<h4>Digital + Paper Magazine</h4>
 				<div class="price">$39.95</div>
@@ -180,19 +179,9 @@ print'
 				<p>Import eBay card purchases to checklist</p>
 				<p>Wishlist: eBay auction email notification</p>
 				<p>Enhanced card art lists</p>
-
-
-	';
-	if($user->subscription['next_plan'] === 'sub-digital' || $user->subscription['status'] === 'none' || $user->subscription['next_plan'] === 'none'){
-		print '<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>';
-	}
-	if($user->subscription['next_plan'] === 'sub-digital+paper'){
-		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-check-square-o"></i></div></a>';
-	}else{
-		print '<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa fa-square-o"></i></div></a>';
-	}
-	print'
-				</li>
+				'.$sub_pay_xnote.'
+				<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa '.$sub_pay_check.'"></i></div></a>
+			</li>
 	';
 
 
