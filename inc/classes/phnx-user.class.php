@@ -507,7 +507,7 @@
 					}elseif($good_sub > 1){
 						$this->subscription = array(
 							'status' => 'error',
-							'msg'	 => 'Multiple subscriptions found, contact support.';
+							'msg'	 => 'Multiple subscriptions found, contact support.'
 						);
 					}
 				}
