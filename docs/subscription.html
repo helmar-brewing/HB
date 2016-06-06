@@ -33,57 +33,19 @@ $user-&gt;checksub();
 <li>active</li>
 </ul>
 
+<h3 id="id">id</h3>
+
+<pre><code class="php">$user-&gt;subscription['id']
+</code></pre>
+
+<p>The id of the selected plan. Currently, it should always be &#8216;helmar16&#8217;</p>
+
 <h3 id="msg">msg</h3>
 
 <pre><code class="php">$user-&gt;subscription['msg']
 </code></pre>
 
 <p>This will only be there is the status is &#8220;error&#8221;, and can be used for debugging purposes, or error messages.</p>
-
-<h3 id="plan_type">plan_type</h3>
-
-<pre><code class="php">$user-&gt;subscription['plan_type']
-</code></pre>
-
-<p>Possible values:</p>
-
-<ul>
-<li>sub-paper</li>
-<li>sub-digital</li>
-<li>sub-digital+paper</li>
-</ul>
-
-<p>This can be used to find out what type of subscription they have, but should not be used for things like displaying the digital mag&#8230;</p>
-
-<h3 id="digital">digital</h3>
-
-<pre><code class="php">$user-&gt;subscription['digital']
-</code></pre>
-
-<p>Possible values:</p>
-
-<ul>
-<li>true</li>
-<li>false</li>
-<li>error</li>
-</ul>
-
-<p>This is the one that can be used to for display the digital mag, and related things.</p>
-
-<h3 id="paper">paper</h3>
-
-<pre><code class="php">$user-&gt;subscription['paper']
-</code></pre>
-
-<p>Possible values:</p>
-
-<ul>
-<li>true</li>
-<li>false</li>
-<li>error</li>
-</ul>
-
-<p>Used to find out if they receive the paper mag.</p>
 
 <h3 id="cancel_at_period_end">cancel_at_period_end</h3>
 
@@ -105,6 +67,13 @@ $user-&gt;checksub();
 </code></pre>
 
 <p>This is a unix time stamp of when the users subscription period ends</p>
+
+<h3 id="next_payment">next_payment</h3>
+
+<pre><code class="php">$user-&gt;subscription['next_payment']
+</code></pre>
+
+<p>The amount the credit card will be charges when the plan renews.</p>
 
 </body>
 </html>
