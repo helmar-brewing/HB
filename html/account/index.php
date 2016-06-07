@@ -152,7 +152,7 @@ print'
 			<label>Choose Your Subscription</label>
 			<p>When you downgrade your subscription your plan will change on your next renewal date. When you upgrade your subscription your current subscription will end and your new subscription will begin immediately.</p>
 			<ul class="sub-buttons">
-				<li id="sub-digitalpaper" onclick="sub()" class="'.$sub_pay_class.'">
+				<li id="sub-digitalpaper" onclick="sub(\'subscribe\')" class="'.$sub_pay_class.'">
 					<a href="javascript:;">
 						<h4>Digital + Paper Magazine</h4>
 						<div class="price">$39.95</div>
@@ -166,7 +166,7 @@ print'
 						<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa '.$sub_pay_check.'"></i></div>
 					</a>
 				</li>
-				<li id="sub-none" onclick="sub()" class="'.$sub_free_class.'">
+				<li id="sub-none" onclick="sub(\'cancel\')" class="'.$sub_free_class.'">
 					<a href="javascript:;">
 						<h4>Website Access / Cancel Paid Subscription</h4>
 						<div class="price">FREE</div>

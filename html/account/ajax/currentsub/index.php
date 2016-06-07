@@ -99,12 +99,6 @@ try{
 
 
 
-
-
-
-
-
-
 }catch(\Stripe\Error\Card $e) {
 	// Since it's a decline, \Stripe\Error\Card will be caught
 	$body = $e->getJsonBody();

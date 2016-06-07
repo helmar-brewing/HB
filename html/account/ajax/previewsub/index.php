@@ -24,16 +24,13 @@ require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 
-// date formulas
-date_default_timezone_set('US/Eastern');
-
- $currentmonth = date('n');
- $currentyear = date('Y');
-
-if ($currentmonth == 1 ||$currentmonth == 2 ){
+// next mag date
+$currentmonth = date('n');
+$currentyear = date('Y');
+if ($currentmonth == 1 || $currentmonth == 2 ){
 	$dateReturn = 'March '.$currentyear;
 } elseif ($currentmonth == 12 ){
-	$dateReturn = 'March '.$currentyear+1;
+	$dateReturn = 'March '.date('Y',strtotime('+1 year'));
 } elseif ($currentmonth == 3 ||$currentmonth == 4 ||$currentmonth == 5 ){
 	$dateReturn = 'June '.$currentyear;
 } elseif ($currentmonth == 6 ||$currentmonth == 7 ||$currentmonth == 8 ){
@@ -43,118 +40,6 @@ if ($currentmonth == 1 ||$currentmonth == 2 ){
 } else{
 	$dateReturn = 'Error! well, this isn\'t good! there isn\'t a 13th month!';
 }
-
-/* PAGE FUNCTIONS */
-function subName($sub){
-	switch($sub){
-		case 'sub-digital':
-			return 'Digital Magazine';
-			break;
-		case 'sub-paper':
-			return 'Paper Magazine';
-			break;
-		case 'sub-digital+paper':
-			return 'Digital + Paper Magazine';
-			break;
-		default: throw new Exception('Cannot get subscription name, invalid plan type.');
-	}
-}
-function downgrade($to = NULL){
-	global $user;
-	global $action;
-	if( $to === NULL ){ throw new Exception('no plan set for downgrade.'); }
-	$html = array(
-		'sub-digital' => '
-			<p>You are changing your subscription from '.subName($user->subscription['plan_type']).' to <span>Digital Magazine</span>.</p>
-			<p>You will continue to have your current benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>. Your new subscription benefits will be available on your renewal date of '.date('M j Y', $user->subscription['current_period_end']).'.</p>
-			<p>Your credit card will not be charged at this time.</p>
-			<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>
-		',
-		'sub-paper' => '
-			<p>You are changing your subscription from <span>'.subName($user->subscription['plan_type']).'</span> to <span>Paper Magazine</span>.</p>
-			<p>You will continue to have your current benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>. Your new subscription benefits will be available on your renewal date of '.date('M j Y', $user->subscription['current_period_end']).'.</p>
-			<p>Your credit card will not be charged at this time.</p>
-			<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>
-		',
-	);
-	return $html[$to];
-}
-
-function upgrade($to = NULL){
-	if( $to === NULL ){ throw new Exception('no plan set for upgrade.'); }
-	global $cust, $user;
-	global $action;
-	if( date("L", $user->subscription['current_period_end']) === '1' || date("L", time()) === '1' ){
-		$year = 60*60*24*366;
-	}else{
-		$year = 60*60*24*365;
-	}
-	$diff = ( $user->subscription['current_period_end'] - time() ) / ($year);
-	$bal = floor( 0 - ( $diff * $user->subscription['last_paid'] ) );
-	$plan = \Stripe\Plan::retrieve($to);
-	$charge = $plan['amount'] + $bal;
-	$html = array(
-		'sub-paper' => '
-			<p>You are upgrading your subscription to <span>Paper Magazine</span>.</p>
-			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today.
-			Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>
-			<p>Your credit card will be charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
-			<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>
-		',
-		'sub-digital+paper' => '
-			<p>You are upgrading your subscription to <span>Digital + Paper Magazine</span>.</p>
-			<p>New benefits will be available immediately, and your renewal date will be extended to one year from today.
-			Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>
-			<p>Your credit card will be charged $'.substr($charge,0,-2).'.'.substr($charge,-2).'</p>
-			<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>
-		'
-	);
-	return $html[$to];
-}
-function cancel(){
-	global $user;
-	global $action;
-	$html = '
-		<p>You are about to disable auto-renew for your <span>'.subName($user->subscription['plan_type']).'</span> subscription.</p>
-		<p>You can continue to enjoy your benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>
-		<button onclick="subUpdate(\''.$action.'\')">Disable Auto-Renew</button>
-	';
-	return $html;
-}
-function renew($to){
-	global $cust, $user;
-	global $action;
-	$subscription = $cust->subscriptions->retrieve($user->subscription['sub_id']);
-	if($user->subscription['cancel_at_period_end'] === true){
-		$h .= '<p>You are about to enable auto-renew for your <span>'.subName($user->subscription['plan_type']).'</span> subscription.</p>';
-		$h .= '<button onclick="subUpdate(\''.$action.'\')">Enable Auto-Renew</button>';
-	}else{
-		$meta = $subscription->metadata->__toArray();
-		if($meta['downgrade'] === 'yes'){
-			$h .= '<p>You are switching your subscription back to <span>'.subName($user->subscription['plan_type']).'</span>.</p>';
-			$h .= '<p>Your subscription will renew on <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>';
-			$h .= '<p>Your credit card will not be charged at this time.</p>';
-			$h .= '<button onclick="subUpdate(\''.$action.'\')">Change Subscription</button>';
-		}else{
-			$h .= '<p>This is your current subscription.</p>';
-		}
-	}
-	$html = array(
-		'sub-digital' => $h,
-		'sub-paper' => $h,
-		'sub-digital+paper' => $h
-	);
-	return $html[$to];
-}
-
-
-
-
-
-
-
-
-
 
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
@@ -168,7 +53,7 @@ try{
     }
 
 	// test action
-    $allowed_actions = array('none', 'paper','digital','digitalpaper');
+    $allowed_actions = array('subscribe', 'cancel');
     $action = preg_replace('[^a-z]', '', $_GET['action']);
     if(!in_array($action, $allowed_actions, true)){
         throw new Exception('invalid action x01');
@@ -189,132 +74,62 @@ try{
 	if($user->subscription['status'] === 'none'){
 
 		switch($action){
-
-			case 'none':
+			case 'cancel' : {
 				$error = '0';
-				$h1 = 'Subscription Status';
-				$html = '
-					<p>This is your current subscription.</p>
-				';
+				$h1    = 'Subscription Status';
+				$html  = '<p>This is your current subscription.</p>';
+				$html .= '<p>You are currently enjoying the free version of the website.</p>';
 				break;
-
-			case 'digital':
+			}
+			case 'subscribe' : {
 				$error = '0';
-				$h1 = 'Subscription';
-				$html ='
-					<p>You are signing up for <span>Digital Magazine</span>.</p>
-					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
-					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
-				';
+				$h1    = 'Subscribe';
+				$html  = '<p>You are signing up for <span>Digital + Paper Magazine</span>. Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>';
+				$html .= '<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>';
+				$html .= '<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>';
 				break;
-
-			case 'paper':
-				$error = '0';
-				$h1 = 'Subscription';
-				$html ='
-					<p>You are signing up for <span>Paper Magazine</span>. Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>
-					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
-					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
-				';
-				break;
-
-			case 'digitalpaper':
-				$error = '0';
-				$h1 = 'Subscription';
-				$html ='
-					<p>You are signing up for <span>Digital + Paper Magazine</span>. Based on today\'s date, you will receive your first paper magazine starting next quarter ('.$dateReturn.')</p>
-					<p>You will pay for the full year subscription that will renew on '.date( "m/d/Y", (time() + 31536000) ).'.</p>
-					<button onclick="subUpdate(\''.$action.'\')">Subscribe</button>
-				';
-				break;
-
-			default:
+			}
+			default : {
 				throw new Exception('invalid action x02');
 				break;
-
+			}
 		}
 
-	}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital'){
+	}elseif(in_array($user->subscription['status'], array('active', 'trialing'))){
+
 		switch($action){
-			case 'none':
-				$html = cancel();
+			case 'cancel' : {
 				$error = '0';
-				$h1 = 'Subscription Status';
+				$h1    = 'Subscription Status';
+				$html  = '<p>You are about to disable auto-renew for your <span>Digital + Paper Magazine</span> subscription.</p>';
+				$html .= '<p>You can continue to enjoy your benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>';
+				$html .= '<button onclick="subUpdate(\''.$action.'\')">Disable Auto-Renew</button>';
 				break;
-			case 'digital':
-				$html = renew('sub-digital');
+			}
+			case 'subscribe' : {
 				$error = '0';
-				$h1 = 'Subscription Status';
+				$h1    = 'Subscription Status';
+				$subscription = $cust->subscriptions->retrieve($user->subscription['id']);
+				if($user->subscription['cancel_at_period_end'] === true){
+					$html .= '<p>You are about to enable auto-renew for your <span>'.subName($user->subscription['plan_type']).'</span> subscription.</p>';
+					$html .= '<button onclick="subUpdate(\''.$action.'\')">Enable Auto-Renew</button>';
+				}else{
+					$payment = $user->subscription['next_payment'] / 100;
+					$html .= '<p>This is your current subscription.</p>';
+					$html .= '<p>Your subscription will renew on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
+					$html .= '<p>Next Payment: $'.$payment.' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
+				}
 				break;
-			case 'paper':
-				$html = upgrade('sub-paper');
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			case 'digitalpaper':
-				$html = upgrade('sub-digital+paper');
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			default:
+			}
+			default : {
 				throw new Exception('invalid action x02');
 				break;
+			}
 		}
-	}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-paper'){
-		switch($action){
-			case 'none':
-				$html = cancel();
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			case 'digital':
-				$html = downgrade('sub-digital', 'sub-paper');
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			case 'paper':
-				$html = renew('sub-paper');
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			case 'digitalpaper':
-				$html = upgrade('sub-digital+paper');
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			default:
-				throw new Exception('invalid action x02');
-				break;
-		}
-	}elseif($user->subscription['status'] === 'active' && $user->subscription['plan_type'] === 'sub-digital+paper'){
-		switch($action){
-			case 'none':
-				$html = cancel();
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			case 'digital':
-				$html = downgrade('sub-digital', 'sub-digital+paper');
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			case 'paper':
-				$html = downgrade('sub-paper', 'sub-digital+paper');
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			case 'digitalpaper':
-				$html = renew('sub-digital+paper');
-				$error = '0';
-				$h1 = 'Subscription Status';
-				break;
-			default:
-				throw new Exception('invalid action x02');
-				break;
-		}
-	}else{
-		throw new Exception('no plan type');
-	}
+
+	}else{ throw new Exception('invalid status'); }
+
+
 
 
 }catch(\Stripe\Error\Card $e) {
