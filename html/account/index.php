@@ -116,7 +116,7 @@ $r = $chimp->get('lists/'.$apikey['mailchimp_list'].'/members/'.$subscriber);
 $email_sub_check = ($r['status'] === 'subscribed') ? ' checked' : '';
 
 // check subscription status
-$status_test    = (in_array($user->subscription['status'], array('active','trialing'), TRUE)) ? TRUE : FALSE;
+$status_test    = (in_array($user->subscription['status'], array('active','trialing'), TRUE) && $user->subscription['cancel_at_period_end'] !== TRUE) ? TRUE : FALSE;
 $sub_pay_class  = ($status_test) ? 'selected' : '';
 $sub_pay_xnote  = ($status_test) ? '' : '<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>';
 $sub_pay_check  = ($status_test) ? 'fa-check-square-o' : 'fa-square-o';

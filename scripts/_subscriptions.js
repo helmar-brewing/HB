@@ -207,35 +207,20 @@ function subUpdate(a){
             }else if(data.error === '0'){
 
 				$('#sub-none').removeClass('selected');
-				$('#sub-digital').removeClass('selected');
-				$('#sub-paper').removeClass('selected');
 				$('#sub-digitalpaper').removeClass('selected');
 
 				$('#sub-none-checkbox').removeClass('fa-check-square-o');
-				$('#sub-digital-checkbox').removeClass('fa-check-square-o');
-				$('#sub-paper-checkbox').removeClass('fa-check-square-o');
 				$('#sub-digitalpaper-checkbox').removeClass('fa-check-square-o');
+
 				$('#sub-none-checkbox').addClass('fa-square-o');
-				$('#sub-digital-checkbox').addClass('fa-square-o');
-				$('#sub-paper-checkbox').addClass('fa-square-o');
 				$('#sub-digitalpaper-checkbox').addClass('fa-square-o');
 
-				if(a === 'none'){
+				if(a === 'cancel'){
 					$('#sub-none').addClass('selected');
 					$('#sub-none-checkbox').removeClass('fa-square-o');
 					$('#sub-none-checkbox').addClass('fa-check-square-o');
 				}
-				if(a === 'paper'){
-					$('#sub-paper').addClass('selected');
-					$('#sub-paper-checkbox').removeClass('fa-square-o');
-					$('#sub-paper-checkbox').addClass('fa-check-square-o');
-				}
-				if(a === 'digital'){
-					$('#sub-digital').addClass('selected');
-					$('#sub-digital-checkbox').removeClass('fa-square-o');
-					$('#sub-digital-checkbox').addClass('fa-check-square-o');
-				}
-				if(a === 'digitalpaper'){
+				if(a === 'subscribe'){
 					$('#sub-digitalpaper').addClass('selected');
 					$('#sub-digitalpaper-checkbox').removeClass('fa-square-o');
 					$('#sub-digitalpaper-checkbox').addClass('fa-check-square-o');

@@ -101,18 +101,22 @@ try{
 			case 'cancel' : {
 				$error = '0';
 				$h1    = 'Subscription Status';
-				$html  = '<p>You are about to disable auto-renew for your <span>Digital + Paper Magazine</span> subscription.</p>';
-				$html .= '<p>You can continue to enjoy your benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>';
-				$html .= '<button onclick="subUpdate(\''.$action.'\')">Disable Auto-Renew</button>';
+				if($user->subscription['cancel_at_period_end'] === TRUE){
+					$html  = '<p><i class="fa fa-ban"></i> Auto re-new is turned off. Your subscription will be canceled on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
+				}else{
+					$html  = '<p>You are about to disable auto-renew for your <span>Digital + Paper Magazine</span> subscription.</p>';
+					$html .= '<p>You can continue to enjoy your benefits until <span>'.date('m/d/Y', $user->subscription['current_period_end']).'</span>.</p>';
+					$html .= '<button onclick="subUpdate(\'cancel\')">Disable Auto-Renew</button>';
+				}
 				break;
 			}
 			case 'subscribe' : {
 				$error = '0';
 				$h1    = 'Subscription Status';
 				$subscription = $cust->subscriptions->retrieve($user->subscription['id']);
-				if($user->subscription['cancel_at_period_end'] === true){
-					$html .= '<p>You are about to enable auto-renew for your <span>'.subName($user->subscription['plan_type']).'</span> subscription.</p>';
-					$html .= '<button onclick="subUpdate(\''.$action.'\')">Enable Auto-Renew</button>';
+				if($user->subscription['cancel_at_period_end'] === TRUE){
+					$html  = '<p>You are about to enable auto-renew for your <span>Digital + Paper Magazine</span> subscription.</p>';
+					$html .= '<button onclick="subUpdate(\'subscribe\')">Enable Auto-Renew</button>';
 				}else{
 					$payment = $user->subscription['next_payment'] / 100;
 					$html .= '<p>This is your current subscription.</p>';

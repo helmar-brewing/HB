@@ -61,7 +61,7 @@ try{
 			$html = '<p>You are currently subscribed to <span>Digital + Paper Magazine</span></p>';
 			if($user->subscription['cancel_at_period_end'] === true){
 				$html .= '<p><i class="fa fa-ban"></i> Auto re-new is turned off. Your subscription will be canceled on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
-				$html .= '<button onclick="sub(\''.subAction($user->subscription['plan_type']).'\')">Resume Subscription</button>';
+				$html .= '<button onclick="sub(\'subscribe\')">Resume Subscription</button>';
 			}else{
 				$html .= '<p><i class="fa fa-refresh"></i> Your subscription will renew on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
 				$html .= '<p>Next Payment: $'.$payment.' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
@@ -72,7 +72,7 @@ try{
 			$html = '<p>You are currently subscribed to <span>Digital + Paper Magazine</span></p>';
 			if($user->subscription['cancel_at_period_end'] === true){
 				$html .= '<p><i class="fa fa-ban"></i> Auto re-new is turned off. Your subscription will be canceled on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
-				$html .= '<button onclick="sub(\''.subAction($user->subscription['plan_type']).'\')">Resume Subscription</button>';
+				$html .= '<button onclick="sub(\'subscribe\')">Resume Subscription</button>';
 			}else{
 				$html .= '<p><i class="fa fa-refresh"></i> Your subscription will renew on <span>'.date('M j Y', $user->subscription['current_period_end']).'</span>.</p>';
 				$html .= '<p>Next Payment: $'.$payment.' on '.date('M j Y', $user->subscription['current_period_end']).'.</p>';
