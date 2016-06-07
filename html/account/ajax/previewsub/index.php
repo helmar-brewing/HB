@@ -46,11 +46,16 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // remove this if you
 try{
 
     // get the user and test for login
+	$page = (isset($_GET['page'])) ? preg_replace('[^a-z]', '', $_GET['page']) : NULL;
+
 	$user = new phnx_user;
 	$user->checklogin(2);
+
 	if($user->login() !== 2){
-        throw new AuthException('');
-    }
+		throw new AuthException('');
+	}
+
+
 
 	// test action
     $allowed_actions = array('subscribe', 'cancel');
