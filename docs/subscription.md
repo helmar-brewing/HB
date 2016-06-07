@@ -43,6 +43,32 @@ $user->subscription['msg']
 ```
 This will only be there is the status is "error", and can be used for debugging purposes, or error messages.
 
+### digital
+
+```php
+$user->subscription['digital']
+```
+Possible values:
+
+* true
+* false
+* error
+
+This is the one that can be used to for display the digital mag, and related things.
+
+### paper
+
+```php
+$user->subscription['paper']
+```
+Possible values:
+
+* true
+* false
+* error
+
+Used to find out if they receive the paper mag.
+
 ### cancel_at_period_end
 
 ```php

@@ -486,9 +486,16 @@
 					);
 				}else{
 
-					// put break here that gives access to everyone while we convert
-
-
+					// *** put break here that gives access to everyone while we convert
+					// $this->subscription = array(
+					// 	'status' => 'active',
+					// 	'id' => 'helmar16',
+					// 	'cancel_at_period_end' => null,
+					// 	'current_period_end' => null,
+					// 	'next_payment' => 3995,
+					// 	'digital' => TRUE,
+					// 	'paper' => TRUE
+					// );
 
 
 					$good_sub = 0;
@@ -499,21 +506,27 @@
 								'id' => $sub_data['id'],
 								'cancel_at_period_end' => $sub_data['cancel_at_period_end'],
 								'current_period_end' => $sub_data['current_period_end'],
-								'next_payment' => $sub_data->plan['amount']
+								'next_payment' => $sub_data->plan['amount'],
+								'digital' => TRUE,
+								'paper' => TRUE
 							);
 							$good_sub++;
 						}
 					}
 					if($good_sub === 0){
 						$this->subscription = array(
-							'status' => 'none'
+							'status' => 'none',
+							'digital' => FALSE,
+							'paper' => FALSE
 						);
 					}elseif($good_sub === 1){
 						// do nothing
 					}elseif($good_sub > 1){
 						$this->subscription = array(
 							'status' => 'error',
-							'msg'	 => 'Multiple subscriptions found, contact support.'
+							'msg'	 => 'Multiple subscriptions found, contact support.',
+							'digital' => 'error',
+							'paper' => 'error'
 						);
 					}
 				}
@@ -525,27 +538,37 @@
 			}catch (Stripe_InvalidRequestError $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}catch (Stripe_AuthenticationError $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}catch (Stripe_ApiConnectionError $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}catch (Stripe_Error $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}catch (Exception $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}
 			if($cache){
