@@ -501,12 +501,21 @@
 					$good_sub = 0;
 					foreach($sub_response->data as $sub_data){
 						if($sub_data->plan['id'] === 'helmar16'){
+
+							if(isset($sub_data->discount['coupon']['percent_off']) && $sub_data->discount['coupon']['percent_off'] !== null){
+								$payment = $sub_data->plan['amount'] - ($sub_data->plan['amount'] * $sub_data->discount['coupon']['percent_off'] / 100);
+							}elseif(isset($sub_data->discount['coupon']['amount_off']) && $sub_data->discount['coupon']['amount_off'] !== null){
+								$payment = $sub_data->plan['amount'] - $sub_data->discount['coupon']['amount_off'];
+							}else{
+								$payment = $sub_data->plan['amount'];
+							}
+
 							$this->subscription = array(
 								'status' => $sub_data['status'],
 								'id' => $sub_data['id'],
 								'cancel_at_period_end' => $sub_data['cancel_at_period_end'],
 								'current_period_end' => $sub_data['current_period_end'],
-								'next_payment' => $sub_data->plan['amount'],
+								'next_payment' => $payment,
 								'digital' => TRUE,
 								'paper' => TRUE
 							);
