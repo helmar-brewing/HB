@@ -23,6 +23,7 @@ $file = $magazine_path.$_GET['f'];
 $currentpage = 'magazine/'.$_GET['f'];
 
 class SubException extends Exception{}
+class SubRedirException extends Exception{}
 
 $user = new phnx_user;
 $user->checklogin(1);
@@ -43,32 +44,44 @@ try{
             throw new SubException('x1');
 			break;
 		case 'none':
-            echo 'no sub'; // redirect to sub page with error
+            throw new SubRedirException('/subscription/?status=none');
 			break;
+		case 'past_due':
+			throw new SubRedirException('/subscription/?status=past_due');
+			break;
+		case 'unpaid':
+			throw new SubRedirException('/subscription/?status=unpaid');
+			break;
+		case 'canceled':
+			throw new SubRedirException('/subscription/?status=canceled');
+			break;
+		case 'trialing':
 		case 'active':
-			if($user->subscription['digital'] === TRUE){
-				if($_GET['f'] == '/' || $_GET['f'] == ''){
-					http_response_code(404);
-					echo '404';
-				}else{
-	                if(file_exists($file)){
-	                    header('Content-Type: ' . mime_content_type($file));
-	                    header('Content-Length: ' . filesize($file));
-	                    readfile($file);
-	                }else{
-	                    http_response_code(404);
-	                    echo '404';
-	                }
-				}
-            }else{
-                echo 'no paper sub'; // redirect to sub page with error
-            }
+
+			if($_GET['f'] == '/' || $_GET['f'] == ''){
+				http_response_code(404);
+				echo '404';
+			}else{
+                if(file_exists($file)){
+                    header('Content-Type: ' . mime_content_type($file));
+                    header('Content-Length: ' . filesize($file));
+                    readfile($file);
+                }else{
+                    http_response_code(404);
+                    echo '404';
+                }
+			}
+
 			break;
 		default:
             throw new SubException('x2');
 			break;
 	}
-
+}catch(SubRedirException $e){
+	$page = $e->getMessage();
+	header('Location: '.$protocol.$site.$page,TRUE,303);
+    ob_end_flush();
+    exit;
 }catch(SubException $e){
     http_response_code(500);
     echo '500 ';
