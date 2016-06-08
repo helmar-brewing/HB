@@ -51,7 +51,7 @@ try{
 	}
 
 	// check subscription
-	if($user->subscription['status'] !== 'active'){
+	if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing'){
 		throw new Exception('You must have an active subscription to update your checklist');
 	}
 
