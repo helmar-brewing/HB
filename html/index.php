@@ -68,23 +68,22 @@ print'
 
 
 
-if(isset($user)){
+if($user->login() === '1'){
+	if(in_array($user->subscription['status']), array('active', 'trialing'), TRUE){
+		// do this if the user subscription = active
+		// NO PICTURE TO SHOW!
+	}else{
+		// do if user is logged in, but not active (so free account)
+		print'
+			<h1><a href="subscription/"><img src="/img/upgrade_account.png" alt="Helmar Brewing"></a></h1>
+		';
 
-		 if($user->subscription['status'] != 'active') {
-			 // do if user is logged in, but not active (so free account)
-			 print'
-								<h1><a href="subscription/"><img src="/img/upgrade_account.png" alt="Helmar Brewing"></a></h1>
-			 ';
-
-		 }else{
-			 // do this if the user subscription = active
-			 	// NO PICTURE TO SHOW!
-		 }
+	}
 }else{
-	 /* do this if user is not logged in */
-	 print'
-	 					<h1><a href="subscription/"><img src="/img/join_free.png" alt="Helmar Brewing"></a></h1>
-	 ';
+	/* do this if user is not logged in */
+	print'
+		<h1><a href="subscription/"><img src="/img/join_free.png" alt="Helmar Brewing"></a></h1>
+	';
 }
 
 print'
