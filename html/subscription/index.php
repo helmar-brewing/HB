@@ -173,6 +173,7 @@ if($user->login() === 1){
 					<h4>Digital + Paper Magazine</h4>
 					<div class="price">$39.95</div>
 					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+					<p>A Helmar Brewing baseball art card sent quarterly, complementing the theme of the magazine</p>
 					<p>Website access to all digital magazines</p>
 					<p>Personal card checklist</p>
 					<p>Import eBay card purchases to checklist</p>
@@ -193,6 +194,7 @@ if($user->login() === 1){
 			<h4>Digital + Paper Magazine</h4>
 			<div class="price">$39.95</div>
 			<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+			<p>A Helmar Brewing baseball art card sent quarterly, complementing the theme of the magazine</p>
 			<p>Website access to all digital magazines</p>
 			<p>Personal card checklist</p>
 			<p>Import eBay card purchases to checklist</p>

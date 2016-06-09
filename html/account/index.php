@@ -150,13 +150,14 @@ print'
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
 			<label>Choose Your Subscription</label>
-			<p>When you downgrade your subscription your plan will change on your next renewal date. When you upgrade your subscription your current subscription will end and your new subscription will begin immediately.</p>
+			<p>When you downgrade your subscription to the free plan, you will continue to receive full digital + paper benefits through the end of your current subscription term. When you sign up for the digital + paper paid subscription, your subscription benefits will begin immediately.</p>
 			<ul class="sub-buttons">
 				<li id="sub-digitalpaper" onclick="sub(\'subscribe\')" class="'.$sub_pay_class.'">
 					<a href="javascript:;">
 						<h4>Digital + Paper Magazine</h4>
 						<div class="price">$39.95</div>
 						<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+						<p>A Helmar Brewing baseball art card sent quarterly, complementing the theme of the magazine</p>
 						<p>Website access to all digital magazines</p>
 						<p>Personal card checklist</p>
 						<p>Import eBay card purchases to checklist</p>
