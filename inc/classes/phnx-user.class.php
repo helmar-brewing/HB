@@ -488,7 +488,8 @@
 
 					$good_sub = 0;
 					foreach($sub_response->data as $sub_data){
-						if($sub_data->plan['id'] === 'helmar16'){
+						//if($sub_data->plan['id'] === 'helmar16'){
+						if(true){
 
 							if(isset($sub_data->discount['coupon']['percent_off']) && $sub_data->discount['coupon']['percent_off'] !== null){
 								$payment = $sub_data->plan['amount'] - ($sub_data->plan['amount'] * $sub_data->discount['coupon']['percent_off'] / 100);
