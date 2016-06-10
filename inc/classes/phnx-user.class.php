@@ -538,7 +538,7 @@
 				// 			'paper' => 'error'
 				// 		);
 				// 	}
-				// }
+				}
 			}catch(Stripe_CardError $e){
 				$this->subscription = array(
 					'status' => 'error',
