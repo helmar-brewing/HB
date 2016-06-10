@@ -80,44 +80,13 @@ do{
 	            'status' => 'none'
 	        );
 	    }else{
-	        if($sub_response[0]['metadata']['downgrade'] === 'yes'){
-	            if(time() < $sub_response[0]['metadata']['downgrade_date']){
-	                $plan_type = $sub_response[0]['metadata']['downgrade_from'];
-	                $last_paid = $sub_response[0]['metadata']['downgrade_paid'];
-	                $next_payment = $sub_response[0]->plan['amount'];
-	            }else{
-	                $plan_type = $sub_response[0]->plan['id'];
-	                $last_paid = $sub_response[0]->plan['amount'];
-	                $next_payment = $sub_response[0]->plan['amount'];
-	            }
-	        }else{
-	            $plan_type = $sub_response[0]->plan['id'];
-	            $last_paid = $sub_response[0]->plan['amount'];
-	            $next_payment = $sub_response[0]->plan['amount'];
-	        }
+
 	        $list[$i]['subscription'] = array(
 	            'status' => $sub_response[0]['status'],
 	            'sub_id' => $sub_response[0]['id'],
 	            'cancel_at_period_end' => $sub_response[0]['cancel_at_period_end'],
-	            'current_period_end' => $sub_response[0]['current_period_end'],
-	            'plan_type' => $plan_type,
-	            'next_plan' => $sub_response[0]->plan['id'],
-	            'last_paid' => $last_paid,
-	            'next_payment' => $next_payment
+	            'current_period_end' => $sub_response[0]['current_period_end']
 	        );
-	        if($plan_type === 'sub-digital'){
-	            $list[$i]['subscription']['digital'] = TRUE;
-	            $list[$i]['subscription']['paper'] = FALSE;
-	        }elseif($plan_type === 'sub-paper'){
-	            $list[$i]['subscription']['digital'] = FALSE;
-	            $list[$i]['subscription']['paper'] = TRUE;
-	        }elseif($plan_type === 'sub-digital+paper'){
-	            $list[$i]['subscription']['digital'] = TRUE;
-	            $list[$i]['subscription']['paper'] = TRUE;
-	        }else{
-	            $list[$i]['subscription']['digital'] = 'error';
-	            $list[$i]['subscription']['paper'] = 'error';
-	        }
 	    }
 
 	    $i++;
@@ -145,7 +114,7 @@ do{
    $fp = fopen($file, 'w');
 
    // set the headers for the spreadsheet,
-   $csvheaders = array('username','name','email','Stripe ID','ebayID','firmname','building','address','city','state','zip','current subscription','renewal date','next subscription');
+   $csvheaders = array('username','name','email','Stripe ID','ebayID','firmname','building','address','city','state','zip','subscription status','renewal date');
 
    // write the headers to the file
    fputcsv($fp, $csvheaders);
@@ -183,9 +152,8 @@ do{
                 $ulist->city,
                 $ulist->state,
                 $ulist->zip5.'-'.$ulist->zip4,
-                $sub['plan_type'],
-                $d,
-                $sub['next_plan']
+                $sub['status'],
+                $d
             );
             fputcsv($fp, $csvline);
         }

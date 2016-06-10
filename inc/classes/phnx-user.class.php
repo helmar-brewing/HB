@@ -485,53 +485,60 @@
 						'status' => 'none'
 					);
 				}else{
-					if($sub_response->data[0]['metadata']['downgrade'] === 'yes'){
-						if(time() < $sub_response->data[0]['metadata']['downgrade_date']){
-							$plan_type = $sub_response->data[0]['metadata']['downgrade_from'];
-							$last_paid = $sub_response->data[0]['metadata']['downgrade_paid'];
-							$next_payment = $sub_response->data[0]->plan['amount'];
-						}else{
-							$subscription = \Stripe\Customer::retrieve($this->stripeID)->subscriptions->retrieve($sub_response->data[0]['id']);
-							$subscription->metadata = array('downgrade' => NULL, 'downgrade_from' => NULL ,'downgrade_date' => NULL);
-							$subscription->save();
-							$plan_type = $sub_response->data[0]->plan['id'];
-							$last_paid = $sub_response->data[0]->plan['amount'];
-							$next_payment = $sub_response->data[0]->plan['amount'];
-						}
-					}else{
-						$plan_type = $sub_response->data[0]->plan['id'];
-						$last_paid = $sub_response->data[0]->plan['amount'];
-						$next_payment = $sub_response->data[0]->plan['amount'];
-					}
-					if($sub_response->data[0]['cancel_at_period_end'] == true){
-						$next_plan = 'none';
-					}else{
-						$next_plan = $sub_response->data[0]->plan['id'];
-					}
+
+					//*** put break here that gives access to everyone while we convert
 					$this->subscription = array(
-						'status' => $sub_response->data[0]['status'],
-						'sub_id' => $sub_response->data[0]['id'],
-						'cancel_at_period_end' => $sub_response->data[0]['cancel_at_period_end'],
-						'current_period_end' => $sub_response->data[0]['current_period_end'],
-						'plan_type' => $plan_type,
-						'next_plan' => $next_plan,
-						'last_paid' => $last_paid,
-						'next_payment' => $next_payment
+						'status' => 'active',
+						'id' => 'helmar16',
+						'cancel_at_period_end' => null,
+						'current_period_end' => null,
+						'next_payment' => 3995,
+						'digital' => TRUE,
+						'paper' => TRUE
 					);
-					if($plan_type === 'sub-digital'){
-						$this->subscription['digital'] = TRUE;
-						$this->subscription['paper'] = FALSE;
-					}elseif($plan_type === 'sub-paper'){
-						$this->subscription['digital'] = FALSE;
-						$this->subscription['paper'] = TRUE;
-					}elseif($plan_type === 'sub-digital+paper'){
-						$this->subscription['digital'] = TRUE;
-						$this->subscription['paper'] = TRUE;
-					}else{
-						$this->subscription['digital'] = 'error';
-						$this->subscription['paper'] = 'error';
-					}
-				}
+
+
+				// 	$good_sub = 0;
+				// 	foreach($sub_response->data as $sub_data){
+				// 		if($sub_data->plan['id'] === 'helmar16'){
+				//
+				// 			if(isset($sub_data->discount['coupon']['percent_off']) && $sub_data->discount['coupon']['percent_off'] !== null){
+				// 				$payment = $sub_data->plan['amount'] - ($sub_data->plan['amount'] * $sub_data->discount['coupon']['percent_off'] / 100);
+				// 			}elseif(isset($sub_data->discount['coupon']['amount_off']) && $sub_data->discount['coupon']['amount_off'] !== null){
+				// 				$payment = $sub_data->plan['amount'] - $sub_data->discount['coupon']['amount_off'];
+				// 			}else{
+				// 				$payment = $sub_data->plan['amount'];
+				// 			}
+				//
+				// 			$this->subscription = array(
+				// 				'status' => $sub_data['status'],
+				// 				'id' => $sub_data['id'],
+				// 				'cancel_at_period_end' => $sub_data['cancel_at_period_end'],
+				// 				'current_period_end' => $sub_data['current_period_end'],
+				// 				'next_payment' => $payment,
+				// 				'digital' => TRUE,
+				// 				'paper' => TRUE
+				// 			);
+				// 			$good_sub++;
+				// 		}
+				// 	}
+				// 	if($good_sub === 0){
+				// 		$this->subscription = array(
+				// 			'status' => 'none',
+				// 			'digital' => FALSE,
+				// 			'paper' => FALSE
+				// 		);
+				// 	}elseif($good_sub === 1){
+				// 		// do nothing
+				// 	}elseif($good_sub > 1){
+				// 		$this->subscription = array(
+				// 			'status' => 'error',
+				// 			'msg'	 => 'Multiple subscriptions found, contact support.',
+				// 			'digital' => 'error',
+				// 			'paper' => 'error'
+				// 		);
+				// 	}
+				// }
 			}catch(Stripe_CardError $e){
 				$this->subscription = array(
 					'status' => 'error',
@@ -540,27 +547,37 @@
 			}catch (Stripe_InvalidRequestError $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}catch (Stripe_AuthenticationError $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}catch (Stripe_ApiConnectionError $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}catch (Stripe_Error $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}catch (Exception $e){
 				$this->subscription = array(
 					'status' => 'error',
-					'msg'	 => $e->getMessage()
+					'msg'	 => $e->getMessage(),
+					'digital' => 'error',
+					'paper' => 'error'
 				);
 			}
 			if($cache){

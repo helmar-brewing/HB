@@ -57,7 +57,7 @@ print'
 
 
       // if user does NOT have subscription:
-      if($user->subscription['status'] != 'active') {
+      if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing') {
 
 				 print'
 
