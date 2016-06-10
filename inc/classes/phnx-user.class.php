@@ -486,59 +486,59 @@
 					);
 				}else{
 
-					// *** put break here that gives access to everyone while we convert
-					// $this->subscription = array(
-					// 	'status' => 'active',
-					// 	'id' => 'helmar16',
-					// 	'cancel_at_period_end' => null,
-					// 	'current_period_end' => null,
-					// 	'next_payment' => 3995,
-					// 	'digital' => TRUE,
-					// 	'paper' => TRUE
-					// );
+					//*** put break here that gives access to everyone while we convert
+					$this->subscription = array(
+						'status' => 'active',
+						'id' => 'helmar16',
+						'cancel_at_period_end' => null,
+						'current_period_end' => null,
+						'next_payment' => 3995,
+						'digital' => TRUE,
+						'paper' => TRUE
+					);
 
 
-					$good_sub = 0;
-					foreach($sub_response->data as $sub_data){
-						if($sub_data->plan['id'] === 'helmar16'){
-
-							if(isset($sub_data->discount['coupon']['percent_off']) && $sub_data->discount['coupon']['percent_off'] !== null){
-								$payment = $sub_data->plan['amount'] - ($sub_data->plan['amount'] * $sub_data->discount['coupon']['percent_off'] / 100);
-							}elseif(isset($sub_data->discount['coupon']['amount_off']) && $sub_data->discount['coupon']['amount_off'] !== null){
-								$payment = $sub_data->plan['amount'] - $sub_data->discount['coupon']['amount_off'];
-							}else{
-								$payment = $sub_data->plan['amount'];
-							}
-
-							$this->subscription = array(
-								'status' => $sub_data['status'],
-								'id' => $sub_data['id'],
-								'cancel_at_period_end' => $sub_data['cancel_at_period_end'],
-								'current_period_end' => $sub_data['current_period_end'],
-								'next_payment' => $payment,
-								'digital' => TRUE,
-								'paper' => TRUE
-							);
-							$good_sub++;
-						}
-					}
-					if($good_sub === 0){
-						$this->subscription = array(
-							'status' => 'none',
-							'digital' => FALSE,
-							'paper' => FALSE
-						);
-					}elseif($good_sub === 1){
-						// do nothing
-					}elseif($good_sub > 1){
-						$this->subscription = array(
-							'status' => 'error',
-							'msg'	 => 'Multiple subscriptions found, contact support.',
-							'digital' => 'error',
-							'paper' => 'error'
-						);
-					}
-				}
+				// 	$good_sub = 0;
+				// 	foreach($sub_response->data as $sub_data){
+				// 		if($sub_data->plan['id'] === 'helmar16'){
+				//
+				// 			if(isset($sub_data->discount['coupon']['percent_off']) && $sub_data->discount['coupon']['percent_off'] !== null){
+				// 				$payment = $sub_data->plan['amount'] - ($sub_data->plan['amount'] * $sub_data->discount['coupon']['percent_off'] / 100);
+				// 			}elseif(isset($sub_data->discount['coupon']['amount_off']) && $sub_data->discount['coupon']['amount_off'] !== null){
+				// 				$payment = $sub_data->plan['amount'] - $sub_data->discount['coupon']['amount_off'];
+				// 			}else{
+				// 				$payment = $sub_data->plan['amount'];
+				// 			}
+				//
+				// 			$this->subscription = array(
+				// 				'status' => $sub_data['status'],
+				// 				'id' => $sub_data['id'],
+				// 				'cancel_at_period_end' => $sub_data['cancel_at_period_end'],
+				// 				'current_period_end' => $sub_data['current_period_end'],
+				// 				'next_payment' => $payment,
+				// 				'digital' => TRUE,
+				// 				'paper' => TRUE
+				// 			);
+				// 			$good_sub++;
+				// 		}
+				// 	}
+				// 	if($good_sub === 0){
+				// 		$this->subscription = array(
+				// 			'status' => 'none',
+				// 			'digital' => FALSE,
+				// 			'paper' => FALSE
+				// 		);
+				// 	}elseif($good_sub === 1){
+				// 		// do nothing
+				// 	}elseif($good_sub > 1){
+				// 		$this->subscription = array(
+				// 			'status' => 'error',
+				// 			'msg'	 => 'Multiple subscriptions found, contact support.',
+				// 			'digital' => 'error',
+				// 			'paper' => 'error'
+				// 		);
+				// 	}
+				// }
 			}catch(Stripe_CardError $e){
 				$this->subscription = array(
 					'status' => 'error',
