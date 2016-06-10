@@ -505,7 +505,8 @@
 								'id' => $sub_data['id'],
 								'cancel_at_period_end' => $sub_data['cancel_at_period_end'],
 								'current_period_end' => $sub_data['current_period_end'],
-								'next_payment' => $payment,
+								'next_payment' => '3995',
+								//'next_payment' => $payment,
 								'digital' => TRUE,
 								'paper' => TRUE
 							);
