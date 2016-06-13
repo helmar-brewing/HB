@@ -726,6 +726,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/html\/img\/upgrade_account.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 5719,
+		"inputAbbreviatedPath": "\/html\/img\/upgrade_account.png",
+		"outputAbbreviatedPath": "\/html\/img\/upgrade_account.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/html\/index.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -3771,7 +3782,7 @@
 	"bowerAbbreviatedPath": "",
 	"displayValue": "Helmar Brewing",
 	"displayValueWasSetByUser": 1,
-	"iconImageName": "brackets_brown"
+	"iconImageName": "globe_orange"
 	},
 "projectSettings": {
 	"alwaysUseExternalServer": 1,
