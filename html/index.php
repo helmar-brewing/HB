@@ -68,7 +68,7 @@ print'
 
 
 
-if($user->login() === '1'){
+if($user->login() === 1){
 	if(in_array($user->subscription['status'], array('active', 'trialing'), TRUE)){
 		// do this if the user subscription = active
 		// NO PICTURE TO SHOW!
