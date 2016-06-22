@@ -110,7 +110,7 @@ if($user->login() === 1){
 				<div class="credit-card">
 					<h2>Issues</h2>
 		';
-		if($user->subscription['digital'] == TRUE){
+
 			print'<ul>';
 			$magStart = date("Y");
 			$magEnd = 2015;
@@ -144,12 +144,6 @@ if($user->login() === 1){
 			}
 			print'</ul>';
 
-
-		}else{
-			print'
-					<p>You do not have access to the digital magazine. <a href="'.$protocol.$site.'/account/">Manage your subscription</a> on the <a href="'.$protocol.$site.'/account/">account</a> page.</p>
-			';
-		}
 		print'
 				</div>
 				<div class="credit-card">
@@ -201,6 +195,17 @@ if($user->login() === 1){
 			<p>Wishlist: eBay auction email notification</p>
 			<p>Enhanced card art lists</p>
 			<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
+			</a>
+		</li>
+	</ul>
+
+	<ul class="sub-buttons">
+		<li id="sub-none" onclick="showModal(\'login_or_register\')" class="selected free">
+			<a href="javascript:;">
+			<h4>Website Access</h4>
+			<div class="price">FREE</div>
+			<p>Join our email list</p>
+			<p>View our basic card art list</p>
 			</a>
 		</li>
 	</ul>
