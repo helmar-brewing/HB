@@ -24,6 +24,17 @@ Possible values:
 * error
 * none
 * active
+* trialing
+* past_due
+* unpaid
+* canceled
+
+### id
+
+```php
+$user->subscription['id']
+```
+The id of the selected plan. Currently, it should always be 'helmar16'
 
 ### msg
 
@@ -31,19 +42,6 @@ Possible values:
 $user->subscription['msg']
 ```
 This will only be there is the status is "error", and can be used for debugging purposes, or error messages.
-
-### plan_type
-
-```php
-$user->subscription['plan_type']
-```
-Possible values:
-
-* sub-paper
-* sub-digital
-* sub-digital+paper
-
-This can be used to find out what type of subscription they have, but should not be used for things like displaying the digital mag...
 
 ### digital
 
@@ -89,3 +87,10 @@ This lets us know if their subscription will renew or not at the end of their pe
 $user->subscription['current_period_end']
 ```
 This is a unix time stamp of when the users subscription period ends
+
+### next_payment
+
+```php
+$user->subscription['next_payment']
+```
+The amount the credit card will be charges when the plan renews.

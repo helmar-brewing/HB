@@ -104,55 +104,13 @@ print'
 		<section class="subscription">
 ';
 if($user->login() === 1){
-	if($user->subscription['status'] != 'active') {
-		print'
-			<label>Choose Your Annual Subscription</label>
-			<ul class="sub-buttons">
-				<li id="sub-digitalpaper" onclick="sub2(\'digitalpaper\')" class="selected">
-					<a href="javascript:;">
-					<h4>Digital + Paper Magazine</h4>
-					<div class="price">$34.95</div>
-					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-					<p>Website access to all digital magazines</p>
-					<p>Personal card checklist</p>
-					<p>Import eBay card purchases to checklist</p>
-					<p>Wishlist: eBay auction email notification</p>
-					<p>Enhanced card art lists</p>
-					<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
-					</a>
-				</li>
-				<li id="sub-paper" onclick="sub2(\'paper\')" class="selected">
-					<a href="javascript:;">
-					<h4>Paper Magazine</h4>
-					<div class="price">$29.95</div>
-					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-					<p>Personal card checklist</p>
-					<p>Import eBay card purchases to checklist</p>
-					<p>Wishlist: eBay auction email notification</p>
-					<p>Enhanced card art lists</p>
-					<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
-					</a>
-				</li>
-				<li id="sub-digital" onclick="sub2(\'digital\')" class="selected">
-					<a href="javascript:;">
-					<h4>Digital Magazine</h4>
-					<div class="price">$19.95</div>
-					<p>Website access to all digital magazines</p>
-					<p>Personal card checklist</p>
-					<p>Import eBay card purchases to checklist</p>
-					<p>Wishlist: eBay auction email notification</p>
-					<p>Enhanced card art lists</p>
-					</a>
-				</li>
-			</ul>
-		';
-	}else{
+	if(in_array($user->subscription['status'], array('active','trialing'),TRUE)) {
 		print'
 			<div class="sub-row">
 				<div class="credit-card">
 					<h2>Issues</h2>
 		';
-		if($user->subscription['digital'] == TRUE){
+
 			print'<ul>';
 			$magStart = date("Y");
 			$magEnd = 2015;
@@ -186,12 +144,6 @@ if($user->login() === 1){
 			}
 			print'</ul>';
 
-
-		}else{
-			print'
-					<p>You do not have access to the digital magazine. <a href="'.$protocol.$site.'/account/">Manage your subscription</a> on the <a href="'.$protocol.$site.'/account/">account</a> page.</p>
-			';
-		}
 		print'
 				</div>
 				<div class="credit-card">
@@ -206,58 +158,57 @@ if($user->login() === 1){
 				});
 			</script>
 		';
+	}else{
+		print'
+			<label>Choose Your Annual Subscription</label>
+			<ul class="sub-buttons">
+				<li id="sub-digitalpaper" onclick="sub2(\'subscribe\')" class="selected">
+					<a href="javascript:;">
+					<h4>Digital + Paper Magazine</h4>
+					<div class="price">$39.95</div>
+					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+					<p>A Helmar Brewing baseball art card sent quarterly, complementing the theme of the magazine</p>
+					<p>Website access to all digital magazines</p>
+					<p>Personal card checklist</p>
+					<p>Import eBay card purchases to checklist</p>
+					<p>Wishlist: eBay auction email notification</p>
+					<p>Enhanced card art lists</p>
+					<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
+					</a>
+				</li>
+			</ul>
+		';
 	}
 }else{
 	print'
 	<label>Choose Your Annual Subscription</label>
 	<ul class="sub-buttons">
-		<li id="sub-digitalpaper" onclick="sub2(\'digitalpaper\')" class="selected">
+		<li id="sub-digitalpaper" onclick="sub2(\'subscribe\')" class="selected">
 			<a href="javascript:;">
 			<h4>Digital + Paper Magazine</h4>
-			<div class="price">$34.95</div>
+			<div class="price">$39.95</div>
 			<p>A paper copy of the quarterly magazine sent to you when they are released</p>
+			<p>A Helmar Brewing baseball art card sent quarterly, complementing the theme of the magazine</p>
 			<p>Website access to all digital magazines</p>
 			<p>Personal card checklist</p>
 			<p>Import eBay card purchases to checklist</p>
 			<p>Wishlist: eBay auction email notification</p>
 			<p>Enhanced card art lists</p>
 			<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
-			</a>
-		</li>
-		<li id="sub-paper" onclick="sub2(\'paper\')" class="selected">
-			<a href="javascript:;">
-			<h4>Paper Magazine</h4>
-			<div class="price">$29.95</div>
-			<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-			<p>Personal card checklist</p>
-			<p>Import eBay card purchases to checklist</p>
-			<p>Wishlist: eBay auction email notification</p>
-			<p>Enhanced card art lists</p>
-			<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
-			</a>
-		</li>
-		<li id="sub-digital" onclick="sub2(\'digital\')" class="selected">
-			<a href="javascript:;">
-			<h4>Digital Magazine</h4>
-			<div class="price">$19.95</div>
-			<p>Website access to all digital magazines</p>
-			<p>Personal card checklist</p>
-			<p>Import eBay card purchases to checklist</p>
-			<p>Wishlist: eBay auction email notification</p>
-			<p>Enhanced card art lists</p>
 			</a>
 		</li>
 	</ul>
-			<ul class="sub-buttons">
-				<li id="sub-none" onclick="showModal(\'login_or_register\')" class="selected free">
-					<a href="javascript:;">
-					<h4>Website Access</h4>
-					<div class="price">FREE</div>
-					<p>Join our email list</p>
-					<p>View our basic card art list</p>
-					</a>
-				</li>
-			</ul>
+
+	<ul class="sub-buttons">
+		<li id="sub-none" onclick="showModal(\'login_or_register\')" class="selected free">
+			<a href="javascript:;">
+			<h4>Website Access</h4>
+			<div class="price">FREE</div>
+			<p>Join our email list</p>
+			<p>View our basic card art list</p>
+			</a>
+		</li>
+	</ul>
 	';
 }
 print'

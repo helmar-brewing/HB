@@ -118,7 +118,7 @@ print'    </div>
 
 
       // if user does NOT have subscription:
-      if($user->subscription['status'] != 'active') {
+      if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing') {
 				print'
 				<table id="t1" class="tables table-autosort table-autofilter table-stripeclass:alternate table-page-number:t1page table-page-count:t1pages table-filtered-rowcount:t1filtercount table-rowcount:t1allcount">
 									<thead>
