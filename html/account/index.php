@@ -152,21 +152,7 @@ print'
 			<label>Choose Your Subscription</label>
 			<p>When you downgrade your subscription to the free plan, you will continue to receive full digital + paper benefits through the end of your current subscription term. When you sign up for the digital + paper paid subscription, your subscription benefits will begin immediately.</p>
 			<ul class="sub-buttons">
-				<li id="sub-digitalpaper" onclick="sub(\'subscribe\')" class="'.$sub_pay_class.'">
-					<a href="javascript:;">
-						<h4>Digital + Paper Magazine</h4>
-						<div class="price">$39.95</div>
-						<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-						<p>A Helmar Brewing baseball art card sent quarterly, complementing the theme of the magazine</p>
-						<p>Website access to all digital magazines</p>
-						<p>Personal card checklist</p>
-						<p>Import eBay card purchases to checklist</p>
-						<p>Wishlist: eBay auction email notification</p>
-						<p>Enhanced card art lists</p>
-						'.$sub_pay_xnote.'
-						<div class="sub-checkbox"><i id="sub-digitalpaper-checkbox" class="fa '.$sub_pay_check.'"></i></div>
-					</a>
-				</li>
+			
 				<li id="sub-none" onclick="sub(\'cancel\')" class="'.$sub_free_class.'">
 					<a href="javascript:;">
 						<h4>Website Access / Cancel Paid Subscription</h4>
