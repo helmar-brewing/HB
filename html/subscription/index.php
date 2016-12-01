@@ -159,29 +159,11 @@ if($user->login() === 1){
 			</script>
 		';
 	}else{
-		print'
-			<label>Choose Your Annual Subscription</label>
-			<ul class="sub-buttons">
-				<li id="sub-digitalpaper" onclick="sub2(\'subscribe\')" class="selected">
-					<a href="javascript:;">
-					<h4>Digital + Paper Magazine</h4>
-					<div class="price">$39.95</div>
-					<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-					<p>A Helmar Brewing baseball art card sent quarterly, complementing the theme of the magazine</p>
-					<p>Website access to all digital magazines</p>
-					<p>Personal card checklist</p>
-					<p>Import eBay card purchases to checklist</p>
-					<p>Wishlist: eBay auction email notification</p>
-					<p>Enhanced card art lists</p>
-					<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
-					</a>
-				</li>
-			</ul>
-		';
+
 	}
 }else{
-	print'
-	<label>Choose Your Annual Subscription</label>
+
+/*
 	<ul class="sub-buttons">
 		<li id="sub-digitalpaper" onclick="sub2(\'subscribe\')" class="selected">
 			<a href="javascript:;">
@@ -198,7 +180,10 @@ if($user->login() === 1){
 			</a>
 		</li>
 	</ul>
+*/
 
+print'
+<label>Choose Your Annual Subscription</label>
 	<ul class="sub-buttons">
 		<li id="sub-none" onclick="showModal(\'login_or_register\')" class="selected free">
 			<a href="javascript:;">
