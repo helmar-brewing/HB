@@ -233,8 +233,8 @@ if($user->login() === 1){
 			<div class="side-image-content">
 				<h4>Account</h4>
 				<h1>Register</h1>
-				<p>You are registering for a free membership. After creating an account, you will be able to
-				select a paid subscription or remain with the free membership. <a href="'.$protocol.$site.'/subscription">Click to view the available subscription plans.</a></p>
+				<p>You are registering for a free membership. After creating an account, you will
+				have access to all website features. <a href="'.$protocol.$site.'/subscription">Click to view the free website features.</a></p>
 		        <form method="post">
     ';
     if(isset($redir)){

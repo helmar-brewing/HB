@@ -115,74 +115,19 @@ print'    </div>
 	WHERE cardList.series = '".$series_tag."'"
 );
 
-
-
-      // if user does NOT have subscription:
-      if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing') {
-				print'
-				<table id="t1" class="tables table-autosort table-autofilter table-stripeclass:alternate table-page-number:t1page table-page-count:t1pages table-filtered-rowcount:t1filtercount table-rowcount:t1allcount">
-									<thead>
-										<tr>
-											<th class="table-sortable:numeric">Card Number</th>
-											<th class="table-filterable table-sortable:default">Player</th>
-											<th class="table-filterable table-sortable:default">Stance / Position</th>
-											<th class="table-filterable table-sortable:default">Team</th>
-											<th class="table-sortable:numeric">Active Auction</th>
-										</tr>
-									</thead>
-									<tbody>
-				';
-
-                $i = 0;
-                if($R_cards !== FALSE){
-                    $R_cards->data_seek(0);
-                    while($card = $R_cards->fetch_object()){
-                        print'
-                            <tr>
-                                <td>'.$card->cardnum.'</td>
-                                <td>'.$card->player.'</td>
-                                <td>'.$card->description.'</td>
-                                <td>'.$card->team.'</td>
-
-                        ';
-												// add ebay auction if active
-													print '<td><a href="http://www.ebay.com/itm/'. $wishlist[$series_tag.'-'.$card->cardnum]['auctionID'].'/" target="_blank">'.$wishlist[$series_tag.'-'.$card->cardnum]['auctionID'].'</a></td>';
-
-
-                        print'
-                                </td>
-                            </tr>
-                        ';
-                        $i++;
-                        $updated = $card->updatedate;
-                    }
-                    $R_cards->free();
-                }else{
-                    print'
-                        <tr><td colspan="4">could not get list of cards</td></tr>
-                    ';
-                }
-                print'
-                          </tbody>
-                        </table>
-                        <p>
-                            Card list last updated: '.$updated.'<br/>
-                            Number of Records: '.$i.'
-                        </p>
-
-                ';
-
-      }else{
         // do this if the user subscription = active
+				// thanks internet!
+				// http://www.javascripttoolbox.com/lib/table/examples.php
+				//
 
             print'
 						<table id="t1" class="tables table-autosort table-autofilter table-stripeclass:alternate table-page-number:t1page table-page-count:t1pages table-filtered-rowcount:t1filtercount table-rowcount:t1allcount">
                       <thead>
                         <tr>
                           <th class="table-sortable:numeric">Card Number</th>
-                          <th class="table-filterable table-sortable:default">Player</th>
-                          <th class="table-filterable table-sortable:default">Stance / Position</th>
-                          <th class="table-filterable table-sortable:default">Team</th>
+                          <th class="table-filterable table-sortable:ignorecase">Player</th>
+                          <th class="table-filterable table-sortable:ignorecase">Stance / Position</th>
+                          <th class="table-filterable table-sortable:ignorecase">Team</th>
                           <th class="table-sortable:date">Last Sold Date</th>
                           <th class="table-sortable:currency">Max Sell Price</th>
                           <th>Pictures</th>
@@ -306,8 +251,6 @@ print'    </div>
 
 
             ';
-
-      }
 
 
 

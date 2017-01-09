@@ -35,19 +35,6 @@ if(isset($user)){
    if( $user->login() == 1 || $user->login() == 2 ){
    /* do this code if user is logged in */
 
-		// if user does NOT have subscription:
-      if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing') {
-
-					print '
-				  <p>
-					  Sorry, you do not have a paid membership! Please checkout our paid subscriptions so you can view your personal Helmar card art checklist!
-				  </p>
-				  ';
-
-			  }else{
-
-
-
 				   // set the name of the files to be downloaded
 				   $file = $user->username.'-checklist.csv';
 
@@ -130,17 +117,17 @@ if(isset($user)){
 						 // delete the file from the server
 						 unlink($file);
 
-			  } // end if user is active
+
 
 
 
    /* END code if user is logged in */
    }else{
    /* do this if user is not logged in */
-   print 'No Data to Download';    }
+   print 'To view Checklist, please log in or create an account';    }
 }else{
    /* do this if user is not logged in */
-   print 'No Data to Download';
+   print 'To view Checklist, please log in or create an account';
 }
 
 // close database connections

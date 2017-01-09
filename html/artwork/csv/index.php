@@ -59,47 +59,6 @@ if(isset($user)){
        // query to pull from cardList series
       $R_cards = $db_main->query("SELECT * FROM cardList WHERE series = '".$series_tag."'");
 
-
-
-
-
-
-             // if user does NOT have subscription:
-             if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing') {
-
-                   // set the headers for the spreadsheet,
-                   $csvheaders = array('Series','Card Number','Player Name','Position','Team Name');
-
-                   // write the headers to the file
-                   fputcsv($fp, $csvheaders);
-
-
-
-                   // write the file with a while loop. you could also instead build an array of your data with a while loop, up before you set the filename.
-                   // that would allow you to make sure that there were no errors, then use a for each loop down where to write the data.
-                   // it would also allow you to change the format of the info form the database.
-                   // for example, in this dataset perhaps 'vote' is a booleen in the database, but you want to display it as 'yes', or 'no' in the CSV.
-                   $result = $db_main->query("SELECT * FROM cardList WHERE series = '".$series_tag."'");
-                   if($result != FALSE){
-                   	$result->data_seek(0);
-                   	while($object = $result->fetch_object()){
-                   		// your csvline needs to be a simple array
-                   		$csvline = array($series_name,$object->cardnum,$object->player,$object->description,$object->team);
-                   		fputcsv($fp, $csvline);
-                   	}
-                   }
-
-
-
-
-
-
-
-
-             }else{
-               // do this if the user subscription = active
-
-
                // set the headers for the spreadsheet,
                $csvheaders = array('Series','Card Number','Player Name','Position','Team Name','Last Sold','Max Sell');
 
@@ -121,11 +80,6 @@ if(isset($user)){
                    fputcsv($fp, $csvline);
                  }
                }
-
-
-             }  // end code for if user is logged in or not (this ends the ELSE)
-
-
 
 
 
@@ -167,10 +121,10 @@ if(isset($user)){
    /* END code if user is logged in */
    }else{
    /* do this if user is not logged in */
-   print 'No Data to Download';    }
+   print 'To view Checklist, please log in or create an account';    }
 }else{
    /* do this if user is not logged in */
-   print 'No Data to Download';
+   print 'To view Checklist, please log in or create an account';
 }
 
 // close database connections

@@ -103,8 +103,10 @@ print'
 		<h1 class="pagetitle">Baseball History &amp; Art Subscription</h1>
 		<section class="subscription">
 ';
-if($user->login() === 1){
-	if(in_array($user->subscription['status'], array('active','trialing'),TRUE)) {
+
+if(isset($user)){
+	 if( $user->login() === 1 || $user->login() === 2 ){
+
 		print'
 			<div class="sub-row">
 				<div class="credit-card">
@@ -142,45 +144,51 @@ if($user->login() === 1){
 				}
 
 			}
-			print'</ul>';
+			print'</ul><p></p>';
 
 		print'
 				</div>
 				<div class="credit-card">
-					<label>Current Subscription</label>
-					<div id="sub-info"></div>
-					<p><a href="'.$protocol.$site.'/account/">Manage your subscription</a> on the <a href="'.$protocol.$site.'/account/">account</a> page.</p>
+					<p></p>
 				</div>
 			</div>
-			<script>
-				$( document ).ready(function() {
-					currentSub();
-				});
-			</script>
+
 		';
 	}else{
+		print'
+		<label>Click below to join FREE! </label>
+			<ul class="sub-buttons">
+				<li id="sub-none" onclick="showModal(\'login_or_register\')" class="selected free">
+					<a href="javascript:;">
+					<h4>Website Access</h4>
+					<div class="price">FREE</div>
+					<p>Join our email list</p>
+					<p>View our FULL card art list</p>
+					<p>Create a personal card checklist</p>
+					<p>Card wishlist - be notified when your card is listed on eBay</p>
+					<p>Baseball History & Art - View prior digital magazines</p>
+					</a>
+				</li>
+			</ul>
+			';
 
+		print'
+				</section>
+			</div>
+			<div class="modal-holder" id="login_or_register">
+				<div class="modal-wrap">
+					<div class="modal">
+						<i id="modal_close" class="close fa fa-times" onclick="hideModal(\'login_or_register\');"></i>
+						<h1>Do you have an account?</h1>
+						<a class="button" href="'.$protocol.$site.'/account/register/">Register</a>
+						<a class="button" href="'.$protocol.$site.'/account/login/?redir='.$currentpage.'">Log in</a>
+					</div>
+				</div>
+			</div>
+		';
 	}
 }else{
 
-/*
-	<ul class="sub-buttons">
-		<li id="sub-digitalpaper" onclick="sub2(\'subscribe\')" class="selected">
-			<a href="javascript:;">
-			<h4>Digital + Paper Magazine</h4>
-			<div class="price">$39.95</div>
-			<p>A paper copy of the quarterly magazine sent to you when they are released</p>
-			<p>A Helmar Brewing baseball art card sent quarterly, complementing the theme of the magazine</p>
-			<p>Website access to all digital magazines</p>
-			<p>Personal card checklist</p>
-			<p>Import eBay card purchases to checklist</p>
-			<p>Wishlist: eBay auction email notification</p>
-			<p>Enhanced card art lists</p>
-			<p><strong>Note: You will receive your first magazine starting next quarter ('.$dateReturn.')</strong></p>
-			</a>
-		</li>
-	</ul>
-*/
 
 print'
 <label>Choose Your Annual Subscription</label>
@@ -190,12 +198,15 @@ print'
 			<h4>Website Access</h4>
 			<div class="price">FREE</div>
 			<p>Join our email list</p>
-			<p>View our basic card art list</p>
+			<p>View our FULL card art list</p>
+			<p>Create a personal card checklist</p>
+			<p>Card wishlist - be notified when your card is listed on eBay</p>
+			<p>Baseball History & Art - View prior digital magazines</p>
 			</a>
 		</li>
 	</ul>
 	';
-}
+
 print'
 		</section>
 	</div>
@@ -211,7 +222,7 @@ print'
 	</div>
 ';
 
-
+}
 
 /* FOOTER */ require('layout/footer1.php');
 

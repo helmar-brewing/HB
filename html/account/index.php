@@ -149,29 +149,36 @@ print'
 		<h1 class="pagetitle">Your Account</h1>
 		<section class="subscription">
 			<h2>Baseball History Subscription</h2>
-			<label>Choose Your Subscription</label>
-			<p>When you downgrade your subscription to the free plan, you will continue to receive full digital + paper benefits through the end of your current subscription term. When you sign up for the digital + paper paid subscription, your subscription benefits will begin immediately.</p>
+			<label>Your Subscription</label>
+			<p>Below is your current subsctiption</p>
 			<ul class="sub-buttons">
-			
+
 				<li id="sub-none" onclick="sub(\'cancel\')" class="'.$sub_free_class.'">
-					<a href="javascript:;">
-						<h4>Website Access / Cancel Paid Subscription</h4>
-						<div class="price">FREE</div>
-						<p>Join our email list</p>
-						<p>View our basic card art list</p>
-						<div class="sub-checkbox"><i id="sub-none-checkbox" class="fa '.$sub_free_check.'"></i></div>
-					</a>
+				<a href="javascript:;">
+				<h4>Website Access</h4>
+				<div class="price">FREE</div>
+				<p>Join our email list</p>
+				<p>View our FULL card art list</p>
+				<p>Create a personal card checklist</p>
+				<p>Card wishlist - be notified when your card is listed on eBay</p>
+				<p>Baseball History & Art - View prior digital magazines</p>
+				</a>
 				</li>
 			</ul>
 			<div class="sub-row">
 				<div class="credit-card">
 					<label>Current Subscription</label>
-					<div id="sub-info"></div>
+					<div><p>Your have full website access</p></div>
 				</div>
 				<div class="credit-card">
+	';
+
+
+if($card_button_text==='Update Card'){
+	print'
 					<form action="" method="POST" id="payment-form">
 						<div class="payment-errors" id="payment-errors">'.$msg.'</div>
-						<label>Card Number</label>
+						<label>Card Number (Used only to update CC on file)</label>
 						<input type="text" maxlength="30" id="card_number" data-stripe="number" value="'.$card_num.'" />
 						<fieldset class="exp">
 							<label>Expiration</label>
@@ -183,6 +190,10 @@ print'
 						</fieldset>
 						<button id="add_update_card" type="submit">'.$card_button_text.'</button>
 					</form>
+		';
+	}
+
+print'
 				</div>
 			</div>
 		</section>

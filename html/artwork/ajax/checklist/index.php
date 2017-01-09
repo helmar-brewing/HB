@@ -51,9 +51,9 @@ try{
 	}
 
 	// check subscription
-	if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing'){
-		throw new Exception('You must have an active subscription to update your checklist');
-	}
+	//if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing'){
+	//	throw new Exception('You must have an active subscription to update your checklist');
+	//}
 
 	// get current qty
 	$quantity = db1($db_main, "SELECT quantity FROM userCardChecklist WHERE userid='".$user->id."' AND series='$series' and cardnum='".$_GET['cardnum']."' LIMIT 1");

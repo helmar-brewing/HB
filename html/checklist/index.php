@@ -19,7 +19,7 @@ require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
-$currentpage = 'userchecklist/';
+$currentpage = 'checklist/';
 
 
 
@@ -56,18 +56,7 @@ print'
 		/* do this code if user is logged in */
 
 
-      // if user does NOT have subscription:
-      if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing') {
 
-				 print'
-
-          <p>
-              Sorry, you do not have a paid membership! Please checkout our paid subscriptions so you can view your personal Helmar card art checklist!
-          </p>
-
-          ';
-
-      }else{
         // do this if the user subscription = active
 
 				print'
@@ -389,7 +378,7 @@ FROM userCardChecklist
 					            ';
 
 					      }
-					}
+
 
 
 		/* END code if user is logged in, but not paid subscription */
@@ -398,7 +387,7 @@ FROM userCardChecklist
 		print'
 
 		<p>
-				Sorry, are not logged in! Please login to view your Helmar artwork checklist. If you are not a paid subscriber, sign up for a paid subscription so you can track your personal Helmar card artwork purchases!
+				Sorry, are not logged in! Please login to view your Helmar artwork checklist. If you are not a subscriber, sign up for a subscription so you can track your personal Helmar card artwork purchases!
 		</p>
 
 		';	}
@@ -406,7 +395,7 @@ FROM userCardChecklist
 		/* do this if user is not logged in */
 		print '
 		<p>
-				Sorry, are not logged in! Please login to view your Helmar artwork checklist. If you are not a paid subscriber, sign up for a paid subscription so you can track your personal Helmar card artwork purchases!
+				Sorry, are not logged in! Please login to view your Helmar artwork checklist. If you are not a subscriber, sign up for a subscription so you can track your personal Helmar card artwork purchases!
 		</p>';
 		}
 
