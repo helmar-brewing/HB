@@ -27,7 +27,14 @@ class SubRedirException extends Exception{}
 
 $user = new phnx_user;
 $user->checklogin(1);
-$user->checksub();
+
+/*
+	stop the subsctiption check to speed up response since it is no longer needed
+	set all users to an active subscription so every who is logged in can view magazines
+*/
+
+// $user->checksub();
+$user->subscription[status] = 'active';
 
 $db_auth->close();
 $db_main->close();
@@ -44,17 +51,17 @@ try{
             throw new SubException('x1');
 			break;
 		case 'none':
-  //          throw new SubRedirException('/subscription/?status=none');
-	//		break;
+        	throw new SubRedirException('/subscription/?status=none');
+			break;
 		case 'past_due':
-	//		throw new SubRedirException('/subscription/?status=past_due');
-	//		break;
+			throw new SubRedirException('/subscription/?status=past_due');
+			break;
 		case 'unpaid':
-//			throw new SubRedirException('/subscription/?status=unpaid');
-// 			break;
+			throw new SubRedirException('/subscription/?status=unpaid');
+			break;
 		case 'canceled':
-//			throw new SubRedirException('/subscription/?status=canceled');
-//			break;
+			throw new SubRedirException('/subscription/?status=canceled');
+			break;
 		case 'trialing':
 		case 'active':
 
