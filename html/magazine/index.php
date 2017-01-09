@@ -43,17 +43,17 @@ try{
             throw new SubException('x1');
 			break;
 		case 'none':
-            throw new SubRedirException('/subscription/?status=none');
-			break;
+  //          throw new SubRedirException('/subscription/?status=none');
+	//		break;
 		case 'past_due':
-			throw new SubRedirException('/subscription/?status=past_due');
-			break;
+	//		throw new SubRedirException('/subscription/?status=past_due');
+	//		break;
 		case 'unpaid':
-			throw new SubRedirException('/subscription/?status=unpaid');
-			break;
+//			throw new SubRedirException('/subscription/?status=unpaid');
+// 			break;
 		case 'canceled':
-			throw new SubRedirException('/subscription/?status=canceled');
-			break;
+//			throw new SubRedirException('/subscription/?status=canceled');
+//			break;
 		case 'trialing':
 		case 'active':
 
