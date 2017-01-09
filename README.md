@@ -1,4 +1,5 @@
-[![Deployment status from dploy.io](https://helmar.dploy.io/badge/23779029970145/26313.png)](http://helmar.dploy.io)
+Production Server Deployment:
+[![Deployment status from DeployBot](https://helmar.deploybot.com/badge/02267417982087/28538.svg)](http://deploybot.com)
 
 
 [Checking for Subscription](docs/subscription.md)
