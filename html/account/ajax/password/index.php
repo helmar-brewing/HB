@@ -46,7 +46,7 @@ try{
     // send the message
     $html    = '<div style="line-height:1.3; font-family:arial, sans-serif; font-size:12pt; max-width:500px">';
     $html   .= '<p>Helmar Brewing Password Reset</p>';
-    $html   .= '<p>Please click on this link to reset your password.<br/><a href="'.$protocol.$site.'/account/recover/password/?token='.$id.'_'.$token.'">'.$protocol.$site.'/account/recover/password/?token='.$id.'_'.$token.'</a></p>';
+    $html   .= '<p>Please click on this link to reset your password.<br/> <a href="'.$protocol.$site.'/account/recover/password/?token='.$id.'_'.$token.'">'.$protocol.$site.'/account/recover/password/?token='.$id.'_'.$token.'</a> <br/></p>';
     $html   .= '<p>Please note, this is a single use link. Once you click on it it will become invalid.</p>';
     $html   .= '</div>';
     $to =	array(array("email" => $email, "name" => $username));
