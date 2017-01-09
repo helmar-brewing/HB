@@ -152,7 +152,8 @@ if(isset($user)){
 					<p></p>
 				</div>
 			</div>
-
+		</section>
+	</div>
 		';
 	}else{
 		print'
