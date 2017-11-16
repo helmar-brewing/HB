@@ -43,12 +43,16 @@ print'
 		<div class="artwork">
 			<h4>Artwork</h4>
 			<h1>Helmar Artwork</h1>
+					<p>Welcome to the Helmar Brewing Artwork page. Here you will find current and retired card series. Click on any of the artwork series
+					to view series info along with a card checklist for that series. If you wish to see a checklist of all cards in all series, <a href="'.$protocol.$site.'/artwork/allseries/"><u>CLICK HERE</u></a>.</p>
 		';
 
 		if($series_sql !== FALSE){
 
 				print '
 				<div class="auctions">
+
+
 				<ul id="auction_list">';
 
 		    $series_sql->data_seek(0);
