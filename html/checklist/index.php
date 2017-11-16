@@ -306,22 +306,22 @@ FROM userCardChecklist
 										$backlarge  = '/images/cardPics/large/'.$card->series.'_'.$card->cardnum.'_Back.jpg';
 
 					                    //check if either pic exists
-					                    if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic) || file_exists($_SERVER['DOCUMENT_ROOT'].$backpic) ){
+					                    if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) || file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
 
 					                        // print the front pic if exists
-					                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic)){
+					                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
 					                            print'
 																			<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
 					                            ';
 					                        }
 
 					                        // insert space
-					                        if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontpic) && file_exists($_SERVER['DOCUMENT_ROOT'].$backpic) ){
+					                        if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) && file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
 					                            print'&nbsp;&nbsp;';
 					                        }
 
 					                        // print the back pic if exists
-					                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$backpic)){
+					                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
 					                            print'
 																			<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
 					                            ';
