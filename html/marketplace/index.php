@@ -59,7 +59,7 @@ if(isset($user)){
 		/* do this code if user is logged in */
 
 
-		// selling 
+		// selling
 
 
 		// get unique users, want the user who has the farthest end date (newest card listed)
@@ -67,7 +67,7 @@ if(isset($user)){
 		SELECT marketSale.userid, users.*
 		from marketSale
 		LEFT JOIN users ON users.userid = marketSale.userid
-		where expired = 'N' and $user->id <> marketSale.userid
+		WHERE expired = 'N' and ".$user->id." <> marketSale.userid
 		GROUP BY marketSale.userid
 		ORDER BY max(endDate) DESC
 		"
@@ -75,7 +75,7 @@ if(isset($user)){
 
 
 		if($R_cards !== FALSE){
-	
+
 		// grab card info --- need to left join on the card list table on series and card num, sory by series, card num
 		$R_cards2 = $db_main->query("
 		SELECT marketSale.*, cardList.*
@@ -84,11 +84,11 @@ if(isset($user)){
 		WHERE marketSale.expired = 'N' and $user->id <> marketSale.userid
 		"
 		);
-	
+
 
 		print '<h2>Marketplace Items for Sale</h2>
 		<p>The following users have items listed for sale on the helmar market place. Click on the items you\'re interested in to reach out to that user!</p>';
-	
+
 				print'
 							<table>
 						  <thead>
@@ -121,19 +121,19 @@ if(isset($user)){
 									<td>'.$card2->player.'</td>
 									<td>'.$card2->description.'</td>
 									<td>'.$card2->team.'</td>
-				
+
 									<td>x1</td>
 									<td>x2</td>
 									<td>pcitures</td>
 								';
 						}
-						
+
 					}
 
-	
+
 						/* end row */
 						print '</tr>';
-	
+
 					}
 
 
@@ -148,16 +148,16 @@ if(isset($user)){
 						  </tbody>
 						</table>
 						';
-			
+
 
 
 
 print '<p></p><p></p>';
 
 
-			// buying 
+			// buying
 
-		
+
 		// get unique users, want the user who has the farthest end date (newest card listed)
 		$R_cards = $db_main->query("
 		SELECT marketWishlist.userid, users.*
@@ -171,7 +171,7 @@ print '<p></p><p></p>';
 
 
 		if($R_cards !== FALSE){
-	
+
 		// grab card info --- need to left join on the card list table on series and card num, sory by series, card num
 		$R_cards2 = $db_main->query("
 		SELECT marketWishlist.*, cardList.*
@@ -180,11 +180,11 @@ print '<p></p><p></p>';
 		WHERE marketWishlist.expired = 'N' and $user->id <> marketWishlist.userid
 		"
 		);
-	
+
 
 		print '<h2>Marketplace Items Wanted</h2>
 		<p>The following users are interested in the items listed below. Click on the items if you would like to trade or reach out to that user!</p>';
-	
+
 				print'
 							<table>
 						  <thead>
@@ -217,19 +217,19 @@ print '<p></p><p></p>';
 									<td>'.$card2->player.'</td>
 									<td>'.$card2->description.'</td>
 									<td>'.$card2->team.'</td>
-				
+
 									<td>x1</td>
 									<td>x2</td>
 									<td>pcitures</td>
 								';
 						}
-						
+
 					}
 
-	
+
 						/* end row */
 						print '</tr>';
-	
+
 					}
 
 
@@ -257,6 +257,24 @@ print '<p></p><p></p>';
 
 print'
 	</div>
+    <div class="modal-holder" id="user-to-user">
+        <div class="modal-wrap">
+            <div class="modal user-to-user">
+                <label>From Email</label>
+                <input id="email" type="text" disabled>
+                <p><a href="/account/">Update your email</a></p>
+                <label for="name">From Name</label>
+                <input id="name" type="text">
+                <label for="subject">Subject</label>
+                <input id="subject" type="text">
+                <textarea id="message_body"></textarea>
+                <input id="disclaimer" type="checkbox">
+                <p>Disclaimer text goes here.</p>
+                <button id="send" disabled>Send</button>
+                <button id="cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
 ';
 
 

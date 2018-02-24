@@ -16,23 +16,6 @@
 		"oAP": "\/.gitignore",
 		"oF": 0
 		},
-	"\/css\/style.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/css\/style-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/css\/style.css.map": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/css\/style.css.map",
-		"oF": 0
-		},
 	"\/docs\/address.md": {
 		"cB": 0,
 		"cS": 0,
@@ -891,6 +874,13 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/html\/magazine\/index.php",
+		"oF": 0
+		},
+	"\/html\/marketplace\/ajax\/send\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/marketplace\/ajax\/send\/index.php",
 		"oF": 0
 		},
 	"\/html\/marketplace\/index.php": {
@@ -4753,7 +4743,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/helmar.test",
+	"externalServerAddress": "https:\/\/helmar.test",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",
