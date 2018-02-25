@@ -93,13 +93,13 @@ if(isset($user)){
 							<table>
 						  <thead>
 							<tr>
+							<th>Series</th>
 							<th>Card Number</th>
 							<th>Player</th>
 							<th>Stance / Position</th>
 							<th>Team</th>
-							<th>x</th>
-							<th>x</th>
-							<th>Pictures</th>
+							<th>Stock Pictures</th>
+							<th>Seller Note</th>
 							</tr>
 						  </thead>
 						  <tbody>
@@ -117,14 +117,58 @@ if(isset($user)){
 						if($card->userid === $card2->userid){
 							print'
 								<tr>
+									<td>'.$card2->series.'</td>
 									<td>'.$card2->cardnum.'</td>
 									<td>'.$card2->player.'</td>
 									<td>'.$card2->description.'</td>
-									<td>'.$card2->team.'</td>
+									<td>'.$card2->team.'</td>';
 
-									<td>x1</td>
-									<td>x2</td>
-									<td>pcitures</td>
+
+
+									// define the pictures
+									$frontpic = '/images/cardPics/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
+									$frontthumb = '/images/cardPics/thumb/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
+									$backpic  = '/images/cardPics/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
+									$backthumb  = '/images/cardPics/thumb/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
+									$frontlarge = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
+									$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
+
+							print ' <td>';
+
+					                    //check if either pic exists
+					                    if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) || file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
+
+					                        // print the front pic if exists
+					                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
+					                            print'
+																			<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
+					                            ';
+					                        }
+
+					                        // insert space
+					                        if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) && file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
+					                            print'&nbsp;&nbsp;';
+					                        }
+
+					                        // print the back pic if exists
+					                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
+					                            print'
+																			<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
+					                            ';
+
+					                        }
+
+					                    // neither pic exists print message instead
+					                    }else{
+					                        print'
+					                                <i>no picture</i>
+					                        ';
+					                    }
+
+
+
+							print ' </td>
+									<td>'.$card2->card_note.'</td>
 								';
 						}
 
@@ -189,12 +233,11 @@ print '<p></p><p></p>';
 							<table>
 						  <thead>
 							<tr>
+							<th>Series</th>
 							<th>Card Number</th>
 							<th>Player</th>
 							<th>Stance / Position</th>
 							<th>Team</th>
-							<th>x</th>
-							<th>x</th>
 							<th>Pictures</th>
 							</tr>
 						  </thead>
@@ -205,7 +248,7 @@ print '<p></p><p></p>';
 				while($card = $R_cards->fetch_object()){
 
 					print'
-						<tr><td colspan="7" style="background: #f2f2f2;">'.strtoupper(substr($card->firstname,0,1)).' from '.$card->state.'</td></tr>
+						<tr><td colspan="6" style="background: #f2f2f2;">'.strtoupper(substr($card->firstname,0,1)).' from '.$card->state.'</td></tr>
 					';
 
 					$R_cards2->data_seek(0);
@@ -213,15 +256,48 @@ print '<p></p><p></p>';
 						if($card->userid === $card2->userid){
 							print'
 								<tr>
-									<td>'.$card2->cardnum.'</td>
+								<td>'.$card2->series.'</td>
+								<td>'.$card2->cardnum.'</td>
 									<td>'.$card2->player.'</td>
 									<td>'.$card2->description.'</td>
 									<td>'.$card2->team.'</td>
+									<td>';
+									
+									
+										//check if either pic exists
+										if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) || file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
 
-									<td>x1</td>
-									<td>x2</td>
-									<td>pcitures</td>
-								';
+											// print the front pic if exists
+											if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
+												print'
+																			<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
+												';
+											}
+
+											// insert space
+											if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) && file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
+												print'&nbsp;&nbsp;';
+											}
+
+											// print the back pic if exists
+											if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
+												print'
+																			<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
+												';
+
+											}
+
+										// neither pic exists print message instead
+										}else{
+											print'
+													<i>no picture</i>
+											';
+										}
+
+
+									
+									
+									print '</td>';
 						}
 
 					}
@@ -237,7 +313,7 @@ print '<p></p><p></p>';
 					$R_cards2->free();
 				}else{
 					print'
-						<tr><td colspan="7">could not get list of cards</td></tr>
+						<tr><td colspan="6">could not get list of cards</td></tr>
 					';
 				}
 				print'
