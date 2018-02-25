@@ -862,6 +862,13 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/html\/js\/scripts.js.map": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/js\/scripts.js.map",
+		"oF": 0
+		},
 	"\/html\/magazine\/.htaccess": {
 		"cB": 0,
 		"ft": 8192,
@@ -876,18 +883,11 @@
 		"oAP": "\/html\/magazine\/index.php",
 		"oF": 0
 		},
-	"\/html\/marketplace\/ajax\/send\/index.php": {
+	"\/html\/marketplace\/ajax\/user_to_user\/index.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "\/html\/marketplace\/ajax\/send\/index.php",
-		"oF": 0
-		},
-	"\/html\/marketplace\/index.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/html\/marketplace\/index.php",
+		"oAP": "\/html\/marketplace\/ajax\/user_to_user\/index.php",
 		"oF": 0
 		},
 	"\/html\/pay\/.htaccess": {
@@ -3239,6 +3239,16 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/scripts\/_marketplace.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/html\/js\/_marketplace.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
 	"\/scripts\/_nav.js": {
 		"ft": 64,
 		"ma": 0,
@@ -3321,7 +3331,7 @@
 		},
 	"\/scripts\/scripts.js": {
 		"ft": 64,
-		"ma": 0,
+		"ma": 1,
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/html\/js\/scripts.js",

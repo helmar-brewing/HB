@@ -276,11 +276,24 @@ print'
         </div>
     </div>
 ';
+?>
+
+
+<script>
+    $( document ).ready( function(){
+        $('#disclaimer').on('change', function(){
+            userToUserAcceptDisclaimer();
+        });
+        $('#cancel').on('click', function(){
+            userToUserCancel();
+        });
+    });
+</script>
 
 
 
 
-
+<?php
 /* FOOTER */ require('layout/footer1.php');
 
 $db_auth->close();
