@@ -116,7 +116,7 @@ if(isset($user)){
 					while($card2 = $R_cards2->fetch_object()){
 						if($card->userid === $card2->userid){
 							print'
-								<tr>
+								<tr class="item-for-sale">
 									<td>'.$card2->series.'</td>
 									<td>'.$card2->cardnum.'</td>
 									<td>'.$card2->player.'</td>
@@ -262,8 +262,8 @@ print '<p></p><p></p>';
 									<td>'.$card2->description.'</td>
 									<td>'.$card2->team.'</td>
 									<td>';
-									
-									
+
+
 										//check if either pic exists
 										if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) || file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
 
@@ -295,8 +295,8 @@ print '<p></p><p></p>';
 										}
 
 
-									
-									
+
+
 									print '</td>';
 						}
 
@@ -356,12 +356,17 @@ print'
 
 
 <script>
-    $( document ).ready( function(){
+    $(document).ready( function(){
         $('#disclaimer').on('change', function(){
             userToUserAcceptDisclaimer();
         });
         $('#cancel').on('click', function(){
             userToUserCancel();
+        });
+    });
+    $(document).ready( function(){
+        $('.item-for-sale').on('click', function(){
+            userToUser();
         });
     });
 </script>

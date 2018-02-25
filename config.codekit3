@@ -241,6 +241,13 @@
 		"oAP": "\/html\/artwork\/ajax\/marketSale\/index.php",
 		"oF": 0
 		},
+	"\/html\/artwork\/ajax\/marketSaleComment\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/artwork\/ajax\/marketSaleComment\/index.php",
+		"oF": 0
+		},
 	"\/html\/artwork\/ajax\/marketWishlist\/index.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -385,6 +392,20 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/html\/checklist\/ajax\/index.php",
+		"oF": 0
+		},
+	"\/html\/checklist\/ajax\/renewMarketSale\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/checklist\/ajax\/renewMarketSale\/index.php",
+		"oF": 0
+		},
+	"\/html\/checklist\/ajax\/renewMarketWant\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/checklist\/ajax\/renewMarketWant\/index.php",
 		"oF": 0
 		},
 	"\/html\/checklist\/csv\/index.php": {
@@ -888,6 +909,13 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/html\/marketplace\/ajax\/user_to_user\/index.php",
+		"oF": 0
+		},
+	"\/html\/marketplace\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/marketplace\/index.php",
 		"oF": 0
 		},
 	"\/html\/pay\/.htaccess": {
