@@ -71,8 +71,8 @@ try{
 	// update the qty
 
 	$now = time();
-	$expire = $now + 90*24*60*60;
-	// 90 days in future
+	$expire = $now + 270*24*60*60;
+	// 270 days in future
 
 	if($quantity === '0'){
 		// if the qty is 0 set it to 1
@@ -83,6 +83,7 @@ try{
 			$db_main->query("UPDATE marketWishlist SET quantity=1, endDate=$expire, expired='N' WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
 		}
 		$db_main->query("UPDATE marketWishlist SET lastBumpDate=$now WHERE userid='".$user->id."' AND expired = 'N'");
+		$db_main->query("UPDATE marketWishlist SET endDate=$expire WHERE userid='".$user->id."' AND expired = 'N'");
 		$msg = 'You have added card '.$_GET['cardnum'].' to your wishlist';
 	}elseif($quantity === '1'){
 		// if the qty is 1 set it to 0
@@ -101,6 +102,7 @@ try{
 			$db_main->query("UPDATE marketWishlist SET quantity=1, endDate=$expire, expired='N' WHERE userid='".$user->id."' AND series='".$series."' and cardnum='".$_GET['cardnum']."' LIMIT 1");
 		}
 		$db_main->query("UPDATE marketWishlist SET lastBumpDate=$now WHERE userid='".$user->id."' AND expired = 'N'");
+		$db_main->query("UPDATE marketWishlist SET endDate=$expire WHERE userid='".$user->id."' AND expired = 'N'");
 		$msg = 'You have added card '.$_GET['cardnum'].' to your wishlist';
 	}else{
 		throw new Exception('There was an error updating the card. [0x1]');

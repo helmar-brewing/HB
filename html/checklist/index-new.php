@@ -280,7 +280,7 @@ FROM userCardChecklist
 									$R_cards = $db_main->query("
 
 									SELECT
-					userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketSale,userCardChecklist.marketWishlist, userCardChecklist.dateadded,
+					userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketSale,userCardChecklist.marketWishlist,userCardChecklist.card_note, userCardChecklist.dateadded,
 					cardList.series, cardList.cardnum, cardList.player, cardList.description, cardList.team,
 					series_info.series_name, series_info.series_tag, series_info.sort
 
@@ -300,22 +300,22 @@ FROM userCardChecklist
 									if($MarketSaleQuantity>0){
 										if($MarketSalesBump>0){
 											print '
-											<img src="/img/mktsalesactive.png" alt="Helmar Brewing">
+											<a href="javascript:;" title="Click to bump your Marketplace Sales items to the top of the Marketplace page and extend your expiration date"><img src="/img/mktsalesactive.png" alt="Helmar Brewing" onclick="renewMarketSale()"></a>
 											';
 										}else{
 											print '
-											<img src="/img/mktsalesinactive.png" alt="Helmar Brewing">
+											<img src="/img/mktsalesinactive.png" alt="Helmar Brewing" title="You can only renew every 14 days">
 											';
 										}
 									}
 									if($MarketWishlistQuantity>0){
 										if($MarketWishlistBump>0){
 											print '
-											<img src="/img/mktwishlistactive.png" alt="Helmar Brewing">
+											<a href="javascript:;" title="Click to bump your Marketplace Wanted items to the top of the Marketplace page and extend your expiration date"><img src="/img/mktwishlistactive.png" alt="Helmar Brewing" onclick="renewMarketWish()"></a>
 											';
 										}else{
 											print '
-											<img src="/img/mktwishlistinactive.png" alt="Helmar Brewing">
+											<img src="/img/mktwishlistinactive.png" alt="Helmar Brewing" title="You can only renew every 14 days">
 											';
 										}
 									}
@@ -330,11 +330,11 @@ FROM userCardChecklist
 										<th>Player</th>
 										<th>Stance / Position</th>
 										<th>Team</th>
-										<th>Pictures</th>
-										<th>Checklist</th>
-										<th>Wishlist</th>
-										<th>For Sale on Marketplace</th>
-										<th>Wanted on Marketplace</th>
+										<th>Stock Pictures</th>
+										<th title="Use the checkbox to indicate you own this card">Card Owned <i class="fa fa-info-circle"></i></th>
+										<th title="Use the checkbox to indicate you have an interest in this card when it shows up on eBay. Checking the box, you will receive an email when it goes live">eBay Auction Wishlist <i class="fa fa-info-circle"></i></th>
+										<th title="Use the checkbox to indicate you own this card and wish to sell/trade on the Marketplace Use the comment icon to note any notable items suchs as card condition, quality, and artwork (some Helmar cards have different artwork)">Sell Card on Marketplace <i class="fa fa-info-circle"></i></th>
+										<th title="Use the checkbox to indicate you want to buy/trade for this card on the Marketplace">Want from Marketplace <i class="fa fa-info-circle"></i></th>
 										</tr>
 									  </thead>
 
@@ -433,13 +433,21 @@ FROM userCardChecklist
 											print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
 										}
 
-											
-										if($card->marketSale > 0){
-											print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketSale(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktSale'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+										if($card->quantity > 0){	
+											if($card->marketSale > 0){
+												print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketSale(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktSale'.$card->cardnum.'_'.$card->series.'"></i></a> &nbsp;';
+												if($card->card_note <> ""){
+													print '<a href="javascript:;" title="'.$card->card_note.'"><i class="fa fa-comments" onclick="marketSaleComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note.'\')" id="mktSaleComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
+												}else{
+													print '<a href="javascript:;" title="'.$card->card_note.'"><i class="fa fa-comment-o" onclick="marketSaleComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note.'\')" id="mktSaleComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
+												}
+												print '</td>';
+											} else{
+												print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="marketSale(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktSale'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+											}
 										} else{
-											print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="marketSale(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktSale'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+											print '<td></td>';
 										}
-
 
 
 										if($card->marketWishlist > 0){
@@ -515,13 +523,13 @@ $(document).ready(function() {
     { "width": "13%" },
     { "width": "5%" },
     { "width": "18%" },
-    { "width": "12%" },
-    { "width": "12%" },
-	{ "width": "12%" }, 
+    { "width": "10%" },
+    { "width": "10%" },
+	{ "width": "10%" }, 
 	{ "width": "7%" },
-    { "width": "7%" },
-    { "width": "7%" },
-	{ "width": "7%" }
+    { "width": "9%" },
+    { "width": "9%" },
+	{ "width": "9%" }
   ],
 	//"scrollY": "600px",
 	//"scrollCollapse": true,
@@ -745,7 +753,94 @@ function ebayImport(s){
 
 
 }
+</script>
 
+<script>
+function marketSaleComment(s, c, t){
 
+	var t = prompt("Please enter any comments about your card that you would share with others", t);
+
+    document.getElementById('fullscreenload').style.display = 'block';
+   $.get(
+        "/artwork/ajax/marketSaleComment/",
+		{ series:s, cardnum:c, comment:t },
+//        function( data ) {
+//			if(data.error === 0){
+//				if(data.qty === '1'){
+//					if(window.confirm(txt)){
+//					//	$('#mktSaleComment' + c + '_' + s).removeClass('fa-square-o');
+//					//	$('#mktSaleComment' + c + '_' + s).addClass('fa-check-square-o');
+//						location.reload();
+//					}else{
+//						$.get(
+//							"/artwork/ajax/marketSale/",
+//							{ series:s, cardnum:c },
+//							"json"
+//						);
+//						window.alert("You need to accept terms to list on the Marketplace");
+//					}
+//				}else if(data.qty === '0'){
+//					//	$('#mktSaleComment' + c + '_' + s).removeClass('fa-check-square-o');
+//					//	$('#mktSaleComment' + c + '_' + s).addClass('fa-square-o');
+//						location.reload();
+//				} else {
+//					alert("else part...");
+//				}
+//			}else{
+//				alert(data.msg);
+//				location.reload();
+//			}
+//            document.getElementById('fullscreenload').style.display = 'none';
+//        },
+        "json"
+    )
+    .fail(function() {
+        alert('There was an error, refresh the page.');
+    });
+
+	document.getElementById('fullscreenload').style.display = 'none';
+	alert("Card comment updated");
+	location.reload();
+
+}
+</script>
+
+<script>
+function renewMarketSale(){
+
+document.getElementById('fullscreenload').style.display = 'block';
+$.get(
+	"/checklist/ajax/renewMarketSale/",
+	"json"
+)
+.fail(function() {
+	alert('There was an error, refresh the page.');
+});
+
+document.getElementById('fullscreenload').style.display = 'none';
+alert("All current Market sales cards have been renewed");
+location.reload();
+
+}
+
+</script>
+
+<script>
+function renewMarketWish(){
+
+document.getElementById('fullscreenload').style.display = 'block';
+$.get(
+	"/checklist/ajax/renewMarketWant/",
+	"json"
+)
+.fail(function() {
+	alert('There was an error, refresh the page.');
+});
+
+document.getElementById('fullscreenload').style.display = 'none';
+alert("All current Market wanted cards have been renewed");
+location.reload();
+
+}
 
 </script>
