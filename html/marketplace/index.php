@@ -35,7 +35,9 @@ $user->checksub();
 
 
 ob_end_flush();
-/* <HEAD> */ $head=''; // </HEAD>
+/* <HEAD> */ $head='
+<script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+'; // </HEAD>
 /* PAGE TITLE */ $title='Helmar Brewing Co';
 /* HEADER */ require('layout/header0.php');
 
@@ -116,7 +118,7 @@ if(isset($user)){
 					while($card2 = $R_cards2->fetch_object()){
 						if($card->userid === $card2->userid){
 							print'
-								<tr class="item-for-sale">
+								<tr class="item-for-sale" data-owner-of-card="'.$card->userid.'">
 									<td>'.$card2->series.'</td>
 									<td>'.$card2->cardnum.'</td>
 									<td>'.$card2->player.'</td>
@@ -335,19 +337,28 @@ print'
 	</div>
     <div class="modal-holder" id="user-to-user">
         <div class="modal-wrap">
-            <div class="modal user-to-user">
-                <label>From Email</label>
-                <input id="email" type="text" disabled>
-                <p><a href="/account/">Update your email</a></p>
-                <label for="name">From Name</label>
-                <input id="name" type="text">
-                <label for="subject">Subject</label>
-                <input id="subject" type="text">
+            <div class="modal">
+                <h1>Helmar Brewing Marketplace Messaging</h1>
+                <fieldset>
+                    <label for="name">From Name</label>
+                    <input id="name" type="text">
+                    <label>From Email</label>
+                    <input id="email" type="text" disabled>
+                    <p><a href="/account/">Need to update your email?</a> <a href="/account/">Account Settings</a></p>
+                    <label>To</label>
+                    <input id="to" type="text" disabled>
+                    <label for="subject">Subject</label>
+                    <input id="subject" type="text">
+                </fieldset>
                 <textarea id="message_body"></textarea>
-                <input id="disclaimer" type="checkbox">
-                <p>Disclaimer text goes here.</p>
-                <button id="send" disabled>Send</button>
-                <button id="cancel">Cancel</button>
+                <div class="disclaimer">
+                    <input id="disclaimer" type="checkbox">
+                    <p>Disclaimer text goes here.</p>
+                </div>
+                <div class="buttons">
+                    <button id="send" disabled>Send</button>
+                    <button id="cancel">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
@@ -366,8 +377,16 @@ print'
     });
     $(document).ready( function(){
         $('.item-for-sale').on('click', function(){
-            userToUser();
+            var owner_of_card_id = this.getAttribute('data-owner-of-card');
+            userToUser(owner_of_card_id);
         });
+    });
+</script>
+<script>
+    CKEDITOR.replace( 'message_body', {
+        toolbar: [
+            ['Bold', 'Italic']
+        ]
     });
 </script>
 

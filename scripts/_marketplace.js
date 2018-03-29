@@ -42,24 +42,27 @@ function userToUserAcceptDisclaimer(){
 }
 
 
-function userToUser(){
+function userToUser(owner_of_card_id){
     var defaultSubject = 'I\'m interested in a card you have on the Helmar Brewing Marketplace!';
     showFullScreenLoad();
     $.get(
         "ajax/user_to_user/",
-        null,
-        function( data ) {
-            document.getElementById('name').value = data.name;
-            document.getElementById('email').value = data.email;
+        {
+            owner_of_card_id: owner_of_card_id
+        },
+        function(data) {
+            document.getElementById('name').value = data.from_name;
+            document.getElementById('email').value = data.from_email;
+            document.getElementById('to').value = data.to_line;
             document.getElementById('subject').value = defaultSubject;
             showModal('user-to-user');
             hideFullScreenLoad();
         },
         "json"
-    ).fail(function() {
+    ).fail(function(response) {
+        console.log(response);
         var h1 = 'Error';
-        var content = '<p>There was an error displaying the contact form.<br>[ref: ajax fail]</p>';
+        var content = '<p>There was an error displaying the contact form.<br>[ref: '+response.status+']</p>';
         userToUserError(h1, content);
-
     });
 }
