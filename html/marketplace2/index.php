@@ -37,6 +37,9 @@ $user->checksub();
 ob_end_flush();
 /* <HEAD> */ $head='
 <script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/js/jquery.dataTables.min.css">
 '; // </HEAD>
 /* PAGE TITLE */ $title='Helmar Brewing Co';
 /* HEADER */ require('layout/header0.php');
@@ -92,7 +95,7 @@ if(isset($user)){
 		<p>The following users have items listed for sale on the helmar market place. Click on the items you\'re interested in to reach out to that user!</p>';
 
 				print'
-							<table>
+							<table id="selling" class="display compact">
 						  <thead>
 							<tr>
 							<th>User</th>
@@ -237,7 +240,7 @@ print '<p></p><p></p>';
 		<p>The following users are interested in the items listed below. Click on the items if you would like to trade or reach out to that user!</p>';
 
 				print'
-							<table>
+							<table id="wishlist" class="display compact">
 						  <thead>
 							<tr>
 							<th>User</th>
@@ -408,3 +411,36 @@ print'
 $db_auth->close();
 $db_main->close();
 ?>
+
+<script>
+$(document).ready(function() {
+    $('#selling').DataTable({
+  "columns": [
+    { "width": "10%" },
+    { "width": "11%" },
+    { "width": "7%" },
+    { "width": "19%" },
+    { "width": "13%" },
+	{ "width": "12%" },
+	{ "width": "12%" },
+	{ "width": "16%" }
+  ]
+});
+} );
+</script>
+
+<script>
+$(document).ready(function() {
+    $('#wishlist').DataTable({
+  "columns": [
+    { "width": "10%" },
+    { "width": "13%" },
+    { "width": "7%" },
+    { "width": "23%" },
+    { "width": "15%" },
+	{ "width": "15%" },
+	{ "width": "17%" }
+  ]
+});
+} );
+</script>
