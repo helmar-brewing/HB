@@ -42,10 +42,9 @@ ob_end_flush();
 /* HEADER */ require('layout/header1.php');
 
 print'
-<script language="javascript" type="text/javascript" src="table.js"></script>
-<script language="javascript" type="text/javascript" src="jquery-1.12.4.js"></script>
-<script language="javascript" type="text/javascript" src="jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="jquery.dataTables.min.css">
+<script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery-1.12.4.js"></script>
+<script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://helmarbrewing.com/js/jquery.dataTables.min.css">
 ';
 
 
@@ -531,30 +530,7 @@ $(document).ready(function() {
     { "width": "9%" },
 	{ "width": "9%" }
   ],
-	//"scrollY": "600px",
-	//"scrollCollapse": true,
-	//"scrollX": false,
-	"pageLength": 50,
-	initComplete: function () {
-					 this.api().columns().every( function () {
-							 var column = this;
-							 var select = $('<select><option value=""></option></select>')
-									 .appendTo( $(column.footer()).empty() )
-									 .on( 'change', function () {
-											 var val = $.fn.dataTable.util.escapeRegex(
-													 $(this).val()
-											 );
-
-											 column
-													 .search( val ? '^'+val+'$' : '', true, false )
-													 .draw();
-									 } );
-
-							 column.data().unique().sort().each( function ( d, j ) {
-									 select.append( '<option value="'+d+'">'+d+'</option>' )
-							 } );
-					 } );
-			 }
+	"pageLength": 50
 },
 );
 } );
