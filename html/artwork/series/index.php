@@ -1,4 +1,4 @@
-<?php
+d<?php
 ob_start();
 
 /* ROOT SETTINGS */ require($_SERVER['DOCUMENT_ROOT'].'/root_settings.php');
@@ -19,7 +19,7 @@ require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
-$currentpage = 'artwork/series/'.$_GET['series'].'/';
+$currentpage = 'artwork/series2/'.$_GET['series'].'/';
 $series_id = $_GET['series'];
 
 
@@ -61,8 +61,9 @@ ob_end_flush();
 
 print'
 
-<script language="javascript" type="text/javascript" src="table.js"></script>
-<link rel="stylesheet" type="text/css" href="sorting.css">
+<script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery-1.12.4.js"></script>
+<script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://helmarbrewing.com/js/jquery.dataTables.min.css">
 
 
 <div class="artwork">
@@ -107,7 +108,7 @@ print'    </div>
 
 
 	$R_cards = $db_main->query("
-	SELECT cardList.*, userCardChecklist.quantity, userCardChecklist.wishlistQuantity FROM cardList
+	SELECT cardList.*, userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketWishlist FROM cardList
 	LEFT JOIN userCardChecklist
 		ON cardList.series = userCardChecklist.series
 		AND cardList.cardnum = userCardChecklist.cardnum
@@ -121,19 +122,20 @@ print'    </div>
 				//
 
             print'
-						<table id="t1" class="tables table-autosort table-autofilter table-stripeclass:alternate table-page-number:t1page table-page-count:t1pages table-filtered-rowcount:t1filtercount table-rowcount:t1allcount">
+            <table id="example" class="display compact">
                       <thead>
                         <tr>
-                          <th class="table-sortable:numeric">Card Number</th>
-                          <th class="table-filterable table-sortable:ignorecase">Player</th>
-                          <th class="table-filterable table-sortable:ignorecase">Stance / Position</th>
-                          <th class="table-filterable table-sortable:ignorecase">Team</th>
-                          <th class="table-sortable:date">Last Sold Date</th>
-                          <th class="table-sortable:currency">Max Sell Price</th>
-                          <th>Pictures</th>
-            			        <th>Personal Checklist</th>
-													<th>Personal Wishlist</th>
-													<th class="table-sortable:numeric">Active Auction</th>
+                            <th>Card Number</th>
+                            <th>Player</th>
+                            <th>Stance / Position</th>
+                            <th>Team</th>
+                            <th>Last Sold Date</th>
+                            <th>Max Sell Price</th>
+                            <th>Pictures</th>
+                            <th title="Use the checkbox to indicate you own this card">Card Owned <i class="fa fa-info-circle"></i></th>
+                            <th title="Use the checkbox to indicate you have an interest in this card when it shows up on eBay. Checking the box, you will receive an email when it goes live">eBay Auction Wishlist <i class="fa fa-info-circle"></i></th>
+                            <th title="Use the checkbox to indicate you want to buy/trade for this card on the Marketplace">Want from Marketplace <i class="fa fa-info-circle"></i></th>
+                            <th>Active Auction</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -220,7 +222,15 @@ print'    </div>
 			print '<td><a href="javascript:;"><i class="fa fa-check-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></a></td>';
 		} else{
 			print '<td><a href="javascript:;"><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></a></td>';
-		}
+        }
+
+        
+        if($card->marketWishlist > 0){
+            print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+        } else{
+            print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+        }
+
 
 		// add ebay auction if active
 			print '<td><a href="http://www.ebay.com/itm/'. $wishlist[$series_tag.'-'.$card->cardnum]['auctionID'].'/" target="_blank">'.$wishlist[$series_tag.'-'.$card->cardnum]['auctionID'].'</a></td>';
@@ -274,6 +284,27 @@ print'
 $db_auth->close();
 $db_main->close();
 ?>
+
+<script>
+$(document).ready(function() {
+    $('#example').DataTable({
+  "columns": [
+    { "width": "5%" },
+    { "width": "15%" },
+    { "width": "10%" },
+    { "width": "9%" },
+    { "width": "9%" },
+	{ "width": "9%" }, 
+	{ "width": "7%" },
+    { "width": "9%" },
+    { "width": "9%" },
+	{ "width": "9%" },
+	{ "width": "9%" }
+  ],
+  "pageLength": 50
+});
+} );
+</script>
 
 <script>
 function checklist(s, c){
@@ -332,5 +363,50 @@ function wishlist(s, c){
     .fail(function() {
         alert('There was an error, refresh the page.');
     });
+}
+</script>
+
+<script>
+function marketWishlist(s, c){
+	var txt = "To list a card on the Helmar Brewing Marketplace, you must agree to the following:\n\nYou understand that you are listing a card or cards on the Helmar Brewing Marketplace.\nWithin the Marketplace, your identity will be anonymous. In using the Marketplace, \nanother user may or may not reach out to you via the Marketplace contact form. You \nwill receive this communication to the email you have listed under your \nhelmarbrewing.com account. You are free to communicate with the other party \nas you wish. This will take place outside of the helmarbrewing.com website and \nyou will not hold Helmar Brewing responsible for any issues that may occur outside \nof the helmarbrewing.com website.\n\nHelmar Brewing recommends safe trading practices.\n\nIn order to list your card, you must agree to the above terms. If you do not agree, \nyou will be taken back to the page you were last visiting.\n\nClick \'ok\' to agree to these terms, or click \'cancel\' to return to the checklist";
+    document.getElementById('fullscreenload').style.display = 'block';
+    $.get(
+        "/artwork/ajax/marketWishlist/",
+		{ series:s, cardnum:c },
+        function( data ) {
+			if(data.error === 0){
+				if(data.qty === '1'){
+					if(window.confirm(txt)){
+						$('#mktWish' + c + '_' + s).removeClass('fa-square-o');
+						$('#mktWish' + c + '_' + s).addClass('fa-check-square-o');
+						location.reload();
+					}else{
+						$.get(
+							"/artwork/ajax/marketWishlist/",
+							{ series:s, cardnum:c },
+							"json"
+						);
+						window.alert("You need to accept terms to list on the Marketplace");
+					}
+				}else if(data.qty === '0'){
+						$('#mktWish' + c + '_' + s).removeClass('fa-check-square-o');
+						$('#mktWish' + c + '_' + s).addClass('fa-square-o');
+						location.reload();
+				} else {
+					alert("else part...");
+				}
+			}else{
+				alert(data.msg);
+				location.reload();
+			}
+            document.getElementById('fullscreenload').style.display = 'none';
+        },
+        "json"
+    )
+    
+    .fail(function() {
+        alert('There was an error, refresh the page.');
+    });
+    
 }
 </script>

@@ -1,6 +1,0 @@
-#Fix Rewrite
-Options -Multiviews
-
-RewriteEngine on
-RewriteBase /artwork/series2/
-RewriteRule ^([A-Za-z0-9-]+)/?$ index.php?series=$1 [L]
