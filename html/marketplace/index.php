@@ -37,6 +37,9 @@ $user->checksub();
 ob_end_flush();
 /* <HEAD> */ $head='
 <script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+<script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery-1.12.4.js"></script>
+<script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://helmarbrewing.com/js/jquery.dataTables.min.css">
 '; // </HEAD>
 /* PAGE TITLE */ $title='Helmar Brewing Co';
 /* HEADER */ require('layout/header0.php');
@@ -92,9 +95,10 @@ if(isset($user)){
 		<p>The following users have items listed for sale on the helmar market place. Click on the items you\'re interested in to reach out to that user!</p>';
 
 				print'
-							<table>
+							<table id="selling" class="display compact">
 						  <thead>
 							<tr>
+							<th>User</th>
 							<th>Series</th>
 							<th>Card Number</th>
 							<th>Player</th>
@@ -110,15 +114,19 @@ if(isset($user)){
 				$R_cards->data_seek(0);
 				while($card = $R_cards->fetch_object()){
 
-					print'
-						<tr><td colspan="7" style="background: #f2f2f2;">'.strtoupper(substr($card->firstname,0,1)).' from '.$card->state.'</td></tr>
-					';
-
 					$R_cards2->data_seek(0);
 					while($card2 = $R_cards2->fetch_object()){
 						if($card->userid === $card2->userid){
+
+							if($card->state == ""){
+								$greetings=$card->firstname;
+							}else{
+								$greetings=$card->firstname.' from '.$card->state;
+							}
+
 							print'
 								<tr class="item-for-sale" data-owner-of-card="'.$card->userid.'">
+									<td>'.$greetings.'</td>
 									<td>'.$card2->series.'</td>
 									<td>'.$card2->cardnum.'</td>
 									<td>'.$card2->player.'</td>
@@ -232,9 +240,10 @@ print '<p></p><p></p>';
 		<p>The following users are interested in the items listed below. Click on the items if you would like to trade or reach out to that user!</p>';
 
 				print'
-							<table>
+							<table id="wishlist" class="display compact">
 						  <thead>
 							<tr>
+							<th>User</th>
 							<th>Series</th>
 							<th>Card Number</th>
 							<th>Player</th>
@@ -249,15 +258,18 @@ print '<p></p><p></p>';
 				$R_cards->data_seek(0);
 				while($card = $R_cards->fetch_object()){
 
-					print'
-						<tr><td colspan="6" style="background: #f2f2f2;">'.strtoupper(substr($card->firstname,0,1)).' from '.$card->state.'</td></tr>
-					';
-
 					$R_cards2->data_seek(0);
 					while($card2 = $R_cards2->fetch_object()){
+						if($card->state == ""){
+							$greetings=$card->firstname;
+						}else{
+							$greetings=$card->firstname.' from '.$card->state;
+						}
+
 						if($card->userid === $card2->userid){
 							print'
 								<tr>
+								<td>'.$greetings.'</td>
 								<td>'.$card2->series.'</td>
 								<td>'.$card2->cardnum.'</td>
 									<td>'.$card2->player.'</td>
@@ -399,3 +411,36 @@ print'
 $db_auth->close();
 $db_main->close();
 ?>
+
+<script>
+$(document).ready(function() {
+    $('#selling').DataTable({
+  "columns": [
+    { "width": "10%" },
+    { "width": "11%" },
+    { "width": "7%" },
+    { "width": "19%" },
+    { "width": "13%" },
+	{ "width": "12%" },
+	{ "width": "12%" },
+	{ "width": "16%" }
+  ]
+});
+} );
+</script>
+
+<script>
+$(document).ready(function() {
+    $('#wishlist').DataTable({
+  "columns": [
+    { "width": "10%" },
+    { "width": "13%" },
+    { "width": "7%" },
+    { "width": "23%" },
+    { "width": "15%" },
+	{ "width": "15%" },
+	{ "width": "17%" }
+  ]
+});
+} );
+</script>
