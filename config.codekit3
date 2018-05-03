@@ -7,7 +7,7 @@
 		"uuidString": "A86D8BA9-E82F-463B-A39F-2FF63446D8F0"
 		}
 	],
-"creatorBuild": "26330",
+"creatorBuild": "26680",
 "files": {
 	"\/.gitignore": {
 		"cB": 0,
@@ -269,39 +269,11 @@
 		"oAP": "\/html\/artwork\/allseries\/.htaccess",
 		"oF": 0
 		},
-	"\/html\/artwork\/allseries\/allcardsidea.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/html\/artwork\/allseries\/allcardsidea.php",
-		"oF": 0
-		},
-	"\/html\/artwork\/allseries\/allcardsidea2.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/html\/artwork\/allseries\/allcardsidea2.php",
-		"oF": 0
-		},
-	"\/html\/artwork\/allseries\/efficient.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/html\/artwork\/allseries\/efficient.php",
-		"oF": 0
-		},
 	"\/html\/artwork\/allseries\/index.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/html\/artwork\/allseries\/index.php",
-		"oF": 0
-		},
-	"\/html\/artwork\/allseries\/inefficient.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/html\/artwork\/allseries\/inefficient.php",
 		"oF": 0
 		},
 	"\/html\/artwork\/csv\/.htaccess": {
@@ -351,20 +323,6 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/html\/artwork\/series\/index.php",
-		"oF": 0
-		},
-	"\/html\/artwork\/series2\/.htaccess": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/html\/artwork\/series2\/.htaccess",
-		"oF": 0
-		},
-	"\/html\/artwork\/series2\/index.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/html\/artwork\/series2\/index.php",
 		"oF": 0
 		},
 	"\/html\/artwork\/sorting.css": {
@@ -525,6 +483,7 @@
 	"\/html\/images\/cardPics\/large\/R319-Helmar_1_Back.jpg": {
 		"ft": 16384,
 		"iS": 53513,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/images\/cardPics\/large\/R319-Helmar_1_Back.jpg",
 		"oF": 0,
@@ -535,6 +494,7 @@
 	"\/html\/images\/cardPics\/large\/R319-Helmar_1_Front.jpg": {
 		"ft": 16384,
 		"iS": 49989,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/images\/cardPics\/large\/R319-Helmar_1_Front.jpg",
 		"oF": 0,
@@ -545,6 +505,7 @@
 	"\/html\/images\/cardPics\/medium\/R319-Helmar_1_Back.jpg": {
 		"ft": 16384,
 		"iS": 15929,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/images\/cardPics\/medium\/R319-Helmar_1_Back.jpg",
 		"oF": 0,
@@ -555,6 +516,7 @@
 	"\/html\/images\/cardPics\/medium\/R319-Helmar_1_Front.jpg": {
 		"ft": 16384,
 		"iS": 17915,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/images\/cardPics\/medium\/R319-Helmar_1_Front.jpg",
 		"oF": 0,
@@ -565,6 +527,7 @@
 	"\/html\/images\/cardPics\/R319-Helmar_1_Back.jpg": {
 		"ft": 16384,
 		"iS": 0,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/images\/cardPics\/R319-Helmar_1_Back.jpg",
 		"oF": 0,
@@ -575,6 +538,7 @@
 	"\/html\/images\/cardPics\/R319-Helmar_1_Front.jpg": {
 		"ft": 16384,
 		"iS": 410409,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/images\/cardPics\/R319-Helmar_1_Front.jpg",
 		"oF": 0,
@@ -585,6 +549,7 @@
 	"\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Back.jpg": {
 		"ft": 16384,
 		"iS": 1325,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Back.jpg",
 		"oF": 0,
@@ -595,6 +560,7 @@
 	"\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Front.jpg": {
 		"ft": 16384,
 		"iS": 1485,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/images\/cardPics\/thumb\/R319-Helmar_1_Front.jpg",
 		"oF": 0,
@@ -612,6 +578,7 @@
 	"\/html\/img\/bar.jpg": {
 		"ft": 16384,
 		"iS": 18888,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/img\/bar.jpg",
 		"oF": 0,
@@ -622,6 +589,7 @@
 	"\/html\/img\/checklist-sample.jpg": {
 		"ft": 16384,
 		"iS": 79340,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/img\/checklist-sample.jpg",
 		"oF": 0,
@@ -661,6 +629,7 @@
 	"\/html\/img\/helmar_bg.jpg": {
 		"ft": 16384,
 		"iS": 848508,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/img\/helmar_bg.jpg",
 		"oF": 0,
@@ -723,6 +692,7 @@
 	"\/html\/img\/login-card.jpg": {
 		"ft": 16384,
 		"iS": 94440,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/img\/login-card.jpg",
 		"oF": 0,
@@ -744,6 +714,7 @@
 	"\/html\/img\/mandel.jpg": {
 		"ft": 16384,
 		"iS": 377948,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/img\/mandel.jpg",
 		"oF": 0,
@@ -754,6 +725,7 @@
 	"\/html\/img\/microphone.jpg": {
 		"ft": 16384,
 		"iS": 170271,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/img\/microphone.jpg",
 		"oF": 0,
@@ -841,6 +813,7 @@
 	"\/html\/img\/tile.jpg": {
 		"ft": 16384,
 		"iS": 20479,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/html\/img\/tile.jpg",
 		"oF": 0,
@@ -865,6 +838,36 @@
 		"oA": 0,
 		"oAP": "\/html\/index.php",
 		"oF": 0
+		},
+	"\/html\/js\/jquery-1.12.4.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/html\/html\/js\/jquery-1.12.4.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/html\/js\/jquery.dataTables.min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/html\/js\/jquery.dataTables.min-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"\/html\/js\/jquery.dataTables.min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/html\/html\/js\/jquery.dataTables.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
 		},
 	"\/html\/js\/scripts.js": {
 		"ft": 64,
@@ -1016,6 +1019,13 @@
 		"oAP": "\/inc\/layout\/footer1.php",
 		"oF": 0
 		},
+	"\/inc\/layout\/footer2.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/inc\/layout\/footer2.php",
+		"oF": 0
+		},
 	"\/inc\/layout\/header0.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -1035,6 +1045,13 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/inc\/layout\/header2.php",
+		"oF": 0
+		},
+	"\/inc\/layout\/header3.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/inc\/layout\/header3.php",
 		"oF": 0
 		},
 	"\/inc\/layout\/old_header1.php": {
@@ -3392,7 +3409,8 @@
 	"creationDate": 541186687,
 	"displayValue": "Helmar Brewing",
 	"displayValueWasSetByUser": 1,
-	"iconImageName": "brackets_brown"
+	"iconImageName": "brackets_brown",
+	"iconImageWasSetByUser": 0
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -5195,6 +5213,7 @@
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
+		"outputFormat": 0,
 		"quality": 100
 		},
 	"languageDefaultsJS": {
