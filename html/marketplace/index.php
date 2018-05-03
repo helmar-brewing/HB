@@ -378,46 +378,43 @@ print'</div>';
         ]
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('#selling').DataTable({
+          "columns": [
+            { "width": "10%" },
+            { "width": "11%" },
+            { "width": "7%" },
+            { "width": "19%" },
+            { "width": "13%" },
+        	{ "width": "12%" },
+        	{ "width": "12%" },
+        	{ "width": "16%" }
+          ]
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#wishlist').DataTable({
+          "columns": [
+            { "width": "10%" },
+            { "width": "13%" },
+            { "width": "7%" },
+            { "width": "23%" },
+            { "width": "15%" },
+        	{ "width": "15%" },
+        	{ "width": "17%" }
+          ]
+        });
+    });
+</script>
 
 
 
 
 <?php
 /* FOOTER */ require('layout/footer1.php');
-
 $db_auth->close();
 $db_main->close();
 ?>
-
-<script>
-$(document).ready(function() {
-    $('#selling').DataTable({
-  "columns": [
-    { "width": "10%" },
-    { "width": "11%" },
-    { "width": "7%" },
-    { "width": "19%" },
-    { "width": "13%" },
-	{ "width": "12%" },
-	{ "width": "12%" },
-	{ "width": "16%" }
-  ]
-});
-} );
-</script>
-
-<script>
-$(document).ready(function() {
-    $('#wishlist').DataTable({
-  "columns": [
-    { "width": "10%" },
-    { "width": "13%" },
-    { "width": "7%" },
-    { "width": "23%" },
-    { "width": "15%" },
-	{ "width": "15%" },
-	{ "width": "17%" }
-  ]
-});
-} );
-</script>
