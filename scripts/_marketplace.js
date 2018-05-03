@@ -42,25 +42,33 @@ function userToUserAcceptDisclaimer(){
 }
 
 
-function userToUser(owner_of_card_id){
-    var defaultSubject = 'I\'m interested in a card you have on the Helmar Brewing Marketplace!';
+function userToUser(send_to_user_id, email_to_wanter_instead){
+    var subject;
+    var emailToOwnerSubject = 'I\'m interested in a card you have on the Helmar Brewing Marketplace!';
+    var emailToWanterSubject = 'I have a card you are interested in on Helmar Brewing Marketplace!';
+    if(email_to_wanter_instead === undefined){ email_to_wanter_instead = false; }
+    if(email_to_wanter_instead){
+        subject = emailToWanterSubject;
+    }else{
+        subject = emailToOwnerSubject;
+    }
     showFullScreenLoad();
     $.get(
         "ajax/user_to_user/",
         {
-            owner_of_card_id: owner_of_card_id
+            send_to_user_id: send_to_user_id
         },
         function(data) {
             document.getElementById('name').value = data.from_name;
             document.getElementById('email').value = data.from_email;
             document.getElementById('to').value = data.to_line;
-            document.getElementById('subject').value = defaultSubject;
+
+            document.getElementById('subject').value = subject;
             showModal('user-to-user');
             hideFullScreenLoad();
         },
         "json"
     ).fail(function(response) {
-        console.log(response);
         var h1 = 'Error';
         var content = '<p>There was an error displaying the contact form.<br>[ref: '+response.status+']</p>';
         userToUserError(h1, content);

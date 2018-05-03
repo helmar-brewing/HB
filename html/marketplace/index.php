@@ -127,7 +127,7 @@ if(isset($user)){
 						$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
 
 						print'
-							<tr class="item-for-sale" data-owner-of-card="'.$card->userid.'">
+							<tr class="item-for-sale" data-send-to-user-id="'.$card->userid.'">
 								<td>'.$greetings.'</td>
 								<td>'.$card2->series.'</td>
 								<td>'.$card2->cardnum.'</td>
@@ -254,7 +254,7 @@ if(isset($user)){
 						$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
 
 						print'
-							<tr class="item-for-sale" data-wanter-of-card="'.$card->userid.'">
+							<tr class="item-for-sale" data-send-to-user-id="'.$card->userid.'">
 							    <td>'.$greetings.'</td>
 							    <td>'.$card2->series.'</td>
 							    <td>'.$card2->cardnum.'</td>
@@ -366,8 +366,8 @@ print'</div>';
     });
     $(document).ready( function(){
         $('.item-for-sale').on('click', function(){
-            var owner_of_card_id = this.getAttribute('data-owner-of-card');
-            userToUser(owner_of_card_id);
+            var send_to_user_id = this.getAttribute('data-send-to-user-id');
+            userToUser(send_to_user_id);
         });
     });
 </script>
