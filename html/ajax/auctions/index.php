@@ -14,6 +14,8 @@ $db2use = array(
 
 ob_start();
 
+$html=null;
+
 
 // Set the token
 $ebay_auth_token = $apikey['ebay']['auth_token'];
@@ -93,10 +95,14 @@ if($ebay->Ack == 'Success'){
     $error = 0;
 
     //set next page
-    if($_GET['pagenum'] == $ebay->PaginationResult->TotalNumberOfPages){
-        $nextpage = FALSE;
+    if(isset($_GET['pagenam'])){
+        if($_GET['pagenum'] == $ebay->PaginationResult->TotalNumberOfPages){
+            $nextpage = FALSE;
+        }else{
+            $nextpage = $_GET['pagenum'] + 1;
+        }
     }else{
-        $nextpage = $_GET['pagenum'] + 1;
+        $nextpage = FALSE;
     }
 
 

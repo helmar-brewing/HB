@@ -1,0 +1,46 @@
+@include -phnx-modal('#user-to-user', 700, 50){
+    fieldset{
+        label{
+            box-sizing: border-box;
+            float:left;
+            width:19.9%;
+            height:2.5rem;
+            line-height: 2.5rem;
+            font-size: 0.75rem;
+            text-align: right;
+            margin-bottom: 0.75rem;
+            padding-right: 10px;
+        }
+        input[type="text"]{
+            box-sizing: border-box;
+            float:left;
+            width:79.9%;
+            height:2.5rem;
+            margin-bottom: 0.75rem;
+        }
+        p{
+            padding-left: 19.9%;
+            font-size: .75rem;
+        }
+    }
+    .disclaimer{
+        margin: 1.5rem 0;
+        border:1px solid #AAA;
+        padding: 5px;
+        position: relative;
+        color:#444;
+        input[type="checkbox"]{
+            display: block;
+            position: absolute;
+            top:5px;
+            left:5px;
+        }
+        p{
+            padding-left: 30px;
+            font-size:0.8rem;
+        }
+    }
+    .buttons{
+        text-align: center;
+    }
+}

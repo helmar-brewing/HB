@@ -16,23 +16,6 @@
 		"oAP": "\/.gitignore",
 		"oF": 0
 		},
-	"\/css\/style.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/css\/style-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/css\/style.css.map": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/css\/style.css.map",
-		"oF": 0
-		},
 	"\/docs\/address.md": {
 		"cB": 0,
 		"cS": 0,
@@ -251,6 +234,27 @@
 		"oAP": "\/html\/artwork\/ajax\/index.php",
 		"oF": 0
 		},
+	"\/html\/artwork\/ajax\/marketSale\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/artwork\/ajax\/marketSale\/index.php",
+		"oF": 0
+		},
+	"\/html\/artwork\/ajax\/marketSaleComment\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/artwork\/ajax\/marketSaleComment\/index.php",
+		"oF": 0
+		},
+	"\/html\/artwork\/ajax\/marketWishlist\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/artwork\/ajax\/marketWishlist\/index.php",
+		"oF": 0
+		},
 	"\/html\/artwork\/ajax\/wishlist\/index.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -346,6 +350,20 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/html\/checklist\/ajax\/index.php",
+		"oF": 0
+		},
+	"\/html\/checklist\/ajax\/renewMarketSale\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/checklist\/ajax\/renewMarketSale\/index.php",
+		"oF": 0
+		},
+	"\/html\/checklist\/ajax\/renewMarketWant\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/checklist\/ajax\/renewMarketWant\/index.php",
 		"oF": 0
 		},
 	"\/html\/checklist\/csv\/index.php": {
@@ -715,6 +733,50 @@
 		"opt": 0,
 		"q": 100
 		},
+	"\/html\/img\/mktsalesactive.png": {
+		"ft": 32768,
+		"iS": 3950,
+		"oA": 0,
+		"oAP": "\/html\/img\/mktsalesactive.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/html\/img\/mktsalesinactive.png": {
+		"ft": 32768,
+		"iS": 2133,
+		"oA": 0,
+		"oAP": "\/html\/img\/mktsalesinactive.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/html\/img\/mktwishlistactive.png": {
+		"ft": 32768,
+		"iS": 4074,
+		"oA": 0,
+		"oAP": "\/html\/img\/mktwishlistactive.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/html\/img\/mktwishlistinactive.png": {
+		"ft": 32768,
+		"iS": 2210,
+		"oA": 0,
+		"oAP": "\/html\/img\/mktwishlistinactive.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/html\/img\/next.png": {
 		"ft": 32768,
 		"iS": 1350,
@@ -777,6 +839,36 @@
 		"oAP": "\/html\/index.php",
 		"oF": 0
 		},
+	"\/html\/js\/jquery-1.12.4.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/html\/html\/js\/jquery-1.12.4.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/html\/js\/jquery.dataTables.min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/html\/js\/jquery.dataTables.min-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"\/html\/js\/jquery.dataTables.min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/html\/html\/js\/jquery.dataTables.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
 	"\/html\/js\/scripts.js": {
 		"ft": 64,
 		"ma": 0,
@@ -786,6 +878,13 @@
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
+		},
+	"\/html\/js\/scripts.js.map": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/js\/scripts.js.map",
+		"oF": 0
 		},
 	"\/html\/magazine\/.htaccess": {
 		"cB": 0,
@@ -799,6 +898,20 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/html\/magazine\/index.php",
+		"oF": 0
+		},
+	"\/html\/marketplace\/ajax\/user_to_user\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/marketplace\/ajax\/user_to_user\/index.php",
+		"oF": 0
+		},
+	"\/html\/marketplace\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/html\/marketplace\/index.php",
 		"oF": 0
 		},
 	"\/html\/pay\/.htaccess": {
@@ -906,6 +1019,13 @@
 		"oAP": "\/inc\/layout\/footer1.php",
 		"oF": 0
 		},
+	"\/inc\/layout\/footer2.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/inc\/layout\/footer2.php",
+		"oF": 0
+		},
 	"\/inc\/layout\/header0.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -925,6 +1045,13 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/inc\/layout\/header2.php",
+		"oF": 0
+		},
+	"\/inc\/layout\/header3.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/inc\/layout\/header3.php",
 		"oF": 0
 		},
 	"\/inc\/layout\/old_header1.php": {
@@ -1526,6 +1653,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/html\/css\/_home.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
+	"\/sass\/_marketplace.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/html\/css\/_marketplace.css",
 		"oF": 0,
 		"oS": 3,
 		"uL": 1
@@ -3139,6 +3279,16 @@
 		"mi": 1,
 		"oA": 1,
 		"oAP": "\/html\/js\/_home.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/scripts\/_marketplace.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/html\/js\/_marketplace.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0

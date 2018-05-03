@@ -10,6 +10,7 @@
 // @koala-prepend "_subscriptions.js"
 // @koala-prepend "_subscriptions2.js"
 // @koala-prepend "_contact.js"
+// @koala-prepend "_marketplace.js"
 
 
 
@@ -25,3 +26,4 @@
 // @codekit-prepend "_subscriptions.js"
 // @codekit-prepend "_subscriptions2.js"
 // @codekit-prepend "_contact.js"
+// @codekit-prepend "_marketplace.js"
