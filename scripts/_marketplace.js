@@ -74,3 +74,18 @@ function userToUser(send_to_user_id, email_to_wanter_instead){
         userToUserError(h1, content);
     });
 }
+
+function userToUserSend(send_to_user_id){
+    var subject;
+    var name;
+    var body;
+    showFullScreenLoad();
+    subject = document.getElementById('subject').value;
+    name = document.getElementById('name').value;
+    $.post(
+        "ajax/user_to_user/",
+        function(){
+
+        }
+    );
+}
