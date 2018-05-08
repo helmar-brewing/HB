@@ -345,7 +345,9 @@ print'</div>';
             <textarea id="message_body"></textarea>
             <div class="disclaimer">
                 <input id="disclaimer" type="checkbox">
-                <p>Disclaimer text goes here.</p>
+                <p>You understand that you are contacting another member via the Helmar Brewing Marketplace because you have an interest in a card listed on the Marketplace. You will be respectful for other members and not send obscene or explicit communication, else your account may be terminated. After the communication is sent via the Marketplace, the receiving user may or may not respond to you. We have policies in place to disallow spamming of communication. The receiving party will have your email listed in your helmarbrewing.com account. If they choose to respond, you are free to communicate with the other party as you wish. This will take place outside of the helmarbrewing.com website and you will not hold Helmar Brewing responsible for any issues that may occur outside of the helmarbrewing.com website.</p>
+                <p>Helmar Brewing recommends safe trading practices.</p>
+                <p>In order to send your message, you must agree to the above terms.</p>
             </div>
             <div class="buttons">
                 <button id="send" disabled>Send</button>

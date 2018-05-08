@@ -42,7 +42,7 @@
             break;
         }
 
-        $owner_of_card_id = (isset($_GET['owner_of_card_id'])) ? $_GET['owner_of_card_id'] : null;
+        $owner_of_card_id = (isset($_GET['send_to_user_id'])) ? $_GET['send_to_user_id'] : null;
         if($owner_of_card_id === null){
             $code = 400;
             break;
