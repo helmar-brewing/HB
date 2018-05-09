@@ -42,9 +42,13 @@
             break;
         }
 
-        $send_to_user_id = (isset($_GET['send_to_user_id'])) ? $_GET['send_to_user_id'] : null;
+        $send_to_user_id = (isset($_REQUEST['send_to_user_id'])) ? $_REQUEST['send_to_user_id'] : null;
         if($send_to_user_id === null){
             $code = 400;
+            $json = array(
+                'error_msg' => 'you did not tell us who to send the message to',
+                'request' => $_REQUEST
+            );
             break;
         }
 
@@ -97,6 +101,9 @@
 
         }else{
             $code = 400;
+            $json = array(
+                'error_msg' => 'bad request method'
+            );
         }
 
 

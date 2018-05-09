@@ -33,11 +33,13 @@ function userToUserAcceptDisclaimer(){
     if(document.getElementById('disclaimer').checked){
         document.getElementById('send').disabled = false;
         $('#send').on('click', function(){
-            userToUserSend();
+            var send_to_user_id;
+            send_to_user_id = this.getAttribute('data-send-to-user-id');
+            userToUserSend(send_to_user_id);
         });
     }else{
         document.getElementById('send').disabled = true;
-        $('send').off();
+        $('#send').off();
     }
 }
 
@@ -56,13 +58,13 @@ function userToUser(send_to_user_id, email_to_wanter_instead){
     $.get(
         "ajax/user_to_user/",
         {
-            send_to_user_id: send_to_user_id
+            'send_to_user_id' : send_to_user_id
         },
         function(data) {
+            document.getElementById('send').setAttribute('data-send-to-user-id', send_to_user_id);
             document.getElementById('name').value = data.from_name;
             document.getElementById('email').value = data.from_email;
             document.getElementById('to').value = data.to_line;
-
             document.getElementById('subject').value = subject;
             showModal('user-to-user');
             hideFullScreenLoad();
@@ -83,9 +85,21 @@ function userToUserSend(send_to_user_id){
     subject = document.getElementById('subject').value;
     name = document.getElementById('name').value;
     $.post(
-        "ajax/user_to_user/",
-        function(){
+        'ajax/user_to_user/',
+        {
+            'thing' : 'stuff',
+            'send_to_user_id' : send_to_user_id,
+            'subject' : subject,
+            'name' : name
+        },
+        function(data){
 
-        }
-    );
+        },
+        'json'
+    ).fail(function(response) {
+        console.log(response);
+        var h1 = 'Error';
+        var content = '<p>There was an error sending the message.<br>[ref: '+response.status+' : '+response.responseJSON.error_msg+']</p>';
+        userToUserError(h1, content);
+    });
 }

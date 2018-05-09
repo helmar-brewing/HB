@@ -254,7 +254,7 @@ if(isset($user)){
 						$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
 
 						print'
-							<tr class="item-for-sale" data-send-to-user-id="'.$card->userid.'">
+							<tr class="item-wanted" data-send-to-user-id="'.$card->userid.'">
 							    <td>'.$greetings.'</td>
 							    <td>'.$card2->series.'</td>
 							    <td>'.$card2->cardnum.'</td>
@@ -370,6 +370,12 @@ print'</div>';
         $('.item-for-sale').on('click', function(){
             var send_to_user_id = this.getAttribute('data-send-to-user-id');
             userToUser(send_to_user_id);
+        });
+    });
+    $(document).ready( function(){
+        $('.item-wanted').on('click', function(){
+            var send_to_user_id = this.getAttribute('data-send-to-user-id');
+            userToUser(send_to_user_id, true);
         });
     });
 </script>
