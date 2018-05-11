@@ -32,7 +32,6 @@
         }
     }
 
-
     do{
         $json = array();
         $code = 200;
@@ -69,9 +68,7 @@
             );
             $code = 200;
         }elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
-
             require_once('libraries/drill/drill.php');
-
             $args = array(
                 'key' => $apikey['mandrill'],
                 'message' => array(
@@ -79,7 +76,11 @@
                     'from_email' => 'marketplace@helmarbrewing.com',
                     'from_name' => 'TestName',
                     'subject' => 'Test Subject',
-                    'to' => $user_to_send_to->email,
+                    'to' => array(
+                        array(
+                            'email' => $user_to_send_to->email
+                        )
+                    ),
                     'headers' => array(
                         'Reply-To' => $user->email
                     ),
@@ -88,25 +89,71 @@
                     'auto_text' => true
                 )
             );
-
-            $mandrill = new \Gajus\Drill\Client($apikey['mandrill']);
-            $mandrill_response = $mandrill->api('messages/send', $args);
-
-            if($mandrill_response['status'] === 'error'){
-                $code = 500;
-            }else{
+            try{
+                $mandrill = new \Gajus\Drill\Client($apikey['mandrill']);
+                $mandrill_response = $mandrill->api('messages/send', $args);
                 $code = 200;
+            } catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
+                // @see https://mandrillapp.com/api/docs/messages.html
+                $code = 500;
+                $json = array(
+                    'error_msg' => 'madrill ValidationError'
+                );
+            } catch (\Gajus\Drill\Exception\RuntimeException\UserErrorException $e) {
+                // @see https://mandrillapp.com/api/docs/messages.html
+                $code = 500;
+                $json = array(
+                    'error_msg' => 'madrill UserError'
+                );
+            } catch (\Gajus\Drill\Exception\RuntimeException\UnknownSubaccountException $e) {
+                // @see https://mandrillapp.com/api/docs/messages.html
+                $code = 500;
+                $json = array(
+                    'error_msg' => 'madrill UnknownSubaccount'
+                );
+            } catch (\Gajus\Drill\Exception\RuntimeException\PaymentRequiredException $e) {
+                // @see https://mandrillapp.com/api/docs/messages.html
+                $code = 500;
+                $json = array(
+                    'error_msg' => 'mandrill PaymentRequired'
+                );
+            } catch (\Gajus\Drill\Exception\RuntimeException\GeneralErrorException $e) {
+                // @see https://mandrillapp.com/api/docs/messages.html
+                $code = 500;
+                $json = array(
+                    'error_msg' => ''
+                );
+            } catch (\Gajus\Drill\Exception\RuntimeException\ValidationErrorException $e) {
+                // @see https://mandrillapp.com/api/docs/messages.html
+                $code = 500;
+                $json = array(
+                    'error_msg' => 'mandrill GeneralError'
+                );
+            } catch (\Gajus\Drill\Exception\RuntimeException $e) {
+                // All possible API errors.
+                $code = 500;
+                $json = array(
+                    'error_msg' => 'mandrill apiError'
+                );
+            } catch (\Gajus\Drill\Exception\InvalidArgumentException $e) {
+                // Invalid SDK use errors.
+                $code = 500;
+                $json = array(
+                    'error_msg' => 'mandrill InvalidArgument'
+                );
+            } catch (\Gajus\Drill\Exception\DrillException $e) {
+                // Everything.
+                $code = 500;
+                $json = array(
+                    'error_msg' => 'mandrill DrillException'
+                );
             }
-
-
         }else{
             $code = 400;
             $json = array(
                 'error_msg' => 'bad request method'
             );
         }
-
-
 
     }while(false);
 
