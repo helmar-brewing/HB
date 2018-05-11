@@ -46,7 +46,6 @@
             $code = 400;
             $json = array(
                 'error_msg' => 'you did not tell us who to send the message to',
-                'request' => $_REQUEST
             );
             break;
         }
@@ -68,14 +67,30 @@
             );
             $code = 200;
         }elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $body = (isset($_POST['body'])) ? $_POST['body'] : '';
+            if($body === ''){
+                $code = 400;
+                $json = array(
+                    'error_msg' => 'no message body',
+                );
+                break;
+            }
+            $subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';
+            $name = (isset($_POST['name'])) ? $_POST['name'] : null;
+            $name = ($name === '') ? 'Helmar Brewing Markplace User' : $name;
+            $body .= '
+                    <hr>
+                    <p style="color:#444; font-size:0.9em; line-height:1.5">You understand that you are contacting another member via the Helmar Brewing Marketplace because you have an interest in a card listed on the Marketplace. You will be respectful for other members and not send obscene or explicit communication, else your account may be terminated. After the communication is sent via the Marketplace, the receiving user may or may not respond to you. We have policies in place to disallow spamming of communication. The receiving party will have your email listed in your helmarbrewing.com account. If they choose to respond, you are free to communicate with the other party as you wish. This will take place outside of the helmarbrewing.com website and you will not hold Helmar Brewing responsible for any issues that may occur outside of the helmarbrewing.com website.</p>
+                    <p style="color:#444; font-size:0.9em; line-height:1.5">Helmar Brewing recommends safe trading practices.</p>
+            ';
             require_once('libraries/drill/drill.php');
             $args = array(
                 'key' => $apikey['mandrill'],
                 'message' => array(
-                    'html' => '<p>Test.</p>',
+                    'html' => $body,
                     'from_email' => 'marketplace@helmarbrewing.com',
-                    'from_name' => 'TestName',
-                    'subject' => 'Test Subject',
+                    'from_name' => $name,
+                    'subject' => $subject,
                     'to' => array(
                         array(
                             'email' => $user_to_send_to->email

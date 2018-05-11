@@ -11,19 +11,13 @@ function clearUserToUserForm(){
     document.getElementById('email').value='';
     document.getElementById('name').value='';
     document.getElementById('subject').value='';
-    document.getElementById('message_body').value='';
     document.getElementById('disclaimer').checked = false;
     document.getElementById('send').disabled = true;
+    CKEDITOR.instances['message_body'].setData('');
 }
 
 
 function userToUserCancel(){
-    hideModal('user-to-user');
-    clearUserToUserForm();
-}
-
-
-function userToUserSend(){
     hideModal('user-to-user');
     clearUserToUserForm();
 }
@@ -81,25 +75,35 @@ function userToUserSend(send_to_user_id){
     var subject;
     var name;
     var body;
+    $('.inline_error').hide();
     showFullScreenLoad();
     subject = document.getElementById('subject').value;
     name = document.getElementById('name').value;
+    body = CKEDITOR.instances['message_body'].getData();
     $.post(
         'ajax/user_to_user/',
         {
-            'thing' : 'stuff',
             'send_to_user_id' : send_to_user_id,
+            'name' : name,
             'subject' : subject,
-            'name' : name
+            'body' : body
+
         },
         function(data){
-
+            hideModal('user-to-user');
+            hideFullScreenLoad();
+            clearUserToUserForm();
         },
         'json'
     ).fail(function(response) {
-        console.log(response);
-        var h1 = 'Error';
-        var content = '<p>There was an error sending the message.<br>[ref: '+response.status+' : '+response.responseJSON.error_msg+']</p>';
-        userToUserError(h1, content);
+        if(response.responseJSON.error_msg === 'no message body'){
+            hideFullScreenLoad();
+            $('#error_no_message_body').show();
+        }else{
+            console.log(response);
+            var h1 = 'Error';
+            var content = '<p>There was an error sending the message.<br>[ref: '+response.status+' : '+response.responseJSON.error_msg+']</p>';
+            userToUserError(h1, content);
+        }
     });
 }

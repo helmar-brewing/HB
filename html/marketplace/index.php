@@ -342,6 +342,7 @@ print'</div>';
                 <label for="subject">Subject</label>
                 <input id="subject" type="text">
             </fieldset>
+            <p id="error_no_message_body" class="inline_error">You must enter a message.</p>
             <textarea id="message_body"></textarea>
             <div class="disclaimer">
                 <input id="disclaimer" type="checkbox">
