@@ -1012,6 +1012,13 @@
 		"oAP": "\/inc\/keys.php",
 		"oF": 0
 		},
+	"\/inc\/keys.php.old.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/inc\/keys.php.old.php",
+		"oF": 0
+		},
 	"\/inc\/layout\/footer1.php": {
 		"cB": 0,
 		"ft": 8192,

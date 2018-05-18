@@ -80,8 +80,7 @@
             $name = ($name === '') ? 'Helmar Brewing Markplace User' : $name;
             $body .= '
                     <hr>
-                    <p style="color:#444; font-size:0.9em; line-height:1.5">You understand that you are contacting another member via the Helmar Brewing Marketplace because you have an interest in a card listed on the Marketplace. You will be respectful for other members and not send obscene or explicit communication, else your account may be terminated. After the communication is sent via the Marketplace, the receiving user may or may not respond to you. We have policies in place to disallow spamming of communication. The receiving party will have your email listed in your helmarbrewing.com account. If they choose to respond, you are free to communicate with the other party as you wish. This will take place outside of the helmarbrewing.com website and you will not hold Helmar Brewing responsible for any issues that may occur outside of the helmarbrewing.com website.</p>
-                    <p style="color:#444; font-size:0.9em; line-height:1.5">Helmar Brewing recommends safe trading practices.</p>
+                    <p style="color:#444; font-size:0.9em; line-height:1.5">You are receiving this email because you have a card listed on the helmarbrewing.com marketplace and another user is trying to contact you. This user DOES NOT have your email. You are free to reply to this email to respond to the user. At that point, they would have your contact information. Any communication would be occuring outside of helmarbrewing.com and Helmar Brewing cannnot be held responsible for any issues that may arise. We expect you to to be respectful to other members and not send obscene or explicit communication. We recommend you follow safe trading practices.</p>
             ';
             require_once('libraries/drill/drill.php');
             $args = array(
