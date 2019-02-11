@@ -58,7 +58,7 @@
 
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             $to_line = '';
-            $to_line .= ($user_to_send_to->firstname !== '' && $user_to_send_to->firstname !== null) ? $user_to_send_to->firstname : '';
+            $to_line .= ($user_to_send_to->firstname !== '' && $user_to_send_to->firstname !== null) ? $user_to_send_to->firstname : 'No Name Provided';
             $to_line .= ($to_line !== '' && $user_to_send_to->state !== '' && $user_to_send_to->state !== null) ? ' from ' . $user_to_send_to->state : '';
             $json = array(
                 'from_name' => $user->firstname.' '.$user->lastname,
