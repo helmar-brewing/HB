@@ -114,9 +114,19 @@ if(isset($user)){
 					if($card->userid === $card2->userid){
 
 						if($card->state == ""){
-							$greetings=$card->firstname;
+							if($greetings=$card->firstname == ""){
+								$greetings='NoNameProvided';
+							}else{
+								$greetings=$card->firstname;
+							}
+							
 						}else{
-							$greetings=$card->firstname.' from '.$card->state;
+							if($greetings=$card->firstname == ""){
+								$greetings='NoNameProvided from '.$card->state;
+							}else{
+								$greetings=$card->firstname.' from '.$card->state;
+							}
+							
 						}
 
                         // define the pictures
@@ -240,9 +250,19 @@ if(isset($user)){
 				$R_cards2->data_seek(0);
 				while($card2 = $R_cards2->fetch_object()){
 					if($card->state == ""){
-						$greetings=$card->firstname;
+						if($greetings=$card->firstname == ""){
+							$greetings='NoNameProvided';
+						}else{
+							$greetings=$card->firstname;
+						}
+						
 					}else{
-						$greetings=$card->firstname.' from '.$card->state;
+						if($greetings=$card->firstname == ""){
+							$greetings='NoNameProvided from '.$card->state;
+						}else{
+							$greetings=$card->firstname.' from '.$card->state;
+						}
+						
 					}
 
 					if($card->userid === $card2->userid){
