@@ -63,27 +63,6 @@ if(isset($user)){
     if( $user->login() === 1 || $user->login() === 2 ){
 		/* do this code if user is logged in */
 
-
-		// selling
-        print '
-            <h2>Marketplace Items for Sale</h2>
-            <p>The following users have items listed for sale on the helmar market place. Click on the items you\'re interested in to reach out to that user!</p>
-            <table id="selling" class="display compact">
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Series</th>
-                        <th>Card Number</th>
-                        <th>Player</th>
-                        <th>Stance / Position</th>
-                        <th>Team</th>
-                        <th>Stock Pictures</th>
-                        <th>Seller Note</th>
-                    </tr>
-                </thead>
-                <tbody>
-        ';
-
 		// get unique users, want the user who has the farthest end date (newest card listed)
 		$R_cards = $db_main->query("
 		    SELECT marketSale.userid, users.*
