@@ -115,14 +115,14 @@ if(isset($user)){
 
 						if($card->state == ""){
 							if($greetings=$card->firstname == ""){
-								$greetings='NoNameProvided';
+								$greetings='User';
 							}else{
 								$greetings=$card->firstname;
 							}
 							
 						}else{
 							if($greetings=$card->firstname == ""){
-								$greetings='NoNameProvided from '.$card->state;
+								$greetings='User from '.$card->state;
 							}else{
 								$greetings=$card->firstname.' from '.$card->state;
 							}
@@ -251,14 +251,14 @@ if(isset($user)){
 				while($card2 = $R_cards2->fetch_object()){
 					if($card->state == ""){
 						if($greetings=$card->firstname == ""){
-							$greetings='NoNameProvided';
+							$greetings='User';
 						}else{
 							$greetings=$card->firstname;
 						}
 						
 					}else{
 						if($greetings=$card->firstname == ""){
-							$greetings='NoNameProvided from '.$card->state;
+							$greetings='User from '.$card->state;
 						}else{
 							$greetings=$card->firstname.' from '.$card->state;
 						}
