@@ -127,22 +127,6 @@ if(isset($user)){
 						  <tbody>
 				';
 
-				$R_cards->data_seek(0);
-				while($card = $R_cards->fetch_object()){
-
-					$R_cards2->data_seek(0);
-					while($card2 = $R_cards2->fetch_object()){
-						if($card->userid === $card2->userid){					
-
-							print'
-								<tr class="item-for-sale" data-owner-of-card="'.$card->userid.'">
-									<td>'.$greetings.'</td>
-									<td>'.$card2->series.'</td>
-									<td>'.$card2->cardnum.'</td>
-									<td>'.$card2->player.'</td>
-									<td>'.$card2->description.'</td>
-									<td>'.$card2->team.'</td>';
-
 			$R_cards->data_seek(0);
 			while($card = $R_cards->fetch_object()){
 
@@ -247,23 +231,6 @@ if(isset($user)){
 						  </thead>
 						  <tbody>
 				';
-
-				$R_cards->data_seek(0);
-				while($card = $R_cards->fetch_object()){
-
-					$R_cards2->data_seek(0);
-					while($card2 = $R_cards2->fetch_object()){
-
-						if($card->userid === $card2->userid){
-							print'
-								<tr>
-								<td>'.$greetings.'</td>
-								<td>'.$card2->series.'</td>
-								<td>'.$card2->cardnum.'</td>
-									<td>'.$card2->player.'</td>
-									<td>'.$card2->description.'</td>
-									<td>'.$card2->team.'</td>
-									<td>';
 
 
 
