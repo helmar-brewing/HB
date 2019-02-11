@@ -132,25 +132,7 @@ if(isset($user)){
 
 					$R_cards2->data_seek(0);
 					while($card2 = $R_cards2->fetch_object()){
-						if($card->userid === $card2->userid){
-
-							if($card->state == ""){
-								if($card->firstname == ""){
-									$greetings='NoName';
-								}else{
-									$greetings=$card->firstname;
-								}
-
-
-							}else{
-								if($card->firstname == ""){
-									$greetings='NoName from '.$card->state;
-								}else{
-									$greetings=$card->firstname.' from '.$card->state;
-								}
-								
-							}
-							
+						if($card->userid === $card2->userid){					
 
 							print'
 								<tr class="item-for-sale" data-owner-of-card="'.$card->userid.'">
@@ -271,22 +253,6 @@ if(isset($user)){
 
 					$R_cards2->data_seek(0);
 					while($card2 = $R_cards2->fetch_object()){
-						if($card->state == ""){
-							if($card->firstname == ""){
-								$greetings='NoName';
-							}else{
-								$greetings=$card->firstname;
-							}
-
-
-						}else{
-							if($card->firstname == ""){
-								$greetings='NoName from '.$card->state;
-							}else{
-								$greetings=$card->firstname.' from '.$card->state;
-							}
-							
-						}
 
 						if($card->userid === $card2->userid){
 							print'
