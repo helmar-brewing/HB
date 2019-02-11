@@ -63,6 +63,13 @@
             $json = array(
                 'from_name' => $user->firstname.' '.$user->lastname,
                 'from_email' => $user->email,
+                //
+                if($owner_of_card->firstname == ""){
+                    'to_line' => 'NoName given from '.$owner_of_card->state
+                }else{
+                    'to_line' => strtoupper(substr($owner_of_card->firstname,0,1)).' from '.$owner_of_card->state
+                }
+
                 'to_line' => $to_line
             );
             $code = 200;

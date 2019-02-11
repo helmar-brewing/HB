@@ -97,13 +97,69 @@ if(isset($user)){
 
 		if($R_cards !== FALSE){
 
-    		// grab card info --- need to left join on the card list table on series and card num, sory by series, card num
-    		$R_cards2 = $db_main->query("
-    		    SELECT marketSale.*, cardList.*
-    		    FROM marketSale
-    		    LEFT JOIN cardList ON marketSale.series = cardList.series and marketSale.cardnum = cardList.cardnum
-    		    WHERE marketSale.expired = 'N' and $user->id <> marketSale.userid
-    		");
+		// grab card info --- need to left join on the card list table on series and card num, sory by series, card num
+		$R_cards2 = $db_main->query("
+		SELECT marketSale.*, cardList.*
+		FROM marketSale
+		LEFT JOIN cardList ON marketSale.series = cardList.series and marketSale.cardnum = cardList.cardnum
+		WHERE marketSale.expired = 'N' and $user->id <> marketSale.userid
+		"
+		);
+
+
+		print '<h2>Marketplace Items for Sale</h2>
+		<p>The following users have items listed for sale on the helmar market place. Click on the items you\'re interested in to reach out to that user!</p>';
+
+				print'
+							<table id="selling" class="display compact">
+						  <thead>
+							<tr>
+							<th>User</th>
+							<th>Series</th>
+							<th>Card Number</th>
+							<th>Player</th>
+							<th>Stance / Position</th>
+							<th>Team</th>
+							<th>Stock Pictures</th>
+							<th>Seller Note</th>
+							</tr>
+						  </thead>
+						  <tbody>
+				';
+
+				$R_cards->data_seek(0);
+				while($card = $R_cards->fetch_object()){
+
+					$R_cards2->data_seek(0);
+					while($card2 = $R_cards2->fetch_object()){
+						if($card->userid === $card2->userid){
+
+							if($card->state == ""){
+								if($card->firstname == ""){
+									$greetings='NoName';
+								}else{
+									$greetings=$card->firstname;
+								}
+
+
+							}else{
+								if($card->firstname == ""){
+									$greetings='NoName from '.$card->state;
+								}else{
+									$greetings=$card->firstname.' from '.$card->state;
+								}
+								
+							}
+							
+
+							print'
+								<tr class="item-for-sale" data-owner-of-card="'.$card->userid.'">
+									<td>'.$greetings.'</td>
+									<td>'.$card2->series.'</td>
+									<td>'.$card2->cardnum.'</td>
+									<td>'.$card2->player.'</td>
+									<td>'.$card2->description.'</td>
+									<td>'.$card2->team.'</td>';
 
 			$R_cards->data_seek(0);
 			while($card = $R_cards->fetch_object()){
@@ -205,10 +261,44 @@ if(isset($user)){
 							<th>Stance / Position</th>
 							<th>Team</th>
 							<th>Pictures</th>
-						</tr>
-					</thead>
-				    <tbody>
-		';
+							</tr>
+						  </thead>
+						  <tbody>
+				';
+
+				$R_cards->data_seek(0);
+				while($card = $R_cards->fetch_object()){
+
+					$R_cards2->data_seek(0);
+					while($card2 = $R_cards2->fetch_object()){
+						if($card->state == ""){
+							if($card->firstname == ""){
+								$greetings='NoName';
+							}else{
+								$greetings=$card->firstname;
+							}
+
+
+						}else{
+							if($card->firstname == ""){
+								$greetings='NoName from '.$card->state;
+							}else{
+								$greetings=$card->firstname.' from '.$card->state;
+							}
+							
+						}
+
+						if($card->userid === $card2->userid){
+							print'
+								<tr>
+								<td>'.$greetings.'</td>
+								<td>'.$card2->series.'</td>
+								<td>'.$card2->cardnum.'</td>
+									<td>'.$card2->player.'</td>
+									<td>'.$card2->description.'</td>
+									<td>'.$card2->team.'</td>
+									<td>';
+
 
 
 		// get unique users, want the user who has the farthest end date (newest card listed)
