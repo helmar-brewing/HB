@@ -55,13 +55,13 @@ do{
                 $token = explode('_', $_GET['token']);
                 if(count($token, COUNT_RECURSIVE)!=2){
                     $step = 0;
-                    $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                    $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x001)</li>';
                 }else{
                     $step = 3;
                 }
             }else{
                 $step = 0;
-                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x002)</li>';
             }
             break;
 
@@ -72,7 +72,7 @@ do{
             $uname_via_token = db1($db_main,"SELECT username FROM users WHERE token='".$token[1]."' LIMIT 1");
             if($uname_via_ID == FALSE || $uname_via_token == FALSE || $uname_via_ID != $uname_via_token){
                 $step = 0;
-                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x003)</li>';
             }else{
                 $new_token = substr(md5(uniqid(rand(),true)), 0, 25);
                 $db_main->query("UPDATE users SET token='$new_token' WHERE username='$uname_via_ID'");
@@ -111,12 +111,12 @@ do{
                     $step = 0;
                 }else{
                     $step = 0;
-                    $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                    $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x004)</li>';
                     $user->kill_session();
                 }
             }else{
                 $step = 0;
-                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x005)</li>';
                 $user->kill_session();
             }
             break;
@@ -158,12 +158,12 @@ do{
                 }else{
                     $step = 0;
                     $msg .= '<li>Too many failed attempts.</li>';
-                    $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                    $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x006)</li>';
                     $user->kill_session();
                 }
             }else{
                 $step = 0;
-                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x007)</li>';
                 $user->kill_session();
             }
             break;
@@ -179,10 +179,10 @@ do{
             }catch(mysqli_sql_exception $e){
                 $msg .= '<li>We are sorry, there was a problem updating your password. (ref: data)</li>';
                 $msg .= '<li>'.$e->getMessage().'</li>';
-                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x008)</li>';
             }catch(Exception $e){
                 $msg .= '<li>We are sorry, there was a problem updating your password. (ref: hash)</li>';
-                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again.</li>';
+                $msg .= '<li>This link is invalid. Please return to <a href="'.$protocol.$site.'/account/recover/">account recovery</a> and try again. (id: x009)</li>';
             }
             mysqli_report(MYSQLI_REPORT_ERROR ^ MYSQLI_REPORT_STRICT); // remove this if you already use exceptions for all mysqli queries
             $step = 0;
