@@ -95,7 +95,7 @@ if($ebay->Ack == 'Success'){
     $error = 0;
 
     //set next page
-    if(isset($_GET['pagenam'])){
+    if(isset($_GET['pagenum'])){
         if($_GET['pagenum'] == $ebay->PaginationResult->TotalNumberOfPages){
             $nextpage = FALSE;
         }else{
