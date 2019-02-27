@@ -35,6 +35,7 @@ $http_headers = $apikey['ebay']['headers'];
 
 $pagenum = (isset($_GET['pagenum'])) ? $_GET['pagenum'] : 1;
 
+/*
 $xml_request = '
     <?xml version="1.0" encoding="utf-8"?>
     <GetSellerListRequest xmlns="urn:ebay:apis:eBLBaseComponents">
@@ -53,7 +54,24 @@ $xml_request = '
         </Pagination>
     </GetSellerListRequest>
 ';
+*/
 
+$xml_request = '
+<?xml version="1.0" encoding="UTF-8"?>
+<GetMyeBaySellingRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+  <RequesterCredentials>
+  <eBayAuthToken>'.$ebay_auth_token.'</eBayAuthToken>
+  </RequesterCredentials>
+  <Version>425</Version>
+  <ActiveList>
+    <Sort>TimeLeft</Sort>
+    <Pagination>
+      <EntriesPerPage>8</EntriesPerPage>
+      <PageNumber>'.$pagenum.'</PageNumber>
+    </Pagination>
+  </ActiveList>
+</GetMyeBaySellingRequest>
+';
 
 
 
