@@ -109,6 +109,8 @@ if( $debug_ebay === 'true'){ var_dump($ebay); }
 
 // Test for success
 if($ebay->Ack == 'Success'){
+    
+    window.alert("success!");
 
     $error = 0;
 
@@ -130,6 +132,7 @@ if($ebay->Ack == 'Success'){
         $html .='<li><a style="background:url(\''.$listing->PictureDetails->PictureURL.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$listing->ListingDetails->ViewItemURL.'"><span><figure style="background:url(\''.$listing->PictureDetails->PictureURL.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure></span></a></li>';
     }
 }else{
+    window.alert("fail!!!!");
     $error = 1;
 	$html = null;
 	$nextpage = null;
