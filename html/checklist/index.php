@@ -90,8 +90,8 @@ print'
 							// grab ebay auctions for ebay user
 							$R_cards2 = $db_main->query("
 							SELECT *
-							FROM ebay_card_summary
-							WHERE ebayUserID ='$ebayID' and cardNum > 0
+							FROM completed_auctions
+							WHERE ebayID ='$ebayID' and cardNum > 0
 								"
 							);
 							$totalSummary = $R_cards2->num_rows;
@@ -101,8 +101,8 @@ print'
 							// grab ebay summary last date
 							$R_cards2 = $db_main->query("
 							SELECT *
-							FROM ebay_card_summary
-							ORDER BY dateAdded DESC
+							FROM completed_auctions
+							ORDER BY auctionEnd DESC
 							LIMIT 1
 								"
 							);
@@ -110,7 +110,7 @@ print'
 							$R_cards2->data_seek(0);
 							while($card = $R_cards2->fetch_object()){
 
-								$ebaySummaryDate = $card->dateAdded;
+								$ebaySummaryDate = $card->auctionEnd;
 
 							}
 

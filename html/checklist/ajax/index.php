@@ -59,14 +59,14 @@ try{
 	// grab ebay auctions for ebay user
 	$R_cards2 = $db_main->query("
 	SELECT *
-	FROM ebay_card_summary
-	WHERE ebayUserID ='$ebayID' and cardNum > 0
+	FROM completed_auctions
+	WHERE ebayID ='$ebayID' and cardNum > 0
 		"
 	);
 	$R_cards2->data_seek(0);
 	while($card = $R_cards2->fetch_object()){
 
-		$series = $card->series;
+		$series = $card->series_tag;
 		$cardnum = $card->cardNum;
 
 
