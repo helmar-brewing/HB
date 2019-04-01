@@ -43,10 +43,10 @@ try{
 		throw new Exception('You need to be logged in to update your checklist');
 	}
 
-	// check subscription
-	if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing'){
-		throw new Exception('You must have an active subscription to update your checklist');
-	}
+	// check subscription - On March 31, 2019 - commented out this code. I should check where this comes from though. maybe in Stripe?
+//	if($user->subscription['status'] !== 'active' && $user->subscription['status'] !== 'trialing'){
+//		throw new Exception('You must have an active subscription to update your checklist');
+//	}
 
 	// check varibles
 	if(empty($_GET['ebayID'])){
