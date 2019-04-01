@@ -18,7 +18,7 @@ function auctions(p){
                     });
                 }
             }else{
-                alert('There was an error. ref: ebay error');
+                alert('There was an error. ref: ebay error 2');
             }
             document.getElementById('fullscreenload').style.display = 'none';
         },
