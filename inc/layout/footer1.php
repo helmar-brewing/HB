@@ -11,7 +11,7 @@
                     <li><a href="'.$protocol.$site.'/marketplace/">Marketplace</a></li>
                     <li><a href="'.$protocol.$site.'/about/">Helmar &amp; Charles</a></li>
                 <!--    <li><a href="">Articles</a></li>                -->
-                    <li><a href="'.$protocol.$site.'/subscription">Digital Magazine</a></li>
+                    <li><a href="'.$protocol.$site.'/magazine">Digital Magazine</a></li>
                     <li><a href="http://helmarblog.com/" target="_blank">Blog</a></li>
                 </ul>
                 <ul>
@@ -43,7 +43,7 @@
     print'
                         <li><a href="'.$protocol.$site.'/account/">Manage Account</a>
                         <li><a href="'.$protocol.$site.'/checklist/">Personal Checklist</a></li>
-                        <li><a href="'.$protocol.$site.'/subscription">Subscription</a></li>
+                <!--        <li><a href="'.$protocol.$site.'/magazine">Magazine</a></li> -->
                 <!--    <li><a href="">Terms and Conditions</a></li>    -->
                 <!--    <li><a href="">Privacy Policy</a></li>          -->
                 </ul>
