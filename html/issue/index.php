@@ -50,16 +50,16 @@ try{
             throw new SubException('x1');
 			break;
 		case 'none':
-        	throw new SubRedirException('/subscription/?status=none');
+        	throw new SubRedirException('/magazine/?status=none');
 			break;
 		case 'past_due':
-			throw new SubRedirException('/subscription/?status=past_due');
+			throw new SubRedirException('/magazine/?status=past_due');
 			break;
 		case 'unpaid':
-			throw new SubRedirException('/subscription/?status=unpaid');
+			throw new SubRedirException('/magazine/?status=unpaid');
 			break;
 		case 'canceled':
-			throw new SubRedirException('/subscription/?status=canceled');
+			throw new SubRedirException('/magazine/?status=canceled');
 			break;
 		case 'trialing':
 		case 'active':
