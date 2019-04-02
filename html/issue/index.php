@@ -66,7 +66,7 @@ try{
 
 			if($_GET['f'] == '/' || $_GET['f'] == ''){
 				http_response_code(404);
-				echo '404-1';
+				echo '404.1';
 			}else{
                 if(file_exists($file)){
                     header('Content-Type: ' . mime_content_type($file));
@@ -74,7 +74,7 @@ try{
                     readfile($file);
                 }else{
                     http_response_code(404);
-                    echo '404-2 '.$file;
+                    echo '404.2';
                 }
 			}
 
