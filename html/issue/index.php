@@ -74,7 +74,7 @@ try{
                     readfile($file);
                 }else{
                     http_response_code(404);
-                    echo '404-2';
+                    echo '404-2 '.$file;
                 }
 			}
 
