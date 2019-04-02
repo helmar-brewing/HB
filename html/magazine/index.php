@@ -69,7 +69,7 @@ function folder_exist($folder)
         Stripe.setPublishableKey(\''.$apikey['stripe']['public'].'\');
     </script>
 '; // </HEAD>
-/* PAGE TITLE */ $title='Helmar Brewing Co - Subscription';
+/* PAGE TITLE */ $title='Helmar Brewing Co - Magazine';
 /* HEADER */ require('layout/header0.php');
 
 if($user->subscription['status'] != 'active') {
@@ -99,21 +99,20 @@ if($user->subscription['status'] != 'active') {
 
 
 print'
-	<div class="account">
+	<div class="artwork">
 		<h1 class="pagetitle">Baseball History &amp; Art Magazine Issues</h1>
-		<section class="subscription">
+		
 ';
 
 if(isset($user)){
 	 if( $user->login() === 1 || $user->login() === 2 ){
 
 		print'
-			<div class="sub-row">
-				<div class="credit-card">
-					<h2>Issues</h2>
+		<div class="auctions">
+				<h2>Issues</h2>
 		';
 
-			print'<ul>';
+			print'<ul id="auction_list">';
 			$magStart = date("Y");
 			$magEnd = 2015;
 
@@ -125,22 +124,65 @@ if(isset($user)){
 
 				if(FALSE !== ($path = folder_exist($f12)))
 				{
-				    print '<li><a href="'.$protocol.$site.'/issue/'.$x.'/12/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Winter '.$x.'</a></li>';
+					print '
+					<li>
+						<a style="background:url(\''.$protocol.$site.'/img/'.$x.'12.jpg'.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$protocol.$site.'/issue/'.$x.'/12/" target="_blank">
+							<span>
+								<figure style="background:url(\''.$protocol.$site.'/img/'.$x.'12.jpg'.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
+							</span>
+						</a>
+						<p class="nameplate">'.'Winter '.$x.'</p>
+					</li>
+					';
+
 				}
 
 				if(FALSE !== ($path = folder_exist($f09)))
 				{
-				    print '<li><a href="'.$protocol.$site.'/issue/'.$x.'/09/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fall '.$x.'</a></li>';
+				//	print '<li><a href="'.$protocol.$site.'/issue/'.$x.'/09/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fall '.$x.'</a></li>';
+					
+					print '
+					<li>
+						<a style="background:url(\''.$protocol.$site.'/img/'.$x.'09.jpg'.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$protocol.$site.'/issue/'.$x.'/09/" target="_blank">
+							<span>
+								<figure style="background:url(\''.$protocol.$site.'/img/'.$x.'09.jpg'.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
+							</span>
+						</a>
+						<p class="nameplate">'.'Fall '.$x.'</p>
+					</li>
+					';
 				}
 
 				if(FALSE !== ($path = folder_exist($f06)))
 				{
-						print '<li><a href="'.$protocol.$site.'/issue/'.$x.'/06/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summer '.$x.'</a></li>';
+				//		print '<li><a href="'.$protocol.$site.'/issue/'.$x.'/06/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summer '.$x.'</a></li>';
+
+						print '
+					<li>
+						<a style="background:url(\''.$protocol.$site.'/img/'.$x.'06.jpg'.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$protocol.$site.'/issue/'.$x.'/06/" target="_blank">
+							<span>
+								<figure style="background:url(\''.$protocol.$site.'/img/'.$x.'06.jpg'.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
+							</span>
+						</a>
+						<p class="nameplate">'.'Summer '.$x.'</p>
+					</li>
+					';
 				}
 
 				if(FALSE !== ($path = folder_exist($f03)))
 				{
-						print '<li><a href="'.$protocol.$site.'/issue/'.$x.'/03/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spring '.$x.'</a></li>';
+				//		print '<li><a href="'.$protocol.$site.'/issue/'.$x.'/03/" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spring '.$x.'</a></li>';
+
+						print '
+					<li>
+						<a style="background:url(\''.$protocol.$site.'/img/'.$x.'03.jpg'.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$protocol.$site.'/issue/'.$x.'/03/" target="_blank">
+							<span>
+								<figure style="background:url(\''.$protocol.$site.'/img/'.$x.'03.jpg'.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
+							</span>
+						</a>
+						<p class="nameplate">'.'Spring '.$x.'</p>
+					</li>
+					';
 				}
 
 			}
@@ -148,14 +190,9 @@ if(isset($user)){
 
 		print'
 				</div>
-			</div>
-		</section>
 	</div>
 		';
-	// removed from the print directly above, now close out 2 divs
-	//	<div class="credit-card">
-	//	<p></p>
-	//</div>
+
 
 	}else{
 		print'
@@ -176,7 +213,7 @@ if(isset($user)){
 			';
 
 		print'
-				</section>
+				
 			</div>
 			<div class="modal-holder" id="login_or_register">
 				<div class="modal-wrap">
@@ -211,7 +248,7 @@ print'
 	';
 
 print'
-		</section>
+	
 	</div>
 	<div class="modal-holder" id="login_or_register">
 		<div class="modal-wrap">
