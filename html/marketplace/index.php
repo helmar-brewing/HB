@@ -138,8 +138,8 @@ if(isset($user)){
 						$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
 
 						print'
-							<tr class="item-for-sale" data-send-to-user-id="'.$card->userid.'">
-								<td>'.$greetings.'</td>
+							<tr >
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
 								<td>'.$card2->series.'</td>
 								<td>'.$card2->cardnum.'</td>
 								<td>'.$card2->player.'</td>
