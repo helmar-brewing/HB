@@ -140,11 +140,11 @@ if(isset($user)){
 						print'
 							<tr >
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
-								<td>'.$card2->series.'</td>
-								<td>'.$card2->cardnum.'</td>
-								<td>'.$card2->player.'</td>
-								<td>'.$card2->description.'</td>
-								<td>'.$card2->team.'</td>
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->player.'</td>
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->description.'</td>
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->team.'</td>
                                 <td>
                         ';
 
