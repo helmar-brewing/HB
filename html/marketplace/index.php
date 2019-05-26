@@ -93,7 +93,7 @@ if(isset($user)){
 							<table id="selling" class="display compact">
 						  <thead>
 							<tr>
-							<th><i class="envelope-o"></i></th>
+							<th><i class="fa-envelope-o"></i></th>
 							<th>User</th>
 							<th>Series</th>
 							<th>Card Number</th>
@@ -141,7 +141,7 @@ if(isset($user)){
 						print'
 							<tr >
 							
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'"><i class="envelope-o"></i></td>
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'"><i class="fa-envelope-o"></i></td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
@@ -212,7 +212,7 @@ if(isset($user)){
 			    <table id="wishlist" class="display compact">
 				    <thead>
 						<tr>
-							<th><i class="envelope-o"></i></th>
+							<th><i class="fa-envelope-o"></i></th>
 							<th>User</th>
 							<th>Series</th>
 							<th>Card Number</th>
@@ -281,7 +281,7 @@ if(isset($user)){
 
 						print'
 							<tr>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'"><i class="envelope-o"></i></td>
+								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'"><i class="fa-envelope-o"></i></td>
 							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
 							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
 							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
