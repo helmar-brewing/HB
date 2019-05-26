@@ -93,6 +93,7 @@ if(isset($user)){
 							<table id="selling" class="display compact">
 						  <thead>
 							<tr>
+							<th>Contact</th>
 							<th>User</th>
 							<th>Series</th>
 							<th>Card Number</th>
@@ -139,6 +140,8 @@ if(isset($user)){
 
 						print'
 							<tr >
+							
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'"><i class="fa fa-info-circle"></i></td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
@@ -209,6 +212,7 @@ if(isset($user)){
 			    <table id="wishlist" class="display compact">
 				    <thead>
 						<tr>
+							<th>Contact</th>
 							<th>User</th>
 							<th>Series</th>
 							<th>Card Number</th>
@@ -276,13 +280,14 @@ if(isset($user)){
 						$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
 
 						print'
-							<tr class="item-wanted" data-send-to-user-id="'.$card->userid.'">
-							    <td>'.$greetings.'</td>
-							    <td>'.$card2->series.'</td>
-							    <td>'.$card2->cardnum.'</td>
-								<td>'.$card2->player.'</td>
-								<td>'.$card2->description.'</td>
-								<td>'.$card2->team.'</td>
+							<tr>
+								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'"><i class="fa fa-info-circle"></i></td>
+							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
+							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
+							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
+								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->player.'</td>
+								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->description.'</td>
+								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->team.'</td>
 								<td>
                         ';
 
@@ -413,6 +418,7 @@ print'</div>';
     $(document).ready(function() {
         $('#selling').DataTable({
           "columns": [
+			{ "width": "4%" },
             { "width": "10%" },
             { "width": "11%" },
             { "width": "7%" },
@@ -420,7 +426,7 @@ print'</div>';
             { "width": "13%" },
         	{ "width": "12%" },
         	{ "width": "12%" },
-        	{ "width": "16%" }
+        	{ "width": "12%" }
           ]
         });
     });
@@ -429,13 +435,14 @@ print'</div>';
     $(document).ready(function() {
         $('#wishlist').DataTable({
           "columns": [
-            { "width": "10%" },
+            { "width": "4%" },
+			{ "width": "10%" },
             { "width": "13%" },
             { "width": "7%" },
             { "width": "23%" },
             { "width": "15%" },
         	{ "width": "15%" },
-        	{ "width": "17%" }
+        	{ "width": "13%" }
           ]
         });
     });
