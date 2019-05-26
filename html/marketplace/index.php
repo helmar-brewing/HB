@@ -93,7 +93,7 @@ if(isset($user)){
 							<table id="selling" class="display compact">
 						  <thead>
 							<tr>
-							<th>Contact</th>
+							<th><i class="envelope-o"></i></th>
 							<th>User</th>
 							<th>Series</th>
 							<th>Card Number</th>
@@ -141,7 +141,7 @@ if(isset($user)){
 						print'
 							<tr >
 							
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'"><i class="fa fa-info-circle"></i></td>
+								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'"><i class="envelope-o"></i></td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
 								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
@@ -212,7 +212,7 @@ if(isset($user)){
 			    <table id="wishlist" class="display compact">
 				    <thead>
 						<tr>
-							<th>Contact</th>
+							<th><i class="envelope-o"></i></th>
 							<th>User</th>
 							<th>Series</th>
 							<th>Card Number</th>
@@ -281,7 +281,7 @@ if(isset($user)){
 
 						print'
 							<tr>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'"><i class="fa fa-info-circle"></i></td>
+								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'"><i class="envelope-o"></i></td>
 							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
 							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
 							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
@@ -418,7 +418,7 @@ print'</div>';
     $(document).ready(function() {
         $('#selling').DataTable({
           "columns": [
-			{ "width": "4%" },
+			{ "width": "3%" },
             { "width": "10%" },
             { "width": "11%" },
             { "width": "7%" },
@@ -426,7 +426,7 @@ print'</div>';
             { "width": "13%" },
         	{ "width": "12%" },
         	{ "width": "12%" },
-        	{ "width": "12%" }
+        	{ "width": "13%" }
           ]
         });
     });
@@ -435,14 +435,14 @@ print'</div>';
     $(document).ready(function() {
         $('#wishlist').DataTable({
           "columns": [
-            { "width": "4%" },
+            { "width": "3%" },
 			{ "width": "10%" },
             { "width": "13%" },
             { "width": "7%" },
             { "width": "23%" },
             { "width": "15%" },
         	{ "width": "15%" },
-        	{ "width": "13%" }
+        	{ "width": "14%" }
           ]
         });
     });
