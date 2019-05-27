@@ -65,13 +65,12 @@ if(isset($user)){
 
 		// get unique users, want the user who has the farthest end date (newest card listed)
 		$R_cards = $db_main->query("
-		    SELECT marketSale.userid, users.*
+		    SELECT TOP 2 marketSale.userid, users.*
 		    from marketSale
 		    LEFT JOIN users ON users.userid = marketSale.userid
 		    WHERE expired = 'N' and ".$user->id." <> marketSale.userid
 		    GROUP BY marketSale.userid
 			ORDER BY max(endDate) DESC
-			LIMIT 2
 		");
 
 
@@ -79,11 +78,10 @@ if(isset($user)){
 
 		// grab card info --- need to left join on the card list table on series and card num, sory by series, card num
 		$R_cards2 = $db_main->query("
-		SELECT marketSale.*, cardList.*
+		SELECT TOP 2 marketSale.*, cardList.*
 		FROM marketSale
 		LEFT JOIN cardList ON marketSale.series = cardList.series and marketSale.cardnum = cardList.cardnum
 		WHERE marketSale.expired = 'N' and $user->id <> marketSale.userid
-		LIMIT 2
 		"
 		);
 
