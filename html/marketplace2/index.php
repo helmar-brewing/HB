@@ -210,20 +210,6 @@ if(isset($user)){
         print '
             <h2>Marketplace Items Wanted</h2>
 		    <p>The following users are interested in the items listed below. Click on the items if you would like to trade or reach out to that user!</p>
-			    <table id="wishlist" class="display compact">
-				    <thead>
-						<tr>
-							<th><i class="fa fa-envelope-o"></i></th>
-							<th>User</th>
-							<th>Series</th>
-							<th>Card Number</th>
-							<th>Player</th>
-							<th>Stance / Position</th>
-							<th>Team</th>
-							<th>Pictures</th>
-							</tr>
-						  </thead>
-						  <tbody>
 				';
 
 
@@ -250,6 +236,12 @@ if(isset($user)){
 				LIMIT 2
     		");
 
+			print '
+			<div class="auctions">
+
+
+			<ul id="auction_list">';
+			
 			$R_cards->data_seek(0);
 			while($card = $R_cards->fetch_object()){
 
@@ -278,69 +270,92 @@ if(isset($user)){
 						$frontthumb = '/images/cardPics/thumb/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
 						$backpic  = '/images/cardPics/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
 						$backthumb  = '/images/cardPics/thumb/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
-						$frontlarge = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
+						$frontlarge = $protocol.$site.'/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
 						$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
 
+		
+		
+		
 						print'
-							<tr>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'"><i class="fa fa-envelope-o"></i></td>
-							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
-							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
-							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->player.'</td>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->description.'</td>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->team.'</td>
-								<td>
-                        ';
+							<li>
+								<a style="background:url(\''.$frontlarge.'\'); background-size: cover; background-position: center center;background-repeat: repeat;"  data-lightbox="'.$card->series.'_'.$card->cardnum.'>
+									<span>
+										<figure style="background:url(\''.$frontlarge.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
+									</span>
+								</a>
+								<p class="nameplate"  class="item-wanted" data-send-to-user-id="'.$card->userid.'">SOMETHING</p>
+							</li>
+						';
+					
 
 
-						//check if either pic exists
-						if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) || file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
 
-							// print the front pic if exists
-							if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
-								print'
-															<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
-								';
-							}
 
-							// insert space
-							if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) && file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
-								print'&nbsp;&nbsp;';
-							}
 
-							// print the back pic if exists
-							if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
-								print'
-															<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
-								';
 
-							}
 
-						// neither pic exists print message instead
-						}else{
-							print'<i>no picture</i>';
-						}
 
-						print '
-                                </td>
-                            </tr>
-                        ';
+
+
+
+
+			//			print'
+		//					<tr>
+		//						<td class="item-wanted" data-send-to-user-id="'.$card->userid.'"><i class="fa fa-envelope-o"></i></td>
+		//					    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
+		//					    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
+		//					    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
+		//						<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->player.'</td>
+		//						<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->description.'</td>
+		//						<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->team.'</td>
+		//						<td>
+         //               ';
+
+
+//						//check if either pic exists
+//						if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) || file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
+//
+//							// print the front pic if exists
+//		//					if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
+//								print'
+//															<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
+//								';
+//							}
+//
+//							// insert space
+//							if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) && file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
+//								print'&nbsp;&nbsp;';
+//							}
+//
+//							// print the back pic if exists
+//							if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
+//								print'
+//															<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
+//								';
+//
+//							}
+//
+//						// neither pic exists print message instead
+//						}else{
+//							print'<i>no picture</i>';
+//						}
+
 					}
 				}
 			}
+
+			print '
+			</ul></div>';
+			
 			$R_cards->free();
 			$R_cards2->free();
 
 		}else{
 			print'
-				<tr><td colspan="6">could not get list of cards</td></tr>
+				could not get list of cards
 			';
 		}
-		print'
-		        </tbody>
-			</table>
-		';
+
 
 		/* END code if user is logged in, but not paid subscription */
     }else{
