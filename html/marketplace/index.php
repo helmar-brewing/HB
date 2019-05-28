@@ -157,7 +157,7 @@ if(isset($user)){
 	                        // print the front pic if exists
 	                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
 	                            print'
-									<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" >
+									<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" >
                                         <img src="'.$protocol.$site.$frontthumb.'">
                                     </a>
 	                            ';
@@ -171,7 +171,7 @@ if(isset($user)){
 	                        // print the back pic if exists
 	                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
 	                            print'
-								    <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" >
+								    <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" >
                                         <img src="'.$protocol.$site.$backthumb.'">
                                     </a>
 	                            ';
@@ -298,7 +298,7 @@ if(isset($user)){
 							// print the front pic if exists
 							if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
 								print'
-															<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
+															<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
 								';
 							}
 
@@ -310,7 +310,7 @@ if(isset($user)){
 							// print the back pic if exists
 							if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
 								print'
-															<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
+															<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
 								';
 
 							}

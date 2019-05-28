@@ -158,7 +158,7 @@ if(isset($user)){
 	                        // print the front pic if exists
 	                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
 	                            print'
-									<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" >
+									<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" >
                                         <img src="'.$protocol.$site.$frontthumb.'">
                                     </a>
 	                            ';
@@ -172,7 +172,7 @@ if(isset($user)){
 	                        // print the back pic if exists
 	                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
 	                            print'
-								    <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" >
+								    <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" >
                                         <img src="'.$protocol.$site.$backthumb.'">
                                     </a>
 	                            ';
@@ -233,7 +233,7 @@ if(isset($user)){
     		    FROM marketWishlist
     		    LEFT JOIN cardList ON marketWishlist.series = cardList.series and marketWishlist.cardnum = cardList.cardnum
 				WHERE marketWishlist.expired = 'N' and $user->id <> marketWishlist.userid
-				LIMIT 2
+				LIMIT 8
     		");
 
 			print '
@@ -278,20 +278,36 @@ if(isset($user)){
 		
 						print'
 							<li>
-								<a style="background:url(\''.$frontlarge.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" data-lightbox="'.$card->series.'_'.$card->cardnum.'>
+								<a style="background:url(\''.$frontlarge.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" href="'.$frontlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" >
 									<span>
 										<figure style="background:url(\''.$frontlarge.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
 									</span>
 								</a>
-								<p class="nameplate">'.$frontlarge.'</p>
+								<p class="nameplate item-wanted" data-send-to-user-id="'.$card->userid.'">
+									<i class="fa fa-envelope-o"></i> '.$greetings.'<br>
+									'.$card2->series.', 
+									'.$card2->cardnum.'<br>
+									'.$card2->player.'<br>
+									'.$card2->team.'<br>
+								
+	
+								</p>
 							</li>
 						';
+
+						// print the back pic if exists
+						if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
+							print'
+								<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" >
+									<img src="'.$protocol.$site.$backthumb.'" style="display:none">
+								</a>
+							';
+						}
 					
 
 //  class="item-wanted" data-send-to-user-id="'.$card->userid.'"
-//  data-lightbox="'.$card->series.'_'.$card->cardnum.'
 
-
+//style=”display:none”
 
 
 
