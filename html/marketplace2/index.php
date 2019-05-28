@@ -278,18 +278,18 @@ if(isset($user)){
 		
 						print'
 							<li>
-								<a style="background:url(\''.$frontlarge.'\'); background-size: cover; background-position: center center;background-repeat: repeat;"  data-lightbox="'.$card->series.'_'.$card->cardnum.'>
+								<a style="background:url(\''.$frontlarge.'\'); background-size: cover; background-position: center center;background-repeat: repeat;">
 									<span>
 										<figure style="background:url(\''.$frontlarge.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
 									</span>
 								</a>
-								<p class="nameplate"  class="item-wanted" data-send-to-user-id="'.$card->userid.'">SOMETHING</p>
+								<p class="nameplate">'.$frontlarge.'</p>
 							</li>
 						';
 					
 
-
-
+//  class="item-wanted" data-send-to-user-id="'.$card->userid.'"
+//  data-lightbox="'.$card->series.'_'.$card->cardnum.'
 
 
 
@@ -346,7 +346,7 @@ if(isset($user)){
 
 			print '
 			</ul></div>';
-			
+
 			$R_cards->free();
 			$R_cards2->free();
 
