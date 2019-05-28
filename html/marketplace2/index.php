@@ -278,7 +278,7 @@ if(isset($user)){
 		
 						print'
 							<li>
-								<a style="background:url(\''.$frontlarge.'\'); background-size: cover; background-position: center center;background-repeat: repeat;">
+								<a style="background:url(\''.$frontlarge.'\'); background-size: cover; background-position: center center;background-repeat: repeat;" data-lightbox="'.$card->series.'_'.$card->cardnum.'>
 									<span>
 										<figure style="background:url(\''.$frontlarge.'\'); background-size: contain;background-position: center center;background-repeat: no-repeat;"></figure>
 									</span>
