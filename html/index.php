@@ -91,6 +91,8 @@ print'
 		</script>
 	';
 
+
+
 /* FOOTER */ require('layout/footer1.php');
 
 $db_auth->close();
