@@ -72,11 +72,10 @@ print'
     <div class="series_images">
         <img src="'.$front_img.'" />';
 
-		if($back_img!=""){
-					print '<img src="'.$back_img.'" />';
-			}else{
-        // do nothing if no back image
-			}
+        // print the back pic if exists
+        if(file_exists($back_img)){
+            print '<img src="'.$back_img.'" />';
+        }
 
 
 print'    </div>
