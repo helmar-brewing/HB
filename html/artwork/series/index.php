@@ -1,4 +1,4 @@
-d<?php
+<?php
 ob_start();
 
 /* ROOT SETTINGS */ require($_SERVER['DOCUMENT_ROOT'].'/root_settings.php');
@@ -33,6 +33,8 @@ if($series_sql !== FALSE){
       $series_name = $seriesinfo->series_name;
       $front_img = $protocol.$site.'/'.$seriesinfo->front_img;
       $back_img = $protocol.$site.'/'.$seriesinfo->back_img;
+      $front_img_check = '/'.$seriesinfo->front_img;
+      $back_img_check = '/'.$seriesinfo->back_img;
       $series_desc = $seriesinfo->series_desc;
     }
 } else {
@@ -69,12 +71,18 @@ print'
 <div class="artwork">
     <h4>Artwork</h4>
     <h1>'.$series_name.'</h1>
-    <div class="series_images">
-        <img src="'.$front_img.'" />';
-
+    <div class="series_images">';
+        
         // print the back pic if exists
-        if(file_exists($back_img)){
-            print '<img src="'.$back_img.'" />';
+        if(file_exists($_SERVER['DOCUMENT_ROOT'].$front_img_check)){
+           print '<img src="'.$front_img.'" />';
+        }
+        
+        // print the back pic if exists
+        if(file_exists($_SERVER['DOCUMENT_ROOT'].$back_img_check)){
+            if($back_img_check!="/"){
+                print '<img src="'.$back_img.'" />';
+            }
         }
 
 
