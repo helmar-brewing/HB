@@ -76,21 +76,23 @@ if(isset($user)){
 		}
 	}
 
+//	<h1>Current Auctions</h1>
+//	<p id="auction_end">Auctions end on Tuesday evenings</p>
+//	<ul id="auction_list">
+//	</ul>
+//<button id="auction_button">show more</button>
 
 print'
-	        <h1>Current Auctions</h1>
-	        <p id="auction_end">Auctions end on Tuesday evenings</p>
-	        <ul id="auction_list">
-	        </ul>
-			<button id="auction_button">show more</button>
+		<h1><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank"><img src="/img/current_auctions_banner.jpg" alt="Helmar Brewing Current Auctions Banner Link"></a></br></h1>
 	    </div>
-		<script>
-		$( document ).ready(function() {
-			auctions(1);
-		});
-		</script>
+
 	';
 
+	// <script>
+	// $( document ).ready(function() {
+	// 	auctions(1);
+	// });
+	// </script>
 
 
 /* FOOTER */ require('layout/footer1.php');
