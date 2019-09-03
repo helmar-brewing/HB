@@ -35,8 +35,8 @@ ob_end_flush();
 /* HEADER */ require('layout/header1.php');
 
 
-$series_sql = $db_main->query("SELECT * FROM series_info WHERE sort>0 AND series_status <> 'discontinued' ORDER BY sort ASC");
-$series_sql2 = $db_main->query("SELECT * FROM series_info WHERE sort>0 AND series_status = 'discontinued'  ORDER BY sort ASC");
+$series_sql = $db_main->query("SELECT * FROM series_info WHERE sort>0 AND series_status <> 'discontinued' AND live_status = 'live' ORDER BY sort ASC");
+$series_sql2 = $db_main->query("SELECT * FROM series_info WHERE sort>0 AND series_status = 'discontinued' AND live_status = 'live'  ORDER BY sort ASC");
 
 
 print'
