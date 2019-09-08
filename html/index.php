@@ -83,7 +83,8 @@ if(isset($user)){
 //<button id="auction_button">show more</button>
 
 print'
-		<h1><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank"><img src="/img/current_auctions_banner.jpg" alt="Helmar Brewing Current Auctions Banner Link"></a></br></h1>
+		<h1><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank"><img src="/img/current_auctions_banner.jpg" alt="Helmar Brewing Current Auctions Banner Link"></a></h1>
+		<p></p>
 	    </div>
 
 	';
