@@ -107,3 +107,40 @@ function userToUserSend(send_to_user_id){
         }
     });
 }
+
+function getCardInfo(send_to_user_id, email_to_wanter_instead){
+    var subject;
+    var emailToOwnerSubject = 'I\'m interested in a card you have on the Helmar Brewing Marketplace!';
+    var emailToWanterSubject = 'I have a card you are interested in on Helmar Brewing Marketplace!';
+    if(email_to_wanter_instead === undefined){ email_to_wanter_instead = false; }
+    if(email_to_wanter_instead){
+        subject = emailToWanterSubject;
+    }else{
+        subject = emailToOwnerSubject;
+    }
+    showFullScreenLoad();
+    $.get(
+        "ajax/user_to_user/",
+        {
+            'send_to_user_id' : send_to_user_id
+        },
+        function(data) {
+            document.getElementById('send').setAttribute('data-send-to-user-id', send_to_user_id);
+            document.getElementById('name').value = data.from_name;
+            document.getElementById('email').value = data.from_email;
+            document.getElementById('to').value = data.to_line;
+            document.getElementById('subject').value = subject;
+            showModal('market-card-info');
+            hideFullScreenLoad();
+        },
+        "json"
+    ).fail(function(response) {
+        var h1 = 'Error';
+        var content = '<p>There was an error displaying the contact form.<br>[ref: '+response.status+']</p>';
+        userToUserError(h1, content);
+    });
+}
+
+function exitCardInfo(){
+    hideModal('market-card-info');
+}

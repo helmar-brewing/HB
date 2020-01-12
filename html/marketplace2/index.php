@@ -36,6 +36,7 @@ $user->checksub();
 
 ob_end_flush();
 /* <HEAD> */ $head='
+<script src="https://helmarbrewing.com/marketplace2/_marketplace.js"></script>
 <script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
 <script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery-1.12.4.js"></script>
 <script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery.dataTables.min.js"></script>
@@ -142,9 +143,9 @@ if(isset($user)){
 								</a>
 								<p class="nameplate item-wanted" data-send-to-user-id="'.$card->userid.'">
 									<i class="fa fa-envelope-o"></i> '.$greetings.'<br>
-
-								
-	
+								</p>
+								<p class="nameplate card-info" data-send-to-user-id="'.$card->userid.'">
+									<i class="fa fa-info"></i> Click for Card Info<br>
 								</p>
 							</li>
 						';
@@ -249,6 +250,7 @@ print'</div>';
 ?>
 
 
+
 <div class="modal-holder" id="user-to-user">
     <div class="modal-wrap">
         <div class="modal">
@@ -280,6 +282,31 @@ print'</div>';
     </div>
 </div>
 
+<div class="modal-holder" id="market-card-info">
+    <div class="modal-wrap">
+        <div class="modal">
+            <h1>Card Information</h1>
+            <fieldset>
+                <label id="name">Player</label>
+                <input id="name" type="text">
+                <label>Stance/Position</label>
+                <input id="email" type="text" disabled>
+
+                <label>Team</label>
+				<input id="to" type="text" disabled>
+				<label>Last Sold Date</label>
+				<input id="to" type="text" disabled>
+				<label>Max eBay Sell Price</label>
+                <input id="to" type="text" disabled>
+
+            </fieldset>
+            <div class="buttons">
+                <button id="exit">Close Info</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready( function(){
         $('#disclaimer').on('change', function(){
@@ -287,6 +314,9 @@ print'</div>';
         });
         $('#cancel').on('click', function(){
             userToUserCancel();
+		});
+		$('#exit').on('click', function(){
+            exitCardInfo();
         });
     });
     $(document).ready( function(){
@@ -299,6 +329,12 @@ print'</div>';
         $('.item-wanted').on('click', function(){
             var send_to_user_id = this.getAttribute('data-send-to-user-id');
             userToUser(send_to_user_id, true);
+        });
+	});
+	$(document).ready( function(){
+        $('.card-info').on('click', function(){
+            var send_to_user_id = this.getAttribute('data-send-to-user-id');
+            getCardInfo(send_to_user_id, true);
         });
     });
 </script>
