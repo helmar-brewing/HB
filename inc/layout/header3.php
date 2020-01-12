@@ -23,12 +23,31 @@ print'
                 <li class="nav-link"><a href="http://stores.ebay.com/Helmar-Brewing-Art-and-History/" target="_blank">eBay Store</a></li>
                 <li class="nav-link"><a href="'.$protocol.$site.'/magazine/">Magazine</a></li>
 ';
+
+		// grab userType
+        $R_cards2 = $db_main->query("
+        SELECT userType
+        FROM users
+        WHERE userid ='".$user->id."'
+            "
+        );
+        $R_cards2->data_seek(0);
+        while($card = $R_cards2->fetch_object()){
+            $userType = $card->userType;
+        }
+        $R_cards2->free();
+
 if(isset($user)){
     if( $user->login() == 1 || $user->login() == 2 ){
         print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/checklist/">My Checklist</a></li>
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/logout">Log out</a></li>
         ';
+            if ($userType === 'admin') {
+                print'
+                <li class="nav-link"><a href="'.$protocol.$site.'/reports/">Reports</a></li>
+                ';
+            }
     }else{
         print'
                 <li class="nav-link"><a href="'.$protocol.$site.'/account/login?redir='.$currentpage.'">Log in</a></li>
