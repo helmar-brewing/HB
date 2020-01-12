@@ -19,7 +19,7 @@ require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
-$currentpage = 'reports/';
+$currentpage = 'reports/user/';
 
 // create user object
 $user = new phnx_user;
@@ -72,11 +72,10 @@ ob_end_flush();
             
             
             <div class="artwork">
-                <h4>Reports > Main Menu</h4>
-    
+                <h4><a href="'.$protocol.$site.'/'.'reports/">Reports</a> > User Reports</h4>   
 
                 <div>
-                <h2><a href="'.$protocol.$site.'/'.'reports/user/">User Reports</a></h2>
+                <h2>User Reports</h2>
                     <ul>
                         <li><a href="'.$protocol.$site.'/'.'reports/user/spend/">User Spend</a></li>
                     </ul>

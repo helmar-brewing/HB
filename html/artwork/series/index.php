@@ -19,7 +19,7 @@ require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
-$currentpage = 'artwork/series2/'.$_GET['series'].'/';
+$currentpage = 'artwork/series/'.$_GET['series'].'/';
 $series_id = $_GET['series'];
 
 

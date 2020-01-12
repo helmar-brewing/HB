@@ -19,7 +19,7 @@ require_once('libraries/stripe/init.php');
 \Stripe\Stripe::setApiKey($apikey['stripe']['secret']);
 
 /* PAGE VARIABLES */
-$currentpage = 'reports/';
+$currentpage = 'reports/user/';
 
 // create user object
 $user = new phnx_user;
@@ -64,6 +64,8 @@ ob_end_flush();
         if ($userType === 'admin') {
             // where all the code goes if you're admin!
 
+
+
             print'
 
             <script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery-1.12.4.js"></script>
@@ -72,21 +74,60 @@ ob_end_flush();
             
             
             <div class="artwork">
-                <h4>Reports > Main Menu</h4>
-    
+                <h4><a href="'.$protocol.$site.'/'.'reports/">Reports</a> > <a href="'.$protocol.$site.'/'.'reports/user/">User Reports</a> > User Spend</h4>   
 
                 <div>
-                <h2><a href="'.$protocol.$site.'/'.'reports/user/">User Reports</a></h2>
-                    <ul>
-                        <li><a href="'.$protocol.$site.'/'.'reports/user/spend/">User Spend</a></li>
-                    </ul>
-                </div>
+                <h2>User Spend Report</h2>              
+                <p></p>  
+                </div>';
+
+                print '<div><p><a href="'.$protocol.$site.'/'.'reports/user/spend/csv/"><i class="fa fa-download"></i> Download User Report</a></p></div>';
+
+                  
+            // run the sql code to get user data
+
+            print'<div>';  
+
+            $R_cards2 = $db_main->query("
+            SELECT ebayID, buyerName, sum(auctionAmount) as SumAmount
+            FROM completed_auctions
+            GROUP BY ebayID, buyerName
+            ORDER BY Sum(auctionAmount) DESC
+                "
+            );
+            $R_cards2->data_seek(0);
+
+            print '<table>
+            <tr>
+                <th>eBay ID</th>
+                <th>Name</th>
+                <th>Amount</th>
+            </tr>';
+
+
+            while($card = $R_cards2->fetch_object()){
+
+            print '<tr>';
+            print '<td>'.$card->ebayID.'</td>';
+            print '<td>'.$card->buyerName.'</td>';
+            print '<td>$ '.number_format($card->SumAmount,2).'</td>';
+            print '</tr>';
+            }
+
+            print '</table>';
+
+                $R_cards2->free();
+            print'</div>';  
+
+            // end report code
 
 
 
-
-                </div>
+                print'    </div>
             ';
+
+            // close out db 
+
 
         } else{
             // not admin
