@@ -5,3 +5,6 @@ inc/keys.php
 inc/keys*.php
 cron/
 images/
+sass.zip
+scripts/_marketplace.js
+
