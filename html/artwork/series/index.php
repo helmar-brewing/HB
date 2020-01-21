@@ -61,11 +61,15 @@ ob_end_flush();
 /* HEADER */ require('layout/header2.php');
 /* HEADER */ require('layout/header1.php');
 
+
+
 print'
 
 <script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery-1.12.4.js"></script>
 <script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery.dataTables.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="https://helmarbrewing.com/js/jquery.dataTables.min.css">
+
 
 
 <div class="artwork">
@@ -190,7 +194,7 @@ print'    </div>
                         // print the front pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
                             print'
-                                <a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
+                                <a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'" alt="Picture Helmar Brewing '.$series_name.' Card # '.$card->cardnum.' '.$card->player.' '.$card->description.' '.$card->team.'"></a>
                             ';
                         }
 
@@ -202,7 +206,7 @@ print'    </div>
                         // print the back pic if exists
                         if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
                             print'
-                                <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
+                                <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card->series.'_'.$card->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'" alt="Picture Helmar Brewing '.$series_name.' Card # '.$card->cardnum.' '.$card->player.' '.$card->description.' '.$card->team.'"></a>
                             ';
 
                         }
