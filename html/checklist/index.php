@@ -279,7 +279,7 @@ FROM userCardChecklist
 									$R_cards = $db_main->query("
 
 									SELECT
-					userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketSale,userCardChecklist.marketWishlist,userCardChecklist.card_note,userCardChecklist.card_note_wish, userCardChecklist.dateadded,
+					userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketSale,userCardChecklist.marketWishlist,userCardChecklist.card_note, userCardChecklist.card_note_wish, userCardChecklist.dateadded,
 					cardList.series, cardList.cardnum, cardList.player, cardList.description, cardList.team,
 					series_info.series_name, series_info.series_tag, series_info.sort
 
@@ -450,12 +450,13 @@ FROM userCardChecklist
 
 
 										if($card->marketWishlist > 0){
-											print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+											print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a> &nbsp;';
 											if($card->card_note_wish <> ""){
 												print '<a href="javascript:;" title="'.$card->card_note_wish.'"><i class="fa fa-comments" onclick="marketWishComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note_wish.'\')" id="mktWishComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
 											}else{
 												print '<a href="javascript:;" title="'.$card->card_note_wish.'"><i class="fa fa-comment-o" onclick="marketWishComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note_wish.'\')" id="mktWishComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
 											}
+											print '</td>';
 										} else{
 											print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
 										}

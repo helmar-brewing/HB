@@ -237,12 +237,13 @@ print'    </div>
 
         /* add Market Wishlist icon */
         if($card->marketWishlist > 0){
-            print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+            print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a> &nbsp;';
             if($card->card_note_wish <> ""){
                 print '<a href="javascript:;" title="'.$card->card_note_wish.'"><i class="fa fa-comments" onclick="marketWishComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note_wish.'\')" id="mktWishComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
             }else{
                 print '<a href="javascript:;" title="'.$card->card_note_wish.'"><i class="fa fa-comment-o" onclick="marketWishComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note_wish.'\')" id="mktWishComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
             }
+            print '</td>';
         } else{
             print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
         }
