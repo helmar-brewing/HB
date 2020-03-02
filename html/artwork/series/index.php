@@ -363,7 +363,7 @@ function marketWishComment(s, c, t){
         "json"
     )
     .fail(function() {
-        alert('There was an error, refresh the page.');
+       // alert('There was an error, refresh the page.');
     });
 
 	document.getElementById('fullscreenload').style.display = 'none';
