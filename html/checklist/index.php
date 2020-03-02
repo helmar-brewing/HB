@@ -279,7 +279,7 @@ FROM userCardChecklist
 									$R_cards = $db_main->query("
 
 									SELECT
-					userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketSale,userCardChecklist.marketWishlist,userCardChecklist.card_note, userCardChecklist.dateadded,
+					userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketSale,userCardChecklist.marketWishlist,userCardChecklist.card_note,userCardChecklist.card_note_wish, userCardChecklist.dateadded,
 					cardList.series, cardList.cardnum, cardList.player, cardList.description, cardList.team,
 					series_info.series_name, series_info.series_tag, series_info.sort
 
@@ -451,6 +451,11 @@ FROM userCardChecklist
 
 										if($card->marketWishlist > 0){
 											print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+											if($card->card_note_wish <> ""){
+												print '<a href="javascript:;" title="'.$card->card_note_wish.'"><i class="fa fa-comments" onclick="marketWishComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note_wish.'\')" id="mktWishComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
+											}else{
+												print '<a href="javascript:;" title="'.$card->card_note_wish.'"><i class="fa fa-comment-o" onclick="marketWishComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note_wish.'\')" id="mktWishComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
+											}
 										} else{
 											print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
 										}
@@ -739,6 +744,57 @@ function marketSaleComment(s, c, t){
     document.getElementById('fullscreenload').style.display = 'block';
    $.get(
         "/artwork/ajax/marketSaleComment/",
+		{ series:s, cardnum:c, comment:t },
+//        function( data ) {
+//			if(data.error === 0){
+//				if(data.qty === '1'){
+//					if(window.confirm(txt)){
+//					//	$('#mktSaleComment' + c + '_' + s).removeClass('fa-square-o');
+//					//	$('#mktSaleComment' + c + '_' + s).addClass('fa-check-square-o');
+//						location.reload();
+//					}else{
+//						$.get(
+//							"/artwork/ajax/marketSale/",
+//							{ series:s, cardnum:c },
+//							"json"
+//						);
+//						window.alert("You need to accept terms to list on the Marketplace");
+//					}
+//				}else if(data.qty === '0'){
+//					//	$('#mktSaleComment' + c + '_' + s).removeClass('fa-check-square-o');
+//					//	$('#mktSaleComment' + c + '_' + s).addClass('fa-square-o');
+//						location.reload();
+//				} else {
+//					alert("else part...");
+//				}
+//			}else{
+//				alert(data.msg);
+//				location.reload();
+//			}
+//            document.getElementById('fullscreenload').style.display = 'none';
+//        },
+        "json"
+    )
+    .fail(function() {
+        alert('There was an error, refresh the page.');
+    });
+
+	document.getElementById('fullscreenload').style.display = 'none';
+	alert("Card comment updated");
+	location.reload();
+
+}
+</script>
+
+
+<script>
+function marketWishComment(s, c, t){
+
+	var t = prompt("Please enter any comments about your card that you would share with others", t);
+
+    document.getElementById('fullscreenload').style.display = 'block';
+   $.get(
+        "/artwork/ajax/marketWishComment/",
 		{ series:s, cardnum:c, comment:t },
 //        function( data ) {
 //			if(data.error === 0){
