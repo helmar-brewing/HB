@@ -119,7 +119,7 @@ print'    </div>
 
 
 	$R_cards = $db_main->query("
-	SELECT cardList.*, userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketWishlist FROM cardList
+	SELECT cardList.*, userCardChecklist.quantity, userCardChecklist.wishlistQuantity, userCardChecklist.marketWishlist, userCardChecklist.card_note_wish FROM cardList
 	LEFT JOIN userCardChecklist
 		ON cardList.series = userCardChecklist.series
 		AND cardList.cardnum = userCardChecklist.cardnum
@@ -235,9 +235,14 @@ print'    </div>
 			print '<td><a href="javascript:;"><i class="fa fa-square-o" onclick="wishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="WISH'.$card->cardnum.'"></i></a></td>';
         }
 
-        
+        /* add Market Wishlist icon */
         if($card->marketWishlist > 0){
             print '<td><a href="javascript:;" ><i class="fa fa-check-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
+            if($card->card_note_wish <> ""){
+                print '<a href="javascript:;" title="'.$card->card_note_wish.'"><i class="fa fa-comments" onclick="marketWishComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note_wish.'\')" id="mktWishComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
+            }else{
+                print '<a href="javascript:;" title="'.$card->card_note_wish.'"><i class="fa fa-comment-o" onclick="marketWishComment(\''.$card->series.'\',\''.$card->cardnum.'\',\''.$card->card_note_wish.'\')" id="mktWishComment'.$card->cardnum.'_'.$card->series.'"></i></a>';
+            }
         } else{
             print '<td><a href="javascript:;" ><i class="fa fa-square-o" onclick="marketWishlist(\''.$card->series.'\',\''.$card->cardnum.'\')" id="mktWish'.$card->cardnum.'_'.$card->series.'"></i></a></td>';
         }
@@ -316,6 +321,57 @@ $(document).ready(function() {
 });
 } );
 </script>
+
+<script>
+function marketWishComment(s, c, t){
+
+	var t = prompt("Please enter any comments about your card that you would share with others", t);
+
+    document.getElementById('fullscreenload').style.display = 'block';
+   $.get(
+        "/artwork/ajax/marketWishComment/",
+		{ series:s, cardnum:c, comment:t },
+//        function( data ) {
+//			if(data.error === 0){
+//				if(data.qty === '1'){
+//					if(window.confirm(txt)){
+//					//	$('#mktSaleComment' + c + '_' + s).removeClass('fa-square-o');
+//					//	$('#mktSaleComment' + c + '_' + s).addClass('fa-check-square-o');
+//						location.reload();
+//					}else{
+//						$.get(
+//							"/artwork/ajax/marketSale/",
+//							{ series:s, cardnum:c },
+//							"json"
+//						);
+//						window.alert("You need to accept terms to list on the Marketplace");
+//					}
+//				}else if(data.qty === '0'){
+//					//	$('#mktSaleComment' + c + '_' + s).removeClass('fa-check-square-o');
+//					//	$('#mktSaleComment' + c + '_' + s).addClass('fa-square-o');
+//						location.reload();
+//				} else {
+//					alert("else part...");
+//				}
+//			}else{
+//				alert(data.msg);
+//				location.reload();
+//			}
+//            document.getElementById('fullscreenload').style.display = 'none';
+//        },
+        "json"
+    )
+    .fail(function() {
+        alert('There was an error, refresh the page.');
+    });
+
+	document.getElementById('fullscreenload').style.display = 'none';
+	alert("Card comment updated");
+	location.reload();
+
+}
+</script>
+
 
 <script>
 function checklist(s, c){
