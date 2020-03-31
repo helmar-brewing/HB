@@ -64,31 +64,42 @@ print'
 	    	<div class="hero-inner">
 				<div class="hero-twocol">
 					<div class="l">	
-					<!--<img src="/img/helmar_logo_striped.png" alt="Helmar Brewing">-->
 
-						<img src="/img/tag-2.png" alt="Helmar Brewing" style="margin-bottom:0px; margin-left:-74%;">
-
-						<img src="/img/logo-2.png" alt="Helmar Brewing" style="margin-bottom:15px!important;">
-
-						<h2 style="color:#ffff80;font-weight:500;font-size:48px; font-family:Arial, Helvetica, sans-serif">Auctions Every Tuesday</h2>
-         
-                         <a class="card" href="https://helmarbrewing.com/marketplace/">See Cards Wanted Now!</a>
-						
-
-						<p style="font-size:32px; font-family:Arial, Helvetica, sans-serif""> The #1 Community for Sports Art!</p>
-
-
-						<!--<p>Welcome to the Helmar Brewing Company. Helmar is the consummate originator of fine, hand-made art cards for serious sports enthusiasts.</p>-->
-						<!--Our magazine, <em>Baseball History & Art</em>, shares joyous insight into the history and art of the National Game.</p>-->
+                        <img src="/img/tag-2.png" alt="Helmar Brewing" style="margin-bottom:0px; ">
+    
+                        <img src="/img/logo-2.png" alt="Helmar Brewing" style="margin-bottom:15px!important;">
+                        
+                        <div class="mobile_hide" style="width: 100%">
+                            <h2 style="color:#ffff80;font-weight:500;font-size:48px; font-family:Arial, Helvetica, sans-serif">Auctions Every Tuesday</h2>
+             
+                            <a class="card" href="https://helmarbrewing.com/marketplace/">See Cards Wanted Now!</a>
+                           
+                            <p style="font-size:32px; font-family:Arial, Helvetica, sans-serif""> The #1 Community for Sports Art!</p>
+                        </div>
 					</div>
-					<div class="r" style="margin-top:8%;">
-					<!--<img src="/img/mag-2015-06.png"><br><br>-->
+					<div class="r mobile_hide" style="margin-top:8%;">
 						<img class="rev-img"src="'.getRandomImage().'" style="margin-left:21%;"><br><br>
-						<!--<a class="button" href="http://helmarbrewing.com/magazine-preview/2015/06/" target="_blank">Preview</a>-->
 					</div>
 				</div>
 	    	</div>
 	    </div>
+	    
+	    <!-- Hide the mobile_hide class for screen sizes less than 747px. This is when the two column layout is merged two just one. -->
+	    <style>
+	        @media only screen and (max-width: 747px) {
+	            .mobile_hide {
+	                display: none;
+	            }
+	            
+	            .hero-inner {
+	                padding: 0;
+	            }
+	            
+	            .hero {
+	                padding-bottom: 0;
+	            }
+	        }
+        </style>
 ';
 
 

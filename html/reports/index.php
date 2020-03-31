@@ -86,6 +86,7 @@ ob_end_flush();
                 <h2><a href="'.$protocol.$site.'/'.'reports/maintain/">Maintenance</a></h2>
                     <ul>
                         <li><a href="'.$protocol.$site.'/'.'reports/maintain/series_info/">Series Info</a></li>
+                        <li><a href="'.$protocol.$site.'/'.'reports/maintain/series_order/">Series Image Order of Display</a></li>
                     </ul>
                 </div>
 

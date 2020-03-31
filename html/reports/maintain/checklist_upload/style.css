@@ -1,0 +1,44 @@
+body{
+    font-family:sans-serif;
+  }
+  
+  .submission-form{
+    max-width:80%;
+    margin:2rem auto;
+    border:2px solid #E74C3C;
+    padding:2rem;
+    border-radius:5px;
+    label{
+      display:block;
+      padding:1rem 0 .25rem;
+      text-transform:uppercase;
+      font-size:14px;
+    }
+    input, textarea{
+      display:block;
+      width:100%;
+      border:2px solid #2980B9;
+      padding:.5rem;
+      font-size:18px;
+      border-radius:5px;
+    }   
+  }
+
+  input.in2{
+    background-color : #d1d1d1; 
+  }
+  
+  #sendBtn{
+    border:0;
+    background:#343050;
+    padding:.5rem;
+    color:white;
+    margin:1rem 0;
+    width:auto;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:.3s background ease;
+    &:hover{
+      background:#3498DB;
+    }
+  }
