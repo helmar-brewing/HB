@@ -36,6 +36,7 @@ $user->checksub();
 
 ob_end_flush();
 /* <HEAD> */ $head='
+<script src="https://helmarbrewing.com/marketplace/_marketplace.js"></script>
 <script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
 <script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery-1.12.4.js"></script>
 <script language="javascript" type="text/javascript" src="https://helmarbrewing.com/js/jquery.dataTables.min.js"></script>
@@ -63,282 +64,83 @@ if(isset($user)){
     if( $user->login() === 1 || $user->login() === 2 ){
 		/* do this code if user is logged in */
 
-		// get unique users, want the user who has the farthest end date (newest card listed)
-		$R_cards = $db_main->query("
-		    SELECT marketSale.userid, users.*
-		    from marketSale
-		    LEFT JOIN users ON users.userid = marketSale.userid
-		    WHERE expired = 'N' and ".$user->id." <> marketSale.userid
-		    GROUP BY marketSale.userid
-		    ORDER BY max(endDate) DESC
-		");
-
-
-		if($R_cards !== FALSE){
-
-		// grab card info --- need to left join on the card list table on series and card num, sory by series, card num
-		$R_cards2 = $db_main->query("
-		SELECT marketSale.*, cardList.*
-		FROM marketSale
-		LEFT JOIN cardList ON marketSale.series = cardList.series and marketSale.cardnum = cardList.cardnum
-		WHERE marketSale.expired = 'N' and $user->id <> marketSale.userid
-		"
-		);
-
-
-		print '<h2>Marketplace Items for Sale</h2>
-		<p>The following users have items listed for sale on the helmar market place. Click on the items you\'re interested in to reach out to that user!</p>';
-
-				print'
-							<table id="selling" class="display compact">
-						  <thead>
-							<tr>
-							<th><i class="fa fa-envelope-o"></i></th>
-							<th>User</th>
-							<th>Series</th>
-							<th>Card Number</th>
-							<th>Player</th>
-							<th>Stance / Position</th>
-							<th>Team</th>
-							<th>Stock Pictures</th>
-							<th>Seller Note</th>
-							</tr>
-						  </thead>
-						  <tbody>
-				';
-
-			$R_cards->data_seek(0);
-			while($card = $R_cards->fetch_object()){
-
-				$R_cards2->data_seek(0);
-				while($card2 = $R_cards2->fetch_object()){
-					if($card->userid === $card2->userid){
-
-						if($card->state == ""){
-							if($greetings=$card->firstname == ""){
-								$greetings='User';
-							}else{
-								$greetings=$card->firstname;
-							}
-							
-						}else{
-							if($greetings=$card->firstname == ""){
-								$greetings='User from '.$card->state;
-							}else{
-								$greetings=$card->firstname.' from '.$card->state;
-							}
-							
-						}
-
-                        // define the pictures
-						$frontpic = '/images/cardPics/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
-						$frontthumb = '/images/cardPics/thumb/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
-						$backpic  = '/images/cardPics/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
-						$backthumb  = '/images/cardPics/thumb/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
-						$frontlarge = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
-						$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
-
-						print'
-							<tr >
-							
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'"><i class="fa fa-envelope-o"></i></td>
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->player.'</td>
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->description.'</td>
-								<td class="item-for-sale" data-send-to-user-id="'.$card->userid.'">'.$card2->team.'</td>
-                                <td>
-                        ';
-
-	                    //check if either pic exists
-	                    if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) || file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
-
-	                        // print the front pic if exists
-	                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
-	                            print'
-									<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" >
-                                        <img src="'.$protocol.$site.$frontthumb.'">
-                                    </a>
-	                            ';
-	                        }
-
-	                        // insert space
-	                        if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) && file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
-	                            print'&nbsp;&nbsp;';
-	                        }
-
-	                        // print the back pic if exists
-	                        if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
-	                            print'
-								    <a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" >
-                                        <img src="'.$protocol.$site.$backthumb.'">
-                                    </a>
-	                            ';
-	                        }
-
-	                    // neither pic exists print message instead
-	                    }else{
-	                        print'<i>no picture</i>';
-	                    }
-
-						print '
-                                </td>
-							    <td>'.$card2->card_note.'</td>
-                            </tr>
-                        ';
-					}
-				}
-			}
-			$R_cards->free();
-			$R_cards2->free();
-            unset($R_cards, $R_cards2);
-		}else{
-			print'<tr><td colspan="7">could not get list of cards</td></tr>';
-	    }
-		print'
-		        </tbody>
-			</table>
-		';
-
-
-        print '<p></p><p></p>';
-
 
 		// buying
-        print '
-            <h2>Marketplace Items Wanted</h2>
-		    <p>The following users are interested in the items listed below. Click on the items if you would like to trade or reach out to that user!</p>
-			    <table id="wishlist" class="display compact">
-				    <thead>
-						<tr>
-							<th><i class="fa fa-envelope-o"></i></th>
-							<th>User</th>
-							<th>Series</th>
-							<th>Card Number</th>
-							<th>Player</th>
-							<th>Stance / Position</th>
-							<th>Team</th>
-							<th>Pictures</th>
-							</tr>
-						  </thead>
-						  <tbody>
+		print '
+		<div class="auctions">
+            <h2 style="color:black">Marketplace Items <span id="type_label"></span></h2>
+            <div style="display: inline-flexbox">
+                <button onclick="setType('."'".'selling'."'".')" id="selling_btn">For Sale</button>
+                <button onclick="setType('."'".'buying'."'".')" id="buying_btn">Wanted</button>
+            </div>
+            
+		    <p id="type_message" style="text-align: left"></p>
 				';
 
-
-
-		// get unique users, want the user who has the farthest end date (newest card listed)
-		$R_cards = $db_main->query("
-		    SELECT marketWishlist.userid, users.*
-		    from marketWishlist
-		    LEFT JOIN users ON users.userid = marketWishlist.userid
-		    where expired = 'N' and $user->id <> marketWishlist.userid
-		    GROUP BY marketWishlist.userid
-		    ORDER BY max(endDate) DESC
-		");
-
-
-		if($R_cards !== FALSE){
-
-    		// grab card info --- need to left join on the card list table on series and card num, sory by series, card num
-    		$R_cards2 = $db_main->query("
-    		    SELECT marketWishlist.*, cardList.*
-    		    FROM marketWishlist
-    		    LEFT JOIN cardList ON marketWishlist.series = cardList.series and marketWishlist.cardnum = cardList.cardnum
-    		    WHERE marketWishlist.expired = 'N' and $user->id <> marketWishlist.userid
-    		");
-
-			$R_cards->data_seek(0);
-			while($card = $R_cards->fetch_object()){
-
-				$R_cards2->data_seek(0);
-				while($card2 = $R_cards2->fetch_object()){
-					if($card->state == ""){
-						if($greetings=$card->firstname == ""){
-							$greetings='User';
-						}else{
-							$greetings=$card->firstname;
-						}
-						
-					}else{
-						if($greetings=$card->firstname == ""){
-							$greetings='User from '.$card->state;
-						}else{
-							$greetings=$card->firstname.' from '.$card->state;
-						}
-						
-					}
-
-					if($card->userid === $card2->userid){
-
-                        // define the pictures
-						$frontpic = '/images/cardPics/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
-						$frontthumb = '/images/cardPics/thumb/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
-						$backpic  = '/images/cardPics/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
-						$backthumb  = '/images/cardPics/thumb/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
-						$frontlarge = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Front.jpg';
-						$backlarge  = '/images/cardPics/large/'.$card2->series.'_'.$card2->cardnum.'_Back.jpg';
-
-						print'
-							<tr>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'"><i class="fa fa-envelope-o"></i></td>
-							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$greetings.'</td>
-							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->series.'</td>
-							    <td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->cardnum.'</td>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->player.'</td>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->description.'</td>
-								<td class="item-wanted" data-send-to-user-id="'.$card->userid.'">'.$card2->team.'</td>
-								<td>
-                        ';
-
-
-						//check if either pic exists
-						if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) || file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
-
-							// print the front pic if exists
-							if(file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge)){
-								print'
-															<a href="'.$protocol.$site.'/'.$frontlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" ><img src="'.$protocol.$site.$frontthumb.'"></a>
-								';
-							}
-
-							// insert space
-							if( file_exists($_SERVER['DOCUMENT_ROOT'].$frontlarge) && file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge) ){
-								print'&nbsp;&nbsp;';
-							}
-
-							// print the back pic if exists
-							if(file_exists($_SERVER['DOCUMENT_ROOT'].$backlarge)){
-								print'
-															<a href="'.$protocol.$site.'/'.$backlarge.'" data-lightbox="'.$card2->series.'_'.$card2->cardnum.'" ><img src="'.$protocol.$site.$backthumb.'"></a>
-								';
-
-							}
-
-						// neither pic exists print message instead
-						}else{
-							print'<i>no picture</i>';
-						}
-
-						print '
-                                </td>
-                            </tr>
-                        ';
-					}
-				}
-			}
-			$R_cards->free();
-			$R_cards2->free();
-
-		}else{
-			print'
-				<tr><td colspan="6">could not get list of cards</td></tr>
-			';
-		}
-		print'
-		        </tbody>
-			</table>
+		print '
+		    <div class="search-container" style="width: 100%;">
+		        <div style="float: left" class="results_per_page">
+		            <label style="color: black">Results per page: </label>
+		            <select id="results-per-page" onchange="changePageSize()" style="width: 100%">
+		                <option>16</option>
+		                <option>32</option>
+		                <option>64</option>
+		                <option>All</option>
+                    </select>
+                </div>
+		        <div style="float: right" class="search">
+                    <label style="color:black">Search: </label>
+                    <input type="text" placeholder="Player/Team/Series" id="search-query"/>
+                </div>
+                <div style="float: right;" class="filter_series">
+                    <label style="color: black">Filter by Series:</label>
+                    <select id="series_filter" style="width: 100%;" onchange="refreshCards(false)">
+                        <option></option>
+                    </select>
+                </div>
+		    </div>
+		    
+		    <div class="view-container" style="width: 100%; height: 30px">
+		        <a style="float: right; font-size: 20px" id="view_type_btn" onclick="toggleViewType(event)" href="#"></a>
+            </div>
+		    
+		    
+		    <div class="auctions_container" id="auction_list_container">
+		        <ul id="auction_list" style="display: flex; flex-wrap: wrap;">
+		        </ul>
+		        <div class="auction_list_table_container" style="overflow-x:scroll">
+                    <table id="auction_list_table">
+                        <thead>
+                            <th style="width: 40px; text-align: center"><i class="fa fa-envelope-o" /></th>
+                            <th>User</th>
+                            <th>Series</th>
+                            <th>Card Number</th>
+                            <th>Player</th>
+                            <th>Stance / Position</th>
+                            <th>Team</th>
+                            <th>Stock Pictures</th>
+                            <th>User Note</th>
+                        </thead>
+                        <tbody id="auction_list_table_body">
+                            
+                        </tbody>
+                    </table>
+                </div>    
+		        <p id="no_results">No results match your criteria</p>
+            </div>
+            <div id="auction_list_loading" style="text-align: center">
+                <img src="https://cdn.lowgif.com/small/d35d94c490e598e3-loading-gif-transparent-loading-gif.gif" style="width: 50px; height: 50px;"/>
+            </div>
+            
+            <!--<p id="auction_list_loading" style="display: block; margin: 0;">Loading Results...</p>-->
+            <p style="margin: 1em;">Page <span id="result_size">0</span> of <span id="total_size">0</span></p>
+            <center>
+                <div id="pagination-container" style="margin: 1em">
+                    
+                </div>
+            </center>
 		';
+
 
 		/* END code if user is logged in, but not paid subscription */
     }else{
@@ -352,6 +154,7 @@ if(isset($user)){
 
 print'</div>';
 ?>
+
 
 
 <div class="modal-holder" id="user-to-user">
@@ -385,6 +188,50 @@ print'</div>';
     </div>
 </div>
 
+<div class="modal-holder" id="market-card-info">
+    <div class="modal-wrap">
+        <div class="modal">
+            <h1>Card Information</h1>
+            <fieldset>
+                <div style="column-count: 2">
+                    <div>
+                        <label>Series</label>
+                        <input id="series_name" type="text" disabled/>
+                    </div>
+                    <div>
+                        <label>Card Number</label>
+                        <input id="card_number" type="text" disabled/>
+                    </div>
+                </div>
+
+                <label>Player</label>
+                <input id="player_name" type="text" disabled>
+
+                <label>Stance/Position</label>
+                <input id="player_position" type="text" disabled>
+
+                <label>Team</label>
+				<input id="player_team" type="text" disabled>
+
+                <div style="column-count: 2">
+                    <div>
+                        <label>Last Sold Date</label>
+                        <input id="last_sold_date" type="text" disabled>
+                    </div>
+                    <div>
+                        <label>Max eBay Sell Price</label>
+                        <input id="max_ebay_price" type="text" disabled>
+                    </div>
+                </div>
+
+            </fieldset>
+            <div class="buttons">
+                <button id="exit">Close Info</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready( function(){
         $('#disclaimer').on('change', function(){
@@ -392,19 +239,29 @@ print'</div>';
         });
         $('#cancel').on('click', function(){
             userToUserCancel();
+		});
+		$('#exit').on('click', function(){
+            exitCardInfo();
         });
     });
     $(document).ready( function(){
+
+        changePageSize();
+
+        setType("buying");
+        setViewType("card");
+
+        refreshCards();
+        getSeriesNames();
+
         $('.item-for-sale').on('click', function(){
             var send_to_user_id = this.getAttribute('data-send-to-user-id');
             userToUser(send_to_user_id);
         });
-    });
-    $(document).ready( function(){
-        $('.item-wanted').on('click', function(){
-            var send_to_user_id = this.getAttribute('data-send-to-user-id');
-            userToUser(send_to_user_id, true);
-        });
+
+        $('#search-query').on('keyup', function() {
+            refreshCards();
+        })
     });
 </script>
 <script>
@@ -414,42 +271,143 @@ print'</div>';
         ]
     });
 </script>
-<script>
-    $(document).ready(function() {
-        $('#selling').DataTable({
-          "columns": [
-			{ "width": "3%" },
-            { "width": "10%" },
-            { "width": "11%" },
-            { "width": "7%" },
-            { "width": "19%" },
-            { "width": "13%" },
-        	{ "width": "12%" },
-        	{ "width": "12%" },
-        	{ "width": "13%" }
-          ]
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#wishlist').DataTable({
-          "columns": [
-            { "width": "3%" },
-			{ "width": "10%" },
-            { "width": "13%" },
-            { "width": "7%" },
-            { "width": "23%" },
-            { "width": "15%" },
-        	{ "width": "15%" },
-        	{ "width": "14%" }
-          ]
-        });
-    });
-</script>
+
+<style>
+
+    .email_btn:hover {
+        background-color: lightgrey;
+    }
+
+    .thumbnail {
+        height: 50px;
+        max-height: 50px;
+        width: auto;
+        margin: 5px;
+    }
+
+    th, td {
+        color: black;
+    }
+
+    .artwork p {
+            margin-bottom: 1em !important;
+    }
+
+    .artwork select {
+        margin-bottom: 0 !important;
+    }
+
+    .inactive {
+        background-color: gray !important;
+        color: black !important;
+    }
+
+    #auction_list {
+        margin: 0 !important;
+        max-width: 100%;
+    }
+
+    select {
+        height: 35px;
+        border-color: #DDD;
+        background-color: white;
+        color: #757575;
+    }
+
+    .nameplate {
+        cursor: pointer;
+    }
+
+    .nameplate:hover {
+        background-color: #b8b7b7;
+    }
+
+    #pagination-container {
+        display: inline-block;
+    }
+
+    #pagination-container a {
+        color: black;
+        float: center;
+        padding: 8px 16px;
+        text-decoration: none;
+        text-align:center;
+    }
+
+    #pagination-container a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    #pagination-container a:hover:not(.active) {background-color: #ddd;}
+
+    @media only screen and (max-width: 1000px) {
+        .grid_item {
+            width: 50% !important;
+        }
+    }
+
+    .auctions {
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        .search-container {
+            height: 178px;
+        }
+
+        .artwork {
+            width: 100%;
+        }
+
+        .grid_item {
+            width: 100% !important;
+        }
+
+        .search {
+            width: 53%;
+        }
+
+        .results_per_page {
+            width: 45%;
+        }
+
+        .filter_series {
+            width: 100%;
+        }
+
+        table {
+            width: 800px;
+        }
+    }
+
+    @media only screen and (min-width: 600px) {
+
+        .search-container {
+            height: 90px;
+        }
+
+        .artwork {
+            padding-left: 10em;
+            padding-right: 10em;
+        }
 
 
+        .search {
+            width: 30%;
+        }
 
+        .results_per_page {
+
+        }
+
+        .filter_series {
+            width: 30%;
+            margin-right: 1em;
+        }
+    }
+</style>
 
 <?php
 /* FOOTER */ require('layout/footer1.php');
