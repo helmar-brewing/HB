@@ -274,6 +274,19 @@ print'</div>';
 
 <style>
 
+    .image-not-found {
+        height: 17.7em;
+        background-color: grey;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .image-not-found-text {
+        padding-top: 45%;
+        color: white !important;
+        font-size: 24px;
+    }
+
     .email_btn:hover {
         background-color: lightgrey;
     }

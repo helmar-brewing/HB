@@ -163,11 +163,15 @@ function printGridItem(card) {
 
     let fn = getUserFunction(card);
 
-    html += '<a style="background:url(' + "'" + card.frontPicture + "'" + '); background-size: cover; background-position: center;background-repeat: repeat;" href="' + card.frontPicture + '" data-lightbox="' + card.series + "_" + card.cardnum + '" >';
-    html += "<span>";
-    html += '<figure style="background:url(' + "'" + card.frontPicture + "'" + '); background-size: contain; background-position: center;background-repeat: no-repeat;"></figure>';
-    html += "</span>";
-    html += "</a>";
+    if (card.frontPicture) {
+        html += '<a style="background:url(' + "'" + card.frontPicture + "'" + '); background-size: cover; background-position: center;background-repeat: repeat;" href="' + card.frontPicture + '" data-lightbox="' + card.series + "_" + card.cardnum + '" >';
+        html += "<span>";
+        html += '<figure style="background:url(' + "'" + card.frontPicture + "'" + '); background-size: contain; background-position: center;background-repeat: no-repeat;"></figure>';
+        html += "</span>";
+        html += "</a>";
+    } else {
+        html += "<div class='image-not-found'><p class='image-not-found-text'>No Image Available</p></div>";
+    }
 
     let greetings = !card.firstname || card.firstname === "" ? "User" : cleanString(card.firstname);
     greetings = card.state  === "" || !card.state ? greetings : greetings + " from " + card.state.toUpperCase();
@@ -452,7 +456,7 @@ function getCardInfo(cardNum, series){
             if (data.success) {
                 document.getElementById("series_name").value = data.cardInfo.series_name;
                 document.getElementById("card_number").value = data.cardInfo.cardnum;
-                document.getElementById('player_name').value = data.cardInfo.properName.trim();
+                document.getElementById('player_name').value = cleanString(data.cardInfo.properName);
                 document.getElementById('player_team').value = data.cardInfo.team;
                 document.getElementById('player_position').value = data.cardInfo.description;
                 document.getElementById('last_sold_date').value = formatDate(data.cardInfo.lastsold);
