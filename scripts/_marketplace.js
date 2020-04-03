@@ -197,7 +197,7 @@ let cards = [];
 let pageSize = 16;
 let page = 0;
 let totalResults = 0;
-let maxPaginationButtons = 6;
+let maxPaginationButtons = 5;
 
 function changePageSize() {
     pageSize = $('#results-per-page').val();
@@ -229,22 +229,19 @@ function setPagination() {
         let lowerBound = page - (maxPaginationButtons - 1) / 2;
         let upperBound = page + (maxPaginationButtons - 1) / 2;
 
-        console.log(lowerBound, upperBound);
-
         if (lowerBound < 0) {
             upperBound -= lowerBound;
             lowerBound = 0;
         }
 
-        if (upperBound > pages - 1) {
-            lowerBound -= upperBound - pages;
-            upperBound = pages;
+        if (upperBound >= pages - 1) {
+            let delta = upperBound - pages + 1;
+            lowerBound -= delta;
+            upperBound = pages - 1;
         }
 
         lowerBound = lowerBound < 0 ? 0 : lowerBound;
         upperBound = upperBound >= pages ? pages : upperBound;
-
-        console.log(lowerBound, upperBound);
 
         if (page > 1) {
             html += "<a onclick='gotoPage(0)'>&laquo;</a>";
@@ -254,7 +251,7 @@ function setPagination() {
             html += "<a onclick='gotoPage(" + (page - 1) + ")'>&lsaquo;</a>";
         }
 
-        for (let i = lowerBound; i < upperBound; i++) {
+        for (let i = lowerBound; i <= upperBound; i++) {
             html += paginationButton(i, page === i);
         }
 
@@ -265,7 +262,6 @@ function setPagination() {
         if (page < pages - 2) {
             html += "<a onclick='gotoPage(" + (pages - 1) + ")'>&raquo;</a>";
         }
-        console.log(html);
     }
     $('#pagination-container').html(html);
 }
