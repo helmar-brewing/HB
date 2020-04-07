@@ -583,7 +583,8 @@
 			if($pword === NULL){
 				throw new Exception("UserMgmt tried to create a new hash, and the password is not set.");
 			}
-			$salt = mcrypt_create_iv(22, MCRYPT_DEV_URANDOM);
+			//$salt = mcrypt_create_iv(22, MCRYPT_DEV_URANDOM);
+			$salt = random_bytes(22);
 			$salt = base64_encode($salt);
 			$salt = str_replace('+', '.', $salt);
 			$pepper = md5(uniqid(rand(),true));
