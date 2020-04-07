@@ -163,11 +163,15 @@ function printGridItem(card) {
 
     let fn = getUserFunction(card);
 
-    html += '<a style="background:url(' + "'" + card.frontPicture + "'" + '); background-size: cover; background-position: center;background-repeat: repeat;" href="' + card.frontPicture + '" data-lightbox="' + card.series + "_" + card.cardnum + '" >';
-    html += "<span>";
-    html += '<figure style="background:url(' + "'" + card.frontPicture + "'" + '); background-size: contain; background-position: center;background-repeat: no-repeat;"></figure>';
-    html += "</span>";
-    html += "</a>";
+    if (card.frontPicture) {
+        html += '<a style="background:url(' + "'" + card.frontPicture + "'" + '); background-size: cover; background-position: center;background-repeat: repeat;" href="' + card.frontPicture + '" data-lightbox="' + card.series + "_" + card.cardnum + '" >';
+        html += "<span>";
+        html += '<figure style="background:url(' + "'" + card.frontPicture + "'" + '); background-size: contain; background-position: center;background-repeat: no-repeat;"></figure>';
+        html += "</span>";
+        html += "</a>";
+    } else {
+        html += "<div class='image-not-found'><p class='image-not-found-text'>No Image Available</p></div>";
+    }
 
     let greetings = !card.firstname || card.firstname === "" ? "User" : cleanString(card.firstname);
     greetings = card.state  === "" || !card.state ? greetings : greetings + " from " + card.state.toUpperCase();
@@ -197,7 +201,7 @@ let cards = [];
 let pageSize = 16;
 let page = 0;
 let totalResults = 0;
-let maxPaginationButtons = 6;
+let maxPaginationButtons = 5;
 
 function changePageSize() {
     pageSize = $('#results-per-page').val();
@@ -229,22 +233,19 @@ function setPagination() {
         let lowerBound = page - (maxPaginationButtons - 1) / 2;
         let upperBound = page + (maxPaginationButtons - 1) / 2;
 
-        console.log(lowerBound, upperBound);
-
         if (lowerBound < 0) {
             upperBound -= lowerBound;
             lowerBound = 0;
         }
 
-        if (upperBound > pages - 1) {
-            lowerBound -= upperBound - pages;
-            upperBound = pages;
+        if (upperBound >= pages - 1) {
+            let delta = upperBound - pages + 1;
+            lowerBound -= delta;
+            upperBound = pages - 1;
         }
 
         lowerBound = lowerBound < 0 ? 0 : lowerBound;
         upperBound = upperBound >= pages ? pages : upperBound;
-
-        console.log(lowerBound, upperBound);
 
         if (page > 1) {
             html += "<a onclick='gotoPage(0)'>&laquo;</a>";
@@ -254,7 +255,7 @@ function setPagination() {
             html += "<a onclick='gotoPage(" + (page - 1) + ")'>&lsaquo;</a>";
         }
 
-        for (let i = lowerBound; i < upperBound; i++) {
+        for (let i = lowerBound; i <= upperBound; i++) {
             html += paginationButton(i, page === i);
         }
 
@@ -265,7 +266,6 @@ function setPagination() {
         if (page < pages - 2) {
             html += "<a onclick='gotoPage(" + (pages - 1) + ")'>&raquo;</a>";
         }
-        console.log(html);
     }
     $('#pagination-container').html(html);
 }
@@ -456,7 +456,7 @@ function getCardInfo(cardNum, series){
             if (data.success) {
                 document.getElementById("series_name").value = data.cardInfo.series_name;
                 document.getElementById("card_number").value = data.cardInfo.cardnum;
-                document.getElementById('player_name').value = data.cardInfo.properName.trim();
+                document.getElementById('player_name').value = cleanString(data.cardInfo.properName);
                 document.getElementById('player_team').value = data.cardInfo.team;
                 document.getElementById('player_position').value = data.cardInfo.description;
                 document.getElementById('last_sold_date').value = formatDate(data.cardInfo.lastsold);
