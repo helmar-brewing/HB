@@ -202,7 +202,8 @@ if($user->login() === 1){
                 exit;
                 break;
             }else{
-                header('Location: '.$protocol.$site.'/subscription/',TRUE,303);
+                header('Location: '.$protocol.$site.'/',TRUE,303);
+                //header('Location: '.$protocol.$site.'/subscription/',TRUE,303);
                 ob_end_flush();
                 exit;
                 break;
@@ -234,7 +235,7 @@ if($user->login() === 1){
 				<h4>Account</h4>
 				<h1>Register</h1>
 				<p>You are registering for a free membership. After creating an account, you will
-				have access to all website features. <a href="'.$protocol.$site.'/subscription">Click to view the free website features.</a></p>
+				have access to all website features.</p>
 		        <form method="post">
     ';
     if(isset($redir)){
